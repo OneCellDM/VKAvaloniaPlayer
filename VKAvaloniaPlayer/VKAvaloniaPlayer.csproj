@@ -13,6 +13,7 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.10.3" />
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.3" />
+    <PackageReference Include="ManagedBass" Version="3.0.0" />
     <PackageReference Include="VkNet" Version="1.63.0-621" />
   </ItemGroup>
 </Project>

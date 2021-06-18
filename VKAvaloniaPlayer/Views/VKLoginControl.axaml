@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:VKAvaloniaPlayer.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VKAvaloniaPlayer.Views.VKLoginControl">
+	
+	<Design.DataContext>
+		<vm:VKLoginControlViewModel></vm:VKLoginControlViewModel>
+	</Design.DataContext>
+	<Grid>
+		<StackPanel IsVisible="{Binding Path=LoginPanelIsVisible}" Margin="10">
+			<Label Content="Логин"></Label>
+			<TextBox  Text="{Binding  Path=Login}"></TextBox>
+			<Label Content="Пароль"></Label>
+			<TextBox Text="{Binding Path=Password}" ></TextBox>
+			<Button Content="Войти"  HorizontalAlignment="Center" Margin="20" Command="{Binding AuthCommand}"></Button>
+		</StackPanel>
+		<StackPanel IsVisible="{Binding Path=CodeSendPanelIsVisible}" Margin="10">
+			<Label Content="Код авторизации:"></Label>
+			<TextBox  Text="{Binding  Path=Code}"></TextBox>
+			<Button   HorizontalAlignment="Center" Margin="20" Content="Отправить код"  Command="{Binding  SendCodeCommand}"></Button>
+		</StackPanel>
+		<StackPanel Background="White" IsVisible="{Binding Path=LoginInfoPanelIsVisible}">
+			<TextBlock Text="{Binding Path=LoginInfo}"></TextBlock>
+		</StackPanel>
+	</Grid>
+</UserControl>

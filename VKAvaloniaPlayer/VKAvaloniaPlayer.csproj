@@ -1,12 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Remove="Assets\DefaultResources.axaml" />
+    <AvaloniaResource Remove="Assets\t.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="20647.ttf" />
+    <None Remove="Assets\t.otf" />
+    <None Remove="l.ttf" />
+    <None Remove="lena.ttf" />
+    <None Remove="t.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\t.otf" />
+    <Resource Include="lena.ttf" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.3" />
@@ -14,6 +28,22 @@
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.3" />
     <PackageReference Include="ManagedBass" Version="3.0.0" />
+    <PackageReference Include="ReactiveUI.Fody" Version="14.1.1" />
     <PackageReference Include="VkNet" Version="1.63.0-621" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="20647.ttf" />
+    <Resource Include="l.ttf" />
+    <Resource Include="t.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaXaml Update="Assets\DefaultResources.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ViewLocator.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 </Project>

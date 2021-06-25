@@ -68,49 +68,38 @@ namespace VKAvaloniaPlayer.ViewModels
                 System.Text.Encoding.RegisterProvider(provider);
                 VkNet.VkApi vkApi = new();
 
-               var AuthAwauter= vkApi.AuthorizeAsync(new ApiAuthParams()
-               {    ApplicationId= 6121396,
+                var AuthAwauter = vkApi.AuthorizeAsync(new ApiAuthParams()
+                {   
                     Login = this.Login,
-                    Password = this.Password,
-                    
+                    Password=this.Password,
+                   
                     TwoFactorSupported = true,
                     TwoFactorAuthorization = () =>
                     {
-                        if (LoginPanelIsVisible)
+                        if ( LoginPanelIsVisible )
                         {
                             CodeSendPanelIsVisible = true;
                             LoginPanelIsVisible = false;
                         }
-                          string tmpcode = "";
-                          
-                          if (_CodeIsSend)
-                          {                      
-                                tmpcode = Code;
-                                _CodeIsSend = false;
-                                Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>Code = string.Empty); 
-                          }
-                          return tmpcode;
+                        string tmpcode = "";
+
+                        if ( _CodeIsSend )
+                        {
+                            tmpcode = Code;
+                            _CodeIsSend = false;
+                            Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => Code = string.Empty);
+                        }
+                        return tmpcode;
                     }
-                      
+
                 }).GetAwaiter();
                 AuthAwauter.OnCompleted(() =>
                 {
-                    try
-                    {
+                   
                         AuthAwauter.GetResult();
-                        var AccountInfo = vkApi.Account.GetProfileInfo();
-                        LoginInfo = "Авторизация успешна:" +AccountInfo.FirstName+" "+AccountInfo.LastName;
+                        StaticObjects.VKApi = vkApi;
 
-                    }
-                    catch(Exception ex)
-                    {
-                        LoginInfo = "Ошибка:" + ex.Message;
-                    }
-                    finally
-                    {
-                        LoginInfoPanelIsVisible = true;
-                    }
-
+                   
 
                 });
 

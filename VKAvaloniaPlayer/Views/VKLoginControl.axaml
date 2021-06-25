@@ -3,27 +3,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:VKAvaloniaPlayer.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d"  d:DesignWidth="500" d:DesignHeight="300"
              x:Class="VKAvaloniaPlayer.Views.VKLoginControl">
 	
 	<Design.DataContext>
 		<vm:VKLoginControlViewModel></vm:VKLoginControlViewModel>
 	</Design.DataContext>
-	<Grid>
-		<StackPanel IsVisible="{Binding Path=LoginPanelIsVisible}" Margin="10">
+	<Grid  >
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="1*"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Border  Background="#2787F5" Grid.Row="0"  >
+				<Label HorizontalContentAlignment="Center" Margin="0,20"  Foreground="White" FontSize="18" Content="VK AVALONIA PLAYER"  FontWeight="Bold"></Label>		
+		</Border>
+		<StackPanel Grid.Row="1"  Spacing="20"  IsVisible="{Binding Path=LoginPanelIsVisible}" Margin="180,10">
 			<Label HorizontalAlignment="Center" Content="Логин"></Label>
 			<TextBox Watermark="Введите логин"  Text="{Binding  Path=Login}"></TextBox>
 			<Label HorizontalAlignment="Center" Content="Пароль"></Label>
 			<TextBox VerticalContentAlignment="Center" PasswordChar="*" Watermark="Введите пароль" Text="{Binding Path=Password}" ></TextBox>
-			<Button Content="Войти"  HorizontalAlignment="Center" Margin="20" Command="{Binding AuthCommand}"></Button>
+			<Button Margin="0,10"  Content="Войти"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Binding AuthCommand}"></Button>
 		</StackPanel>
-		<StackPanel IsVisible="{Binding Path=CodeSendPanelIsVisible}" Margin="10">
-			<Label Content="Код авторизации:"></Label>
-			<TextBox   Text="{Binding  Path=Code}"></TextBox>
-			<Button   HorizontalAlignment="Center" Margin="20" Content="Отправить код"  Command="{Binding  SendCodeCommand}"></Button>
-		</StackPanel>
-		<StackPanel Background="White" IsVisible="{Binding Path=LoginInfoPanelIsVisible}">
-			<TextBlock Text="{Binding Path=LoginInfo}"></TextBlock>
-		</StackPanel>
+		<StackPanel Grid.Row="1" Spacing="20" IsVisible="{Binding Path=CodeSendPanelIsVisible}"  Margin="180,50">
+			<Label HorizontalAlignment="Center" Content="Код авторизации"></Label>
+			<TextBox  Text="{Binding  Path=Code}"></TextBox>
+			<Button  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"   Content="Отправить"  Command="{Binding  SendCodeCommand}"></Button>
+		</StackPanel>	
 	</Grid>
 </UserControl>

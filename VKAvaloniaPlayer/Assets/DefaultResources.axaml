@@ -1,0 +1,15 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				>
+
+
+	<SolidColorBrush x:Key="TextBoxColor"          Color="#DDDDDD" />
+	<SolidColorBrush x:Key="MenuBackGroundColor"   Color="#2888F5" />
+	<SolidColorBrush x:Key="ControlsColor"         Color="#2888F5" />
+	<SolidColorBrush x:Key="SliderTickColor"       Color="#2888F5" />
+	<SolidColorBrush x:Key="SliderBackGroundColor" Color="#DDDDDD" />
+	<SolidColorBrush x:Key="MenuForeGroundColor"   Color="White"   />
+	
+
+
+</ResourceDictionary>

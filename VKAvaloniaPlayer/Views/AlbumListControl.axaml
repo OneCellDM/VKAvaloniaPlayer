@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VKAvaloniaPlayer.Views.AlbumListControl">
+	<Grid>
+		<ListBox Items="{Binding Path=AudioAlbums}">
+			<ListBox.Styles>
+				<Style Selector="ListBoxItem">
+					<Setter Property="Margin" Value="5"></Setter>
+				</Style>
+			</ListBox.Styles>
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+				<WrapPanel  Orientation="Horizontal"></WrapPanel>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+				<StackPanel>
+					<Border CornerRadius="10" Width="120" Height="120">
+						<Border.Background>
+							<ImageBrush Source="{Binding Cover}"></ImageBrush>
+						</Border.Background>
+					</Border>
+					<TextBlock Width="120"  Margin="10,3" TextAlignment="Center" TextWrapping="Wrap"  HorizontalAlignment="Center"  Height="40" Text="{Binding Title}"></TextBlock>
+				</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+	    </ListBox>
+	</Grid>
+</UserControl>

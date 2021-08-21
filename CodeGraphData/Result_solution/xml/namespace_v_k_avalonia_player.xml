@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespace_v_k_avalonia_player" kind="namespace">
+    <compoundname>VKAvaloniaPlayer</compoundname>
+    <innerclass refid="class_v_k_avalonia_player_1_1_app" prot="public">VKAvaloniaPlayer::App</innerclass>
+    <innerclass refid="class_v_k_avalonia_player_1_1_program" prot="public">VKAvaloniaPlayer::Program</innerclass>
+    <innerclass refid="class_v_k_avalonia_player_1_1_static_objects" prot="public">VKAvaloniaPlayer::StaticObjects</innerclass>
+    <innerclass refid="class_v_k_avalonia_player_1_1_view_locator" prot="public">VKAvaloniaPlayer::ViewLocator</innerclass>
+    <innernamespace refid="namespace_v_k_avalonia_player_1_1_models">VKAvaloniaPlayer::Models</innernamespace>
+    <innernamespace refid="namespace_v_k_avalonia_player_1_1_view_models">VKAvaloniaPlayer::ViewModels</innernamespace>
+    <innernamespace refid="namespace_v_k_avalonia_player_1_1_views">VKAvaloniaPlayer::Views</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="[generated]" line="1" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "VKAvaloniaPlayer": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

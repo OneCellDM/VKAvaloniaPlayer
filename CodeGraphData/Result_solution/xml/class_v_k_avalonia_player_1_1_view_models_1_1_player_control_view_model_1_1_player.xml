@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</compoundname>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a377056c3b9988512e6a770884ea79b6c" prot="private" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.Player._Stream</definition>
+        <argsstring></argsstring>
+        <name>_Stream</name>
+        <initializer>=0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" line="155" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1ad27073fa187780ede35168363884e7c3" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>static</type>
+        <definition>static VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.Player.Player</definition>
+        <argsstring>()</argsstring>
+        <name>Player</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" line="156" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a4c00d4a6b2b6287a24b555e7135a1d16" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.Player.GetPositionSeconds</definition>
+        <argsstring>()</argsstring>
+        <name>GetPositionSeconds</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" line="158" column="1"/>
+        <referencedby refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1ac38c1b29925cb31beccbef8c9d685bb3" compoundref="_player_control_view_model_8cs" startline="130" endline="138">VKAvaloniaPlayer.ViewModels.PlayerControlViewModel._Timer_Elapsed</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a925cb0d939420e8417c1fe31fd83f1fa" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.Player.SetStream</definition>
+        <argsstring>(Models.AudioModel audioModel)</argsstring>
+        <name>SetStream</name>
+        <param>
+          <type><ref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model" kindref="compound">Models.AudioModel</ref></type>
+          <declname>audioModel</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" line="161" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" bodystart="161" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a7c8576fac7027d7a942da37e6eb9e2b3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.Player.Play</definition>
+        <argsstring>(Models.AudioModel model)</argsstring>
+        <name>Play</name>
+        <param>
+          <type><ref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model" kindref="compound">Models.AudioModel</ref></type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" line="165" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" bodystart="165" bodyend="175"/>
+        <referencedby refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a6d87d3fb01769606a0722049b168584a" compoundref="_player_control_view_model_8cs" startline="103" endline="122">VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.PlayerControlViewModel</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1aa1464a055e0bd6b4ef1b9274fa119d7b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.Player.Play</definition>
+        <argsstring>()</argsstring>
+        <name>Play</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" line="176" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a156e218cd719ef15c5899824d9a7a293" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.Player.Stop</definition>
+        <argsstring>()</argsstring>
+        <name>Stop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" line="180" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" bodystart="180" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a289d0d04dfc8f6f6ba361af89580b059" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.Player.Pause</definition>
+        <argsstring>()</argsstring>
+        <name>Pause</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" line="190" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" bodystart="190" bodyend="198"/>
+        <referencedby refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a6d87d3fb01769606a0722049b168584a" compoundref="_player_control_view_model_8cs" startline="103" endline="122">VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.PlayerControlViewModel</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a6630335e74fae9bbb8804a3f857c80c0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void VKAvaloniaPlayer.ViewModels.PlayerControlViewModel.Player.SetVolume</definition>
+        <argsstring>(double volume)</argsstring>
+        <name>SetVolume</name>
+        <param>
+          <type>double</type>
+          <declname>volume</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" line="199" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" line="153" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" bodystart="152" bodyend="202"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a377056c3b9988512e6a770884ea79b6c" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</scope><name>_Stream</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a4c00d4a6b2b6287a24b555e7135a1d16" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</scope><name>GetPositionSeconds</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a289d0d04dfc8f6f6ba361af89580b059" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</scope><name>Pause</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a7c8576fac7027d7a942da37e6eb9e2b3" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</scope><name>Play</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1aa1464a055e0bd6b4ef1b9274fa119d7b" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</scope><name>Play</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1ad27073fa187780ede35168363884e7c3" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</scope><name>Player</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a925cb0d939420e8417c1fe31fd83f1fa" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</scope><name>SetStream</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a6630335e74fae9bbb8804a3f857c80c0" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</scope><name>SetVolume</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a156e218cd719ef15c5899824d9a7a293" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</scope><name>Stop</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

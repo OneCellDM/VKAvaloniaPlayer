@@ -1,0 +1,17 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Style Selector="TextBox /template/ Border">
+		<Setter Property="CornerRadius" Value="5"></Setter>
+		<Setter Property="BorderBrush" Value="{DynamicResource TextBoxColor}"></Setter>
+	</Style>
+	<Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+		<Setter Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushPointerOver}" />
+		<Setter Property="Background" Value="{DynamicResource TextBoxColor}" />
+	</Style>
+	<Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+		<Setter Property="Background" Value="{DynamicResource TextBoxColor}" />
+		<Setter Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushFocused}" />
+		<Setter Property="BorderThickness" Value="1" />
+	</Style>
+</Styles>

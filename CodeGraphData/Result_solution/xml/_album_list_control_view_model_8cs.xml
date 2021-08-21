@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="_album_list_control_view_model_8cs" kind="file">
+    <compoundname>AlbumListControlViewModel.cs</compoundname>
+    <innerclass refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model" prot="public">VKAvaloniaPlayer::ViewModels::AlbumListControlViewModel</innerclass>
+    <innernamespace refid="namespace_v_k_avalonia_player_1_1_view_models">VKAvaloniaPlayer::ViewModels</innernamespace>
+    <innernamespace refid="namespace_system_1_1_collections_1_1_object_model">System::Collections::ObjectModel</innernamespace>
+    <innernamespace refid="namespace_system_1_1_reactive_1_1_linq">System::Reactive::Linq</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Collections.Generic;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Collections.ObjectModel;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Linq;</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Reactive.Linq;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Text;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Threading.Tasks;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="namespace_v_k_avalonia_player_1_1_view_models" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">VKAvaloniaPlayer.ViewModels</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="11" refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model" kindref="compound">AlbumListControlViewModel</ref>:<ref refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base" kindref="compound">ViewModelBase</ref></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="13" refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1ab6dc931b119084b55995f1faab083894" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1ab6dc931b119084b55995f1faab083894" kindref="member">Isloading</ref>;</highlight></codeline>
+<codeline lineno="14" refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1a83dd48202ba0fa41c9cad8096ba3ac88" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>ObservableCollection&lt;<ref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model" kindref="compound">Models.AudioAlbumModel</ref>&gt;<sp/>AudioAlbums<sp/>{<sp/></highlight><highlight class="keyword">get</highlight><highlight class="normal">;<sp/>set;<sp/>}</highlight></codeline>
+<codeline lineno="15" refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1a74ac96f7696cf897d668e578e2ac10d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1a74ac96f7696cf897d668e578e2ac10d3" kindref="member">AlbumListControlViewModel</ref><sp/>()</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AudioAlbums<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>ObservableCollection&lt;<ref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model" kindref="compound">Models.AudioAlbumModel</ref>&gt;();</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="19" refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1a4924cc51877b42aae57655daccf7532f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1a4924cc51877b42aae57655daccf7532f" kindref="member">Load</ref>()</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>Isloading<sp/>==<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>)</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Task.Run(()<sp/>=&gt;<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Isloading<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AudioAlbums.LoadFromVkCollection(StaticObjects.VKApi.Audio.GetPlaylists(StaticObjects.VKApi.UserId.Value,200,0)<sp/>);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Isloading<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AlbumListControlViewModel.cs"/>
+  </compounddef>
+</doxygen>

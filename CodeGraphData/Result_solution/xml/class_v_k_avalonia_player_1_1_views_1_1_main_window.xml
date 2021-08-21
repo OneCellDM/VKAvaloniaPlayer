@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_views_1_1_main_window" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::Views::MainWindow</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Window</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_views_1_1_main_window_1aaa8f5cec464c0809fc6de2b2224dcbd5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VKAvaloniaPlayer.Views.MainWindow.MainWindow</definition>
+        <argsstring>()</argsstring>
+        <name>MainWindow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/MainWindow.axaml.cs" line="9" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/MainWindow.axaml.cs" bodystart="9" bodyend="15"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_views_1_1_main_window_1a2bf52b4e1876fe25baa26195f3f2e5a7" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VKAvaloniaPlayer.Views.MainWindow.InitializeComponent</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeComponent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/MainWindow.axaml.cs" line="17" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/MainWindow.axaml.cs" bodystart="17" bodyend="20"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="43">
+        <label>Window</label>
+      </node>
+      <node id="42">
+        <label>VKAvaloniaPlayer.Views.MainWindow</label>
+        <link refid="class_v_k_avalonia_player_1_1_views_1_1_main_window"/>
+        <childnode refid="43" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="45">
+        <label>Window</label>
+      </node>
+      <node id="44">
+        <label>VKAvaloniaPlayer.Views.MainWindow</label>
+        <link refid="class_v_k_avalonia_player_1_1_views_1_1_main_window"/>
+        <childnode refid="45" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/MainWindow.axaml.cs" line="8" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/MainWindow.axaml.cs" bodystart="7" bodyend="21"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_views_1_1_main_window_1a2bf52b4e1876fe25baa26195f3f2e5a7" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::Views::MainWindow</scope><name>InitializeComponent</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_views_1_1_main_window_1aaa8f5cec464c0809fc6de2b2224dcbd5" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Views::MainWindow</scope><name>MainWindow</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

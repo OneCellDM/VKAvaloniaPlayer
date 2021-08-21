@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::Models::AudioAlbumModel</compoundname>
+    <basecompoundref refid="class_v_k_avalonia_player_1_1_models_1_1_base_model" prot="public" virt="non-virtual">VKAvaloniaPlayer.Models.BaseModel</basecompoundref>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model_1a22911e901ed7857bdadf0e94d9c32f3b" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>Bitmap</type>
+        <definition>Bitmap VKAvaloniaPlayer.Models.AudioAlbumModel.DefaultImage</definition>
+        <argsstring></argsstring>
+        <name>DefaultImage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/AudioAlbumModel.cs" line="16" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/AudioAlbumModel.cs" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model_1a7946e610e36bccedc59b9a13524cea8e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VKAvaloniaPlayer.Models.AudioAlbumModel.AudioAlbumModel</definition>
+        <argsstring>(VkNet.Model.Attachments.AudioPlaylist audioPlaylist)</argsstring>
+        <name>AudioAlbumModel</name>
+        <param>
+          <type>VkNet.Model.Attachments.AudioPlaylist</type>
+          <declname>audioPlaylist</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/AudioAlbumModel.cs" line="17" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/AudioAlbumModel.cs" bodystart="17" bodyend="37"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model_1aff3f1e5c445aa240741bde3b7339bb77" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.Models.AudioAlbumModel.GetThumbUrl</definition>
+        <argsstring>(VkNet.Model.AudioCover audioCover)</argsstring>
+        <name>GetThumbUrl</name>
+        <param>
+          <type>VkNet.Model.AudioCover</type>
+          <declname>audioCover</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/AudioAlbumModel.cs" line="39" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/AudioAlbumModel.cs" bodystart="39" bodyend="49"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="24">
+        <label>VKAvaloniaPlayer.Models.AudioAlbumModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model"/>
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>INotifyPropertyChanged</label>
+      </node>
+      <node id="25">
+        <label>BaseModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_models_1_1_base_model"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="27">
+        <label>VKAvaloniaPlayer.Models.AudioAlbumModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model"/>
+        <childnode refid="28" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>INotifyPropertyChanged</label>
+      </node>
+      <node id="28">
+        <label>BaseModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_models_1_1_base_model"/>
+        <childnode refid="29" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/AudioAlbumModel.cs" line="14" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/AudioAlbumModel.cs" bodystart="13" bodyend="50"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a28a184c5803cf623971676337dc52ad1" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>Artist</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model_1a7946e610e36bccedc59b9a13524cea8e" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>AudioAlbumModel</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a251538bfd01f5451f1dcf3a8d4de23d9" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>Cover</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a8f26ac22eeff585b83985dbad7d154a3" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>CoverUrl</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model_1a22911e901ed7857bdadf0e94d9c32f3b" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>DefaultImage</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model_1aff3f1e5c445aa240741bde3b7339bb77" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>GetThumbUrl</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1ae0aff6d96d51dbe15e6a2882e9984d99" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>ID</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a1113500d9153bf8e105b29b2f5bc782d" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>LoadBitmap</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1adf23961bb96f035e2b8c4fc386a54131" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>ModelType</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a7b6ae6f887ff227c34cade1fe91f9972" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>OnPropertyChanged</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a67f6035c8c5aaa8fbef0dcff04d2aae5" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>OwnerID</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a9f3091218efe0270b4053e6b775b5127" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>PropertyChanged</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1adeecc070f03829c0cffea211e0bb97e0" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::AudioAlbumModel</scope><name>Title</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

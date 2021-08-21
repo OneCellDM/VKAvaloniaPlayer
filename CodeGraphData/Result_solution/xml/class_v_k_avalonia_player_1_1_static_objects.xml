@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_static_objects" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::StaticObjects</compoundname>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_static_objects_1a7310e72b2fb9d39566bd7c335be20c5e" prot="private" static="yes" mutable="no">
+        <type>VkApi</type>
+        <definition>VkApi VKAvaloniaPlayer.StaticObjects._VkApi</definition>
+        <argsstring></argsstring>
+        <name>_VkApi</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" line="15" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="event">
+      <memberdef kind="event" id="class_v_k_avalonia_player_1_1_static_objects_1a87ec443073c4ca3adfa45b755424adcf" prot="public" static="yes" add="no" remove="no" raise="no">
+        <type><ref refid="class_v_k_avalonia_player_1_1_static_objects_1ad0cd22acaf9e06584e1ad176026df6d8" kindref="member">Api</ref></type>
+        <definition>Api VKAvaloniaPlayer.StaticObjects.VkApiChanged</definition>
+        <argsstring></argsstring>
+        <name>VkApiChanged</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" line="17" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_static_objects_1a71f8c2087f5627aa3ecc896144008053" prot="public" static="yes" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>VkApi</type>
+        <definition>VkApi VKAvaloniaPlayer.StaticObjects.VKApi</definition>
+        <argsstring></argsstring>
+        <name>VKApi</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" line="18" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_static_objects_1ad0cd22acaf9e06584e1ad176026df6d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>delegate void</type>
+        <definition>delegate void VKAvaloniaPlayer.StaticObjects.Api</definition>
+        <argsstring>()</argsstring>
+        <name>Api</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" line="16" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_static_objects_1ad2ae93312c5a59c6ed60b9d499cf38e6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void VKAvaloniaPlayer.StaticObjects.LoadFromVkCollection</definition>
+        <argsstring>(this ObservableCollection&lt; Models.AudioModel &gt; listCollection, VkCollection&lt; VkNet.Model.Attachments.Audio &gt; VkCollection)</argsstring>
+        <name>LoadFromVkCollection</name>
+        <param>
+          <type>this ObservableCollection&lt; <ref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model" kindref="compound">Models.AudioModel</ref> &gt;</type>
+          <declname>listCollection</declname>
+        </param>
+        <param>
+          <type>VkCollection&lt; VkNet.Model.Attachments.Audio &gt;</type>
+          <declname>VkCollection</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" line="27" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" bodystart="27" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_static_objects_1a0df4b7d3ba2cb03b5e23522110e2f6b8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void VKAvaloniaPlayer.StaticObjects.LoadFromVkCollection</definition>
+        <argsstring>(this ObservableCollection&lt; Models.AudioAlbumModel &gt; listCollection, VkCollection&lt; VkNet.Model.Attachments.AudioPlaylist &gt; VkCollection)</argsstring>
+        <name>LoadFromVkCollection</name>
+        <param>
+          <type>this ObservableCollection&lt; <ref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model" kindref="compound">Models.AudioAlbumModel</ref> &gt;</type>
+          <declname>listCollection</declname>
+        </param>
+        <param>
+          <type>VkCollection&lt; VkNet.Model.Attachments.AudioPlaylist &gt;</type>
+          <declname>VkCollection</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" line="37" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" bodystart="37" bodyend="46"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" line="14" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/StaticObjects.cs" bodystart="13" bodyend="50"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_static_objects_1a7310e72b2fb9d39566bd7c335be20c5e" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::StaticObjects</scope><name>_VkApi</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_static_objects_1ad0cd22acaf9e06584e1ad176026df6d8" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::StaticObjects</scope><name>Api</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_static_objects_1ad2ae93312c5a59c6ed60b9d499cf38e6" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::StaticObjects</scope><name>LoadFromVkCollection</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_static_objects_1a0df4b7d3ba2cb03b5e23522110e2f6b8" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::StaticObjects</scope><name>LoadFromVkCollection</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_static_objects_1a71f8c2087f5627aa3ecc896144008053" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::StaticObjects</scope><name>VKApi</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_static_objects_1a87ec443073c4ca3adfa45b755424adcf" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::StaticObjects</scope><name>VkApiChanged</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

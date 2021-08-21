@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::ViewModels::AllMusicListControlViewModel</compoundname>
+    <basecompoundref refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base" prot="public" virt="non-virtual">VKAvaloniaPlayer.ViewModels.ViewModelBase</basecompoundref>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a4cc5d1605245496020a17b4ea9186a6e" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>ObservableCollection&lt; <ref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model" kindref="compound">Models.AudioModel</ref> &gt;</type>
+        <definition>ObservableCollection&lt;Models.AudioModel&gt; VKAvaloniaPlayer.ViewModels.AllMusicListControlViewModel.AudioList</definition>
+        <argsstring></argsstring>
+        <name>AudioList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" line="16" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" bodystart="16" bodyend="-1"/>
+        <referencedby refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a84e3646f1eeab8ae9ef88b16dbf0fd7f" compoundref="_main_window_view_model_8cs" startline="80" endline="108">VKAvaloniaPlayer.ViewModels.MainWindowViewModel.OpenView</referencedby>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a6704c8935a6c27f5818748f3299779cc" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model" kindref="compound">Models.AudioModel</ref></type>
+        <definition>Models.AudioModel VKAvaloniaPlayer.ViewModels.AllMusicListControlViewModel.SelectedModel</definition>
+        <argsstring></argsstring>
+        <name>SelectedModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" line="20" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a76366feb392709c57f5ce3bae613d595" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.AllMusicListControlViewModel.Isloading</definition>
+        <argsstring></argsstring>
+        <name>Isloading</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" line="18" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a9b11a2f2d80efe2b775f0eb18feb3af5" prot="private" static="no" mutable="no">
+        <type><ref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model" kindref="compound">Models.AudioModel</ref></type>
+        <definition>Models.AudioModel VKAvaloniaPlayer.ViewModels.AllMusicListControlViewModel.selectedmodel</definition>
+        <argsstring></argsstring>
+        <name>selectedmodel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" line="19" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a171de5f1fefd70abaf339c5466bb7ae5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VKAvaloniaPlayer.ViewModels.AllMusicListControlViewModel.AllMusicListControlViewModel</definition>
+        <argsstring>()</argsstring>
+        <name>AllMusicListControlViewModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" line="27" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" bodystart="27" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1addcfc5361587013fb4f779f411b3c0ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VKAvaloniaPlayer.ViewModels.AllMusicListControlViewModel.Load</definition>
+        <argsstring>()</argsstring>
+        <name>Load</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" line="31" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" bodystart="31" bodyend="42"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="14">
+        <label>VKAvaloniaPlayer.ViewModels.AllMusicListControlViewModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>ViewModelBase</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>ReactiveObject</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="17">
+        <label>VKAvaloniaPlayer.ViewModels.AllMusicListControlViewModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>ViewModelBase</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>ReactiveObject</label>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" line="14" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AllMusicListControlViewModel.cs" bodystart="13" bodyend="44"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a171de5f1fefd70abaf339c5466bb7ae5" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::AllMusicListControlViewModel</scope><name>AllMusicListControlViewModel</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a4cc5d1605245496020a17b4ea9186a6e" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::AllMusicListControlViewModel</scope><name>AudioList</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a76366feb392709c57f5ce3bae613d595" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::AllMusicListControlViewModel</scope><name>Isloading</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1addcfc5361587013fb4f779f411b3c0ed" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::AllMusicListControlViewModel</scope><name>Load</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a6704c8935a6c27f5818748f3299779cc" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::AllMusicListControlViewModel</scope><name>SelectedModel</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a9b11a2f2d80efe2b775f0eb18feb3af5" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::AllMusicListControlViewModel</scope><name>selectedmodel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

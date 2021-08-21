@@ -1,8 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>false</Optimize>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
@@ -17,19 +24,26 @@
     <None Remove="l.ttf" />
     <None Remove="lena.ttf" />
     <None Remove="t.otf" />
+    <None Remove="Views\AudioSearchContol.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\t.otf" />
     <Resource Include="lena.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.3" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.3" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.3" />
-    <PackageReference Include="ManagedBass" Version="3.0.0" />
-    <PackageReference Include="ReactiveUI.Fody" Version="14.1.1" />
-    <PackageReference Include="VkNet" Version="1.63.0-621" />
+    <PackageReference Include="Avalonia" Version="0.10.7" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.7" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.7" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.7" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.10.7" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.7" />
+    <PackageReference Include="ManagedBass" Version="3.1.0" />
+    <PackageReference Include="VkNet" Version="1.65.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\AudioSearchContol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="20647.ttf" />
@@ -44,6 +58,9 @@
   <ItemGroup>
     <Compile Update="ViewLocator.cs">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Views\MusicListControl.axaml.cs">
+      <DependentUpon>MusicListControl.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

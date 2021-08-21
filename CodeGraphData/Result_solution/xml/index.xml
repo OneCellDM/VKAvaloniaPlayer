@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.6">
+  <compound refid="class_v_k_avalonia_player_1_1_views_1_1_album_list_control" kind="class"><name>VKAvaloniaPlayer::Views::AlbumListControl</name>
+    <member refid="class_v_k_avalonia_player_1_1_views_1_1_album_list_control_1af667cbe368c1969e7cf1bdcf61188672" kind="function"><name>AlbumListControl</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_views_1_1_album_list_control_1afaa7966bf6052e51c869afe974b24376" kind="function"><name>InitializeComponent</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model" kind="class"><name>VKAvaloniaPlayer::ViewModels::AlbumListControlViewModel</name>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1ab6dc931b119084b55995f1faab083894" kind="variable"><name>Isloading</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1a83dd48202ba0fa41c9cad8096ba3ac88" kind="property"><name>AudioAlbums</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1a74ac96f7696cf897d668e578e2ac10d3" kind="function"><name>AlbumListControlViewModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1a4924cc51877b42aae57655daccf7532f" kind="function"><name>Load</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_views_1_1_all_music_list_control" kind="class"><name>VKAvaloniaPlayer::Views::AllMusicListControl</name>
+    <member refid="class_v_k_avalonia_player_1_1_views_1_1_all_music_list_control_1a65f74fa05c1b0b8e7d3e834b83e46cb2" kind="function"><name>AllMusicListControl</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_views_1_1_all_music_list_control_1a9ffd7c2c45895b0505d0e67596f98ae8" kind="function"><name>InitializeComponent</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model" kind="class"><name>VKAvaloniaPlayer::ViewModels::AllMusicListControlViewModel</name>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a4cc5d1605245496020a17b4ea9186a6e" kind="property"><name>AudioList</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a6704c8935a6c27f5818748f3299779cc" kind="property"><name>SelectedModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a76366feb392709c57f5ce3bae613d595" kind="variable"><name>Isloading</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a9b11a2f2d80efe2b775f0eb18feb3af5" kind="variable"><name>selectedmodel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a171de5f1fefd70abaf339c5466bb7ae5" kind="function"><name>AllMusicListControlViewModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1addcfc5361587013fb4f779f411b3c0ed" kind="function"><name>Load</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_app" kind="class"><name>VKAvaloniaPlayer::App</name>
+    <member refid="class_v_k_avalonia_player_1_1_app_1add54ec84d8e3bbebc787cbb45efabbbe" kind="function"><name>Initialize</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_app_1a01ea03e7651aa401f4409bdbdaf11feb" kind="function"><name>OnFrameworkInitializationCompleted</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model" kind="class"><name>VKAvaloniaPlayer::Models::AudioAlbumModel</name>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model_1a22911e901ed7857bdadf0e94d9c32f3b" kind="property"><name>DefaultImage</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model_1a7946e610e36bccedc59b9a13524cea8e" kind="function"><name>AudioAlbumModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model_1aff3f1e5c445aa240741bde3b7339bb77" kind="function"><name>GetThumbUrl</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model" kind="class"><name>VKAvaloniaPlayer::Models::AudioModel</name>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model_1a74fff4aefa1c0db44eb2c933cd44184a" kind="property"><name>Duration</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model_1ac3dfaed0c16128449f8149a221b98932" kind="property"><name>DefaultImage</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model_1a1708cff014d9394bed88e328bce96b34" kind="function"><name>AudioModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model_1ad75e82f6594bb479e78c8b6042720770" kind="function"><name>AudioModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model_1adb919853e3df311727d3517ee5f2b468" kind="function"><name>GetThumbUrl</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_models_1_1_base_model" kind="class"><name>VKAvaloniaPlayer::Models::BaseModel</name>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a932704361b74e80ab2ffc18d9b96af1c" kind="variable"><name>Semaphore</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1ade1f4ab725f127290806c3c94e36e018" kind="variable"><name>s_httpClient</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a254f1b4bea0c86946d5a56078b7ac899" kind="variable"><name>_cover</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a41442489a000a89359449b3c359c24f0" kind="variable"><name>_Bitmap</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a9f3091218efe0270b4053e6b775b5127" kind="event"><name>PropertyChanged</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1adf23961bb96f035e2b8c4fc386a54131" kind="property"><name>ModelType</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1ae0aff6d96d51dbe15e6a2882e9984d99" kind="property"><name>ID</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a67f6035c8c5aaa8fbef0dcff04d2aae5" kind="property"><name>OwnerID</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a28a184c5803cf623971676337dc52ad1" kind="property"><name>Artist</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1adeecc070f03829c0cffea211e0bb97e0" kind="property"><name>Title</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a8f26ac22eeff585b83985dbad7d154a3" kind="property"><name>CoverUrl</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a251538bfd01f5451f1dcf3a8d4de23d9" kind="property"><name>Cover</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a1ace9e16c99afdf21dcf7adccf859584" kind="function"><name>LoadImageStreamAsync</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a1113500d9153bf8e105b29b2f5bc782d" kind="function"><name>LoadBitmap</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a7b6ae6f887ff227c34cade1fe91f9972" kind="function"><name>OnPropertyChanged</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_views_1_1_main_window" kind="class"><name>VKAvaloniaPlayer::Views::MainWindow</name>
+    <member refid="class_v_k_avalonia_player_1_1_views_1_1_main_window_1aaa8f5cec464c0809fc6de2b2224dcbd5" kind="function"><name>MainWindow</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_views_1_1_main_window_1a2bf52b4e1876fe25baa26195f3f2e5a7" kind="function"><name>InitializeComponent</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model" kind="class"><name>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</name>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a40410dd3a40021fa1fb3704162ab27e8" kind="variable"><name>_Avatar</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1ae87e7b066e6b576c9623372ac0f09bc6" kind="variable"><name>_AllMusicListControlViewModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a2512602a67b8a423686b03249a9a6ab8" kind="variable"><name>_AlbumListControlViewModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a1494216b07f3821a1472f4310853f9b9" kind="variable"><name>_VkLoginIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a8b134fb80ca91bad12b0cf54936aaed0" kind="variable"><name>_MenuSelectionIndex</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a6155284fa932b948236bcf10e67f8887" kind="variable"><name>_AllMusicIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a16f7e4228c143ae330c1f3f7e3800a67" kind="variable"><name>_AlbumsIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a286e62759d26635a03bbc54f49e3cfc3" kind="property"><name>AlbumListControlViewModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a1532cabd9d3e20bba9c0b4b83aca13b3" kind="property"><name>AllMusicListControlViewModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1aa1ca613eff223e7068a482a13d9854b9" kind="property"><name>VkLoginIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a3c74bc83aaaa00b9de0cb043d3c012f4" kind="property"><name>MenuSelectionIndex</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1ae281c5079515cdaade615094893184b5" kind="property"><name>AllMusicIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a08bd9947cc66aa1c07e99dac2e8e093c" kind="property"><name>AlbumsIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1aa64000b14b180693b5734b084d4066c4" kind="property"><name>Avatar</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a8d33740368ccf77b07d44d656bb52bbf" kind="function"><name>MainWindowViewModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a84e3646f1eeab8ae9ef88b16dbf0fd7f" kind="function"><name>OpenView</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a382babdcf4ec90b9fd5a84f4ba37d584" kind="function"><name>StaticObjects_VkApiChanged</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player" kind="class"><name>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel::Player</name>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a377056c3b9988512e6a770884ea79b6c" kind="variable"><name>_Stream</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1ad27073fa187780ede35168363884e7c3" kind="function"><name>Player</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a4c00d4a6b2b6287a24b555e7135a1d16" kind="function"><name>GetPositionSeconds</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a925cb0d939420e8417c1fe31fd83f1fa" kind="function"><name>SetStream</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a7c8576fac7027d7a942da37e6eb9e2b3" kind="function"><name>Play</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1aa1464a055e0bd6b4ef1b9274fa119d7b" kind="function"><name>Play</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a156e218cd719ef15c5899824d9a7a293" kind="function"><name>Stop</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a289d0d04dfc8f6f6ba361af89580b059" kind="function"><name>Pause</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1_1_player_1a6630335e74fae9bbb8804a3f857c80c0" kind="function"><name>SetVolume</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_views_1_1_player_control" kind="class"><name>VKAvaloniaPlayer::Views::PlayerControl</name>
+    <member refid="class_v_k_avalonia_player_1_1_views_1_1_player_control_1a00813b67c93329b61511e642a82cc992" kind="function"><name>PlayerControl</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_views_1_1_player_control_1a05bee256bcbb5411ea48320825586a2b" kind="function"><name>InitializeComponent</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model" kind="class"><name>VKAvaloniaPlayer::ViewModels::PlayerControlViewModel</name>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a0fc6b6f003132d29a096f1216c07a7de" kind="event"><name>SetPlaylistEvent</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a92d3913e9645c391405d4df42478d120" kind="variable"><name>_PlayButtonIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a534f0b764d7f7822f4d2285275126f4b" kind="variable"><name>_PauseButtonIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1ab04489b9365d4c8eabad598396e6a867" kind="variable"><name>thread</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1ab1fc077c434da769881cb31c0f4140a0" kind="variable"><name>_Timer</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a96aa579eeca8a9f28f308a36244c11e9" kind="variable"><name>_Volume</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a374fd72dcec7c7b13a1f7e81a946d7c5" kind="variable"><name>_CurrentAudio</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a398d3ed95d1e55812a9d1e01e5e4da8e" kind="variable"><name>_Duration</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a1d4d0747d888dfe36d2bc2c2c86e3646" kind="variable"><name>_PlayPosition</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1aa0b8ca7410430915e31a86aa7e048f3c" kind="variable"><name>PlayList</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1aa4192602d83887612b2abf63590a28a5" kind="property"><name>PlayPosition</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1af03cde15cefc3cf5dd7300a95ba26127" kind="property"><name>Duration</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a7403524ca5edfed21651052dbfae48db" kind="property"><name>Volume</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a741411b96189ae087cf7352d44affc4a" kind="property"><name>CurrentAudio</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a5d2599f18fcad8f6c82c041bc075ef8e" kind="property"><name>PlayButtonIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1afad9086f83ab9ae4fff0cdd3adbb8b12" kind="property"><name>PauseButtonIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1abc6ffcb90b7826545dd8faeeadcdefc9" kind="property"><name>PlayCommand</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a1e6c5dd9f4c9c87790ee5e7ac7b92475" kind="property"><name>PauseCommand</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1ab860daad1184b3d401c44f80f6896e39" kind="property"><name>NextCommand</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a60883f33e0c0ddd2a5f8cda8eaf54c25" kind="property"><name>PreviousCommand</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a31a25cdf3db2af0bb3c2ac9985e2480b" kind="function"><name>SetCollection</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a6d87d3fb01769606a0722049b168584a" kind="function"><name>PlayerControlViewModel</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1aba7b6410770ca663084d88226f428982" kind="function"><name>SetPlaylist</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a07a8020ebcfe392b08ba61fabc4a4f05" kind="function"><name>PlayButtonVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a81519eda97bd0171c579241c4fe5be02" kind="function"><name>PauseButtonVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a08e87f1ab53ec8ffd61212c6816951ef" kind="function"><name>PlayerControlViewModel_SetPlaylistEvent</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1ac38c1b29925cb31beccbef8c9d685bb3" kind="function"><name>_Timer_Elapsed</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1a6ea4f0628942c2f7002b05a4728012d8" kind="function"><name>PlayNext</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model_1ad4f047ceaea503a430f142046133befd" kind="function"><name>PlayPrevious</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_program" kind="class"><name>VKAvaloniaPlayer::Program</name>
+    <member refid="class_v_k_avalonia_player_1_1_program_1ad013c8078de4372138f735aa662c0ddd" kind="function"><name>Main</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_program_1a42600cdfa3e36bb17b43239dfc88ceea" kind="function"><name>BuildAvaloniaApp</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_static_objects" kind="class"><name>VKAvaloniaPlayer::StaticObjects</name>
+    <member refid="class_v_k_avalonia_player_1_1_static_objects_1a7310e72b2fb9d39566bd7c335be20c5e" kind="variable"><name>_VkApi</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_static_objects_1a87ec443073c4ca3adfa45b755424adcf" kind="event"><name>VkApiChanged</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_static_objects_1a71f8c2087f5627aa3ecc896144008053" kind="property"><name>VKApi</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_static_objects_1ad0cd22acaf9e06584e1ad176026df6d8" kind="function"><name>Api</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_static_objects_1ad2ae93312c5a59c6ed60b9d499cf38e6" kind="function"><name>LoadFromVkCollection</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_static_objects_1a0df4b7d3ba2cb03b5e23522110e2f6b8" kind="function"><name>LoadFromVkCollection</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_view_locator" kind="class"><name>VKAvaloniaPlayer::ViewLocator</name>
+    <member refid="class_v_k_avalonia_player_1_1_view_locator_1aae07a182679b020d8e3d25ab94c5d1c6" kind="variable"><name>SupportsRecycling</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_locator_1adac9b782930313f282247dc3884ab98f" kind="function"><name>Build</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_locator_1a31611dc749a4e1967d5c9df88db1e093" kind="function"><name>Match</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base" kind="class"><name>VKAvaloniaPlayer::ViewModels::ViewModelBase</name>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_views_1_1_v_k_login_control" kind="class"><name>VKAvaloniaPlayer::Views::VKLoginControl</name>
+    <member refid="class_v_k_avalonia_player_1_1_views_1_1_v_k_login_control_1a3b4745a7134eed08a1abc9a5530df293" kind="function"><name>VKLoginControl</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_views_1_1_v_k_login_control_1a70c43dcf0c8a29a2b93532199f1d7502" kind="function"><name>InitializeComponent</name></member>
+  </compound>
+  <compound refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model" kind="class"><name>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</name>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1afec05e58d48ad265d033ac47953adedf" kind="variable"><name>_Login</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ae2a1620f8e10b3528aa486b8edb0135d" kind="variable"><name>_Passwod</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a489068e3e107410c31267c2cb6ae7b92" kind="variable"><name>_Code</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1acbef4b420361d7c2716a1403fdeb4ddd" kind="variable"><name>_CodeSendPanelIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1af27839538842229b35805ff0fcb0969c" kind="variable"><name>_LoginPanelIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1aaf2ff10b1e0bcb62401fc382e0245bc6" kind="variable"><name>_CodeIsSend</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a3e542cb2ef5a2dd76bed63c2c6920d9e" kind="variable"><name>_LoginInfoPanelIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1acefc64b7fa2257d906a3a1036ac138af" kind="variable"><name>_LoginInfo</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ae1e9dad1073eddd4f4079d4ce390f70f" kind="property"><name>Login</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a864351782d4c52e50226a5c6797dcd1f" kind="property"><name>Password</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a56ddc934703968a58fabbd9208549697" kind="property"><name>Code</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1abffd83392aee132f374b4cd15869af7c" kind="property"><name>LoginInfo</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ad96c31a4ec8995cd13f5b170889f80dd" kind="property"><name>CodeSendPanelIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a913d08b6dd0eb306e31a15210fc572ea" kind="property"><name>LoginPanelIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1aea032b3c493ddb966d6b027fdedac15c" kind="property"><name>LoginInfoPanelIsVisible</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a6566e890c91ac01613e49ebffea0f802" kind="property"><name>SendCodeCommand</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1aa77fe219ccc322fd84fb43541149079e" kind="property"><name>AuthCommand</name></member>
+    <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ad9cb78cef47a7b1431e51694574a5145" kind="function"><name>VKLoginControlViewModel</name></member>
+  </compound>
+  <compound refid="namespace_avalonia" kind="namespace"><name>Avalonia</name>
+  </compound>
+  <compound refid="namespace_avalonia_1_1_controls" kind="namespace"><name>Avalonia::Controls</name>
+  </compound>
+  <compound refid="namespace_avalonia_1_1_controls_1_1_application_lifetimes" kind="namespace"><name>Avalonia::Controls::ApplicationLifetimes</name>
+  </compound>
+  <compound refid="namespace_avalonia_1_1_controls_1_1_templates" kind="namespace"><name>Avalonia::Controls::Templates</name>
+  </compound>
+  <compound refid="namespace_avalonia_1_1_markup_1_1_xaml" kind="namespace"><name>Avalonia::Markup::Xaml</name>
+  </compound>
+  <compound refid="namespace_avalonia_1_1_media_1_1_imaging" kind="namespace"><name>Avalonia::Media::Imaging</name>
+  </compound>
+  <compound refid="namespace_avalonia_1_1_platform" kind="namespace"><name>Avalonia::Platform</name>
+  </compound>
+  <compound refid="namespace_avalonia_1_1_reactive_u_i" kind="namespace"><name>Avalonia::ReactiveUI</name>
+  </compound>
+  <compound refid="namespace_dynamic_data" kind="namespace"><name>DynamicData</name>
+  </compound>
+  <compound refid="namespace_managed_bass" kind="namespace"><name>ManagedBass</name>
+  </compound>
+  <compound refid="namespace_reactive_u_i" kind="namespace"><name>ReactiveUI</name>
+  </compound>
+  <compound refid="namespace_system" kind="namespace"><name>System</name>
+  </compound>
+  <compound refid="namespace_system_1_1_collections_1_1_generic" kind="namespace"><name>System::Collections::Generic</name>
+  </compound>
+  <compound refid="namespace_system_1_1_collections_1_1_object_model" kind="namespace"><name>System::Collections::ObjectModel</name>
+  </compound>
+  <compound refid="namespace_system_1_1_component_model" kind="namespace"><name>System::ComponentModel</name>
+  </compound>
+  <compound refid="namespace_system_1_1_diagnostics" kind="namespace"><name>System::Diagnostics</name>
+  </compound>
+  <compound refid="namespace_system_1_1_i_o" kind="namespace"><name>System::IO</name>
+  </compound>
+  <compound refid="namespace_system_1_1_linq" kind="namespace"><name>System::Linq</name>
+  </compound>
+  <compound refid="namespace_system_1_1_net_1_1_http" kind="namespace"><name>System::Net::Http</name>
+  </compound>
+  <compound refid="namespace_system_1_1_reactive" kind="namespace"><name>System::Reactive</name>
+  </compound>
+  <compound refid="namespace_system_1_1_reactive_1_1_linq" kind="namespace"><name>System::Reactive::Linq</name>
+  </compound>
+  <compound refid="namespace_system_1_1_runtime_1_1_compiler_services" kind="namespace"><name>System::Runtime::CompilerServices</name>
+  </compound>
+  <compound refid="namespace_system_1_1_text" kind="namespace"><name>System::Text</name>
+  </compound>
+  <compound refid="namespace_system_1_1_threading" kind="namespace"><name>System::Threading</name>
+  </compound>
+  <compound refid="namespace_system_1_1_threading_1_1_tasks" kind="namespace"><name>System::Threading::Tasks</name>
+  </compound>
+  <compound refid="namespace_system_1_1_timers" kind="namespace"><name>System::Timers</name>
+  </compound>
+  <compound refid="namespace_v_k_avalonia_player" kind="namespace"><name>VKAvaloniaPlayer</name>
+  </compound>
+  <compound refid="namespace_v_k_avalonia_player_1_1_models" kind="namespace"><name>VKAvaloniaPlayer::Models</name>
+    <member refid="namespace_v_k_avalonia_player_1_1_models_1a1af8a0148cc2d509fd24acbbdfdfec98" kind="enum"><name>ModelTypes</name></member>
+    <member refid="namespace_v_k_avalonia_player_1_1_models_1a1af8a0148cc2d509fd24acbbdfdfec98ab22f0418e8ac915eb66f829d262d14a2" kind="enumvalue"><name>Audio</name></member>
+    <member refid="namespace_v_k_avalonia_player_1_1_models_1a1af8a0148cc2d509fd24acbbdfdfec98ac4f8393e0c007b946261398d0314a257" kind="enumvalue"><name>Album</name></member>
+  </compound>
+  <compound refid="namespace_v_k_avalonia_player_1_1_view_models" kind="namespace"><name>VKAvaloniaPlayer::ViewModels</name>
+  </compound>
+  <compound refid="namespace_v_k_avalonia_player_1_1_views" kind="namespace"><name>VKAvaloniaPlayer::Views</name>
+  </compound>
+  <compound refid="namespace_vk_net" kind="namespace"><name>VkNet</name>
+  </compound>
+  <compound refid="namespace_vk_net_1_1_model" kind="namespace"><name>VkNet::Model</name>
+  </compound>
+  <compound refid="namespace_vk_net_1_1_utils" kind="namespace"><name>VkNet::Utils</name>
+  </compound>
+  <compound refid="_app_8axaml_8cs" kind="file"><name>App.axaml.cs</name>
+  </compound>
+  <compound refid="_audio_album_model_8cs" kind="file"><name>AudioAlbumModel.cs</name>
+  </compound>
+  <compound refid="_audio_model_8cs" kind="file"><name>AudioModel.cs</name>
+  </compound>
+  <compound refid="_base_model_8cs" kind="file"><name>BaseModel.cs</name>
+  </compound>
+  <compound refid="_program_8cs" kind="file"><name>Program.cs</name>
+  </compound>
+  <compound refid="_static_objects_8cs" kind="file"><name>StaticObjects.cs</name>
+  </compound>
+  <compound refid="_view_locator_8cs" kind="file"><name>ViewLocator.cs</name>
+  </compound>
+  <compound refid="_album_list_control_view_model_8cs" kind="file"><name>AlbumListControlViewModel.cs</name>
+  </compound>
+  <compound refid="_all_music_list_control_view_model_8cs" kind="file"><name>AllMusicListControlViewModel.cs</name>
+  </compound>
+  <compound refid="_main_window_view_model_8cs" kind="file"><name>MainWindowViewModel.cs</name>
+  </compound>
+  <compound refid="_player_control_view_model_8cs" kind="file"><name>PlayerControlViewModel.cs</name>
+  </compound>
+  <compound refid="_view_model_base_8cs" kind="file"><name>ViewModelBase.cs</name>
+  </compound>
+  <compound refid="_v_k_login_control_view_model_8cs" kind="file"><name>VKLoginControlViewModel.cs</name>
+  </compound>
+  <compound refid="_album_list_control_8axaml_8cs" kind="file"><name>AlbumListControl.axaml.cs</name>
+  </compound>
+  <compound refid="_all_music_list_control_8axaml_8cs" kind="file"><name>AllMusicListControl.axaml.cs</name>
+  </compound>
+  <compound refid="_main_window_8axaml_8cs" kind="file"><name>MainWindow.axaml.cs</name>
+  </compound>
+  <compound refid="_player_control_8axaml_8cs" kind="file"><name>PlayerControl.axaml.cs</name>
+  </compound>
+  <compound refid="_v_k_login_control_8axaml_8cs" kind="file"><name>VKLoginControl.axaml.cs</name>
+  </compound>
+  <compound refid="dir_aff7a1c4269b9ffb8c4760d459943565" kind="dir"><name>C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models</name>
+  </compound>
+  <compound refid="dir_756e043c87dd01b7714c6e44c204fe77" kind="dir"><name>C:/Users/onecelldm</name>
+  </compound>
+  <compound refid="dir_7bc19fe640b384bf3130dd89f46ea10f" kind="dir"><name>C:/Users/onecelldm/source/repos</name>
+  </compound>
+  <compound refid="dir_21cf67c9f6c6670bd7d6c6656d07f80a" kind="dir"><name>C:/Users/onecelldm/source</name>
+  </compound>
+  <compound refid="dir_8ceffd4ee35c3518d4e8bdc7e638efe8" kind="dir"><name>C:/Users</name>
+  </compound>
+  <compound refid="dir_04922707395b4c5f9aff27633394a47e" kind="dir"><name>C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels</name>
+  </compound>
+  <compound refid="dir_ba836f8be5300b9243856350e7eb07bd" kind="dir"><name>C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views</name>
+  </compound>
+  <compound refid="dir_b677f7342013104f9a04ca2d944e3895" kind="dir"><name>C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer</name>
+  </compound>
+  <compound refid="dir_d8c750566d5dfb1dc6c0bc850f341d9a" kind="dir"><name>C:/Users/onecelldm/source/repos/VKAvaloniaPlayer</name>
+  </compound>
+</doxygenindex>

@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</compoundname>
+    <basecompoundref refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base" prot="public" virt="non-virtual">VKAvaloniaPlayer.ViewModels.ViewModelBase</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a40410dd3a40021fa1fb3704162ab27e8" prot="private" static="no" mutable="no">
+        <type>Bitmap</type>
+        <definition>Bitmap VKAvaloniaPlayer.ViewModels.MainWindowViewModel._Avatar</definition>
+        <argsstring></argsstring>
+        <name>_Avatar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="11" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1ae87e7b066e6b576c9623372ac0f09bc6" prot="private" static="no" mutable="no">
+        <type><ref refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model" kindref="compound">AllMusicListControlViewModel</ref></type>
+        <definition>AllMusicListControlViewModel VKAvaloniaPlayer.ViewModels.MainWindowViewModel._AllMusicListControlViewModel</definition>
+        <argsstring></argsstring>
+        <name>_AllMusicListControlViewModel</name>
+        <initializer>= null</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="13" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a2512602a67b8a423686b03249a9a6ab8" prot="private" static="no" mutable="no">
+        <type><ref refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model" kindref="compound">AlbumListControlViewModel</ref></type>
+        <definition>AlbumListControlViewModel VKAvaloniaPlayer.ViewModels.MainWindowViewModel._AlbumListControlViewModel</definition>
+        <argsstring></argsstring>
+        <name>_AlbumListControlViewModel</name>
+        <initializer>= null</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="14" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a1494216b07f3821a1472f4310853f9b9" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.MainWindowViewModel._VkLoginIsVisible</definition>
+        <argsstring></argsstring>
+        <name>_VkLoginIsVisible</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="16" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a8b134fb80ca91bad12b0cf54936aaed0" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int VKAvaloniaPlayer.ViewModels.MainWindowViewModel._MenuSelectionIndex</definition>
+        <argsstring></argsstring>
+        <name>_MenuSelectionIndex</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="17" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a6155284fa932b948236bcf10e67f8887" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.MainWindowViewModel._AllMusicIsVisible</definition>
+        <argsstring></argsstring>
+        <name>_AllMusicIsVisible</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="19" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a16f7e4228c143ae330c1f3f7e3800a67" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.MainWindowViewModel._AlbumsIsVisible</definition>
+        <argsstring></argsstring>
+        <name>_AlbumsIsVisible</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="21" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a286e62759d26635a03bbc54f49e3cfc3" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model" kindref="compound">AlbumListControlViewModel</ref></type>
+        <definition>AlbumListControlViewModel VKAvaloniaPlayer.ViewModels.MainWindowViewModel.AlbumListControlViewModel</definition>
+        <argsstring></argsstring>
+        <name>AlbumListControlViewModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="24" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a1532cabd9d3e20bba9c0b4b83aca13b3" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model" kindref="compound">ViewModels.AllMusicListControlViewModel</ref></type>
+        <definition>ViewModels.AllMusicListControlViewModel VKAvaloniaPlayer.ViewModels.MainWindowViewModel.AllMusicListControlViewModel</definition>
+        <argsstring></argsstring>
+        <name>AllMusicListControlViewModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="29" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1aa1ca613eff223e7068a482a13d9854b9" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.MainWindowViewModel.VkLoginIsVisible</definition>
+        <argsstring></argsstring>
+        <name>VkLoginIsVisible</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="33" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a3c74bc83aaaa00b9de0cb043d3c012f4" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>int</type>
+        <definition>int VKAvaloniaPlayer.ViewModels.MainWindowViewModel.MenuSelectionIndex</definition>
+        <argsstring></argsstring>
+        <name>MenuSelectionIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="39" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1ae281c5079515cdaade615094893184b5" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.MainWindowViewModel.AllMusicIsVisible</definition>
+        <argsstring></argsstring>
+        <name>AllMusicIsVisible</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="47" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a08bd9947cc66aa1c07e99dac2e8e093c" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.MainWindowViewModel.AlbumsIsVisible</definition>
+        <argsstring></argsstring>
+        <name>AlbumsIsVisible</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="53" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1aa64000b14b180693b5734b084d4066c4" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>Bitmap</type>
+        <definition>Bitmap VKAvaloniaPlayer.ViewModels.MainWindowViewModel.Avatar</definition>
+        <argsstring></argsstring>
+        <name>Avatar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="59" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a8d33740368ccf77b07d44d656bb52bbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VKAvaloniaPlayer.ViewModels.MainWindowViewModel.MainWindowViewModel</definition>
+        <argsstring>()</argsstring>
+        <name>MainWindowViewModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="64" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a84e3646f1eeab8ae9ef88b16dbf0fd7f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VKAvaloniaPlayer.ViewModels.MainWindowViewModel.OpenView</definition>
+        <argsstring>(int MenuIndex)</argsstring>
+        <name>OpenView</name>
+        <param>
+          <type>int</type>
+          <declname>MenuIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="80" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="80" bodyend="108"/>
+        <references refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model_1a83dd48202ba0fa41c9cad8096ba3ac88" compoundref="_album_list_control_view_model_8cs" startline="14">VKAvaloniaPlayer.ViewModels.AlbumListControlViewModel.AudioAlbums</references>
+        <references refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model_1a4cc5d1605245496020a17b4ea9186a6e" compoundref="_all_music_list_control_view_model_8cs" startline="16">VKAvaloniaPlayer.ViewModels.AllMusicListControlViewModel.AudioList</references>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a382babdcf4ec90b9fd5a84f4ba37d584" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VKAvaloniaPlayer.ViewModels.MainWindowViewModel.StaticObjects_VkApiChanged</definition>
+        <argsstring>()</argsstring>
+        <name>StaticObjects_VkApiChanged</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="69" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="69" bodyend="79"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="47">
+        <label>ViewModelBase</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base"/>
+        <childnode refid="48" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>ReactiveObject</label>
+      </node>
+      <node id="46">
+        <label>VKAvaloniaPlayer.ViewModels.MainWindowViewModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model"/>
+        <childnode refid="47" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="53">
+        <label>VKAvaloniaPlayer.ViewModels.AlbumListControlViewModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model"/>
+        <childnode refid="50" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>VKAvaloniaPlayer.ViewModels.AllMusicListControlViewModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model"/>
+        <childnode refid="50" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>ViewModelBase</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base"/>
+        <childnode refid="51" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>ReactiveObject</label>
+      </node>
+      <node id="49">
+        <label>VKAvaloniaPlayer.ViewModels.MainWindowViewModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model"/>
+        <childnode refid="50" relation="public-inheritance">
+        </childnode>
+        <childnode refid="52" relation="usage">
+          <edgelabel>_AllMusicListControlViewModel</edgelabel>
+        </childnode>
+        <childnode refid="53" relation="usage">
+          <edgelabel>_AlbumListControlViewModel</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" line="10" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" bodystart="9" bodyend="110"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a2512602a67b8a423686b03249a9a6ab8" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>_AlbumListControlViewModel</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a16f7e4228c143ae330c1f3f7e3800a67" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>_AlbumsIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a6155284fa932b948236bcf10e67f8887" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>_AllMusicIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1ae87e7b066e6b576c9623372ac0f09bc6" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>_AllMusicListControlViewModel</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a40410dd3a40021fa1fb3704162ab27e8" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>_Avatar</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a8b134fb80ca91bad12b0cf54936aaed0" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>_MenuSelectionIndex</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a1494216b07f3821a1472f4310853f9b9" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>_VkLoginIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a286e62759d26635a03bbc54f49e3cfc3" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>AlbumListControlViewModel</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a08bd9947cc66aa1c07e99dac2e8e093c" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>AlbumsIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1ae281c5079515cdaade615094893184b5" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>AllMusicIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a1532cabd9d3e20bba9c0b4b83aca13b3" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>AllMusicListControlViewModel</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1aa64000b14b180693b5734b084d4066c4" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>Avatar</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a8d33740368ccf77b07d44d656bb52bbf" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>MainWindowViewModel</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a3c74bc83aaaa00b9de0cb043d3c012f4" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>MenuSelectionIndex</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a84e3646f1eeab8ae9ef88b16dbf0fd7f" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>OpenView</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1a382babdcf4ec90b9fd5a84f4ba37d584" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>StaticObjects_VkApiChanged</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model_1aa1ca613eff223e7068a482a13d9854b9" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::MainWindowViewModel</scope><name>VkLoginIsVisible</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

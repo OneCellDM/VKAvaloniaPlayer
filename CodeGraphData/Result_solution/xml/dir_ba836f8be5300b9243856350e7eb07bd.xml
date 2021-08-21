@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_ba836f8be5300b9243856350e7eb07bd" kind="dir">
+    <compoundname>C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views</compoundname>
+    <innerfile refid="_album_list_control_8axaml_8cs">AlbumListControl.axaml.cs</innerfile>
+    <innerfile refid="_all_music_list_control_8axaml_8cs">AllMusicListControl.axaml.cs</innerfile>
+    <innerfile refid="_main_window_8axaml_8cs">MainWindow.axaml.cs</innerfile>
+    <innerfile refid="_player_control_8axaml_8cs">PlayerControl.axaml.cs</innerfile>
+    <innerfile refid="_v_k_login_control_8axaml_8cs">VKLoginControl.axaml.cs</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/"/>
+  </compounddef>
+</doxygen>

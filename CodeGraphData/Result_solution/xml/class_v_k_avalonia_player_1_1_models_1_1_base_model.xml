@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_models_1_1_base_model" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::Models::BaseModel</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">INotifyPropertyChanged</basecompoundref>
+    <derivedcompoundref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model" prot="public" virt="non-virtual">VKAvaloniaPlayer.Models.AudioAlbumModel</derivedcompoundref>
+    <derivedcompoundref refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model" prot="public" virt="non-virtual">VKAvaloniaPlayer.Models.AudioModel</derivedcompoundref>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a932704361b74e80ab2ffc18d9b96af1c" prot="private" static="yes" mutable="no">
+        <type>Semaphore</type>
+        <definition>Semaphore VKAvaloniaPlayer.Models.BaseModel.Semaphore</definition>
+        <argsstring></argsstring>
+        <name>Semaphore</name>
+        <initializer>= new Semaphore(10, 10)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="23" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1ade1f4ab725f127290806c3c94e36e018" prot="private" static="yes" mutable="no">
+        <type>HttpClient</type>
+        <definition>HttpClient VKAvaloniaPlayer.Models.BaseModel.s_httpClient</definition>
+        <argsstring></argsstring>
+        <name>s_httpClient</name>
+        <initializer>= new()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="24" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a254f1b4bea0c86946d5a56078b7ac899" prot="private" static="no" mutable="no">
+        <type>Bitmap</type>
+        <definition>Bitmap VKAvaloniaPlayer.Models.BaseModel._cover</definition>
+        <argsstring></argsstring>
+        <name>_cover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="25" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a41442489a000a89359449b3c359c24f0" prot="private" static="no" mutable="no">
+        <type>Bitmap</type>
+        <definition>Bitmap VKAvaloniaPlayer.Models.BaseModel._Bitmap</definition>
+        <argsstring></argsstring>
+        <name>_Bitmap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="28" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="event">
+      <memberdef kind="event" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a9f3091218efe0270b4053e6b775b5127" prot="public" static="no" add="no" remove="no" raise="no">
+        <type>PropertyChangedEventHandler</type>
+        <definition>PropertyChangedEventHandler VKAvaloniaPlayer.Models.BaseModel.PropertyChanged</definition>
+        <argsstring></argsstring>
+        <name>PropertyChanged</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="27" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1adf23961bb96f035e2b8c4fc386a54131" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type><ref refid="namespace_v_k_avalonia_player_1_1_models_1a1af8a0148cc2d509fd24acbbdfdfec98" kindref="member">ModelTypes</ref></type>
+        <definition>ModelTypes VKAvaloniaPlayer.Models.BaseModel.ModelType</definition>
+        <argsstring></argsstring>
+        <name>ModelType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="30" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1ae0aff6d96d51dbe15e6a2882e9984d99" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>long</type>
+        <definition>long VKAvaloniaPlayer.Models.BaseModel.ID</definition>
+        <argsstring></argsstring>
+        <name>ID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="31" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a67f6035c8c5aaa8fbef0dcff04d2aae5" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>long</type>
+        <definition>long VKAvaloniaPlayer.Models.BaseModel.OwnerID</definition>
+        <argsstring></argsstring>
+        <name>OwnerID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="32" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a28a184c5803cf623971676337dc52ad1" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.Models.BaseModel.Artist</definition>
+        <argsstring></argsstring>
+        <name>Artist</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="33" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1adeecc070f03829c0cffea211e0bb97e0" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.Models.BaseModel.Title</definition>
+        <argsstring></argsstring>
+        <name>Title</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="34" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a8f26ac22eeff585b83985dbad7d154a3" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.Models.BaseModel.CoverUrl</definition>
+        <argsstring></argsstring>
+        <name>CoverUrl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="35" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a251538bfd01f5451f1dcf3a8d4de23d9" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>Bitmap</type>
+        <definition>Bitmap VKAvaloniaPlayer.Models.BaseModel.Cover</definition>
+        <argsstring></argsstring>
+        <name>Cover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="36" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a1ace9e16c99afdf21dcf7adccf859584" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task&lt; Stream &gt;</type>
+        <definition>async Task&lt;Stream&gt; VKAvaloniaPlayer.Models.BaseModel.LoadImageStreamAsync</definition>
+        <argsstring>()</argsstring>
+        <name>LoadImageStreamAsync</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="38" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="38" bodyend="42"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a1113500d9153bf8e105b29b2f5bc782d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>async Task</type>
+        <definition>async Task VKAvaloniaPlayer.Models.BaseModel.LoadBitmap</definition>
+        <argsstring>()</argsstring>
+        <name>LoadBitmap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="43" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="43" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a7b6ae6f887ff227c34cade1fe91f9972" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VKAvaloniaPlayer.Models.BaseModel.OnPropertyChanged</definition>
+        <argsstring>([CallerMemberName] string prop=&quot;&quot;)</argsstring>
+        <name>OnPropertyChanged</name>
+        <param>
+          <attributes>[CallerMemberName]</attributes>
+          <type>string</type>
+          <declname>prop</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="65" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="65" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="38">
+        <label>VKAvaloniaPlayer.Models.AudioAlbumModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_models_1_1_audio_album_model"/>
+        <childnode refid="36" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>INotifyPropertyChanged</label>
+      </node>
+      <node id="39">
+        <label>VKAvaloniaPlayer.Models.AudioModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_models_1_1_audio_model"/>
+        <childnode refid="36" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>VKAvaloniaPlayer.Models.BaseModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_models_1_1_base_model"/>
+        <childnode refid="37" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="41">
+        <label>INotifyPropertyChanged</label>
+      </node>
+      <node id="40">
+        <label>VKAvaloniaPlayer.Models.BaseModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_models_1_1_base_model"/>
+        <childnode refid="41" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" line="21" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/BaseModel.cs" bodystart="20" bodyend="71"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a41442489a000a89359449b3c359c24f0" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>_Bitmap</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a254f1b4bea0c86946d5a56078b7ac899" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>_cover</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a28a184c5803cf623971676337dc52ad1" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>Artist</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a251538bfd01f5451f1dcf3a8d4de23d9" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>Cover</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a8f26ac22eeff585b83985dbad7d154a3" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>CoverUrl</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1ae0aff6d96d51dbe15e6a2882e9984d99" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>ID</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a1113500d9153bf8e105b29b2f5bc782d" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>LoadBitmap</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a1ace9e16c99afdf21dcf7adccf859584" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>LoadImageStreamAsync</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1adf23961bb96f035e2b8c4fc386a54131" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>ModelType</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a7b6ae6f887ff227c34cade1fe91f9972" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>OnPropertyChanged</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a67f6035c8c5aaa8fbef0dcff04d2aae5" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>OwnerID</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a9f3091218efe0270b4053e6b775b5127" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>PropertyChanged</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1ade1f4ab725f127290806c3c94e36e018" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>s_httpClient</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1a932704361b74e80ab2ffc18d9b96af1c" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>Semaphore</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_models_1_1_base_model_1adeecc070f03829c0cffea211e0bb97e0" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Models::BaseModel</scope><name>Title</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

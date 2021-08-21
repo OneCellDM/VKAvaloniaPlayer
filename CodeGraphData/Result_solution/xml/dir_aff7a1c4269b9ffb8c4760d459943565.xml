@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_aff7a1c4269b9ffb8c4760d459943565" kind="dir">
+    <compoundname>C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models</compoundname>
+    <innerfile refid="_audio_album_model_8cs">AudioAlbumModel.cs</innerfile>
+    <innerfile refid="_audio_model_8cs">AudioModel.cs</innerfile>
+    <innerfile refid="_base_model_8cs">BaseModel.cs</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models/"/>
+  </compounddef>
+</doxygen>

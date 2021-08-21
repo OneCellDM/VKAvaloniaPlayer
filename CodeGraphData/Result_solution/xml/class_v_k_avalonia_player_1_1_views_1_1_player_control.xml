@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_views_1_1_player_control" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::Views::PlayerControl</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">UserControl</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_views_1_1_player_control_1a00813b67c93329b61511e642a82cc992" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VKAvaloniaPlayer.Views.PlayerControl.PlayerControl</definition>
+        <argsstring>()</argsstring>
+        <name>PlayerControl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/PlayerControl.axaml.cs" line="10" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/PlayerControl.axaml.cs" bodystart="10" bodyend="13"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_views_1_1_player_control_1a05bee256bcbb5411ea48320825586a2b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VKAvaloniaPlayer.Views.PlayerControl.InitializeComponent</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeComponent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/PlayerControl.axaml.cs" line="15" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/PlayerControl.axaml.cs" bodystart="15" bodyend="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="56">
+        <label>VKAvaloniaPlayer.Views.PlayerControl</label>
+        <link refid="class_v_k_avalonia_player_1_1_views_1_1_player_control"/>
+        <childnode refid="57" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>UserControl</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="58">
+        <label>VKAvaloniaPlayer.Views.PlayerControl</label>
+        <link refid="class_v_k_avalonia_player_1_1_views_1_1_player_control"/>
+        <childnode refid="59" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>UserControl</label>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/PlayerControl.axaml.cs" line="8" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/PlayerControl.axaml.cs" bodystart="7" bodyend="19"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_views_1_1_player_control_1a05bee256bcbb5411ea48320825586a2b" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::Views::PlayerControl</scope><name>InitializeComponent</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_views_1_1_player_control_1a00813b67c93329b61511e642a82cc992" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Views::PlayerControl</scope><name>PlayerControl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

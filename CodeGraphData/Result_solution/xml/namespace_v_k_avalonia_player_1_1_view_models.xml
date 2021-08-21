@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespace_v_k_avalonia_player_1_1_view_models" kind="namespace">
+    <compoundname>VKAvaloniaPlayer::ViewModels</compoundname>
+    <innerclass refid="class_v_k_avalonia_player_1_1_view_models_1_1_album_list_control_view_model" prot="public">VKAvaloniaPlayer::ViewModels::AlbumListControlViewModel</innerclass>
+    <innerclass refid="class_v_k_avalonia_player_1_1_view_models_1_1_all_music_list_control_view_model" prot="public">VKAvaloniaPlayer::ViewModels::AllMusicListControlViewModel</innerclass>
+    <innerclass refid="class_v_k_avalonia_player_1_1_view_models_1_1_main_window_view_model" prot="public">VKAvaloniaPlayer::ViewModels::MainWindowViewModel</innerclass>
+    <innerclass refid="class_v_k_avalonia_player_1_1_view_models_1_1_player_control_view_model" prot="public">VKAvaloniaPlayer::ViewModels::PlayerControlViewModel</innerclass>
+    <innerclass refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base" prot="public">VKAvaloniaPlayer::ViewModels::ViewModelBase</innerclass>
+    <innerclass refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model" prot="public">VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/AlbumListControlViewModel.cs" line="10" column="1"/>
+  </compounddef>
+</doxygen>

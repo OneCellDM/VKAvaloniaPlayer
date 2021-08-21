@@ -1,0 +1,314 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</compoundname>
+    <basecompoundref refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base" prot="public" virt="non-virtual">VKAvaloniaPlayer.ViewModels.ViewModelBase</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1afec05e58d48ad265d033ac47953adedf" prot="private" static="no" mutable="no">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel._Login</definition>
+        <argsstring></argsstring>
+        <name>_Login</name>
+        <initializer>= string.Empty</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="16" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ae2a1620f8e10b3528aa486b8edb0135d" prot="private" static="no" mutable="no">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel._Passwod</definition>
+        <argsstring></argsstring>
+        <name>_Passwod</name>
+        <initializer>= string.Empty</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="17" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a489068e3e107410c31267c2cb6ae7b92" prot="private" static="no" mutable="no">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel._Code</definition>
+        <argsstring></argsstring>
+        <name>_Code</name>
+        <initializer>= string.Empty</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="18" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1acbef4b420361d7c2716a1403fdeb4ddd" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel._CodeSendPanelIsVisible</definition>
+        <argsstring></argsstring>
+        <name>_CodeSendPanelIsVisible</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="19" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1af27839538842229b35805ff0fcb0969c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel._LoginPanelIsVisible</definition>
+        <argsstring></argsstring>
+        <name>_LoginPanelIsVisible</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="20" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1aaf2ff10b1e0bcb62401fc382e0245bc6" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel._CodeIsSend</definition>
+        <argsstring></argsstring>
+        <name>_CodeIsSend</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="21" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a3e542cb2ef5a2dd76bed63c2c6920d9e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel._LoginInfoPanelIsVisible</definition>
+        <argsstring></argsstring>
+        <name>_LoginInfoPanelIsVisible</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="22" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1acefc64b7fa2257d906a3a1036ac138af" prot="private" static="no" mutable="no">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel._LoginInfo</definition>
+        <argsstring></argsstring>
+        <name>_LoginInfo</name>
+        <initializer>= string.Empty</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="23" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="property">
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ae1e9dad1073eddd4f4079d4ce390f70f" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel.Login</definition>
+        <argsstring></argsstring>
+        <name>Login</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="24" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a864351782d4c52e50226a5c6797dcd1f" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel.Password</definition>
+        <argsstring></argsstring>
+        <name>Password</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="29" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a56ddc934703968a58fabbd9208549697" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel.Code</definition>
+        <argsstring></argsstring>
+        <name>Code</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="34" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1abffd83392aee132f374b4cd15869af7c" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>string</type>
+        <definition>string VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel.LoginInfo</definition>
+        <argsstring></argsstring>
+        <name>LoginInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="39" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ad96c31a4ec8995cd13f5b170889f80dd" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel.CodeSendPanelIsVisible</definition>
+        <argsstring></argsstring>
+        <name>CodeSendPanelIsVisible</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="43" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a913d08b6dd0eb306e31a15210fc572ea" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel.LoginPanelIsVisible</definition>
+        <argsstring></argsstring>
+        <name>LoginPanelIsVisible</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="48" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1aea032b3c493ddb966d6b027fdedac15c" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>bool</type>
+        <definition>bool VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel.LoginInfoPanelIsVisible</definition>
+        <argsstring></argsstring>
+        <name>LoginInfoPanelIsVisible</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="53" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a6566e890c91ac01613e49ebffea0f802" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>IReactiveCommand</type>
+        <definition>IReactiveCommand VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel.SendCodeCommand</definition>
+        <argsstring></argsstring>
+        <name>SendCodeCommand</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="57" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="property" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1aa77fe219ccc322fd84fb43541149079e" prot="public" static="no" readable="no" writable="no" gettable="yes" settable="yes">
+        <type>IReactiveCommand</type>
+        <definition>IReactiveCommand VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel.AuthCommand</definition>
+        <argsstring></argsstring>
+        <name>AuthCommand</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="58" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ad9cb78cef47a7b1431e51694574a5145" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel.VKLoginControlViewModel</definition>
+        <argsstring>()</argsstring>
+        <name>VKLoginControlViewModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="59" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="59" bodyend="106"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="88">
+        <label>VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model"/>
+        <childnode refid="89" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>ViewModelBase</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base"/>
+        <childnode refid="90" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>ReactiveObject</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="91">
+        <label>VKAvaloniaPlayer.ViewModels.VKLoginControlViewModel</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model"/>
+        <childnode refid="92" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>ViewModelBase</label>
+        <link refid="class_v_k_avalonia_player_1_1_view_models_1_1_view_model_base"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>ReactiveObject</label>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" line="15" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" bodystart="14" bodyend="108"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a489068e3e107410c31267c2cb6ae7b92" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>_Code</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1aaf2ff10b1e0bcb62401fc382e0245bc6" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>_CodeIsSend</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1acbef4b420361d7c2716a1403fdeb4ddd" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>_CodeSendPanelIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1afec05e58d48ad265d033ac47953adedf" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>_Login</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1acefc64b7fa2257d906a3a1036ac138af" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>_LoginInfo</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a3e542cb2ef5a2dd76bed63c2c6920d9e" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>_LoginInfoPanelIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1af27839538842229b35805ff0fcb0969c" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>_LoginPanelIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ae2a1620f8e10b3528aa486b8edb0135d" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>_Passwod</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1aa77fe219ccc322fd84fb43541149079e" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>AuthCommand</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a56ddc934703968a58fabbd9208549697" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>Code</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ad96c31a4ec8995cd13f5b170889f80dd" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>CodeSendPanelIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ae1e9dad1073eddd4f4079d4ce390f70f" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>Login</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1abffd83392aee132f374b4cd15869af7c" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>LoginInfo</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1aea032b3c493ddb966d6b027fdedac15c" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>LoginInfoPanelIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a913d08b6dd0eb306e31a15210fc572ea" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>LoginPanelIsVisible</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a864351782d4c52e50226a5c6797dcd1f" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>Password</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1a6566e890c91ac01613e49ebffea0f802" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>SendCodeCommand</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_view_models_1_1_v_k_login_control_view_model_1ad9cb78cef47a7b1431e51694574a5145" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::ViewModels::VKLoginControlViewModel</scope><name>VKLoginControlViewModel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

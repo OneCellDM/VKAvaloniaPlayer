@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_views_1_1_album_list_control" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::Views::AlbumListControl</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">UserControl</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_views_1_1_album_list_control_1af667cbe368c1969e7cf1bdcf61188672" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VKAvaloniaPlayer.Views.AlbumListControl.AlbumListControl</definition>
+        <argsstring>()</argsstring>
+        <name>AlbumListControl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/AlbumListControl.axaml.cs" line="9" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/AlbumListControl.axaml.cs" bodystart="9" bodyend="12"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_views_1_1_album_list_control_1afaa7966bf6052e51c869afe974b24376" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VKAvaloniaPlayer.Views.AlbumListControl.InitializeComponent</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeComponent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/AlbumListControl.axaml.cs" line="14" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/AlbumListControl.axaml.cs" bodystart="14" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="0">
+        <label>VKAvaloniaPlayer.Views.AlbumListControl</label>
+        <link refid="class_v_k_avalonia_player_1_1_views_1_1_album_list_control"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>UserControl</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>VKAvaloniaPlayer.Views.AlbumListControl</label>
+        <link refid="class_v_k_avalonia_player_1_1_views_1_1_album_list_control"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>UserControl</label>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/AlbumListControl.axaml.cs" line="8" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views/AlbumListControl.axaml.cs" bodystart="7" bodyend="18"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_views_1_1_album_list_control_1af667cbe368c1969e7cf1bdcf61188672" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::Views::AlbumListControl</scope><name>AlbumListControl</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_views_1_1_album_list_control_1afaa7966bf6052e51c869afe974b24376" prot="private" virt="non-virtual"><scope>VKAvaloniaPlayer::Views::AlbumListControl</scope><name>InitializeComponent</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

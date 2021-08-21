@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="class_v_k_avalonia_player_1_1_app" kind="class" prot="public">
+    <compoundname>VKAvaloniaPlayer::App</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Application</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_app_1add54ec84d8e3bbebc787cbb45efabbbe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override void</type>
+        <definition>override void VKAvaloniaPlayer.App.Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/App.axaml.cs" line="11" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/App.axaml.cs" bodystart="11" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="class_v_k_avalonia_player_1_1_app_1a01ea03e7651aa401f4409bdbdaf11feb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override void</type>
+        <definition>override void VKAvaloniaPlayer.App.OnFrameworkInitializationCompleted</definition>
+        <argsstring>()</argsstring>
+        <name>OnFrameworkInitializationCompleted</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/App.axaml.cs" line="16" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/App.axaml.cs" bodystart="16" bodyend="27"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="21">
+        <label>Application</label>
+      </node>
+      <node id="20">
+        <label>VKAvaloniaPlayer.App</label>
+        <link refid="class_v_k_avalonia_player_1_1_app"/>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="23">
+        <label>Application</label>
+      </node>
+      <node id="22">
+        <label>VKAvaloniaPlayer.App</label>
+        <link refid="class_v_k_avalonia_player_1_1_app"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/App.axaml.cs" line="10" column="1" bodyfile="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/App.axaml.cs" bodystart="9" bodyend="28"/>
+    <listofallmembers>
+      <member refid="class_v_k_avalonia_player_1_1_app_1add54ec84d8e3bbebc787cbb45efabbbe" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::App</scope><name>Initialize</name></member>
+      <member refid="class_v_k_avalonia_player_1_1_app_1a01ea03e7651aa401f4409bdbdaf11feb" prot="public" virt="non-virtual"><scope>VKAvaloniaPlayer::App</scope><name>OnFrameworkInitializationCompleted</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

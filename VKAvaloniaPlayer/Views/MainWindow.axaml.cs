@@ -4,19 +4,19 @@ using Avalonia.Markup.Xaml;
 
 namespace VKAvaloniaPlayer.Views
 {
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
+	public partial class MainWindow : Window
+	{
+		public MainWindow()
+		{
+			InitializeComponent();
 #if DEBUG
-            this.AttachDevTools();
+			this.AttachDevTools();
 #endif
-        }
+		}
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-    }
+		private void InitializeComponent()
+		{
+			AvaloniaXamlLoader.Load(this);
+		}
+	}
 }

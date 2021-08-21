@@ -3,18 +3,18 @@
              xmlns:local="using:VKAvaloniaPlayer"
              x:Class="VKAvaloniaPlayer.App">
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <local:ViewLocator />
     </Application.DataTemplates>
 	<Application.Resources>
-		<ResourceDictionary >
+		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceInclude Source="/Assets/DefaultResources.axaml"/>
+				<ResourceInclude Source="/Assets/DefaultResources.axaml" />
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
 
     <Application.Styles>
-		
-        <FluentTheme Mode="Light"/>
+
+        <FluentTheme Mode="Light" />
     </Application.Styles>
 </Application>

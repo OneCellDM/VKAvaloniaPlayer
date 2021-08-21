@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_b677f7342013104f9a04ca2d944e3895" kind="dir">
+    <compoundname>C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer</compoundname>
+    <innerdir refid="dir_aff7a1c4269b9ffb8c4760d459943565">C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Models</innerdir>
+    <innerdir refid="dir_04922707395b4c5f9aff27633394a47e">C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/ViewModels</innerdir>
+    <innerdir refid="dir_ba836f8be5300b9243856350e7eb07bd">C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/Views</innerdir>
+    <innerfile refid="_app_8axaml_8cs">App.axaml.cs</innerfile>
+    <innerfile refid="_program_8cs">Program.cs</innerfile>
+    <innerfile refid="_static_objects_8cs">StaticObjects.cs</innerfile>
+    <innerfile refid="_view_locator_8cs">ViewLocator.cs</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="C:/Users/onecelldm/source/repos/VKAvaloniaPlayer/VKAvaloniaPlayer/"/>
+  </compounddef>
+</doxygen>

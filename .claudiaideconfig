@@ -1,0 +1,22 @@
+﻿{
+  "BackgroundImageAbsolutePath": "C:\\Users\\onecelldm\\Pictures\\jZ_edX0EjL8.jpg",
+  "BackgroundImagesDirectoryAbsolutePath": "c:\\users\\onecelldm\\appdata\\local\\microsoft\\visualstudio\\16.0_9305e2b2\\extensions\\45frfqgv.aew\\Images",
+  "ExpandToIDE": false,
+  "Extensions": ".png, .jpg, .gif, .bmp",
+  "ImageBackgroundType": 0,
+  "ImageFadeAnimationInterval": "PT0S",
+  "ImageStretch": 2,
+  "IsLimitToMainlyEditorWindow": false,
+  "LoopSlideshow": true,
+  "MaxHeight": 0,
+  "MaxWidth": 0,
+  "Opacity": 0.2,
+  "PositionHorizon": 1,
+  "PositionVertical": 1,
+  "ShuffleSlideshow": false,
+  "SoftEdgeX": 0,
+  "SoftEdgeY": 0,
+  "UpdateImageInterval": "PT1M",
+  "ViewBoxPointX": 0,
+  "ViewBoxPointY": 0
+}

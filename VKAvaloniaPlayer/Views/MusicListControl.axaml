@@ -1,0 +1,96 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:gif="clr-namespace:AvaloniaGif"
+			 xmlns:views="using:VKAvaloniaPlayer.Views"
+			 xmlns:etc="using:VKAvaloniaPlayer.ETC"
+			 xmlns:converters="using:VKAvaloniaPlayer.Converters"
+			 xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+
+             x:Class="VKAvaloniaPlayer.Views.MusicListControl">
+
+	<UserControl.Resources>
+		<converters:DurationConverter x:Key="durationConverter" />
+	</UserControl.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition></RowDefinition>
+		</Grid.RowDefinitions>
+		<TextBox Grid.Row="0"  Text="{Binding SearchText}" Watermark="Поиск..." Height="8" Margin="10"  Background="{DynamicResource TextBoxColor}">
+			<TextBox.Styles>
+				<StyleInclude Source="/Styles/TextBoxStyle.axaml"></StyleInclude>
+			</TextBox.Styles>
+		</TextBox>
+
+		<ListBox      Grid.Row="1" UseLayoutRounding="True" VirtualizationMode="Simple"
+					 Background="White"
+					 Items="{Binding  DataCollection}"
+					 SelectedIndex="{Binding SelectedIndex}">
+
+			<ListBox.Styles>
+				<Style Selector="ListBoxItem">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+				</Style>
+				<Style Selector="ListBox">
+					<Setter Property="Template">
+						<ControlTemplate>
+							<Border Name="border"
+									Background="{TemplateBinding Background}"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									CornerRadius="{TemplateBinding CornerRadius}">
+								<ScrollViewer  Name="PART_ScrollViewer"
+
+											  HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+											  VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
+											  AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}">
+									<ItemsPresenter Name="PART_ItemsPresenter"
+													Items="{TemplateBinding Items}"
+													ItemsPanel="{TemplateBinding ItemsPanel}"
+													ItemTemplate="{TemplateBinding ItemTemplate}"
+													Margin="{TemplateBinding Padding}"
+													VirtualizationMode="{TemplateBinding VirtualizationMode}" />
+
+									<i:Interaction.Behaviors>
+										<ia:EventTriggerBehavior  EventName="ScrollChanged">
+											<ia:InvokeCommandAction Command="{Binding ScrollingListEventCommand}" />
+										</ia:EventTriggerBehavior>
+									</i:Interaction.Behaviors>
+								</ScrollViewer>
+							</Border>
+						</ControlTemplate>
+					</Setter>
+				</Style>
+			</ListBox.Styles>
+			<ListBox.DataTemplates>
+				<DataTemplate>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="1*"></ColumnDefinition>
+							<ColumnDefinition Width="Auto"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<StackPanel Spacing="5" Orientation="Horizontal">
+							<Border CornerRadius="10" Width="50" Height="50">
+								<Border.Background>
+									<ImageBrush Source="{Binding Cover}" Stretch="Uniform" />
+								</Border.Background>
+							</Border>
+							<StackPanel Margin="5" Spacing="5">
+								<TextBlock FontSize="14"  Text="{Binding Title}" />
+								<TextBlock Foreground="#737272" FontSize="14" Text="{Binding Artist}" />
+							</StackPanel>
+						</StackPanel>
+						<TextBlock VerticalAlignment="Center"  Grid.Column="1" Text="{Binding Duration, Converter={StaticResource durationConverter}}"></TextBlock>
+					</Grid>
+				</DataTemplate>
+			</ListBox.DataTemplates>
+		</ListBox>
+
+		<etc:LoadingControl Grid.Row="1" VerticalContentAlignment="Center"  IsVisible="{Binding Loading}" />
+	</Grid>
+</UserControl>

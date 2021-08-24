@@ -9,7 +9,7 @@ namespace VKAvaloniaPlayer.Models
 	public class SaveAccountModel
 	{
 		public string? Name { get; set; }
-		public long UserID { get; set; }
+		public long? UserID { get; set; }
 		public string? Token { get; set; }
 	}
 }

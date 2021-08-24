@@ -6,214 +6,269 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Timers;
+using VKAvaloniaPlayer.ETC;
+using VKAvaloniaPlayer.Models;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public class PlayerControlViewModel : ViewModelBase
-	{
-		public delegate void SetCollection(IEnumerable<Models.AudioModel> AudioCollection, Models.AudioModel selectedItem);
+    public class PlayerControlViewModel : ViewModelBase
+    {
+        public delegate void SetCollection(IEnumerable<AudioModel> audioCollection, AudioModel selectedItem);
 
-		public static event SetCollection SetPlaylistEvent;
+        public static event SetCollection? SetPlaylistEvent;
 
-		public static void SetPlaylist(IEnumerable<Models.AudioModel> audioCollection, Models.AudioModel selectedItem) =>
-			   SetPlaylistEvent?.Invoke(audioCollection, selectedItem);
+        public static void SetPlaylist(IEnumerable<AudioModel> audioCollection, AudioModel selectedItem) =>
+            SetPlaylistEvent?.Invoke(audioCollection, selectedItem);
+        
 
-		private static bool _PlayButtonIsVisible = true;
-		private static bool _PauseButtonIsVisible = false;
-		private static Thread thread;
-		private double _Volume = 1;
-		private Models.AudioModel _CurrentAudio = new Models.AudioModel();
-		private static System.Timers.Timer _Timer = new System.Timers.Timer();
+        private static bool _playButtonIsVisible = true;
+        private static bool _pauseButtonIsVisible;
+        private static Thread? _thread;
+        private double _Volume = 1;
+        private AudioModel _CurrentAudio = new();
 
-		private int _Duration;
-		private int _PlayPosition;
+        private static readonly System.Timers.Timer Timer = new();
+        private int _Duration;
+        private int _PlayPosition;
+        private IReactiveCommand _PlayCommand = null!;
+        private IReactiveCommand _PauseCommand = null!;
+        private IReactiveCommand _NextCommand = null!;
+        private IReactiveCommand _PreviousCommand = null!;
 
-		public static IEnumerable<Models.AudioModel> PlayList;
+        public static IEnumerable<AudioModel>? PlayList;
 
-		public int PlayPosition
-		{
-			get => _PlayPosition; set => this.RaiseAndSetIfChanged(ref _PlayPosition, value);
-		}
+        public int PlayPosition
+        {
+            get => _PlayPosition;
+            set => this.RaiseAndSetIfChanged(ref _PlayPosition, value);
+        }
 
-		public int Duration
-		{
-			get => _Duration;
-			set => this.RaiseAndSetIfChanged(ref _Duration, value);
-		}
+        public int Duration
+        {
+            get => _Duration;
+            set => this.RaiseAndSetIfChanged(ref _Duration, value);
+        }
 
-		public double Volume
-		{
-			get => _Volume;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref _Volume, value);
-				Player.SetVolume(_Volume);
-			}
-		}
+        public double Volume
+        {
+            get => _Volume;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _Volume, value);
+                Player.SetVolume(_Volume);
+            }
+        }
 
-		public Models.AudioModel CurrentAudio
-		{
-			get => _CurrentAudio;
-			set
-			{
-				try
-				{
-					if (value != null)
-					{
-						this.RaiseAndSetIfChanged(ref _CurrentAudio, value);
+        public AudioModel CurrentAudio
+        {
+            get => _CurrentAudio;
+            set
+            {
+                _CurrentAudio = value;
+                try
+                {
+                    this.RaiseAndSetIfChanged(ref _CurrentAudio, value);
 
-						if (thread != null)
-						{
-							thread.Interrupt();
-							thread.Join(500);
-						}
-						PauseButtonVisible();
+                    if (_thread != null)
+                    {
+                        _thread.Interrupt();
+                        _thread.Join(500);
+                    }
 
-						Duration = CurrentAudio.Duration;
-						PlayPosition = 0;
+                    PauseButtonVisible();
 
-						_Timer.Start();
+                    Duration = CurrentAudio.Duration;
+                    PlayPosition = 0;
 
-						thread = new Thread(() =>
-						 {
-							 if (Player.Play(_CurrentAudio))
-								 Player.SetVolume(Volume);
-						 });
-						thread.Priority = ThreadPriority.Lowest;
-						thread.IsBackground = true;
-						thread.Start();
-					}
-				}
-				catch (Exception EX) { Debug.WriteLine(EX); }
-			}
-		}
+                    Timer.Start();
 
-		public bool PlayButtonIsVisible
-		{
-			get => _PlayButtonIsVisible;
-			set => this.RaiseAndSetIfChanged(ref _PlayButtonIsVisible, value);
-		}
+                    _thread = new Thread(() =>
+                    {
+                        if (Player.Play(_CurrentAudio))
+                            Player.SetVolume(Volume);
+                    });
+                    _thread.Priority = ThreadPriority.Lowest;
+                    _thread.IsBackground = true;
+                    _thread.Start();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
+            }
+        }
 
-		public bool PauseButtonIsVisible
-		{
-			get => _PauseButtonIsVisible;
-			set => this.RaiseAndSetIfChanged(ref _PauseButtonIsVisible, value);
-		}
+        public bool PlayButtonIsVisible
+        {
+            get => _playButtonIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _playButtonIsVisible, value);
+        }
 
-		public IReactiveCommand PlayCommand { get; set; }
-		public IReactiveCommand PauseCommand { get; set; }
-		public IReactiveCommand NextCommand { get; set; }
-		public IReactiveCommand PreviousCommand { get; set; }
+        public bool PauseButtonIsVisible
+        {
+            get => _pauseButtonIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _pauseButtonIsVisible, value);
+        }
 
-		private void PlayButtonVisible()
-		{
-			PlayButtonIsVisible = true;
-			PauseButtonIsVisible = false;
-		}
+        public IReactiveCommand PlayCommand
+        {
+            get => _PlayCommand;
+            set => _PlayCommand = value;
+        }
 
-		private void PauseButtonVisible()
-		{
-			PlayButtonIsVisible = false;
-			PauseButtonIsVisible = true;
-		}
+        public IReactiveCommand PauseCommand
+        {
+            get => _PauseCommand;
+            set => _PauseCommand = value;
+        }
 
-		public PlayerControlViewModel()
-		{
-			PlayCommand = ReactiveCommand.Create(() =>
-			{
-				if (Player.Play())
-					PauseButtonVisible();
-			});
-			PauseCommand = ReactiveCommand.Create(() =>
-			{
-				if (Player.Pause())
-					PlayButtonVisible();
-			});
-			NextCommand = ReactiveCommand.Create(() => PlayNext());
+        public IReactiveCommand NextCommand
+        {
+            get => _NextCommand;
+            set => _NextCommand = value;
+        }
 
-			PreviousCommand = ReactiveCommand.Create(() => PlayPrevious());
+        public IReactiveCommand PreviousCommand
+        {
+            get => _PreviousCommand;
+            set => _PreviousCommand = value;
+        }
 
-			_Timer.Interval = 1000;
-			_Timer.Elapsed += _Timer_Elapsed;
-			SetPlaylistEvent += PlayerControlViewModel_SetPlaylistEvent;
-		}
+        private void PlayButtonVisible()
+        {
+            PlayButtonIsVisible = true;
+            PauseButtonIsVisible = false;
+        }
 
-		private void PlayerControlViewModel_SetPlaylistEvent(IEnumerable<Models.AudioModel> AudioCollection, Models.AudioModel selectedItem)
-		{
-			PlayList = AudioCollection;
-			CurrentAudio = selectedItem;
-		}
+        private void PauseButtonVisible()
+        {
+            PlayButtonIsVisible = false;
+            PauseButtonIsVisible = true;
+        }
 
-		private void _Timer_Elapsed(object sender, ElapsedEventArgs e)
-		{
-			Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => PlayPosition = Player.GetPositionSeconds());
-			if (PlayPosition == Duration)
-			{
-				PlayNext();
-			}
-		}
+        public PlayerControlViewModel()
+        {
+            PlayCommand = ReactiveCommand.Create(() =>
+            {
+                if (Player.Play())
+                    PauseButtonVisible();
+            });
+            PauseCommand = ReactiveCommand.Create(() =>
+            {
+                if (Player.Pause())
+                    PlayButtonVisible();
+            });
+            NextCommand = ReactiveCommand.Create(() => PlayNext());
 
-		private void PlayNext()
-		{
-			int index = PlayList.ToList().IndexOf(CurrentAudio);
-			if (index < (PlayList.Count() - 1)) CurrentAudio = PlayList.ToList()[index + 1];
-		}
+            PreviousCommand = ReactiveCommand.Create(() => PlayPrevious());
 
-		private void PlayPrevious()
-		{
-			int index = PlayList.ToList().IndexOf(CurrentAudio);
-			if (index > 0) CurrentAudio = PlayList.ToList()[index - 1];
-		}
+            Timer.Interval = 1000;
+            Timer.Elapsed += _Timer_Elapsed;
+            SetPlaylistEvent += PlayerControlViewModel_SetPlaylistEvent;
+        }
 
-		public static class Player
-		{
-			private static int _Stream = 0;
+        private void PlayerControlViewModel_SetPlaylistEvent(IEnumerable<AudioModel>? audioCollection,
+            AudioModel selectedItem)
+        {
+            PlayList = audioCollection;
+            CurrentAudio = selectedItem;
+        }
 
-			static Player() => Bass.Init();
+        private void _Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => PlayPosition = Player.GetPositionSeconds());
 
-			public static int GetPositionSeconds() =>
-				 Convert.ToInt32(Bass.ChannelBytes2Seconds(_Stream, Bass.ChannelGetPosition(_Stream)));
+            if (PlayPosition == Duration) PlayNext();
+        }
 
-			public static void SetStream(Models.AudioModel audioModel)
-			{
-				var url = StaticObjects.VKApi.Audio.GetById(new string[] { audioModel.OwnerID + "_" + audioModel.ID }).ElementAt(0).Url.AbsoluteUri;
-				_Stream = Bass.CreateStream(url, 0, BassFlags.Default, null, IntPtr.Zero);
-			}
+        private void PlayNext()
+        {
+            if (PlayList != null)
+            {
+                var index = PlayList.ToList().IndexOf(CurrentAudio);
+                if (index < PlayList.Count() - 1) CurrentAudio = PlayList.ToList()[index + 1];
+            }
+        }
 
-			public static bool Play(Models.AudioModel model)
-			{
-				try
-				{
-					Stop();
-					SetStream(model);
-					return Play();
-				}
-				catch (Exception EX) { return false; }
-			}
+        private void PlayPrevious()
+        {
+            if (PlayList != null)
+            {
+                var index = PlayList.ToList().IndexOf(CurrentAudio);
+                if (index > 0) CurrentAudio = PlayList.ToList()[index - 1];
+            }
+        }
 
-			public static bool Play() => Bass.ChannelPlay(_Stream);
+        public static class Player
+        {
+            private static int _stream;
 
-			public static bool Stop()
-			{
-				try
-				{
-					Bass.ChannelStop(_Stream);
-					Bass.StreamFree(_Stream);
-					return true;
-				}
-				catch (Exception EX) { return false; }
-			}
+            static Player()
+            {
+                Bass.Init();
+            }
 
-			public static bool Pause()
-			{
-				try
-				{
-					return Bass.ChannelPause(_Stream);
-				}
-				catch (Exception Ex) { return false; }
-			}
+            public static int GetPositionSeconds()
+            {
+                return Convert.ToInt32(Bass.ChannelBytes2Seconds(_stream, Bass.ChannelGetPosition(_stream)));
+            }
 
-			public static void SetVolume(double volume) => Bass.ChannelSetAttribute(_Stream, ChannelAttribute.Volume, volume);
-		}
-	}
+            public static void SetStream(AudioModel audioModel)
+            {
+                var url = GlobalVars.VkApi?.Audio.GetById(new [] {audioModel.OwnerID + "_" + audioModel.ID})
+                    .ElementAt(0).Url.AbsoluteUri;
+                _stream = Bass.CreateStream(url, 0, BassFlags.Default, null, IntPtr.Zero);
+            }
+
+            public static bool Play(AudioModel model)
+            {
+                try
+                {
+                    Stop();
+                    SetStream(model);
+                    return Play();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+
+            public static bool Play()
+            {
+                return Bass.ChannelPlay(_stream);
+            }
+
+            public static bool Stop()
+            {
+                try
+                {
+                    Bass.ChannelStop(_stream);
+                    Bass.StreamFree(_stream);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+
+            public static bool Pause()
+            {
+                try
+                {
+                    return Bass.ChannelPause(_stream);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+
+            public static void SetVolume(double volume)
+            {
+                Bass.ChannelSetAttribute(_stream, ChannelAttribute.Volume, volume);
+            }
+        }
+    }
 }

@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:views="using:VKAvaloniaPlayer.Views"
-		xmlns:c="using:VKAvaloniaPlayer.Etc"
-		xmlns:i="using:Avalonia.Xaml.Interactivity"
+        xmlns:i="using:Avalonia.Xaml.Interactivity"
         xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
         mc:Ignorable="d " d:DesignWidth="650" d:DesignHeight="300"
         x:Class="VKAvaloniaPlayer.Views.MainWindow"
@@ -13,12 +12,9 @@
         Title="VKAvaloniaPlayer"
 		MinWidth="650" MinHeight="400">
 	<Window.Resources>
-		<vm:VKLoginControlViewModel x:Key="LoginViewDataContext" ></vm:VKLoginControlViewModel>
+		<vm:VkLoginControlViewModel x:Key="LoginViewDataContext" ></vm:VkLoginControlViewModel>
 		<vm:PlayerControlViewModel x:Key="PlayerContext" ></vm:PlayerControlViewModel>
 	</Window.Resources>
-	<Design.DataContext>
-		<vm:MainWindowViewModel />
-	</Design.DataContext>
 
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -54,7 +50,7 @@
 		<ListBox  SelectedIndex="{Binding Path=MenuSelectionIndex}" Foreground="White"    Background="{DynamicResource MenuBackGroundColor}"  Grid.Column="0" Grid.Row="1">
 			<i:Interaction.Behaviors>
 				<ia:EventTriggerBehavior EventName="PointerEnter">
-					<ia:InvokeCommandAction Command="{Binding MenuPointEnterCommand}" />
+					<ia:InvokeCommandAction Command="{Binding   MenuPointEnterCommand}" />
 				</ia:EventTriggerBehavior>
 
 				<ia:EventTriggerBehavior EventName="PointerLeave">
@@ -77,7 +73,7 @@
 				</StackPanel>
 			</ListBoxItem>
 			<ListBoxItem>
-				<StackPanel Spacing="5" Orientation="Horizontal">
+				<StackPanel  Spacing="5" Orientation="Horizontal">
 					<Path  Stretch="Fill" Width="22" Height="22"  Fill="White" Data="M505.749,475.587l-145.6-145.6c28.203-34.837,45.184-79.104,45.184-127.317c0-111.744-90.923-202.667-202.667-202.667
 			S0,90.925,0,202.669s90.923,202.667,202.667,202.667c48.213,0,92.48-16.981,127.317-45.184l145.6,145.6
 			c4.16,4.16,9.621,6.251,15.083,6.251s10.923-2.091,15.083-6.251C514.091,497.411,514.091,483.928,505.749,475.587z

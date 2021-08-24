@@ -3,13 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:VKAvaloniaPlayer.ViewModels"
-             mc:Ignorable="d"  d:DesignWidth="800" d:DesignHeight="700"
+             mc:Ignorable="d"  Background="white" d:DesignWidth="800" d:DesignHeight="700"
              x:Class="VKAvaloniaPlayer.Views.VKLoginControl">
-
-	<Design.DataContext>
-		<vm:VKLoginControlViewModel></vm:VKLoginControlViewModel>
-	</Design.DataContext>
-	<Grid>
+	
+	
+	<Grid Background="White">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="1*"></RowDefinition>
@@ -36,7 +34,7 @@
 		<StackPanel Grid.Row="1" Spacing="20" IsVisible="{Binding Path=CodeSendPanelIsVisible}"  Margin="180,50">
 			<Label HorizontalAlignment="Center" Content="Код авторизации"></Label>
 			<TextBox  Text="{Binding  Path=Code}"></TextBox>
-			<Button  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"   Content="Отправить"  Command="{Binding  SendCodeCommand}"></Button>
+			<Button  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"   Content="Отправить"  Command="{Binding SendCodeCommand}"></Button>
 		</StackPanel>
 
 		<Grid Grid.Row="1" Background="#2272CE" Grid.Column="1">
@@ -47,7 +45,7 @@
 			</Grid.RowDefinitions>
 			<TextBlock Grid.Row="0"   Foreground="White" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="20" Margin="10" Text="Активные аккаунты" />
 			<TextBlock  Grid.Row="1" Margin="20" FontSize="16" FontWeight="ExtraBold" Text="Выберите аккаунт из списка для входа" Foreground="White"></TextBlock>
-			<ListBox Grid.Row="2" VirtualizationMode="None" VerticalAlignment="Top" Margin="30,0" Background="Transparent">
+			<ListBox SelectedIndex="{Binding ActiveAccountSelectIndex}" Grid.Row="2" VirtualizationMode="None" VerticalAlignment="Top" Margin="30,0" Background="Transparent">
 				<ListBoxItem>
 					<StackPanel Orientation="Horizontal">
 						<Ellipse Fill="White" Width="50" Height="50" />

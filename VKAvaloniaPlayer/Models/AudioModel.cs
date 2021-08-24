@@ -1,8 +1,10 @@
-﻿using VkNet.Model;
+﻿using VKAvaloniaPlayer.ETC;
+using VKAvaloniaPlayer.Models.Base;
+using VkNet.Model;
 
 namespace VKAvaloniaPlayer.Models
 {
-	public class AudioModel : BaseModel
+	public class AudioModel : Base.VkModelBase
 	{
 		public int Duration { get; set; }
 
@@ -11,12 +13,12 @@ namespace VKAvaloniaPlayer.Models
 			Title = "Название";
 			Artist = "Исполнитель";
 
-			Cover = StaticObjects.DefaultMusicImage;
+			Image = GlobalVars.DefaultMusicImage;
 		}
 
 		public AudioModel(VkNet.Model.Attachments.Audio VkModel)
 		{
-			Cover = StaticObjects.DefaultMusicImage;
+			Image = GlobalVars.DefaultMusicImage;
 
 			ModelType = ModelTypes.Audio;
 
@@ -31,7 +33,7 @@ namespace VKAvaloniaPlayer.Models
 			Title = VkModel.Title;
 
 			if (VkModel.Album != null && VkModel.Album.Thumb != null)
-				CoverUrl = GetThumbUrl(VkModel.Album.Thumb);
+				ImageUrl = GetThumbUrl(VkModel.Album.Thumb);
 		}
 
 		public override string GetThumbUrl(AudioCover audioCover)

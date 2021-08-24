@@ -3,13 +3,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using VKAvaloniaPlayer.Models;
 using VkNet.Model.Attachments;
+using VKAvaloniaPlayer.Models.Interfaces;
 using VkNet.Utils;
 
 namespace VKAvaloniaPlayer.ETC
 {
 	public static class ExtensionsMethods
 	{
-		public static void AddRange(this ObservableCollection<IBaseModel> DataCollection, VkCollection<Audio> audios)
+		public static void AddRange(this ObservableCollection<IVkModelBase>? DataCollection, VkCollection<Audio>? audios)
 		{
 			try
 			{
@@ -23,7 +24,7 @@ namespace VKAvaloniaPlayer.ETC
 			}
 		}
 
-		public static void AddRange(this ObservableCollection<IBaseModel> DataCollection, VkCollection<AudioPlaylist> audios)
+		public static void AddRange(this ObservableCollection<IVkModelBase>? DataCollection, VkCollection<AudioPlaylist> audios)
 		{
 			try
 			{
@@ -37,7 +38,7 @@ namespace VKAvaloniaPlayer.ETC
 			}
 		}
 
-		public static void StartLoadImages(this ObservableCollection<IBaseModel> DataCollection)
+		public static void StartLoadImages(this ObservableCollection<IVkModelBase>? DataCollection)
 		{
 			try
 			{

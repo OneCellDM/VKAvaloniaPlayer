@@ -52,12 +52,12 @@
 				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
 			</Grid.RowDefinitions>
-			<Border Grid.RowSpan="2"  Grid.Column="0"  Background="AntiqueWhite" VerticalAlignment="Center" HorizontalAlignment="Left"  CornerRadius="10" Width="50" Height="50">
+			<Border   Grid.RowSpan="2"  Grid.Column="0"   VerticalAlignment="Center" HorizontalAlignment="Left"  CornerRadius="10" Width="50" Height="50">
 				<Border.Background>
 					<ImageBrush Source="{Binding CurrentAudio.Cover}" Stretch="Fill"></ImageBrush>
 				</Border.Background>
-			</Border>
-			<StackPanel Grid.Column="1"   Margin="10,12,0,0">
+				</Border>
+				<StackPanel Grid.Column="1"   Margin="10,12,0,0">
 				<TextBlock  Text="{Binding CurrentAudio.Title}"    TextTrimming="CharacterEllipsis"></TextBlock>
 				<TextBlock  Text="{Binding CurrentAudio.Artist}" TextTrimming="CharacterEllipsis"></TextBlock>
 			</StackPanel>

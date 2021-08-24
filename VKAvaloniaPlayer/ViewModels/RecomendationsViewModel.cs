@@ -1,34 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Avalonia.Layout;
 using VKAvaloniaPlayer.ETC;
+using VKAvaloniaPlayer.ViewModels.Base;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public class RecomendationsViewModel : DataViewModelBase
-	{
-		public RecomendationsViewModel()
-		{
-			StartSearchObservable();
+    public sealed class RecomendationsViewModel : DataViewModelBase
+    {
+        public RecomendationsViewModel()
+        {
+            StartSearchObservable();
+            StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical);
+        }
 
-			StartScrollChangedObservable(DataViewModelBase.LoadMusicsAction, Avalonia.Layout.Orientation.Vertical);
-		}
+        public override void LoadData()
+        {
+            Task.Run(() =>
+            {
+                Loading = true;
+                var res = GlobalVars.VkApi?.Audio.GetRecommendations(count: 500, offset: (uint) Offset);
+                if (res != null)
+                {
+                    DataCollection.AddRange(res);
+                    Offset += res.Count;
+                    ResponseCount = res.Count;
+                    Task.Run(() => DataCollection.StartLoadImages());
+                }
 
-		public override void LoadData()
-		{
-			Task.Run(() =>
-			{
-				Loading = true;
-				var Res = StaticObjects.VKApi.Audio.GetRecommendations(count: 500, offset: (uint)Offset);
-				DataCollection.AddRange(Res);
-				Offset += Res.Count;
-				ResponseCount = Res.Count;
-				Task.Run(() => DataCollection.StartLoadImages());
-				Loading = false;
-			});
-		}
-	}
+                Loading = false;
+            });
+        }
+    }
 }

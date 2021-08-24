@@ -1,12 +1,15 @@
-﻿using VkNet.Model;
+﻿using VKAvaloniaPlayer.ETC;
+using VkNet.Model;
+using VKAvaloniaPlayer.Models.Base;
+
 
 namespace VKAvaloniaPlayer.Models
 {
-	public class AudioAlbumModel : BaseModel
+	public class AudioAlbumModel :  VkModelBase
 	{
 		public AudioAlbumModel(VkNet.Model.Attachments.AudioPlaylist audioPlaylist)
 		{
-			Cover = StaticObjects.DefaultAlbumImage;
+			Image = GlobalVars.DefaultAlbumImage;
 			ModelType = ModelTypes.Album;
 
 			Title = audioPlaylist.Title;
@@ -16,7 +19,7 @@ namespace VKAvaloniaPlayer.Models
 			OwnerID = (long)audioPlaylist.OwnerId;
 
 			if (audioPlaylist.Photo != null)
-				CoverUrl = GetThumbUrl(audioPlaylist.Photo);
+				ImageUrl = GetThumbUrl(audioPlaylist.Photo);
 		}
 
 		public override string GetThumbUrl(AudioCover audioCover)

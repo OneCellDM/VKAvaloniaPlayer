@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using VKAvaloniaPlayer.ETC;
+using VKAvaloniaPlayer.ViewModels.Base;
 using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public class AllMusicViewModel : DataViewModelBase
+	public sealed class AllMusicViewModel : DataViewModelBase
 	{
 		public AllMusicViewModel()
 		{
@@ -18,15 +19,20 @@ namespace VKAvaloniaPlayer.ViewModels
 			Task.Run(() =>
 			{
 				Loading = true;
-				var Res = StaticObjects.VKApi?.Audio.Get(new AudioGetParams()
+				
+				var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams()
 				{
 					Count = 500,
 					Offset = (uint)Offset
 				});
-				DataCollection.AddRange(Res);
+				
+				if (res != null)
+				{
+					DataCollection.AddRange(res);
+					Task.Run(() => DataCollection.StartLoadImages());
+					ResponseCount = res.Count;
+				}
 
-				Task.Run(() => DataCollection.StartLoadImages());
-				ResponseCount = Res.Count;
 				Loading = false;
 			});
 		}

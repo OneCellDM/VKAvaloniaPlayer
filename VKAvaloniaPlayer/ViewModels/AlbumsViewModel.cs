@@ -2,18 +2,20 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using VKAvaloniaPlayer.ETC;
+using VKAvaloniaPlayer.ViewModels.Base;
+using VkNet;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
 	public class AlbumsViewModel : DataViewModelBase
 	{
-		private MusicFromAlbumViewModel _MusicFromAlbumViewModel;
+		private MusicFromAlbumViewModel? _MusicFromAlbumViewModel;
 
 		private bool _MusicFromAlbumIsVisible = false;
 
 		public IReactiveCommand BackToAlbumListCommand { get; set; }
 
-		public MusicFromAlbumViewModel MusicFromAlbumViewModel
+		public MusicFromAlbumViewModel? MusicFromAlbumViewModel
 		{
 			get => _MusicFromAlbumViewModel;
 
@@ -40,11 +42,17 @@ namespace VKAvaloniaPlayer.ViewModels
 		{
 			Task.Run(() =>
 			{
-				var Res = StaticObjects.VKApi.Audio.GetPlaylists((long)StaticObjects.VKApi.UserId, 200, (uint)Offset);
+				if (GlobalVars.UserID != null)
+				{
+					var res = GlobalVars.VkApi?.Audio.GetPlaylists((long) GlobalVars.UserID, 200,
+						(uint) Offset);
+					if (res != null)
+					{
+						DataCollection.AddRange(res);
 
-				DataCollection.AddRange(Res);
-
-				Task.Run(() => DataCollection.StartLoadImages());
+						Task.Run(() => DataCollection.StartLoadImages());
+					}
+				}
 
 				Loading = false;
 			});

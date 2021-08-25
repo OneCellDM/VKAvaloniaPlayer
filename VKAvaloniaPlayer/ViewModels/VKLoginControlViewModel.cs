@@ -17,12 +17,13 @@ namespace VKAvaloniaPlayer.ViewModels
 {
     public class VkLoginControlViewModel : ViewModelBase
     {
+        private bool _CodeSendPanelIsVisible;
+        private bool _LoginPanelIsVisible = true;
+        private bool _SavedAccountsIsVisible;
+        private bool _CodeIsSend;
         private string _Login = string.Empty;
         private string _Passwod = string.Empty;
         private string _Code = string.Empty;
-        private bool _CodeSendPanelIsVisible;
-        private bool _LoginPanelIsVisible = true;
-        private bool _CodeIsSend;
         private string _InfoText = string.Empty;
         private int _ActiveAccountSelectIndex;
         public ObservableCollection<Models.SavedAccountModel>? SavedAccounts { get; set; } = new();
@@ -63,6 +64,12 @@ namespace VKAvaloniaPlayer.ViewModels
             set => this.RaiseAndSetIfChanged(ref _LoginPanelIsVisible, value);
         }
 
+        public bool SavedAccountsIsVisible
+        {
+            get => _SavedAccountsIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _SavedAccountsIsVisible, value);
+        }
+
         public int ActiveAccountSelectIndex
         {
             get => _ActiveAccountSelectIndex;
@@ -79,11 +86,97 @@ namespace VKAvaloniaPlayer.ViewModels
         public VkLoginControlViewModel()
         {
             LoadSavedAccounts();
+            if (SavedAccounts.Count > 0) SavedAccountsIsVisible = true;
             SendCodeCommand = ReactiveCommand.Create(() => _CodeIsSend = true,
                 this.WhenAnyValue(x => x.Code, (code) => !string.IsNullOrEmpty(code)));
             AuthCommand = ReactiveCommand.Create(() => VkAuth(),
                 this.WhenAnyValue(x => x.Login, x => x.Password,
                     (login, password) => !string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password)));
+        }
+
+        private void LoadSavedAccounts()
+        {
+            if (GlobalVars.CurrentPlatform == OSPlatform.Windows) LoadSavedAccountsOnWindows();
+            else if (GlobalVars.CurrentPlatform == OSPlatform.Linux) LoadSavedAccountsOnLinuxOrMac();
+            else if (GlobalVars.CurrentPlatform == OSPlatform.OSX) LoadSavedAccountsOnLinuxOrMac();
+            
+             SavedAccounts?.ToList().AsParallel().ForAll(x=>x.LoadBitmap());
+ 
+        }
+
+        private void LoadSavedAccountsOnWindows()
+        {
+            RegistryKey? key = null;
+            try
+            {
+                key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true)?.CreateSubKey(GlobalVars.AppName);
+                if (key != null)
+                {
+                    string? data = (string?) key.GetValue(GlobalVars.SavedAccountsFileName);
+                    if (data is not null)
+                        SavedAccounts =
+                            JsonConvert.DeserializeObject<ObservableCollection<Models.SavedAccountModel>>(data);
+                }
+            }
+            finally
+            {
+                key?.Close();
+            }
+        }
+
+        private void LoadSavedAccountsOnLinuxOrMac()
+        {
+            try
+            {
+                string? home = GlobalVars.HomeDirectory;
+                if (string.IsNullOrEmpty(home)) return;
+                string path = Path.Combine(home, ".config", GlobalVars.AppName, GlobalVars.SavedAccountsFileName);
+                if (File.Exists(path))
+                    SavedAccounts =
+                        JsonConvert.DeserializeObject<ObservableCollection<Models.SavedAccountModel>>(
+                            File.ReadAllText(path));
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
+
+        private void SaveAccount(VkApi? vkApi)
+        {
+            var accountData = vkApi.Account.GetProfileInfo();
+            SavedAccounts?.Add(new Models.SavedAccountModel()
+            {
+                Token = vkApi.Token, UserID = vkApi.UserId, Name = $"{accountData.FirstName} {accountData.LastName}"
+            });
+            string saveText = JsonConvert.SerializeObject(SavedAccounts);
+            if (GlobalVars.CurrentPlatform == OSPlatform.Windows) SaveAccountsOnWindows(saveText);
+            else if (GlobalVars.CurrentPlatform == OSPlatform.Linux) SaveAccountsOnLinuxOrMac(saveText);
+            else if (GlobalVars.CurrentPlatform == OSPlatform.OSX) SaveAccountsOnLinuxOrMac(saveText);
+        }
+
+        private void SaveAccountsOnWindows(string? data)
+        {
+            RegistryKey? key = null;
+            try
+            {
+                key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true)?.CreateSubKey(GlobalVars.AppName);
+                key?.SetValue(GlobalVars.SavedAccountsFileName, data ?? string.Empty);
+            }
+            finally
+            {
+                key?.Close();
+            }
+        }
+
+        private void SaveAccountsOnLinuxOrMac(string? data)
+        {
+            string? home = GlobalVars.HomeDirectory;
+            if (string.IsNullOrEmpty(home)) return;
+            string path = Path.Combine(home, ".config", GlobalVars.AppName);
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            path = Path.Combine(path, GlobalVars.SavedAccountsFileName);
+            File.WriteAllText(path, data);
         }
 
         private void VkAuth()
@@ -127,88 +220,12 @@ namespace VKAvaloniaPlayer.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    CodeSendPanelIsVisible = false;
+                    LoginPanelIsVisible = true;
+                    
                     InfoText = ex.Message;
                 }
             });
-        }
-
-        private void LoadSavedAccounts()
-        {
-            if (GlobalVars.CurrentPlatform == OSPlatform.Windows) LoadSavedAccountsOnWindows();
-            if (GlobalVars.CurrentPlatform == OSPlatform.Linux) LoadSavedAccountsOnLinux();
-            SavedAccounts?.ToList().AsParallel().ForAll(X => X.LoadBitmap());
-        }
-
-        private void LoadSavedAccountsOnWindows()
-        {
-            RegistryKey? key = null;
-            try
-            {
-                key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true)?.CreateSubKey(GlobalVars.AppName);
-                if (key is not null)
-                {
-                    string? data = (string?) key.GetValue(GlobalVars.SavedAccountsFileName);
-                    if (data is not null)
-                        SavedAccounts =
-                            JsonConvert.DeserializeObject<ObservableCollection<Models.SavedAccountModel>>(data);
-                }
-            }
-            finally
-            {
-                key?.Close();
-            }
-        }
-
-        private void LoadSavedAccountsOnLinux()
-        {
-            try
-            {
-                string? home = GlobalVars.HomeDirectory;
-                if (string.IsNullOrEmpty(home)) return;
-                string path = Path.Combine(home, ".config", GlobalVars.AppName, GlobalVars.SavedAccountsFileName);
-                if (File.Exists(path))
-                    SavedAccounts =
-                        JsonConvert.DeserializeObject<ObservableCollection<Models.SavedAccountModel>>(
-                            File.ReadAllText(path));
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-        }
-
-        private void SaveAccount(VkApi? vkApi)
-        {
-            var accountData = vkApi.Account.GetProfileInfo();
-            SavedAccounts?.Add(new Models.SavedAccountModel()
-            {
-                Token = vkApi.Token, UserID = vkApi.UserId, Name = $"{accountData.FirstName} {accountData.LastName}"
-            });
-            string saveText = JsonConvert.SerializeObject(SavedAccounts);
-            if (GlobalVars.CurrentPlatform == OSPlatform.Windows) SaveAccountsOnWindows(saveText);
-            else if (GlobalVars.CurrentPlatform == OSPlatform.Linux) SaveAccountsOnLinux(saveText);
-        }
-
-        private void SaveAccountsOnWindows(string? data)
-        {
-            RegistryKey? key = null;
-            try
-            {
-                key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true)?.CreateSubKey(GlobalVars.AppName);
-                key?.SetValue(GlobalVars.SavedAccountsFileName, data ?? string.Empty);
-            }
-            finally
-            {
-                key?.Close();
-            }
-        }
-
-        private void SaveAccountsOnLinux(string? data)
-        {
-            string? home = GlobalVars.HomeDirectory;
-            if (string.IsNullOrEmpty(home)) return;
-            string path = Path.Combine(home, ".config", GlobalVars.AppName, GlobalVars.SavedAccountsFileName);
-            File.WriteAllText(path, data);
         }
 
         private void AuthFromActiveAccount(int index)

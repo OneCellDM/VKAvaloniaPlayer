@@ -3,9 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:VKAvaloniaPlayer.ViewModels"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              mc:Ignorable="d"  Background="white" d:DesignWidth="800" d:DesignHeight="700"
              x:Class="VKAvaloniaPlayer.Views.VKLoginControl">
-	
 	
 	<Grid Background="White">
 		<Grid.RowDefinitions>
@@ -14,7 +15,7 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition></ColumnDefinition>
-			<ColumnDefinition MinWidth="300" Width="Auto"></ColumnDefinition>
+			<ColumnDefinition  Width="Auto"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
 
 		<Border  Background="#2787F5" Grid.ColumnSpan="2">
@@ -22,22 +23,22 @@
 		</Border>
 
 		<StackPanel Grid.Row="1"  Spacing="20"  IsVisible="{Binding Path=LoginPanelIsVisible}" Margin="50,10">
-			<TextBlock Foreground="#2787F5" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="20" Text="Войти в аккаунт"></TextBlock>
-			<TextBlock HorizontalAlignment="Center" FontWeight="UltraBold" Text="{Binding InfoText}" Foreground="Red" ></TextBlock>
-			<Label HorizontalAlignment="Center" Content="Логин"></Label>
-			<TextBox Watermark="Введите логин"  Text="{Binding  Path=Login}"></TextBox>
-			<Label HorizontalAlignment="Center" Content="Пароль"></Label>
-			<TextBox VerticalContentAlignment="Center" PasswordChar="*" Watermark="Введите пароль" Text="{Binding Path=Password}" ></TextBox>
+			<TextBlock Foreground="#2787F5" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="20" Text="Войти в аккаунт"/>
+			<TextBlock HorizontalAlignment="Center" FontWeight="UltraBold" Text="{Binding InfoText}" Foreground="Red" />
+			<Label HorizontalAlignment="Center" Content="Логин"/>
+			<TextBox Watermark="Введите логин"  Text="{Binding  Path=Login}"/>
+			<Label HorizontalAlignment="Center" Content="Пароль"/>
+			<TextBox VerticalContentAlignment="Center" PasswordChar="*" Watermark="Введите пароль" Text="{Binding Path=Password}" />
 
-			<Button Margin="0,10"  Content="Войти"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Binding AuthCommand}"></Button>
+			<Button Margin="0,10"  Content="Войти"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Binding AuthCommand}"/>
 		</StackPanel>
 		<StackPanel Grid.Row="1" Spacing="20" IsVisible="{Binding Path=CodeSendPanelIsVisible}"  Margin="180,50">
-			<Label HorizontalAlignment="Center" Content="Код авторизации"></Label>
-			<TextBox  Text="{Binding  Path=Code}"></TextBox>
-			<Button  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"   Content="Отправить"  Command="{Binding SendCodeCommand}"></Button>
+			<Label HorizontalAlignment="Center" Content="Код авторизации"/>
+			<TextBox  Text="{Binding  Path=Code}"/>
+			<Button  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"   Content="Отправить"  Command="{Binding SendCodeCommand}"/>
 		</StackPanel>
 
-		<Grid Grid.Row="1" Background="#2272CE" Grid.Column="1">
+		<Grid IsVisible="{Binding SavedAccountsIsVisible}" Grid.Row="1" Background="#2272CE" Grid.Column="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
@@ -45,59 +46,31 @@
 			</Grid.RowDefinitions>
 			<TextBlock Grid.Row="0"   Foreground="White" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="20" Margin="10" Text="Активные аккаунты" />
 			<TextBlock  Grid.Row="1" Margin="20" FontSize="16" FontWeight="ExtraBold" Text="Выберите аккаунт из списка для входа" Foreground="White"></TextBlock>
-			<ListBox SelectedIndex="{Binding ActiveAccountSelectIndex}" Grid.Row="2" VirtualizationMode="None" VerticalAlignment="Top" Margin="30,0" Background="Transparent">
-				<ListBoxItem>
-					<StackPanel Orientation="Horizontal">
-						<Ellipse Fill="White" Width="50" Height="50" />
-						<TextBlock Text="Даниил мурзак" Foreground="White" VerticalAlignment="Center" Margin="10"></TextBlock>
-					</StackPanel>
-				</ListBoxItem>
-
-				<ListBoxItem>
-					<StackPanel Orientation="Horizontal">
-						<Ellipse Fill="White" Width="50" Height="50" />
-						<TextBlock Text="Даниил мурзак" Foreground="White" VerticalAlignment="Center" Margin="10"></TextBlock>
-					</StackPanel>
-				</ListBoxItem>
-
-				<ListBoxItem>
-					<StackPanel Orientation="Horizontal">
-						<Ellipse Fill="White" Width="50" Height="50" />
-						<TextBlock Text="Даниил мурзак" Foreground="White" VerticalAlignment="Center" Margin="10"></TextBlock>
-					</StackPanel>
-				</ListBoxItem>
-
-				<ListBoxItem>
-					<StackPanel Orientation="Horizontal">
-						<Ellipse Fill="White" Width="50" Height="50" />
-						<TextBlock Text="Даниил мурзак" Foreground="White" VerticalAlignment="Center" Margin="10"></TextBlock>
-					</StackPanel>
-				</ListBoxItem>
-
-				<ListBoxItem>
-					<StackPanel Orientation="Horizontal">
-						<Ellipse Fill="White" Width="50" Height="50" />
-						<TextBlock Text="Даниил мурзак" Foreground="White" VerticalAlignment="Center" Margin="10"></TextBlock>
-					</StackPanel>
-				</ListBoxItem>
-				<ListBoxItem>
-					<StackPanel Orientation="Horizontal">
-						<Ellipse Fill="White" Width="50" Height="50" />
-						<TextBlock Text="Даниил мурзак" Foreground="White" VerticalAlignment="Center" Margin="10"></TextBlock>
-					</StackPanel>
-				</ListBoxItem>
-				<ListBoxItem>
-					<StackPanel Orientation="Horizontal">
-						<Ellipse Fill="White" Width="50" Height="50" />
-						<TextBlock Text="Даниил мурзак" Foreground="White" VerticalAlignment="Center" Margin="10"></TextBlock>
-					</StackPanel>
-				</ListBoxItem>
-				<ListBoxItem>
-					<StackPanel Orientation="Horizontal">
-						<Ellipse Fill="White" Width="50" Height="50" />
-						<TextBlock Text="Даниил мурзак" Foreground="White" VerticalAlignment="Center" Margin="10"></TextBlock>
-					</StackPanel>
-				</ListBoxItem>
+			<ListBox  SelectedIndex="{Binding ActiveAccountSelectIndex}" Items="{Binding SavedAccounts }" Grid.Row="2" VirtualizationMode="None" VerticalAlignment="Top" Margin="30,0" Background="Transparent">
+				<ListBox.DataTemplates>
+					<DataTemplate>
+						<StackPanel Orientation="Horizontal">
+							
+							<Ellipse   Fill="White"  Width="50" Height="50" >
+								<i:Interaction.Behaviors>
+									
+									<ia:DataTriggerBehavior Binding="{Binding  Image.Size.Height}" ComparisonCondition="GreaterThan" Value="0" >
+										
+										<ia:ChangePropertyAction  PropertyName="Fill">
+											<ia:ChangePropertyAction.Value>
+												<ImageBrush Source="{Binding Image}"/>
+											</ia:ChangePropertyAction.Value>
+										</ia:ChangePropertyAction>
+										
+									</ia:DataTriggerBehavior>
+								</i:Interaction.Behaviors>
+							</Ellipse>
+							
+							<TextBlock Text="{Binding Name }" Foreground="White" VerticalAlignment="Center" Margin="10"></TextBlock>
+							
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.DataTemplates>
 			</ListBox>
 		</Grid>
 	</Grid>

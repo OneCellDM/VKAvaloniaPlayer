@@ -13,9 +13,9 @@ namespace VKAvaloniaPlayer.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private const double _menuColumnWidth = 60;
-        private bool _MenuTextIsVisible = false;
-        private bool _AlbumsIsVisible = false;
-        private bool _CurrentDataViewIsVisible = true;
+        private bool _MenuTextIsVisible;
+        private bool _AlbumsIsVisible;
+        private bool _CurrentDataViewIsVisible;
         private bool _VkLoginIsVisible = true;
         private AlbumsViewModel? _AlbumsViewModel;
         private DataViewModelBase? _CurrentDataViewModel;

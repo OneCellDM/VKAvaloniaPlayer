@@ -32,7 +32,7 @@ namespace VKAvaloniaPlayer.ETC
         {
             get
             {
-                if (_homedirectory == null)
+                if (_homedirectory == null) 
                     _homedirectory = Utils.GetHomeDirectory();
 
                 return _homedirectory;
@@ -47,14 +47,19 @@ namespace VKAvaloniaPlayer.ETC
             get
             {
                 if (_vkApi is null)
-                    _vkApi = new();
-
+                {
+                    _vkApi = new ();
+                    _vkApi.Authorize(new ()
+                    {
+                        AccessToken = "4b0168fd4b0168fd4b0168fd8f4b676c6744b014b0168fd1093d8fdf1e3c0017422a04c"
+                    });
+                }
+                
                 return _vkApi;
             }
             set
             {
                 _vkApi = value;
-
                 if (VkApiChanged != null) VkApiChanged.Invoke();
             }
         }

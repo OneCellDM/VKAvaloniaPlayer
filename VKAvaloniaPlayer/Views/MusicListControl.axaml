@@ -76,7 +76,7 @@
 						<StackPanel Spacing="5" Orientation="Horizontal">
 							<Border CornerRadius="10" Width="50" Height="50">
 								<Border.Background>
-									<ImageBrush Source="{Binding Cover}" Stretch="Uniform" />
+									<ImageBrush Source="{Binding Image}" Stretch="Uniform" />
 								</Border.Background>
 							</Border>
 							<StackPanel Margin="5" Spacing="5">

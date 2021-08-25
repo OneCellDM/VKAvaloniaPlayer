@@ -149,22 +149,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
         private void StaticObjects_VkApiChanged()
         {
-            var profileInfoAwaiter = GlobalVars.VkApi?.Users.GetAsync(new[] {(long) GlobalVars.UserID},
-                VkNet.Enums.Filters.ProfileFields.Photo50).GetAwaiter();
-            if (profileInfoAwaiter != null)
-            {
-                profileInfoAwaiter.Value.OnCompleted(() =>
-                {
-                    UserName = profileInfoAwaiter.Value.GetResult()[0].FirstName;
-                    HttpClient httpClient = new HttpClient();
-                    Task.Run(async () =>
-                    {
-                        Avatar = new Bitmap(new MemoryStream(
-                            await httpClient.GetByteArrayAsync(profileInfoAwaiter.Value.GetResult()[0].Photo50
-                                .AbsoluteUri)));
-                    });
-                });
-            }
+            
 
             Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
             {

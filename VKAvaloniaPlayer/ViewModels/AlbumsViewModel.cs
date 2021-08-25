@@ -42,9 +42,9 @@ namespace VKAvaloniaPlayer.ViewModels
 		{
 			Task.Run(() =>
 			{
-				if (GlobalVars.UserID != null)
+				if (GlobalVars.CurrentAccount?.UserID != null)
 				{
-					var res = GlobalVars.VkApi?.Audio.GetPlaylists((long) GlobalVars.UserID, 200,
+					var res = GlobalVars.VkApi.Audio.GetPlaylists((long) GlobalVars.CurrentAccount.UserID, 200,
 						(uint) Offset);
 					if (res != null)
 					{

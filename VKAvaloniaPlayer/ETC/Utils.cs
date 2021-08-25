@@ -34,19 +34,8 @@ namespace VKAvaloniaPlayer.ETC
 
             throw new InvalidOperationException();
         }
-        
-        public static string GetUserNameOnLinux()
-        {
-            string name = string.Empty;
-            Process process = new();
-            process.StartInfo = new ProcessStartInfo {FileName = "whoami"};
-            process.OutputDataReceived += delegate(object _, DataReceivedEventArgs args)
-            {
-                name = args?.Data ?? string.Empty;
-            };
-            process.Start();
-            process.WaitForExit();
-            return name;
-        }
+        public static string? GetHomeDirectory()=> Environment.GetEnvironmentVariable("HOME");
+
+
     }
 }

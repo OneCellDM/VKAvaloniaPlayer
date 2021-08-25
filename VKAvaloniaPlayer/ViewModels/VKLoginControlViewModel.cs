@@ -4,10 +4,14 @@ using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using VKAvaloniaPlayer.ETC;
 using VkNet;
 using VkNet.Model;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
@@ -21,7 +25,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private bool _CodeIsSend;
         private string _InfoText = string.Empty;
         private int _ActiveAccountSelectIndex;
-        public ObservableCollection<Models.SaveAccountModel>? SavedAccounts { get; set; } = new();
+        public ObservableCollection<Models.SavedAccountModel>? SavedAccounts { get; set; } = new();
 
         public string Login
         {
@@ -84,7 +88,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
         private void VkAuth()
         {
-            VkApi vkApi = new();
+            VkApi? vkApi = new();
             InfoText = "";
             System.Text.EncodingProvider provider = System.Text.CodePagesEncodingProvider.Instance;
             System.Text.Encoding.RegisterProvider(provider);
@@ -131,6 +135,8 @@ namespace VKAvaloniaPlayer.ViewModels
         private void LoadSavedAccounts()
         {
             if (GlobalVars.CurrentPlatform == OSPlatform.Windows) LoadSavedAccountsOnWindows();
+            if (GlobalVars.CurrentPlatform == OSPlatform.Linux) LoadSavedAccountsOnLinux();
+            SavedAccounts?.ToList().AsParallel().ForAll(X => X.LoadBitmap());
         }
 
         private void LoadSavedAccountsOnWindows()
@@ -138,23 +144,49 @@ namespace VKAvaloniaPlayer.ViewModels
             RegistryKey? key = null;
             try
             {
-                key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true)?.CreateSubKey("VkAvaloniaPlayer");
+                key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true)?.CreateSubKey(GlobalVars.AppName);
                 if (key is not null)
                 {
-                    string? data = (string?) key.GetValue("Users");
+                    string? data = (string?) key.GetValue(GlobalVars.SavedAccountsFileName);
                     if (data is not null)
                         SavedAccounts =
-                            JsonConvert.DeserializeObject<ObservableCollection<Models.SaveAccountModel>>(data);
+                            JsonConvert.DeserializeObject<ObservableCollection<Models.SavedAccountModel>>(data);
                 }
-            }
-            catch (Exception)
-            {
-                // ignored
             }
             finally
             {
                 key?.Close();
             }
+        }
+
+        private void LoadSavedAccountsOnLinux()
+        {
+            try
+            {
+                string? home = GlobalVars.HomeDirectory;
+                if (string.IsNullOrEmpty(home)) return;
+                string path = Path.Combine(home, ".config", GlobalVars.AppName, GlobalVars.SavedAccountsFileName);
+                if (File.Exists(path))
+                    SavedAccounts =
+                        JsonConvert.DeserializeObject<ObservableCollection<Models.SavedAccountModel>>(
+                            File.ReadAllText(path));
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
+
+        private void SaveAccount(VkApi? vkApi)
+        {
+            var accountData = vkApi.Account.GetProfileInfo();
+            SavedAccounts?.Add(new Models.SavedAccountModel()
+            {
+                Token = vkApi.Token, UserID = vkApi.UserId, Name = $"{accountData.FirstName} {accountData.LastName}"
+            });
+            string saveText = JsonConvert.SerializeObject(SavedAccounts);
+            if (GlobalVars.CurrentPlatform == OSPlatform.Windows) SaveAccountsOnWindows(saveText);
+            else if (GlobalVars.CurrentPlatform == OSPlatform.Linux) SaveAccountsOnLinux(saveText);
         }
 
         private void SaveAccountsOnWindows(string? data)
@@ -162,8 +194,8 @@ namespace VKAvaloniaPlayer.ViewModels
             RegistryKey? key = null;
             try
             {
-                key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true)?.CreateSubKey("VkAvaloniaPlayer");
-                key?.SetValue("Users", data ?? string.Empty);
+                key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true)?.CreateSubKey(GlobalVars.AppName);
+                key?.SetValue(GlobalVars.SavedAccountsFileName, data ?? string.Empty);
             }
             finally
             {
@@ -171,25 +203,12 @@ namespace VKAvaloniaPlayer.ViewModels
             }
         }
 
-        private void SaveAccountsOnLinux()
+        private void SaveAccountsOnLinux(string? data)
         {
-        }
-
-        private string LoadSavedAccountsOnLinux()
-        {
-            return "str";
-        }
-       
-        private void SaveAccount(VkApi vkApi)
-        {
-            var accountData = vkApi.Account.GetProfileInfo();
-            SavedAccounts?.Add(new Models.SaveAccountModel()
-            {
-                Token = vkApi.Token, UserID = vkApi.UserId, Name = $"{accountData.FirstName} {accountData.LastName}"
-            });
-            string saveText = JsonConvert.SerializeObject(SavedAccounts);
-            if (GlobalVars.CurrentPlatform == OSPlatform.Windows) SaveAccountsOnWindows(saveText);
-            else if (GlobalVars.CurrentPlatform == OSPlatform.Linux) SaveAccountsOnLinux();
+            string? home = GlobalVars.HomeDirectory;
+            if (string.IsNullOrEmpty(home)) return;
+            string path = Path.Combine(home, ".config", GlobalVars.AppName, GlobalVars.SavedAccountsFileName);
+            File.WriteAllText(path, data);
         }
 
         private void AuthFromActiveAccount(int index)
@@ -197,7 +216,7 @@ namespace VKAvaloniaPlayer.ViewModels
             try
             {
                 var account = SavedAccounts?[index];
-                VkApi api = new VkApi();
+                VkApi? api = new VkApi();
                 api.Authorize(new ApiAuthParams() {AccessToken = account?.Token, UserId = (long) account?.UserID,});
                 GlobalVars.VkApi = api;
             }

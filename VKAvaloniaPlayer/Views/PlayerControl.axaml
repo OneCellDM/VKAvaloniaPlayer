@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="100"
              x:Class="VKAvaloniaPlayer.Views.PlayerControl"
-			 xmlns:sys="clr-namespace:System;assembly=mscorlib">
+			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+			 xmlns:converters="clr-namespace:VKAvaloniaPlayer.Converters">
+	
 	<UserControl.Resources>
+		<converters:DurationConverter x:Key="DurationConverter"/>
 		<sys:Double  x:Key="PlayerButtonSize">14</sys:Double>
 		<Thickness x:Key="SliderTopHeaderMargin">0,0,0,4</Thickness>
 		<GridLength x:Key="SliderPreContentMargin">15</GridLength>
@@ -54,19 +57,26 @@
 			</Grid.RowDefinitions>
 			<Border   Grid.RowSpan="2"  Grid.Column="0"   VerticalAlignment="Center" HorizontalAlignment="Left"  CornerRadius="10" Width="50" Height="50">
 				<Border.Background>
-					<ImageBrush Source="{Binding CurrentAudio.Cover}" Stretch="Fill"></ImageBrush>
+					<ImageBrush Source="{Binding CurrentAudio.Image}" Stretch="Fill"></ImageBrush>
 				</Border.Background>
 				</Border>
 				<StackPanel Grid.Column="1"   Margin="10,12,0,0">
-				<TextBlock  Text="{Binding CurrentAudio.Title}"    TextTrimming="CharacterEllipsis"></TextBlock>
+				<TextBlock  Text="{Binding CurrentAudio.Title}"  TextTrimming="CharacterEllipsis"></TextBlock>
 				<TextBlock  Text="{Binding CurrentAudio.Artist}" TextTrimming="CharacterEllipsis"></TextBlock>
 			</StackPanel>
-			<Slider   Grid.Row="1" Grid.ColumnSpan="6" Grid.Column="1" Value="{Binding Path=PlayPosition}" Maximum="{Binding Path=Duration}"    Margin="11,-10,0,0">
+			<Slider   Grid.Row="1" Grid.ColumnSpan="6" Grid.Column="1" Value="{Binding Path=PlayPosition}" Maximum="{Binding Path=CurrentAudio.Duration}"    Margin="11,-10,0,0">
 				<Slider.Styles>
 					<StyleInclude Source="/Styles/SliderStyle.axaml"></StyleInclude>
 				</Slider.Styles>
 			</Slider>
-			<TextBlock IsVisible="False" Text="2.4 : 10.6" FontSize="12" Grid.Column="2" VerticalAlignment="Center" Margin="5,11,5,0"></TextBlock>
+			<TextBlock IsVisible="True"    Grid.Column="2" VerticalAlignment="Center" Margin="5,18,5,0">
+				<TextBlock.Text>
+					<MultiBinding StringFormat="{}{0}/{1}">
+						<Binding Path="PlayPosition" Converter="{StaticResource  DurationConverter}"/>	
+						<Binding Path="CurrentAudio.Duration" Converter="{StaticResource DurationConverter}"/>	
+					</MultiBinding>
+				</TextBlock.Text>
+			</TextBlock>
 			<Button Grid.Column="3" VerticalAlignment="Bottom" Background="Transparent">
 
 				<Path Data="M6 0v1h-5c-.55 0-1 .45-1 1v1h1v-1h5v1l2-1.5-2-1.5zm-4 4l-2 1.5 2 1.5v-1h5c.55 0 1-.45 1-1v-1h-1v1h-5v-1z" Stretch="Fill" Width="{StaticResource PlayerButtonSize}" Height="{StaticResource PlayerButtonSize}"   Fill="{DynamicResource ControlsColor}"></Path>

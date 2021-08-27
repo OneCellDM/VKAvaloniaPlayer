@@ -26,6 +26,8 @@ namespace VKAvaloniaPlayer.ViewModels
 				{
 					Loading = true;
 					DataCollection?.Clear();
+					ResponseCount = 0;
+					Offset = 0;
 					LoadData();
 				}
 			});
@@ -46,7 +48,8 @@ namespace VKAvaloniaPlayer.ViewModels
 				{
 					DataCollection.AddRange(res);
 					ResponseCount = res.Count;
-					Task.Run(() => DataCollection.StartLoadImages());
+					Offset += res.Count;
+					Task.Run(() => { DataCollection.StartLoadImages(); });
 
 				}
 

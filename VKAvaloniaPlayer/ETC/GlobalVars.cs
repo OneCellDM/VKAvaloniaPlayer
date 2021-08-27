@@ -5,7 +5,7 @@ using VkNet;
 
 namespace VKAvaloniaPlayer.ETC
 {
-    public class GlobalVars
+    public static class GlobalVars
     {
         private static string? _homedirectory;
         private static OSPlatform? _currentPlatform = null;
@@ -73,7 +73,7 @@ namespace VKAvaloniaPlayer.ETC
             }
         }
 
-        public GlobalVars()
+        static GlobalVars()
         {
             DefaultMusicImage = Utils.LoadImageFromAssets("MusicIcon.jpg");
             DefaultAlbumImage = Utils.LoadImageFromAssets("AlbumIcon.png");

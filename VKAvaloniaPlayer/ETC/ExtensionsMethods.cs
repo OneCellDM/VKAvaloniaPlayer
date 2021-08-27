@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using VKAvaloniaPlayer.Models;
 using VkNet.Model.Attachments;
@@ -45,6 +46,7 @@ namespace VKAvaloniaPlayer.ETC
 				int itemCount = DataCollection.Count;
 				for (int i = 0; i < itemCount; i++)
 					DataCollection[i].LoadBitmap();
+				
 			}
 			catch (Exception EX)
 			{

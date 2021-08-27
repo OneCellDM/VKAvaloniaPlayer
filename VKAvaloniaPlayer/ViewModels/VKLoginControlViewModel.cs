@@ -25,7 +25,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private string _Passwod = string.Empty;
         private string _Code = string.Empty;
         private string _InfoText = string.Empty;
-        private int _ActiveAccountSelectIndex;
+        private int _ActiveAccountSelectIndex = -1;
         public ObservableCollection<Models.SavedAccountModel>? SavedAccounts { get; set; } = new();
 
         public string Login
@@ -75,8 +75,10 @@ namespace VKAvaloniaPlayer.ViewModels
             get => _ActiveAccountSelectIndex;
             set
             {
+                
                 this.RaiseAndSetIfChanged(ref _ActiveAccountSelectIndex, value);
                 if (_ActiveAccountSelectIndex > -1) AuthFromActiveAccount(_ActiveAccountSelectIndex);
+               
             }
         }
 
@@ -149,6 +151,7 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 Token = vkApi.Token, UserID = vkApi.UserId, Name = $"{accountData.FirstName} {accountData.LastName}"
             });
+            GlobalVars.CurrentAccount = SavedAccounts.Last();
             string saveText = JsonConvert.SerializeObject(SavedAccounts);
             if (GlobalVars.CurrentPlatform == OSPlatform.Windows) SaveAccountsOnWindows(saveText);
             else if (GlobalVars.CurrentPlatform == OSPlatform.Linux) SaveAccountsOnLinuxOrMac(saveText);
@@ -235,6 +238,7 @@ namespace VKAvaloniaPlayer.ViewModels
                 var account = SavedAccounts?[index];
                 VkApi? api = new VkApi();
                 api.Authorize(new ApiAuthParams() {AccessToken = account?.Token, UserId = (long) account?.UserID,});
+                GlobalVars.CurrentAccount = account;
                 GlobalVars.VkApi = api;
             }
             catch (Exception)

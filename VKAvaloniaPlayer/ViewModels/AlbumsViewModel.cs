@@ -50,7 +50,7 @@ namespace VKAvaloniaPlayer.ViewModels
 					{
 						DataCollection.AddRange(res);
 
-						Task.Run(() => DataCollection.StartLoadImages());
+						Task.Run(() => { DataCollection.StartLoadImages(); });
 					}
 				}
 

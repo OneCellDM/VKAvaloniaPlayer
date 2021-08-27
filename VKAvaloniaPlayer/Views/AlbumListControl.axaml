@@ -23,7 +23,7 @@
 					<StackPanel>
 						<Border CornerRadius="10" Width="120" Height="120">
 							<Border.Background>
-								<ImageBrush Source="{Binding Cover}"></ImageBrush>
+								<ImageBrush Source="{Binding Image}"></ImageBrush>
 							</Border.Background>
 						</Border>
 						<TextBlock Width="120"  Margin="10,3" TextAlignment="Center" TextWrapping="Wrap"  HorizontalAlignment="Center"  Height="40" Text="{Binding Title}"></TextBlock>

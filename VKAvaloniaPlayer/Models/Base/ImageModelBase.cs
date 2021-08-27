@@ -15,7 +15,7 @@ namespace VKAvaloniaPlayer.Models.Base
 {
 	public class ImageModelBase : INotifyPropertyChanged, IImageBase
 	{
-		public static Semaphore Semaphore = new Semaphore(10, 10);
+		public static Semaphore Semaphore = new Semaphore(5, 5);
 
 		public event PropertyChangedEventHandler? PropertyChanged;
 

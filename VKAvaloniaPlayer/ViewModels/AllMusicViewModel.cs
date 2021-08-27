@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using VKAvaloniaPlayer.ETC;
+using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Base;
 using VkNet.Model.RequestParams;
 
@@ -29,8 +30,11 @@ namespace VKAvaloniaPlayer.ViewModels
 				if (res != null)
 				{
 					DataCollection.AddRange(res);
-					Task.Run(() => DataCollection.StartLoadImages());
+					Task.Run(() => { DataCollection.StartLoadImages(); });
+					Offset += res.Count;
 					ResponseCount = res.Count;
+					
+					
 				}
 
 				Loading = false;

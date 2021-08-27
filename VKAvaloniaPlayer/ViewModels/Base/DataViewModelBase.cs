@@ -31,8 +31,6 @@ namespace VKAvaloniaPlayer.ViewModels.Base
             {
                 if (ResponseCount > 0 && Loading is false)
                     LoadData();
-                else
-                    return;
             });
 
             _AllDataCollection = new ObservableCollection<IVkModelBase>();

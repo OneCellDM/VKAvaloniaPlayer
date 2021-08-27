@@ -28,7 +28,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private AudioModel _CurrentAudio = new();
 
         private static readonly System.Timers.Timer Timer = new();
-        private int _Duration;
+
         private int _PlayPosition;
         private IReactiveCommand _PlayCommand = null!;
         private IReactiveCommand _PauseCommand = null!;
@@ -42,13 +42,6 @@ namespace VKAvaloniaPlayer.ViewModels
             get => _PlayPosition;
             set => this.RaiseAndSetIfChanged(ref _PlayPosition, value);
         }
-
-        public int Duration
-        {
-            get => _Duration;
-            set => this.RaiseAndSetIfChanged(ref _Duration, value);
-        }
-
         public double Volume
         {
             get => _Volume;
@@ -64,7 +57,6 @@ namespace VKAvaloniaPlayer.ViewModels
             get => _CurrentAudio;
             set
             {
-                _CurrentAudio = value;
                 try
                 {
                     this.RaiseAndSetIfChanged(ref _CurrentAudio, value);
@@ -76,8 +68,7 @@ namespace VKAvaloniaPlayer.ViewModels
                     }
 
                     PauseButtonVisible();
-
-                    Duration = CurrentAudio.Duration;
+                    
                     PlayPosition = 0;
 
                     Timer.Start();
@@ -178,7 +169,7 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => PlayPosition = Player.GetPositionSeconds());
 
-            if (PlayPosition == Duration) PlayNext();
+            if (PlayPosition == CurrentAudio.Duration) PlayNext();
         }
 
         private void PlayNext()

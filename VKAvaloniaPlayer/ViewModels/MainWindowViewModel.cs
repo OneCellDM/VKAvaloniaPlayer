@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
@@ -17,6 +18,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private bool _AlbumsIsVisible;
         private bool _CurrentDataViewIsVisible;
         private bool _VkLoginIsVisible = true;
+        private bool _MenuIsOpen = false;
         private AlbumsViewModel? _AlbumsViewModel;
         private DataViewModelBase? _CurrentDataViewModel;
         private AllMusicViewModel? _AllMusicViewModel;
@@ -24,8 +26,11 @@ namespace VKAvaloniaPlayer.ViewModels
         private RecomendationsViewModel? _RecomendationsViewModel;
         private Bitmap? _Avatar;
         private int _MenuSelectionIndex = -1;
+        
         private GridLength _MenuColumnWidth = new GridLength(_menuColumnWidth);
         private string _UserName = "Загрузка...";
+
+        private bool SiderBarAnimationIsPlaying = false;
 
         public bool MenuTextIsVisible
         {
@@ -149,12 +154,13 @@ namespace VKAvaloniaPlayer.ViewModels
 
         private void StaticObjects_VkApiChanged()
         {
-            
-
             Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
             {
                 VkLoginIsVisible = false;
                 MenuSelectionIndex = 0;
+                Avatar = GlobalVars.CurrentAccount?.Image;
+                UserName = GlobalVars.CurrentAccount.Name;
+
             });
             GlobalVars.VkApiChanged -= StaticObjects_VkApiChanged;
         }
@@ -164,13 +170,42 @@ namespace VKAvaloniaPlayer.ViewModels
             GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
             MenuPointEnterCommand = ReactiveCommand.Create((object obj) =>
             {
-                MenuColumnWidth = GridLength.Auto;
-                MenuTextIsVisible = true;
+                
+                if (SiderBarAnimationIsPlaying==false&&!_MenuIsOpen)
+                {
+                    SiderBarAnimationIsPlaying = true;
+                    Task.Run(async () =>
+                    {
+                        MenuTextIsVisible = true;
+
+                        for (int i = 60; i < 200; i += 2)
+                        {
+                            MenuColumnWidth = new GridLength(i);
+                            await Task.Delay(1);
+                        }
+
+                        SiderBarAnimationIsPlaying = false;
+                        _MenuIsOpen = true;
+                    });
+                }
             });
             MenuPointLeaveCommand = ReactiveCommand.Create((object obj) =>
             {
-                MenuTextIsVisible = false;
-                MenuColumnWidth = new GridLength(_menuColumnWidth);
+                if (SiderBarAnimationIsPlaying==false&&_MenuIsOpen)
+                {
+                    SiderBarAnimationIsPlaying = true;
+                    Task.Run(async () =>
+                    {
+                        for (int i = 200; i >= 60; i -= 2)
+                        {
+                            MenuColumnWidth = new GridLength(i);
+                            await Task.Delay(1);
+                        }
+                        MenuTextIsVisible = false;
+                        SiderBarAnimationIsPlaying = false;
+                        _MenuIsOpen = false;
+                    });
+                }
             });
         }
     }

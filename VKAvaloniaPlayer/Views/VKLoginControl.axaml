@@ -7,7 +7,9 @@
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              mc:Ignorable="d"  Background="white" d:DesignWidth="800" d:DesignHeight="700"
              x:Class="VKAvaloniaPlayer.Views.VKLoginControl">
-	
+	<UserControl.DataContext>
+		<vm:VkLoginControlViewModel></vm:VkLoginControlViewModel>
+	</UserControl.DataContext>
 	<Grid Background="White">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
@@ -46,12 +48,24 @@
 			</Grid.RowDefinitions>
 			<TextBlock Grid.Row="0"   Foreground="White" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="20" Margin="10" Text="Активные аккаунты" />
 			<TextBlock  Grid.Row="1" Margin="20" FontSize="16" FontWeight="ExtraBold" Text="Выберите аккаунт из списка для входа" Foreground="White"></TextBlock>
-			<ListBox  SelectedIndex="{Binding ActiveAccountSelectIndex}" Items="{Binding SavedAccounts }" Grid.Row="2" VirtualizationMode="None" VerticalAlignment="Top" Margin="30,0" Background="Transparent">
+			<ListBox  SelectedIndex="{Binding Path= ActiveAccountSelectIndex}" Items="{Binding SavedAccounts}" Grid.Row="2" VirtualizationMode="None" VerticalAlignment="Top" Margin="30,0" Background="Transparent">
+				<ListBox.Styles>
+					<Style Selector="ListBoxItem">
+						<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+						<Setter Property="CornerRadius" Value="5"></Setter>
+						<Setter Property="Background" Value="White"/>
+					</Style>
+				</ListBox.Styles>
 				<ListBox.DataTemplates>
 					<DataTemplate>
-						<StackPanel Orientation="Horizontal">
+						<Grid> 
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="50"></ColumnDefinition>
+								<ColumnDefinition Width="1*"></ColumnDefinition>
+								<ColumnDefinition Width="Auto"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
 							
-							<Ellipse   Fill="White"  Width="50" Height="50" >
+							<Ellipse  Grid.Column="0" Fill="White"  Width="50" Height="50" >
 								<i:Interaction.Behaviors>
 									
 									<ia:DataTriggerBehavior Binding="{Binding  Image.Size.Height}" ComparisonCondition="GreaterThan" Value="0" >
@@ -66,9 +80,13 @@
 								</i:Interaction.Behaviors>
 							</Ellipse>
 							
-							<TextBlock Text="{Binding Name }" Foreground="White" VerticalAlignment="Center" Margin="10"></TextBlock>
-							
-						</StackPanel>
+							<TextBlock Grid.Column="1" Text="{Binding Name}" FontWeight="Bold" VerticalAlignment="Center" Margin="10"></TextBlock>
+							<Button Grid.Column="2">
+								<Button.Content>
+									<TextBlock Text="Удалить"/>
+								</Button.Content>
+							</Button>
+						</Grid>
 					</DataTemplate>
 				</ListBox.DataTemplates>
 			</ListBox>

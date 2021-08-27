@@ -31,18 +31,24 @@ namespace VKAvaloniaPlayer.Models.Base
 				try
 				{
 					Semaphore.WaitOne();
+					
 
-					await using (var imageStream = await LoadImageStreamAsync())
-					{
-						if (imageStream is null)
-							return;
-						Image = await Task.Run(() => ModelType switch
+						await using (var imageStream = await LoadImageStreamAsync())
 						{
-							ModelTypes.Audio => Bitmap.DecodeToWidth(imageStream, 50, Avalonia.Visuals.Media.Imaging.BitmapInterpolationMode.Default),
-							ModelTypes.Album => Bitmap.DecodeToWidth(imageStream, 135, Avalonia.Visuals.Media.Imaging.BitmapInterpolationMode.Default),
-							_ => throw new System.NotImplementedException(),
-						}); ;
-					}
+							if (imageStream is null)
+								return;
+							Image = await Task.Run(() => ModelType switch
+							{
+								ModelTypes.Audio => Bitmap.DecodeToWidth(imageStream, 50,
+									Avalonia.Visuals.Media.Imaging.BitmapInterpolationMode.Default),
+								ModelTypes.Album => Bitmap.DecodeToWidth(imageStream, 135,
+									Avalonia.Visuals.Media.Imaging.BitmapInterpolationMode.Default),
+								_ => throw new System.NotImplementedException(),
+							});
+							
+							
+						}
+					
 				}
 				finally { Semaphore.Release(); }
 			}

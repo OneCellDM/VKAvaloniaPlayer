@@ -8,15 +8,22 @@
 							 Padding="20">
 					Test
 				</ListBoxItem>
-				<ListBoxItem>Test</ListBoxItem>
+				<ListBoxItem>
+					<Path Stretch="Fill" Data="M2.97 0l-2.97 3h2v5h2v-5h2l-3.03-3z" Width="50" Height="50"></Path>
+				</ListBoxItem>
+				<ListBoxItem>
+					Test
+					
+				</ListBoxItem>
 			</ListBox>
 		</Border>
 	</Design.PreviewWith>
 	<Styles.Resources>
 		<Thickness x:Key="ListBoxItemPadding">12,9,12,12</Thickness>
 	</Styles.Resources>
-	<Style Selector="ListBoxItem">
-		<Setter Property="Background" Value="Transparent" />
+	<Style Selector="ListBoxItem" >
+		<Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+		<Setter Property="Background"  Value="Transparent" />
 		<Setter Property="Padding" Value="{DynamicResource ListBoxItemPadding}" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="Margin" Value="4,0,0,0"></Setter>
@@ -26,7 +33,7 @@
 								  Background="{TemplateBinding Background}"
 								  BorderBrush="{TemplateBinding BorderBrush}"
 								  BorderThickness="{TemplateBinding BorderThickness}"
-
+				                  CornerRadius="5,0,0,5"
 								  ContentTemplate="{TemplateBinding ContentTemplate}"
 								  Content="{TemplateBinding Content}"
 								  Padding="{TemplateBinding Padding}"
@@ -36,9 +43,11 @@
 		</Setter>
 	</Style>
 
+	
 	<Style Selector="ListBoxItem /template/ ContentPresenter#PART_ContentPresenter">
 		<Setter Property="TextBlock.FontWeight" Value="Normal" />
 		<Setter Property="TextBlock.FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+		
 	</Style>
 
 	<!--  Disabled State  -->
@@ -48,49 +57,53 @@
 
 	<!--  PointerOver State  -->
 	<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SystemControlHighlightListLowBrush}" />
+		<Setter Property="Background" Value="transparent" />
 	</Style>
 	<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="TextBlock.Foreground" Value="White" />
+		<Setter Property="TextBlock.Foreground" Value="white"/>
 	</Style>
 
 	<!--  Pressed State  -->
 	<Style Selector="ListBoxItem:pressed /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SystemControlHighlightListMediumBrush}" />
+		<Setter Property="Background" Value="White" />
 	</Style>
 	<Style Selector="ListBoxItem:pressed /template/ ContentPresenter">
-		<Setter Property="TextBlock.Foreground" Value="White" />
+		
+		<Setter Property="ListBox.Foreground" Value="black"/>
 	</Style>
 
 	<!--  Selected State  -->
 	<Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SystemControlHighlightListAccentLowBrush}" />
+		<Setter Property="Background" Value="white" />
 	</Style>
 	<Style Selector="ListBoxItem:selected /template/ ContentPresenter">
-		<Setter Property="TextBlock.Foreground" Value="White" />
+	
+		<Setter Property="ListBox.Foreground" Value="black"/>
 	</Style>
 
 	<!--  Selected Unfocused State  -->
 	<Style Selector="ListBoxItem:selected:not(:focus) /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SystemControlHighlightListAccentLowBrush}" />
+		<Setter Property="Background" Value="White" />
 	</Style>
 	<Style Selector="ListBoxItem:selected:not(:focus) /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="TextBlock.Foreground" Value="White" />
+		
+		<Setter Property="ListBox.Foreground" Value="black"/>
 	</Style>
 
 	<!--  Selected PointerOver State  -->
 	<Style Selector="ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SystemControlHighlightListAccentMediumBrush}" />
+		<Setter Property="Background" Value="White" />
 	</Style>
 	<Style Selector="ListBoxItem:selected:pointerover /template/ ContentPresenter">
-		<Setter Property="TextBlock.Foreground" Value="White" />
+
+		<Setter Property="ListBox.Foreground" Value="black"/>
 	</Style>
 
 	<!--  Selected Pressed State  -->
 	<Style Selector="ListBoxItem:selected:pressed /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource SystemControlHighlightListAccentHighBrush}" />
+		<Setter Property="Background" Value="white" />
 	</Style>
 	<Style Selector="ListBoxItem:selected:pressed /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="TextBlock.Foreground" Value="White" />
+		<Setter Property="ListBox.Foreground" Value="black"/>
 	</Style>
 </Styles>

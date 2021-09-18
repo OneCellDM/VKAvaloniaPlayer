@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
@@ -9,10 +10,13 @@ namespace VKAvaloniaPlayer.Views
 		{
 			InitializeComponent();
 		}
-
 		private void InitializeComponent()
 		{
 			AvaloniaXamlLoader.Load(this);
+			
 		}
+
+		
+		
 	}
 }

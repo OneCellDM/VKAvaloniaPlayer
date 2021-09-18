@@ -20,6 +20,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
 		public sealed override void StartSearchObservable(TimeSpan timeSpan)
 		{
+			
 			this.WhenAnyValue(vm => vm.SearchText).Throttle(timeSpan).Subscribe((text) =>
 			{
 				if (text is not null && text.Length > 0)
@@ -48,9 +49,9 @@ namespace VKAvaloniaPlayer.ViewModels
 				{
 					DataCollection.AddRange(res);
 					ResponseCount = res.Count;
-					Offset += res.Count;
+					
 					Task.Run(() => { DataCollection.StartLoadImages(); });
-
+					Offset += res.Count;
 				}
 
 				Loading = false;

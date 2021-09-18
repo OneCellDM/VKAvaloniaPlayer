@@ -34,8 +34,10 @@ namespace VKAvaloniaPlayer.ViewModels
 					{
 						DataCollection.AddRange(res);
 						ResponseCount = res.Count;
-						Offset += res.Count;
+					
+						
 						Task.Run(() => { DataCollection.StartLoadImages(); });
+						Offset += res.Count;
 					}
 				}
 				catch (Exception ex)

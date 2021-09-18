@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
@@ -6,14 +8,23 @@ using ReactiveUI;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Avalonia.Controls.Shapes;
+using Avalonia.Media;
 using VKAvaloniaPlayer.ETC;
+using VKAvaloniaPlayer.Models;
+using VKAvaloniaPlayer.Models.Interfaces;
 using VKAvaloniaPlayer.ViewModels.Base;
+using VkNet.Utils;
+
 
 namespace VKAvaloniaPlayer.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        
+        private int _MenuSelectionIndex = -1;
         private const double _menuColumnWidth = 60;
+        private bool _SiderBarAnimationIsPlaying;
         private bool _MenuTextIsVisible;
         private bool _AlbumsIsVisible;
         private bool _CurrentDataViewIsVisible;
@@ -24,14 +35,18 @@ namespace VKAvaloniaPlayer.ViewModels
         private AllMusicViewModel? _AllMusicViewModel;
         private AudioSearchViewModel? _AudioSearchViewModel;
         private RecomendationsViewModel? _RecomendationsViewModel;
-        private Bitmap? _Avatar;
-        private int _MenuSelectionIndex = -1;
-        
+        private CurrentMusicListViewModel? _CurrentMusicListViewModel;
+
+
+        private SavedAccountModel _CurrentAccountModel;
         private GridLength _MenuColumnWidth = new GridLength(_menuColumnWidth);
-        private string _UserName = "Загрузка...";
 
-        private bool SiderBarAnimationIsPlaying = false;
-
+       
+        public  SavedAccountModel CurrentAccountModel
+        {
+            get => _CurrentAccountModel;
+            set => this.RaiseAndSetIfChanged(ref _CurrentAccountModel, value);
+        }
         public bool MenuTextIsVisible
         {
             get => _MenuTextIsVisible;
@@ -68,12 +83,7 @@ namespace VKAvaloniaPlayer.ViewModels
             set => this.RaiseAndSetIfChanged(ref _CurrentDataViewModel, value);
         }
 
-        public Bitmap? Avatar
-        {
-            get => _Avatar;
-            set => this.RaiseAndSetIfChanged(ref _Avatar, value);
-        }
-
+      
         public int MenuSelectionIndex
         {
             get => _MenuSelectionIndex;
@@ -90,25 +100,27 @@ namespace VKAvaloniaPlayer.ViewModels
             set => this.RaiseAndSetIfChanged(ref _MenuColumnWidth, value);
         }
 
-        public string UserName
-        {
-            get => _UserName;
-            set => this.RaiseAndSetIfChanged(ref _UserName, value);
-        }
 
         public IReactiveCommand MenuPointEnterCommand { get; set; }
         public IReactiveCommand MenuPointLeaveCommand { get; set; }
-
+     
         public void OpenView(int menuIndex)
         {
+            
             Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
             {
                 CurrentDataViewIsVisible = true;
                 CurrentDataViewModel = null;
                 AlbumsIsVisible = false;
+                
                 switch (menuIndex)
                 {
                     case 0:
+                    {
+                        CurrentDataViewModel = _CurrentMusicListViewModel;
+                        break;
+                    }
+                    case 1:
                     {
                         if (_AllMusicViewModel == null)
                         {
@@ -119,7 +131,7 @@ namespace VKAvaloniaPlayer.ViewModels
                         CurrentDataViewModel = _AllMusicViewModel;
                         break;
                     }
-                    case 1:
+                    case 2:
                     {
                         if (_AlbumsViewModel == null)
                         {
@@ -131,13 +143,13 @@ namespace VKAvaloniaPlayer.ViewModels
                         AlbumsIsVisible = true;
                         break;
                     }
-                    case 2:
+                    case 3:
                     {
                         if (_AudioSearchViewModel == null) _AudioSearchViewModel = new AudioSearchViewModel();
                         CurrentDataViewModel = _AudioSearchViewModel;
                         break;
                     }
-                    case 3:
+                    case 4:
                     {
                         if (_RecomendationsViewModel is null)
                         {
@@ -148,32 +160,73 @@ namespace VKAvaloniaPlayer.ViewModels
                         CurrentDataViewModel = _RecomendationsViewModel;
                         break;
                     }
+                    case 5:
+                    {
+                        AccountExit();
+                        break;
+                    }
+                   
+                    
                 }
+                
+              
             });
+          
         }
 
         private void StaticObjects_VkApiChanged()
         {
             Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
             {
+                _CurrentMusicListViewModel = new CurrentMusicListViewModel();
                 VkLoginIsVisible = false;
-                MenuSelectionIndex = 0;
-                Avatar = GlobalVars.CurrentAccount?.Image;
-                UserName = GlobalVars.CurrentAccount.Name;
-
+                CurrentAccountModel = GlobalVars.CurrentAccount;
+                MenuSelectionIndex = 1;
+                
+                if(CurrentAccountModel.Image is null)
+                    CurrentAccountModel.LoadBitmap();
+                
             });
+            
             GlobalVars.VkApiChanged -= StaticObjects_VkApiChanged;
+        }
+
+        private void AccountExit()
+        {
+            PlayerControlViewModel.Player.Pause();
+            
+            CurrentDataViewIsVisible = false;
+            AlbumsIsVisible = false;
+            VkLoginIsVisible = true;
+            
+            AlbumsViewModel?.DataCollection?.Clear();
+            _RecomendationsViewModel?.DataCollection?.Clear();
+            _AllMusicViewModel?.DataCollection?.Clear();
+            _AudioSearchViewModel?.DataCollection?.Clear();
+            CurrentDataViewModel = null;
+            AlbumsViewModel = null;
+            _RecomendationsViewModel = null;
+            _AllMusicViewModel = null;
+            _AudioSearchViewModel = null;
+            CurrentAccountModel = null;
+            GC.Collect(0,GCCollectionMode.Optimized);
+            GC.Collect(1,GCCollectionMode.Optimized);
+            GC.Collect(2,GCCollectionMode.Optimized);
+            GC.Collect(3,GCCollectionMode.Optimized);
+            GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
+
         }
 
         public MainWindowViewModel()
         {
+
             GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
             MenuPointEnterCommand = ReactiveCommand.Create((object obj) =>
             {
                 
-                if (SiderBarAnimationIsPlaying==false&&!_MenuIsOpen)
+                if (_SiderBarAnimationIsPlaying==false&&!_MenuIsOpen)
                 {
-                    SiderBarAnimationIsPlaying = true;
+                    _SiderBarAnimationIsPlaying = true;
                     Task.Run(async () =>
                     {
                         MenuTextIsVisible = true;
@@ -184,16 +237,16 @@ namespace VKAvaloniaPlayer.ViewModels
                             await Task.Delay(1);
                         }
 
-                        SiderBarAnimationIsPlaying = false;
+                        _SiderBarAnimationIsPlaying = false;
                         _MenuIsOpen = true;
                     });
                 }
             });
             MenuPointLeaveCommand = ReactiveCommand.Create((object obj) =>
             {
-                if (SiderBarAnimationIsPlaying==false&&_MenuIsOpen)
+                if (_SiderBarAnimationIsPlaying==false&&_MenuIsOpen)
                 {
-                    SiderBarAnimationIsPlaying = true;
+                    _SiderBarAnimationIsPlaying = true;
                     Task.Run(async () =>
                     {
                         for (int i = 200; i >= 60; i -= 2)
@@ -202,7 +255,7 @@ namespace VKAvaloniaPlayer.ViewModels
                             await Task.Delay(1);
                         }
                         MenuTextIsVisible = false;
-                        SiderBarAnimationIsPlaying = false;
+                        _SiderBarAnimationIsPlaying = false;
                         _MenuIsOpen = false;
                     });
                 }

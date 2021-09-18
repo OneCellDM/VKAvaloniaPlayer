@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Media.Imaging;
+using Newtonsoft.Json.Serialization;
 using VKAvaloniaPlayer.ETC;
 using VkNet.Model;
 
@@ -16,22 +17,32 @@ namespace VKAvaloniaPlayer.Models
         public string? Name { get; set; }
         public long? UserID { get; set; }
         public string? Token { get; set; }
-
+        
+        public  bool Default { get; set; }=false;
+        
         public override void LoadBitmap()
         {
-            var profileInfoAwaiter = GlobalVars.VkApi.Users
-                .GetAsync(new[] {(long) UserID}, VkNet.Enums.Filters.ProfileFields.Photo50)
-                .GetAwaiter();
-            profileInfoAwaiter.OnCompleted(async () =>
+            try
             {
-                using (HttpClient httpClient = new HttpClient())
+                var profileInfoAwaiter = GlobalVars.VkApi.Users
+                    .GetAsync(new[] {(long) UserID}, VkNet.Enums.Filters.ProfileFields.Photo50)
+                    .GetAwaiter();
+                
+                profileInfoAwaiter.OnCompleted(async () =>
                 {
-                    var res = profileInfoAwaiter.GetResult();
-                    if (res != null)
-                        Image = new Bitmap(
-                            new MemoryStream(await httpClient.GetByteArrayAsync(res[0].Photo50.AbsoluteUri)));
-                }
-            });
+                    using (HttpClient httpClient = new HttpClient())
+                    {
+                        var res = profileInfoAwaiter.GetResult();
+                        if (res != null)
+                            Image = new Bitmap(
+                                new MemoryStream(await httpClient.GetByteArrayAsync(res[0].Photo50.AbsoluteUri)));
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
         }
     }
 }

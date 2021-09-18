@@ -12,6 +12,11 @@ using VkNet;
 using VkNet.Model;
 using System.Linq;
 using System.Linq.Expressions;
+using Avalonia.Controls.Presenters;
+using Avalonia.Input;
+using Avalonia.Interactivity;
+using VKAvaloniaPlayer.Models;
+using Button = Avalonia.Controls.Button;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
@@ -70,40 +75,65 @@ namespace VKAvaloniaPlayer.ViewModels
             set => this.RaiseAndSetIfChanged(ref _SavedAccountsIsVisible, value);
         }
 
+
         public int ActiveAccountSelectIndex
         {
             get => _ActiveAccountSelectIndex;
-            set
-            {
-                
-                this.RaiseAndSetIfChanged(ref _ActiveAccountSelectIndex, value);
-                if (_ActiveAccountSelectIndex > -1) AuthFromActiveAccount(_ActiveAccountSelectIndex);
-               
-            }
+            set => this.RaiseAndSetIfChanged(ref _ActiveAccountSelectIndex, value);
         }
 
         public IReactiveCommand? SendCodeCommand { get; set; }
         public IReactiveCommand? AuthCommand { get; set; }
+        public IReactiveCommand? RemoveAccountCommand { get; set; }
 
+        private void ToggleAccountsSidebarVisible() =>
+            SavedAccountsIsVisible = SavedAccounts.Count > 0;
+
+        public IReactiveCommand SelectedItemCommand { get; set; }
         public VkLoginControlViewModel()
         {
+            SelectedItemCommand = ReactiveCommand.Create((PointerPressedEventArgs e) =>
+            {
+             var selectedAccount =  (e?.Source as ContentPresenter).Content as SavedAccountModel;  
+             if(selectedAccount!=null)
+                 AuthFromActiveAccount(selectedAccount);
+            });
+            
             LoadSavedAccounts();
-            if (SavedAccounts.Count > 0) SavedAccountsIsVisible = true;
+            ToggleAccountsSidebarVisible();
+            SavedAccounts.CollectionChanged += (sender, args) =>
+            {
+                SaveAccounts();
+                ToggleAccountsSidebarVisible();
+            };
+                
             SendCodeCommand = ReactiveCommand.Create(() => _CodeIsSend = true,
                 this.WhenAnyValue(x => x.Code, (code) => !string.IsNullOrEmpty(code)));
             AuthCommand = ReactiveCommand.Create(() => VkAuth(),
                 this.WhenAnyValue(x => x.Login, x => x.Password,
                     (login, password) => !string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password)));
+
+            RemoveAccountCommand = ReactiveCommand.Create((RoutedEventArgs e) =>
+            {
+                var accountModel = (e.Source as Button)?.DataContext as SavedAccountModel;
+                SavedAccounts.Remove(accountModel);
+            });
         }
 
         private void LoadSavedAccounts()
         {
-            if (GlobalVars.CurrentPlatform == OSPlatform.Windows) LoadSavedAccountsOnWindows();
-            else if (GlobalVars.CurrentPlatform == OSPlatform.Linux) LoadSavedAccountsOnLinuxOrMac();
-            else if (GlobalVars.CurrentPlatform == OSPlatform.OSX) LoadSavedAccountsOnLinuxOrMac();
-            
-             SavedAccounts?.ToList().AsParallel().ForAll(x=>x.LoadBitmap());
- 
+            try
+            {
+                if (GlobalVars.CurrentPlatform == OSPlatform.Windows) LoadSavedAccountsOnWindows();
+                else if (GlobalVars.CurrentPlatform == OSPlatform.Linux) LoadSavedAccountsOnLinuxOrMac();
+                else if (GlobalVars.CurrentPlatform == OSPlatform.OSX) LoadSavedAccountsOnLinuxOrMac();
+
+                SavedAccounts?.ToList().AsParallel().ForAll(x => x.LoadBitmap());
+            }
+            catch (Exception)
+            {
+                return;
+            }
         }
 
         private void LoadSavedAccountsOnWindows()
@@ -119,6 +149,10 @@ namespace VKAvaloniaPlayer.ViewModels
                         SavedAccounts =
                             JsonConvert.DeserializeObject<ObservableCollection<Models.SavedAccountModel>>(data);
                 }
+            }
+            catch (Exception)
+            {
+                throw;
             }
             finally
             {
@@ -140,23 +174,35 @@ namespace VKAvaloniaPlayer.ViewModels
             }
             catch (Exception)
             {
-                // ignored
+                throw;
             }
         }
 
+
         private void SaveAccount(VkApi? vkApi)
         {
+            var accountEnumerable = SavedAccounts.ToList().Where(x => x.UserID == vkApi.UserId);
+
+            foreach (var savedAccountModel in accountEnumerable)
+                SavedAccounts.Remove(savedAccountModel);
+
             var accountData = vkApi.Account.GetProfileInfo();
-            SavedAccounts?.Add(new Models.SavedAccountModel()
+            SavedAccounts?.Insert(0, new Models.SavedAccountModel()
             {
                 Token = vkApi.Token, UserID = vkApi.UserId, Name = $"{accountData.FirstName} {accountData.LastName}"
             });
+
             GlobalVars.CurrentAccount = SavedAccounts.Last();
+        }
+
+        private void SaveAccounts()
+        {
             string saveText = JsonConvert.SerializeObject(SavedAccounts);
             if (GlobalVars.CurrentPlatform == OSPlatform.Windows) SaveAccountsOnWindows(saveText);
             else if (GlobalVars.CurrentPlatform == OSPlatform.Linux) SaveAccountsOnLinuxOrMac(saveText);
             else if (GlobalVars.CurrentPlatform == OSPlatform.OSX) SaveAccountsOnLinuxOrMac(saveText);
         }
+
 
         private void SaveAccountsOnWindows(string? data)
         {
@@ -223,23 +269,39 @@ namespace VKAvaloniaPlayer.ViewModels
                 }
                 catch (Exception ex)
                 {
+
+                    InfoText = ex.Message;
+                }
+                finally
+                {
+                    Login = string.Empty;
+                    Password = string.Empty;
+                    Code = string.Empty;
                     CodeSendPanelIsVisible = false;
                     LoginPanelIsVisible = true;
-                    
-                    InfoText = ex.Message;
+
                 }
             });
         }
 
-        private void AuthFromActiveAccount(int index)
+        private void AuthFromActiveAccount(Models.SavedAccountModel account)
         {
             try
             {
-                var account = SavedAccounts?[index];
+                
                 VkApi? api = new VkApi();
-                api.Authorize(new ApiAuthParams() {AccessToken = account?.Token, UserId = (long) account?.UserID,});
+
+                api.Authorize(new ApiAuthParams()
+                {
+                    AccessToken = account?.Token,
+                    UserId = (long) account?.UserID,
+                });
+
+
                 GlobalVars.CurrentAccount = account;
                 GlobalVars.VkApi = api;
+                ActiveAccountSelectIndex = -1;
+                _ActiveAccountSelectIndex = -1;
             }
             catch (Exception)
             {

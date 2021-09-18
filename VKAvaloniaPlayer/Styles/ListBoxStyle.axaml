@@ -1,0 +1,49 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="using:Avalonia.Xaml.Interactivity"
+        xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+        >
+    <Style Selector="ListBoxItem"> 
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="ListBox">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <ScrollViewer  Name="PART_ScrollViewer"
+
+                                   HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                                   VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
+                                   AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}">
+                        <ItemsPresenter Name="PART_ItemsPresenter"
+                                        Items="{TemplateBinding Items}"
+                                        ItemsPanel="{TemplateBinding ItemsPanel}"
+                                        ItemTemplate="{TemplateBinding ItemTemplate}"
+                                        Margin="{TemplateBinding Padding}"
+                                        VirtualizationMode="{TemplateBinding VirtualizationMode}"
+                        >
+											
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="PointerPressed" >
+                                    <ia:InvokeCommandAction Command="{Binding SelectedItemCommand}"  />
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>		
+								
+                        </ItemsPresenter>
+													
+
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior  EventName="ScrollChanged">
+                                <ia:InvokeCommandAction Command="{Binding ScrollingListEventCommand}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    </Styles>

@@ -2,41 +2,84 @@
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
+using Avalonia.Controls;
+using Avalonia.Input;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
+using VKAvaloniaPlayer.Models.Interfaces;
+using VkNet.Model.Attachments;
+
 
 namespace VKAvaloniaPlayer.ViewModels
 {
     public class PlayerControlViewModel : ViewModelBase
     {
-        public delegate void SetCollection(IEnumerable<AudioModel> audioCollection, AudioModel selectedItem);
-
-        public static event SetCollection? SetPlaylistEvent;
-
-        public static void SetPlaylist(IEnumerable<AudioModel> audioCollection, AudioModel selectedItem) =>
-            SetPlaylistEvent?.Invoke(audioCollection, selectedItem);
-        
-
+        private static Thread? _thread;
         private static bool _playButtonIsVisible = true;
         private static bool _pauseButtonIsVisible;
-        private static Thread? _thread;
+        private static bool _Repeat = false;
+        private static bool _Shuffling = false;
+        private static bool _Mute = false;
         private double _Volume = 1;
+        private int _PlayPosition=0;
         private AudioModel _CurrentAudio = new();
 
-        private static readonly System.Timers.Timer Timer = new();
+        private static readonly System.Timers.Timer _Timer = new();
+        
+        public delegate void SetCollection(ObservableCollection<AudioModel> audioCollection, int selectedIndex);
 
-        private int _PlayPosition;
-        private IReactiveCommand _PlayCommand = null!;
-        private IReactiveCommand _PauseCommand = null!;
-        private IReactiveCommand _NextCommand = null!;
-        private IReactiveCommand _PreviousCommand = null!;
+        public static event SetCollection? SetPlaylistEvent;
+        
+        public static void SetPlaylist(ObservableCollection<AudioModel> audioCollection, int selectedIndex) =>
+            SetPlaylistEvent?.Invoke(audioCollection, selectedIndex);
 
-        public static IEnumerable<AudioModel>? PlayList;
+        public static ObservableCollection<AudioModel>? PlayList;
+        private static ObservableCollection<AudioModel>? _allData;
 
+        public  bool Repeat
+        {
+            get => _Repeat;
+            set => this.RaiseAndSetIfChanged(ref _Repeat, value);
+        }
+
+        public bool Shuffling
+        {
+            get => _Shuffling;
+            set
+            {
+                SetPlaylistEvent -= PlayerControlViewModel_SetPlaylistEvent;
+                this.RaiseAndSetIfChanged(ref _Shuffling, value);
+               
+                if (_Shuffling)
+                {
+                    _allData = PlayList;
+                    PlayList = _allData.Shuffle<AudioModel>();
+
+                }
+                else
+                    PlayList = _allData;
+
+                SetPlaylist(PlayList, 0);
+                SetPlaylistEvent += PlayerControlViewModel_SetPlaylistEvent;
+                
+            }
+        }
+
+        public bool Mute
+        {
+            get => _Mute;
+            set => this.RaiseAndSetIfChanged(ref _Mute, value);
+            
+        }
+        
         public int PlayPosition
         {
             get => _PlayPosition;
@@ -48,6 +91,9 @@ namespace VKAvaloniaPlayer.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref _Volume, value);
+                if (Volume == 0)
+                    Mute = true;
+                else Mute = false;
                 Player.SetVolume(_Volume);
             }
         }
@@ -71,7 +117,7 @@ namespace VKAvaloniaPlayer.ViewModels
                     
                     PlayPosition = 0;
 
-                    Timer.Start();
+                    _Timer.Start();
 
                     _thread = new Thread(() =>
                     {
@@ -101,30 +147,22 @@ namespace VKAvaloniaPlayer.ViewModels
             set => this.RaiseAndSetIfChanged(ref _pauseButtonIsVisible, value);
         }
 
-        public IReactiveCommand PlayCommand
-        {
-            get => _PlayCommand;
-            set => _PlayCommand = value;
-        }
+        public IReactiveCommand PlayCommand { get; set; }
+        public IReactiveCommand PauseCommand { get; set; }
 
-        public IReactiveCommand PauseCommand
-        {
-            get => _PauseCommand;
-            set => _PauseCommand = value;
-        }
+        public IReactiveCommand NextCommand { get; set; }
 
-        public IReactiveCommand NextCommand
-        {
-            get => _NextCommand;
-            set => _NextCommand = value;
-        }
+        public IReactiveCommand PreviousCommand { get; set; }
 
-        public IReactiveCommand PreviousCommand
-        {
-            get => _PreviousCommand;
-            set => _PreviousCommand = value;
-        }
+        public IReactiveCommand AudioPositionChangeCommand { get; set; }
+        public  IReactiveCommand  RepeatToggleCommand { get; set; }
+        public  IReactiveCommand MuteToggleCommand { get; set; }
 
+        public IReactiveCommand ShuffleToogleCommand
+        {
+            get;
+            set;
+        }
         private void PlayButtonVisible()
         {
             PlayButtonIsVisible = true;
@@ -152,25 +190,70 @@ namespace VKAvaloniaPlayer.ViewModels
             NextCommand = ReactiveCommand.Create(() => PlayNext());
 
             PreviousCommand = ReactiveCommand.Create(() => PlayPrevious());
+            AudioPositionChangeCommand= ReactiveCommand.Create((PointerCaptureLostEventArgs e) =>
+            {
 
-            Timer.Interval = 1000;
-            Timer.Elapsed += _Timer_Elapsed;
+                Slider s = e.Source as Slider;
+                if(s!=null)
+                    Player.SetPositon(s.Value);
+            });
+            
+            RepeatToggleCommand=ReactiveCommand.Create(() =>
+            {
+                if (Repeat)
+                    Repeat = false;
+                
+                else Repeat = true;
+            });
+            ShuffleToogleCommand = ReactiveCommand.Create(() =>
+            {
+                if (!Shuffling)
+                    Shuffling = true;
+                else Shuffling = false;
+            });
+            
+            MuteToggleCommand=ReactiveCommand.Create(() =>
+            {
+                if (Mute)
+                {
+                    if(Volume==0)
+                        return;
+                    Mute = false;
+                    Player.SetVolume(Volume);
+                }
+                else
+                {
+                    Mute = true;
+                    Player.SetVolume(0);
+                }
+            });
+            
+            _Timer.Interval = 1000;
+            _Timer.Elapsed += _Timer_Elapsed;
             SetPlaylistEvent += PlayerControlViewModel_SetPlaylistEvent;
         }
 
-        private void PlayerControlViewModel_SetPlaylistEvent(IEnumerable<AudioModel>? audioCollection,
-            AudioModel selectedItem)
+        private void PlayerControlViewModel_SetPlaylistEvent(ObservableCollection<AudioModel>? audioCollection, int _selectedindex)
         {
             PlayList = audioCollection;
-            CurrentAudio = selectedItem;
+            _allData = PlayList;
+            CurrentAudio = audioCollection.ElementAt(_selectedindex);
         }
 
         private void _Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => PlayPosition = Player.GetPositionSeconds());
-
-            if (PlayPosition == CurrentAudio.Duration) PlayNext();
+            if (PlayPosition == CurrentAudio.Duration&!Repeat) PlayNext();
+            
+            else if (PlayPosition == CurrentAudio.Duration&Repeat)
+            {
+                Player.Update();
+                Player.Play();
+                
+            }
+ 
         }
+        
 
         private void PlayNext()
         {
@@ -193,6 +276,7 @@ namespace VKAvaloniaPlayer.ViewModels
         public static class Player
         {
             private static int _stream;
+            
 
             static Player()
             {
@@ -203,6 +287,26 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 return Convert.ToInt32(Bass.ChannelBytes2Seconds(_stream, Bass.ChannelGetPosition(_stream)));
             }
+
+            public static void SetPositon(double val)
+            {
+                try
+                {
+                    Bass.ChannelSetPosition(_stream, Bass.ChannelSeconds2Bytes(_stream, val), PositionFlags.Bytes);
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+            }
+
+            public static void  Update()
+            {
+                Bass.ChannelUpdate(_stream, 0);
+                
+            }
+            
 
             public static void SetStream(AudioModel audioModel)
             {

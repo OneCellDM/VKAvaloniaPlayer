@@ -16,29 +16,40 @@ namespace VKAvaloniaPlayer.ViewModels
 		}
 
 		public override void LoadData()
-		{
+		{ 
 			Task.Run(() =>
 			{
 				Loading = true;
-				
-				var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams()
+				try
 				{
-					Count = 500,
-					Offset = (uint)Offset
-				});
-				
-				if (res != null)
+					var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams()
+					{
+						Count = 500,
+						Offset = (uint) Offset
+					});
+
+					if (res != null)
+					{
+						DataCollection.AddRange(res);
+						Task.Run(() => { DataCollection.StartLoadImages(); });
+						Offset += res.Count;
+
+						ResponseCount = res.Count;
+					}
+				}
+
+				catch (VkNet.Exception.UserAuthorizationFailException authexception)
 				{
-					DataCollection.AddRange(res);
-					Task.Run(() => { DataCollection.StartLoadImages(); });
-					Offset += res.Count;
-					ResponseCount = res.Count;
-					
-					
+					throw;
+				}
+				catch (Exception ex)
+				{
+					throw;
 				}
 
 				Loading = false;
 			});
+			
 		}
 	}
 }

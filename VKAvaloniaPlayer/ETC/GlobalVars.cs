@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using Avalonia.Media.Imaging;
 using VKAvaloniaPlayer.Models;
+using ReactiveUI;
 using VkNet;
 
 namespace VKAvaloniaPlayer.ETC
@@ -10,24 +11,12 @@ namespace VKAvaloniaPlayer.ETC
         private static string? _homedirectory;
         private static OSPlatform? _currentPlatform = null;
         private static VkApi? _vkApi;
-
-
+        
         public delegate void Api();
-
         public static event Api? VkApiChanged;
-
         public static SavedAccountModel? CurrentAccount { get; set; }
-
-        public static string AppName
-        {
-            get => "VkAvaloniaPlayer";
-        }
-
-        public static string SavedAccountsFileName
-        {
-            get => "Accounts";
-        }
-
+        public static string AppName=> "VkAvaloniaPlayer";
+        public static string SavedAccountsFileName=> "Accounts";
         public static string? HomeDirectory
         {
             get
@@ -38,10 +27,8 @@ namespace VKAvaloniaPlayer.ETC
                 return _homedirectory;
             }
         }
-
         public static Bitmap? DefaultMusicImage { get; set; }
         public static Bitmap? DefaultAlbumImage { get; set; }
-
         public static VkApi VkApi
         {
             get
@@ -60,10 +47,10 @@ namespace VKAvaloniaPlayer.ETC
             set
             {
                 _vkApi = value;
-                if (VkApiChanged != null) VkApiChanged.Invoke();
+                
+                    VkApiChanged?.Invoke();
             }
         }
-
         public static OSPlatform? CurrentPlatform
         {
             get

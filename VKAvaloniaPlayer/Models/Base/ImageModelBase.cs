@@ -9,20 +9,24 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using VKAvaloniaPlayer.Models.Interfaces;
 
 namespace VKAvaloniaPlayer.Models.Base
 {
 	public class ImageModelBase : INotifyPropertyChanged, IImageBase
 	{
-		public static Semaphore Semaphore = new Semaphore(5, 5);
+		
 
 		public event PropertyChangedEventHandler? PropertyChanged;
-
+		
+		[JsonIgnore]
 		private Bitmap? _Image = null;
-
+		
 		public string ImageUrl { get; set; }
+		public bool ImageIsloaded { get; set; }
 
+		[JsonIgnore]
 		public Bitmap? Image
 		{
 			get => _Image; set

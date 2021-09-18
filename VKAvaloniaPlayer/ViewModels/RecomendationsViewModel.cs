@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Avalonia.Layout;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.ViewModels.Base;
+using VkNet.Exception;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
@@ -18,13 +20,22 @@ namespace VKAvaloniaPlayer.ViewModels
             Task.Run(() =>
             {
                 Loading = true;
-                var res = GlobalVars.VkApi?.Audio.GetRecommendations(count: 500, offset: (uint) Offset);
-                if (res != null)
+                try
                 {
-                    DataCollection.AddRange(res);
-                    Offset += res.Count;
-                    ResponseCount = res.Count;
-                    Task.Run(() => { DataCollection.StartLoadImages(); });
+                    var res = GlobalVars.VkApi?.Audio.GetRecommendations(count: 500, offset: (uint) Offset);
+                    if (res != null)
+                    {
+                        DataCollection.AddRange(res);
+                       
+                        Task.Run(() => { DataCollection.StartLoadImages(); });
+                        Offset += res.Count;
+                        ResponseCount = res.Count;
+
+                    }
+                }
+                catch (VkAuthorizationException exception)
+                {
+                    
                 }
 
                 Loading = false;

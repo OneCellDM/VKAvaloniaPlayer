@@ -41,6 +41,9 @@
 		<PackageReference Include="VkNet" Version="1.65.0" />
 	</ItemGroup>
 	<ItemGroup>
+		<Compile Update="Views\ExceptionView.axaml.cs">
+		  <DependentUpon>ExceptionView.axaml</DependentUpon>
+		</Compile>
 		<Compile Update="Views\MusicListControl.axaml.cs">
 			<DependentUpon>MusicListControl.axaml</DependentUpon>
 		</Compile>

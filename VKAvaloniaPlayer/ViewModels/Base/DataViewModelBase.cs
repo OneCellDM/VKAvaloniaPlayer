@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
@@ -18,170 +19,176 @@ using VkNet.Model;
 
 namespace VKAvaloniaPlayer.ViewModels.Base
 {
-    public abstract class DataViewModelBase : ViewModelBase
-    {
-        public  ObservableCollection<IVkModelBase>? _AllDataCollection;
-        private ObservableCollection<IVkModelBase>? _DataCollection;
+	public abstract class DataViewModelBase : ViewModelBase
+	{
+		private ObservableCollection<IVkModelBase>? _DataCollection;
+		private double _LastHeight = 0;
 
-        private bool _Loading = true;
+		private bool _Loading = true;
+		private bool _IsError = false;
 
-        private IDisposable? _SearchDisposable = null;
-        private string _SearchText = string.Empty;
-        private int _SelectedIndex = -1;
-    
-        public IReactiveCommand? ScrollingListEventCommand { get; set; }
-        public  IReactiveCommand? SelectedItemCommand { get; set; }
-        public  IReactiveCommand? ListBoxInitializedCommand { get; set; }
+		private IDisposable? _SearchDisposable = null;
+		private string _SearchText = string.Empty;
+		private int _SelectedIndex = -1;
 
-        public static Action? LoadMusicsAction { get; set; }
+		public ObservableCollection<IVkModelBase>? _AllDataCollection;
 
-        public int ResponseCount { get; set; }
-     
-        public DataViewModelBase()
-        {
-            LoadMusicsAction = new Action(() =>
-            {
-                if (ResponseCount > 0 && Loading is false)
-                    LoadData();
-            });
-            SelectedItemCommand=ReactiveCommand.Create((PointerPressedEventArgs e) =>
-            {
+		public IReactiveCommand? ScrollingListEventCommand { get; set; }
+		public IReactiveCommand? SelectedItemCommand { get; set; }
+		public IReactiveCommand? ListBoxInitializedCommand { get; set; }
 
-                var contentpress = (e?.Source as ContentPresenter);
+		public bool IsError
+		{
+			get => _IsError;
+			set => this.RaiseAndSetIfChanged(ref _IsError, value);
+		}
 
-                var model = contentpress?.Content as IVkModelBase;
-                
-                if (model != null)
-                {
-                    SelectedIndex = DataCollection.IndexOf(model);
-                    SelectedItem();
-                }
+		public Exceptions.ExceptionViewModel ExceptionModel { get; set; }
 
-            });
+		public static Action? LoadMusicsAction { get; set; }
 
-            _AllDataCollection = new ObservableCollection<IVkModelBase>();
-            DataCollection = _AllDataCollection;
-        }
+		public int ResponseCount { get; set; }
 
-        public ObservableCollection<IVkModelBase>? DataCollection
-        {
-            get => _DataCollection;
-            set => this.RaiseAndSetIfChanged(ref _DataCollection, value);
-        }
+		public DataViewModelBase()
+		{
+			LoadMusicsAction = new Action(() =>
+			{
+				if (ResponseCount > 0 && Loading is false)
+				{
+					InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
+				}
+			});
+			SelectedItemCommand = ReactiveCommand.Create((PointerPressedEventArgs e) =>
+			  {
+				  var contentpress = (e?.Source as ContentPresenter);
 
-        public bool Loading
-        {
-            get => _Loading;
-            set => this.RaiseAndSetIfChanged(ref _Loading, value);
-        }
+				  var model = contentpress?.Content as IVkModelBase;
 
-        public int Offset { get; set; } = 0;
+				  if (model != null)
+				  {
+					  SelectedIndex = DataCollection.IndexOf(model);
+					  SelectedItem();
+				  }
+			  });
 
-        public string SearchText
-        {
-            get => _SearchText;
-            set => this.RaiseAndSetIfChanged(ref _SearchText, value);
-        }
+			_AllDataCollection = new ObservableCollection<IVkModelBase>();
+			DataCollection = _AllDataCollection;
+		}
 
-        public int SelectedIndex
-        {
-            get => _SelectedIndex;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _SelectedIndex, value);
-            }
-        }
-        
-     
-        private double _LastHeight = 0;
+		public ObservableCollection<IVkModelBase>? DataCollection
+		{
+			get => _DataCollection;
+			set => this.RaiseAndSetIfChanged(ref _DataCollection, value);
+		}
 
-        public void StartScrollChangedObservable(Action? action, Orientation orientation)
-        {
-            if (ScrollingListEventCommand is null)
-                ScrollingListEventCommand = ReactiveCommand.Create((ScrollChangedEventArgs e) =>{
-                    double max = 0;
-                    double current = 0;
+		public bool Loading
+		{
+			get => _Loading;
+			set => this.RaiseAndSetIfChanged(ref _Loading, value);
+		}
 
-                    if (e.Source is ScrollViewer scrollViewer)
-                    {
-                        if (orientation == Orientation.Vertical)
-                        {
-                            max = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarMaximumProperty);
-                            current = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarValueProperty);
-                        }
-                        else
-                        {
-                            max = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarMaximumProperty);
-                            current = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarValueProperty);
-                        }
+		public int Offset { get; set; } = 0;
 
-                        // ReSharper disable once CompareOfFloatsByEqualityOperator
-                        if (max == current) action?.Invoke();
-                    }
-                });
-        }
+		public string SearchText
+		{
+			get => _SearchText;
+			set => this.RaiseAndSetIfChanged(ref _SearchText, value);
+		}
 
-        public void StopScrollChandegObserVable()
-        {
-            ScrollingListEventCommand = null;
-        }
+		public int SelectedIndex
+		{
+			get => _SelectedIndex;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref _SelectedIndex, value);
+			}
+		}
 
-        public virtual async  void LoadData()
-        {
-            
-        }
+		public virtual void StartLoad() => InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
 
-        public virtual void Search(string text)
-        {
-            if (string.IsNullOrEmpty(SearchText))
-            {
-                SelectedIndex = -1;
-                DataCollection = _AllDataCollection;
-                StartScrollChangedObservable(LoadMusicsAction,Orientation.Vertical);
-            }
-            else if (_AllDataCollection != null && _AllDataCollection.Count() > 0)
-            {
-                StopScrollChandegObserVable();
-                var searchRes = _AllDataCollection.Where(x =>
-                        x.Title.ToLower().Contains(SearchText.ToLower()) ||
-                        x.Artist.ToLower().Contains(SearchText.ToLower()))
-                    .Distinct();
-                DataCollection = new ObservableCollection<IVkModelBase>(searchRes);
-            }
+		public void StartScrollChangedObservable(Action? action, Orientation orientation)
+		{
+			if (ScrollingListEventCommand is null)
+				ScrollingListEventCommand = ReactiveCommand.Create((ScrollChangedEventArgs e) =>
+				{
+					double max = 0;
+					double current = 0;
 
-            Task.Run(() => { DataCollection.StartLoadImages(); });
-            
-        }
-        
+					if (e.Source is ScrollViewer scrollViewer)
+					{
+						if (orientation == Orientation.Vertical)
+						{
+							max = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarMaximumProperty);
+							current = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarValueProperty);
+						}
+						else
+						{
+							max = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarMaximumProperty);
+							current = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarValueProperty);
+						}
 
-        public virtual void SelectedItem()
-        {
-            if (SelectedIndex > -1)
-                PlayerControlViewModel.SetPlaylist(
-                    new ObservableCollection<AudioModel>( DataCollection.Cast<Models.AudioModel>().ToList()), 
-                    SelectedIndex);
-        }
+						// ReSharper disable once CompareOfFloatsByEqualityOperator
+						if (max == current) action?.Invoke();
+					}
+				});
+		}
 
-       
+		public void StopScrollChandegObserVable()
+		{
+			ScrollingListEventCommand = null;
+		}
 
-        public virtual void StartSearchObservable()
-        {
-            if (_SearchDisposable is null)
-                _SearchDisposable = this.WhenAnyValue(x => x.SearchText).Subscribe((text) => Search(text.ToLower()));
-        }
+		public virtual async void LoadData()
+		{
+		}
 
-        public virtual void StartSearchObservable(TimeSpan timeSpan)
-        {
-            if (_SearchDisposable is null)
-                _SearchDisposable = this.WhenAnyValue(x => x.SearchText)
-                    .Throttle(timeSpan)
-                    .Subscribe((text) => Search(text.ToLower()));
-        }
+		public virtual void Search(string text)
+		{
+			if (string.IsNullOrEmpty(SearchText))
+			{
+				SelectedIndex = -1;
+				DataCollection = _AllDataCollection;
+				StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical);
+			}
+			else if (_AllDataCollection != null && _AllDataCollection.Count() > 0)
+			{
+				StopScrollChandegObserVable();
+				var searchRes = _AllDataCollection.Where(x =>
+						x.Title.ToLower().Contains(SearchText.ToLower()) ||
+						x.Artist.ToLower().Contains(SearchText.ToLower()))
+					.Distinct();
+				DataCollection = new ObservableCollection<IVkModelBase>(searchRes);
+			}
 
-        public virtual void StopSearchObservable()
-        {
-            _SearchDisposable?.Dispose();
-            _SearchDisposable = null;
-        }
-    }
+			Task.Run(() => { DataCollection.StartLoadImages(); });
+		}
+
+		public virtual void SelectedItem()
+		{
+			if (SelectedIndex > -1)
+				PlayerControlViewModel.SetPlaylist(
+					new ObservableCollection<AudioModel>(DataCollection.Cast<Models.AudioModel>().ToList()),
+					SelectedIndex);
+		}
+
+		public virtual void StartSearchObservable()
+		{
+			if (_SearchDisposable is null)
+				_SearchDisposable = this.WhenAnyValue(x => x.SearchText).Subscribe((text) => Search(text.ToLower()));
+		}
+
+		public virtual void StartSearchObservable(TimeSpan timeSpan)
+		{
+			if (_SearchDisposable is null)
+				_SearchDisposable = this.WhenAnyValue(x => x.SearchText)
+					.Throttle(timeSpan)
+					.Subscribe((text) => Search(text.ToLower()));
+		}
+
+		public virtual void StopSearchObservable()
+		{
+			_SearchDisposable?.Dispose();
+			_SearchDisposable = null;
+		}
+	}
 }

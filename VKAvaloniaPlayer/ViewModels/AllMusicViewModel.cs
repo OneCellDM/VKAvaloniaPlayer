@@ -15,13 +15,10 @@ namespace VKAvaloniaPlayer.ViewModels
 			StartScrollChangedObservable(DataViewModelBase.LoadMusicsAction, Avalonia.Layout.Orientation.Vertical);
 		}
 
-		public override void LoadData()
-		{ 
-			Task.Run(() =>
-			{
-				Loading = true;
-				try
-				{
+		
+		public override  void LoadData()
+		{
+			
 					var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams()
 					{
 						Count = 500,
@@ -36,20 +33,6 @@ namespace VKAvaloniaPlayer.ViewModels
 
 						ResponseCount = res.Count;
 					}
-				}
-
-				catch (VkNet.Exception.UserAuthorizationFailException authexception)
-				{
-					throw;
-				}
-				catch (Exception ex)
-				{
-					throw;
-				}
-
-				Loading = false;
-			});
-			
 		}
 	}
 }

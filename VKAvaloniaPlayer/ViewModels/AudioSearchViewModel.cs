@@ -29,16 +29,14 @@ namespace VKAvaloniaPlayer.ViewModels
 					DataCollection?.Clear();
 					ResponseCount = 0;
 					Offset = 0;
-					LoadData();
+					StartLoad();
 				}
 			});
 		}
 
 		public override void LoadData()
 		{
-			Task.Run(() =>
-			{
-				Loading = true;
+		
 				var res = GlobalVars.VkApi?.Audio.Search(new AudioSearchParams()
 				{
 					Query = SearchText,
@@ -54,8 +52,9 @@ namespace VKAvaloniaPlayer.ViewModels
 					Offset += res.Count;
 				}
 
-				Loading = false;
-			});
+				
+			
+
 		}
 	}
 }

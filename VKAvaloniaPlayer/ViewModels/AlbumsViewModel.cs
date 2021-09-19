@@ -33,15 +33,14 @@ namespace VKAvaloniaPlayer.ViewModels
 			if (SelectedIndex > -1 && DataCollection.Count > 0)
 			{
 				MusicFromAlbumViewModel = new MusicFromAlbumViewModel((Models.AudioAlbumModel)DataCollection[SelectedIndex]);
-				MusicFromAlbumViewModel.LoadData();
+				MusicFromAlbumViewModel.StartLoad();
 				MusicFromAlbumIsVisible = true;
 			}
 		}
 
 		public override void LoadData()
 		{
-			Task.Run(() =>
-			{
+		
 				if (GlobalVars.CurrentAccount?.UserID != null)
 				{
 					var res = GlobalVars.VkApi.Audio.GetPlaylists((long) GlobalVars.CurrentAccount.UserID, 200,
@@ -53,9 +52,7 @@ namespace VKAvaloniaPlayer.ViewModels
 						Task.Run(() => { DataCollection.StartLoadImages(); });
 					}
 				}
-
-				Loading = false;
-			});
+				
 		}
 
 		public AlbumsViewModel()

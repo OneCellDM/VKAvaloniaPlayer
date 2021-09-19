@@ -7,47 +7,49 @@ using VkNet.Exception;
 
 namespace VKAvaloniaPlayer.ETC
 {
+	public class InvokeHandlerObject
+	{
+		public Action Action { get; set; }
+		public DataViewModelBase View { get; set; }
 
-    public class TaskHandlerObject
-    {
-        public Action Action { get; set; }
-        public DataViewModelBase View { get; set; }
+		public InvokeHandlerObject(Action action, DataViewModelBase view)
+		{
+			this.Action = action;
+			this.View = view;
+		}
+	}
 
-        public TaskHandlerObject(Action action,DataViewModelBase view)
-        {
-            this.Action = action;
-            this.View = view;
-        }
-    }
-    public static class TaskHandler
-    { 
+	public static class InvokeHandler
+	{
+		public delegate void TaskErrorResponsed(InvokeHandlerObject handlerObject, Exception ex);
 
-        public  delegate void TaskErrorResponsed(TaskHandlerObject handlerObject);
-        public static event TaskErrorResponsed TaskErrorResponsedEvent;
-        
-        public static async void Start(TaskHandlerObject handlerObject)
-        {
-           Task.Run(() =>
-           {
-               try
-               {
-                   handlerObject.View.Loading = true;
-                   handlerObject.Action.Invoke();
-               }
-               catch (Exception)
-               {
-                   TaskErrorResponsedEvent?.Invoke(handlerObject);
-               }
-               finally
-               {
-                   handlerObject.View.Loading = false;
-               }
-           });
-        }
-        static TaskHandler()
-        {
-            
-        }
+		public static event TaskErrorResponsed TaskErrorResponsedEvent;
 
-    }
+		public static async void Start(InvokeHandlerObject handlerObject)
+		{
+			await Task.Run(() =>
+			{
+				try
+				{
+					if (handlerObject.View != null)
+						handlerObject.View.IsLoading = true;
+
+					handlerObject.Action.Invoke();
+				}
+				catch (Exception ex)
+				{
+					TaskErrorResponsedEvent?.Invoke(handlerObject, ex);
+				}
+				finally
+				{
+					if (handlerObject.View != null)
+						handlerObject.View.IsLoading = false;
+				}
+			});
+		}
+
+		static InvokeHandler()
+		{
+		}
+	}
 }

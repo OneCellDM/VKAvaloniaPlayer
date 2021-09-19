@@ -14,7 +14,7 @@ namespace VKAvaloniaPlayer.ViewModels
 		public MusicFromAlbumViewModel(Models.AudioAlbumModel audioAlbumModel)
 		{
 			Album = audioAlbumModel;
-			StartSearchObservable();
+			StartSearchObservable(new TimeSpan(0, 0, 0, 0, 500));
 			StartScrollChangedObservable(DataViewModelBase.LoadMusicsAction, Avalonia.Layout.Orientation.Vertical);
 		}
 
@@ -34,8 +34,7 @@ namespace VKAvaloniaPlayer.ViewModels
 					{
 						DataCollection.AddRange(res);
 						ResponseCount = res.Count;
-					
-						
+
 						Task.Run(() => { DataCollection.StartLoadImages(); });
 						Offset += res.Count;
 					}
@@ -44,7 +43,7 @@ namespace VKAvaloniaPlayer.ViewModels
 				{
 					Debug.WriteLine(ex);
 				}
-				Loading = false;
+				IsLoading = false;
 			});
 		}
 	}

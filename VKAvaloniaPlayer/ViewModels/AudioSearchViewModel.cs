@@ -12,7 +12,7 @@ namespace VKAvaloniaPlayer.ViewModels
 	{
 		public AudioSearchViewModel()
 		{
-			Loading = false;
+			IsLoading = false;
 
 			StartSearchObservable(new TimeSpan(0, 0, 1));
 			StartScrollChangedObservable(DataViewModelBase.LoadMusicsAction, Avalonia.Layout.Orientation.Vertical);
@@ -20,42 +20,35 @@ namespace VKAvaloniaPlayer.ViewModels
 
 		public sealed override void StartSearchObservable(TimeSpan timeSpan)
 		{
-			
 			this.WhenAnyValue(vm => vm.SearchText).Throttle(timeSpan).Subscribe((text) =>
 			{
 				if (text is not null && text.Length > 0)
 				{
-					Loading = true;
+					IsLoading = true;
 					DataCollection?.Clear();
 					ResponseCount = 0;
 					Offset = 0;
-					LoadData();
+					StartLoad();
 				}
 			});
 		}
 
 		public override void LoadData()
 		{
-			Task.Run(() =>
+			var res = GlobalVars.VkApi?.Audio.Search(new AudioSearchParams()
 			{
-				Loading = true;
-				var res = GlobalVars.VkApi?.Audio.Search(new AudioSearchParams()
-				{
-					Query = SearchText,
-					Offset = Offset,
-					Count = 300
-				});
-				if (res != null)
-				{
-					DataCollection.AddRange(res);
-					ResponseCount = res.Count;
-					
-					Task.Run(() => { DataCollection.StartLoadImages(); });
-					Offset += res.Count;
-				}
-
-				Loading = false;
+				Query = SearchText,
+				Offset = Offset,
+				Count = 300
 			});
+			if (res != null)
+			{
+				DataCollection.AddRange(res);
+				ResponseCount = res.Count;
+
+				Task.Run(() => { DataCollection.StartLoadImages(); });
+				Offset += res.Count;
+			}
 		}
 	}
 }

@@ -1,21 +1,14 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
 namespace VKAvaloniaPlayer.Views
 {
-	public partial class MainWindow : Window
+	public class ExceptionView : UserControl
 	{
-		public static Window Instance { get; private set; }
-
-		public MainWindow()
+		public ExceptionView()
 		{
 			InitializeComponent();
-			Instance = this;
-
-#if DEBUG
-			this.AttachDevTools();
-#endif
 		}
 
 		private void InitializeComponent()

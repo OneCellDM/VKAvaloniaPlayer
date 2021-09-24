@@ -94,6 +94,6 @@
 			</views:MusicListControl>
 		</Grid>
 
-		<etc:LoadingControl Background="White" VerticalContentAlignment="Center"   IsVisible="{Binding Loading}" />
+		<etc:LoadingControl Background="White" VerticalContentAlignment="Center"   IsVisible="{Binding IsLoading}" />
 	</Grid>
 </UserControl>

@@ -33,7 +33,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
 		private bool _ExceptionIsVisible = false;
 		private AlbumsViewModel? _AlbumsViewModel;
-		private DataViewModelBase? _CurrentDataViewModel;
+		private VkDataViewModelBase? _CurrentDataViewModel;
 		private AllMusicViewModel? _AllMusicViewModel;
 		private AudioSearchViewModel? _AudioSearchViewModel;
 		private RecomendationsViewModel? _RecomendationsViewModel;
@@ -85,7 +85,7 @@ namespace VKAvaloniaPlayer.ViewModels
 			set => this.RaiseAndSetIfChanged(ref _AlbumsViewModel, value);
 		}
 
-		public DataViewModelBase? CurrentDataViewModel
+		public VkDataViewModelBase? CurrentDataViewModel
 		{
 			get => _CurrentDataViewModel;
 			set => this.RaiseAndSetIfChanged(ref _CurrentDataViewModel, value);
@@ -198,7 +198,7 @@ namespace VKAvaloniaPlayer.ViewModels
 				MenuSelectionIndex = 1;
 
 				if (CurrentAccountModel.Image is null)
-					CurrentAccountModel.LoadBitmap();
+					CurrentAccountModel.LoadBitmapAsync();
 			});
 
 			GlobalVars.VkApiChanged -= StaticObjects_VkApiChanged;

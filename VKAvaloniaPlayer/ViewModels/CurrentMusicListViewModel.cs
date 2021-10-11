@@ -11,13 +11,16 @@ using VKAvaloniaPlayer.ViewModels.Base;
 
 namespace VKAvaloniaPlayer
 {
-	public class CurrentMusicListViewModel : DataViewModelBase
+	public class CurrentMusicListViewModel : VkDataViewModelBase
 	{
 		public CurrentMusicListViewModel()
 		{
 			SearchIsVisible = false;
 			IsLoading = false;
 			PlayerControlViewModel.SetPlaylistEvent += PlayerControlViewModelOnSetPlaylistEvent;
+			AudioListButtons.AudioRemoveIsVisible = false;
+			AudioListButtons.AudioAddIsVisible = false;
+			AudioListButtons.AudioAddToAlbumIsVisible = false;
 		}
 
 		public override void SelectedItem()

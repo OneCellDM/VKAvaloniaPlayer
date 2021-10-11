@@ -298,7 +298,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
 			public static void SetStream(AudioModel audioModel)
 			{
-				var url = GlobalVars.VkApi?.Audio.GetById(new[] { audioModel.OwnerID + "_" + audioModel.ID })
+				var url = GlobalVars.VkApi?.Audio.GetById(new[] { audioModel.GetAudioIDFormatWithAccessKey() })
 					.ElementAt(0).Url.AbsoluteUri;
 				_stream = Bass.CreateStream(url, 0, BassFlags.Default, null, IntPtr.Zero);
 			}

@@ -7,12 +7,13 @@ using VkNet.Exception;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public sealed class RecomendationsViewModel : DataViewModelBase
+	public sealed class RecomendationsViewModel : VkDataViewModelBase
 	{
 		public RecomendationsViewModel()
 		{
 			StartSearchObservable(new TimeSpan(0, 0, 0, 0, 500));
 			StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical);
+			AudioListButtons.AudioRemoveIsVisible = false;
 		}
 
 		public override void LoadData()

@@ -19,10 +19,10 @@ using VkNet.Model;
 
 namespace VKAvaloniaPlayer.ViewModels.Base
 {
-	public abstract class DataViewModelBase : ViewModelBase
+	public abstract class VkDataViewModelBase : ViewModelBase
 	{
 		private ObservableCollection<IVkModelBase>? _DataCollection;
-		private double _LastHeight = 0;
+
 		private bool _SearchIsVisible = true;
 		private bool _Loading = true;
 		private bool _IsError = false;
@@ -32,7 +32,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 		private int _SelectedIndex = -1;
 
 		public ObservableCollection<IVkModelBase>? _AllDataCollection;
-
+		public AudioListButtons AudioListButtons { get; set; }
 		public IReactiveCommand? ScrollingListEventCommand { get; set; }
 		public IReactiveCommand? SelectedItemCommand { get; set; }
 		public IReactiveCommand? ListBoxInitializedCommand { get; set; }
@@ -55,14 +55,14 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
 		public int ResponseCount { get; set; }
 
-		public DataViewModelBase()
+		public VkDataViewModelBase()
 		{
+			AudioListButtons = new();
 			LoadMusicsAction = new Action(() =>
 			{
-				if (ResponseCount > 0 && IsLoading is false)
-				{
-					InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
-				}
+				if (string.IsNullOrEmpty(_SearchText))
+					if (ResponseCount > 0 && IsLoading is false)
+						InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
 			});
 			SelectedItemCommand = ReactiveCommand.Create((PointerPressedEventArgs e) =>
 			  {
@@ -139,10 +139,8 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 				});
 		}
 
-		public void StopScrollChandegObserVable()
-		{
+		public void StopScrollChandegObserVable() =>
 			ScrollingListEventCommand = null;
-		}
 
 		public virtual async void LoadData()
 		{

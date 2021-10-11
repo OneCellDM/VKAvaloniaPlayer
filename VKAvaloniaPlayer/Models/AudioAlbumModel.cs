@@ -2,14 +2,19 @@
 using VkNet.Model;
 using VKAvaloniaPlayer.Models.Base;
 
-
 namespace VKAvaloniaPlayer.Models
 {
-	public class AudioAlbumModel :  VkModelBase
+	public class AudioAlbumModel : VkModelBase
 	{
+		public bool IsFollowing { get; set; }
+
 		public AudioAlbumModel(VkNet.Model.Attachments.AudioPlaylist audioPlaylist)
 		{
-			Image = GlobalVars.DefaultAlbumImage;
+			Cover = new ImageModelBase()
+			{
+				Image = GlobalVars.DefaultAlbumImage,
+				DecodeWidth = 0
+			};
 			ModelType = ModelTypes.Album;
 
 			Title = audioPlaylist.Title;
@@ -18,8 +23,10 @@ namespace VKAvaloniaPlayer.Models
 
 			OwnerID = (long)audioPlaylist.OwnerId;
 
+			IsFollowing = audioPlaylist.IsFollowing;
+
 			if (audioPlaylist.Photo != null)
-				ImageUrl = GetThumbUrl(audioPlaylist.Photo);
+				Cover.ImageUrl = GetThumbUrl(audioPlaylist.Photo);
 		}
 
 		public override string GetThumbUrl(AudioCover audioCover)

@@ -1,22 +1,46 @@
-﻿using System;
+﻿using DynamicData.Kernel;
+using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using VKAvaloniaPlayer.ETC;
+using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Base;
 using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public sealed class MusicFromAlbumViewModel : DataViewModelBase
+	public sealed class MusicFromAlbumViewModel : VkDataViewModelBase
 	{
 		private Models.AudioAlbumModel Album { get; set; }
+
+		public delegate void AudioRemove(AudioModel audioModel);
+
+		public static event AudioRemove AudioRemoveEvent;
+
+		public static void AudioRemoveEventCall(AudioModel audioModel) => AudioRemoveEvent?.Invoke(audioModel);
 
 		public MusicFromAlbumViewModel(Models.AudioAlbumModel audioAlbumModel)
 		{
 			Album = audioAlbumModel;
+
 			StartSearchObservable(new TimeSpan(0, 0, 0, 0, 500));
-			StartScrollChangedObservable(DataViewModelBase.LoadMusicsAction, Avalonia.Layout.Orientation.Vertical);
+			StartScrollChangedObservable(VkDataViewModelBase.LoadMusicsAction, Avalonia.Layout.Orientation.Vertical);
+			AudioRemoveEvent += MusicFromAlbumViewModel_AudioRemoveEvent;
+			if (Album.OwnerID == GlobalVars.VkApi.UserId && !Album.IsFollowing)
+			{
+				AudioListButtons.AudioAddIsVisible = false;
+			}
+			else
+			{
+				AudioListButtons.AudioRemoveIsVisible = false;
+			}
+			AudioListButtons.Album = Album;
 		}
+
+		private void MusicFromAlbumViewModel_AudioRemoveEvent(AudioModel audioModel) =>
+
+			_AllDataCollection.Remove(audioModel);
 
 		public override void LoadData()
 		{

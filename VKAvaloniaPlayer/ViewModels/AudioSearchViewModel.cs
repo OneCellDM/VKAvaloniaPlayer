@@ -8,14 +8,15 @@ using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public class AudioSearchViewModel : DataViewModelBase
+	public class AudioSearchViewModel : VkDataViewModelBase
 	{
 		public AudioSearchViewModel()
 		{
 			IsLoading = false;
 
 			StartSearchObservable(new TimeSpan(0, 0, 1));
-			StartScrollChangedObservable(DataViewModelBase.LoadMusicsAction, Avalonia.Layout.Orientation.Vertical);
+			StartScrollChangedObservable(VkDataViewModelBase.LoadMusicsAction, Avalonia.Layout.Orientation.Vertical);
+			AudioListButtons.AudioRemoveIsVisible = false;
 		}
 
 		public sealed override void StartSearchObservable(TimeSpan timeSpan)

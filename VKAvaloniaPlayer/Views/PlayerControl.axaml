@@ -9,162 +9,159 @@
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
 
-    <UserControl.Resources>
-        <converters:DurationConverter x:Key="DurationConverter" />
-        <sys:Double x:Key="PlayerButtonSize">14</sys:Double>
-        <Thickness x:Key="SliderTopHeaderMargin">0,0,0,4</Thickness>
-        <GridLength x:Key="SliderPreContentMargin">15</GridLength>
-        <GridLength x:Key="SliderPostContentMargin">13</GridLength>
-        <x:Double x:Key="SliderHorizontalHeight">32</x:Double>
-        <x:Double x:Key="SliderVerticalWidth">32</x:Double>
-        <CornerRadius x:Key="SliderThumbCornerRadius">20</CornerRadius>
-        <x:Double x:Key="SliderHorizontalThumbWidth">8</x:Double>
-        <x:Double x:Key="SliderHorizontalThumbHeight">8</x:Double>
-        <x:Double x:Key="SliderVerticalThumbWidth">20</x:Double>
-        <x:Double x:Key="SliderVerticalThumbHeight">20</x:Double>
-        <x:Double x:Key="SliderTrackHeight"> 4 </x:Double>
-    </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.RowSpan="2" Spacing="5" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="0">
-            <Button Background="Transparent" Command="{Binding PreviousCommand}">
-                <Path Data="M0 0v6h2v-6h-2zm2 3l5 3v-6l-5 3z" Width="12" Height="12" Stretch="Fill"
+	<UserControl.Resources>
+		<converters:DurationConverter x:Key="DurationConverter" />
+		<sys:Double x:Key="PlayerButtonSize">14</sys:Double>
+		<Thickness x:Key="SliderTopHeaderMargin">0,0,0,4</Thickness>
+		<GridLength x:Key="SliderPreContentMargin">15</GridLength>
+		<GridLength x:Key="SliderPostContentMargin">13</GridLength>
+		<x:Double x:Key="SliderHorizontalHeight">32</x:Double>
+		<x:Double x:Key="SliderVerticalWidth">32</x:Double>
+		<CornerRadius x:Key="SliderThumbCornerRadius">20</CornerRadius>
+		<x:Double x:Key="SliderHorizontalThumbWidth">8</x:Double>
+		<x:Double x:Key="SliderHorizontalThumbHeight">8</x:Double>
+		<x:Double x:Key="SliderVerticalThumbWidth">20</x:Double>
+		<x:Double x:Key="SliderVerticalThumbHeight">20</x:Double>
+		<x:Double x:Key="SliderTrackHeight"> 4 </x:Double>
+	</UserControl.Resources>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
+			<ColumnDefinition Width="1*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<StackPanel Grid.RowSpan="2" Spacing="5" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="0">
+			<Button Background="Transparent" Command="{Binding PreviousCommand}">
+				<Path Data="M0 0v6h2v-6h-2zm2 3l5 3v-6l-5 3z" Width="12" Height="12" Stretch="Fill"
                       Fill="{DynamicResource ControlsColor}">
-                </Path>
-            </Button>
-            <Button Background="Transparent" IsVisible="{Binding PauseButtonIsVisible}"
+				</Path>
+			</Button>
+			<Button Background="Transparent" IsVisible="{Binding PauseButtonIsVisible}"
                     Command="{Binding PauseCommand}">
-                <Path Data="M0 0v6h2v-6h-2zm4 0v6h2v-6h-2z" Width="12" Height="12" Stretch="Fill"
+				<Path Data="M0 0v6h2v-6h-2zm4 0v6h2v-6h-2z" Width="12" Height="12" Stretch="Fill"
                       Fill="{DynamicResource ControlsColor}">
-                </Path>
-            </Button>
-            <Button Background="Transparent" IsVisible="{Binding PlayButtonIsVisible}" Command="{Binding PlayCommand}">
-                <Path Data="M0 0v6l6-3-6-3z" Width="12" Height="12" Stretch="Fill"
+				</Path>
+			</Button>
+			<Button Background="Transparent" IsVisible="{Binding PlayButtonIsVisible}" Command="{Binding PlayCommand}">
+				<Path Data="M0 0v6l6-3-6-3z" Width="12" Height="12" Stretch="Fill"
                       Fill="{DynamicResource ControlsColor}">
-                </Path>
-            </Button>
-            <Button Background="Transparent" Command="{Binding NextCommand}">
-                <Path Data="M0 0v6l5-3-5-3zm5 3v3h2v-6h-2v3z" Width="12" Height="12" Stretch="Fill"
+				</Path>
+			</Button>
+			<Button Background="Transparent" Command="{Binding NextCommand}">
+				<Path Data="M0 0v6l5-3-5-3zm5 3v3h2v-6h-2v3z" Width="12" Height="12" Stretch="Fill"
                       Fill="{DynamicResource ControlsColor}">
-                </Path>
-            </Button>
-        </StackPanel>
-        <Grid Margin="5,0,0,0" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="1*"> </ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Border Grid.RowSpan="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+				</Path>
+			</Button>
+		</StackPanel>
+		<Grid Margin="5,0,0,0" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="1*"> </ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="0.2*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+			</Grid.RowDefinitions>
+			<Border Grid.RowSpan="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                     CornerRadius="10" Width="50" Height="50">
-                <Border.Background>
-                    <ImageBrush Source="{Binding CurrentAudio.Image}" Stretch="Fill"></ImageBrush>
-                </Border.Background>
-            </Border>
-            <StackPanel Grid.Column="1" Margin="10,12,0,0">
-                <TextBlock Text="{Binding CurrentAudio.Title}" TextTrimming="CharacterEllipsis"></TextBlock>
-                <TextBlock Text="{Binding CurrentAudio.Artist}" TextTrimming="CharacterEllipsis"></TextBlock>
-            </StackPanel>
-            <Slider Grid.Row="1" Grid.ColumnSpan="6" Grid.Column="1" Value="{Binding Path=PlayPosition}"
+				<Border.Background>
+					<ImageBrush Source="{Binding CurrentAudio.Cover.Image}" Stretch="Fill"></ImageBrush>
+				</Border.Background>
+			</Border>
+			<StackPanel Grid.Column="1" Margin="10,12,0,0">
+				<TextBlock Text="{Binding CurrentAudio.Title}" TextTrimming="CharacterEllipsis"></TextBlock>
+				<TextBlock Text="{Binding CurrentAudio.Artist}" TextTrimming="CharacterEllipsis"></TextBlock>
+			</StackPanel>
+			<Slider Grid.Row="1" Grid.ColumnSpan="6" Grid.Column="1" Value="{Binding Path=PlayPosition}"
                     Maximum="{Binding Path=CurrentAudio.Duration}" Margin="11,-10,0,0">
-                <i:Interaction.Behaviors>
-                    <ia:EventTriggerBehavior EventName="PointerCaptureLost">
-                        <ia:InvokeCommandAction Command="{Binding AudioPositionChangeCommand}"></ia:InvokeCommandAction>
-                    </ia:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-                <Slider.Styles>
-                    <StyleInclude Source="/Styles/SliderStyle.axaml"></StyleInclude>
-                </Slider.Styles>
-            </Slider>
-            <TextBlock IsVisible="True" Grid.Column="2" VerticalAlignment="Center" Margin="5,18,5,0">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}{0}/{1}">
-                        <Binding Path="PlayPosition" Converter="{StaticResource  DurationConverter}" />
-                        <Binding Path="CurrentAudio.Duration" Converter="{StaticResource DurationConverter}" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-            <Button Command="{Binding RepeatToggleCommand}" Grid.Column="3" VerticalAlignment="Bottom" Background="Transparent" Foreground="{DynamicResource ControlsColor}">
-                <i:Interaction.Behaviors>
-                    <ia:DataTriggerBehavior Binding="{Binding Repeat}" ComparisonCondition="Equal" Value="True">
-                        <ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource ControlsColor}"/>
-                        
-                    </ia:DataTriggerBehavior>
-                    <ia:DataTriggerBehavior Binding="{Binding Repeat}" ComparisonCondition="Equal" Value="False">
-                        <ia:ChangePropertyAction PropertyName="Foreground" Value="Gray"/>
-                    </ia:DataTriggerBehavior>
-                </i:Interaction.Behaviors>
-                
-                <Path
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="PointerCaptureLost">
+						<ia:InvokeCommandAction Command="{Binding AudioPositionChangeCommand}"></ia:InvokeCommandAction>
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+				<Slider.Styles>
+					<StyleInclude Source="/Styles/SliderStyle.axaml"></StyleInclude>
+				</Slider.Styles>
+			</Slider>
+			<TextBlock IsVisible="True" Grid.Column="2" VerticalAlignment="Center" Margin="5,18,5,0">
+				<TextBlock.Text>
+					<MultiBinding StringFormat="{}{0}/{1}">
+						<Binding Path="PlayPosition" Converter="{StaticResource  DurationConverter}" />
+						<Binding Path="CurrentAudio.Duration" Converter="{StaticResource DurationConverter}" />
+					</MultiBinding>
+				</TextBlock.Text>
+			</TextBlock>
+			<Button Command="{Binding RepeatToggleCommand}" Grid.Column="3" VerticalAlignment="Bottom" Background="Transparent" Foreground="{DynamicResource ControlsColor}">
+				<i:Interaction.Behaviors>
+					<ia:DataTriggerBehavior Binding="{Binding Repeat}" ComparisonCondition="Equal" Value="True">
+						<ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource ControlsColor}" />
+					</ia:DataTriggerBehavior>
+					<ia:DataTriggerBehavior Binding="{Binding Repeat}" ComparisonCondition="Equal" Value="False">
+						<ia:ChangePropertyAction PropertyName="Foreground" Value="Gray" />
+					</ia:DataTriggerBehavior>
+				</i:Interaction.Behaviors>
+
+				<Path
                     Data="M6 0v1h-5c-.55 0-1 .45-1 1v1h1v-1h5v1l2-1.5-2-1.5zm-4 4l-2 1.5 2 1.5v-1h5c.55 0 1-.45 1-1v-1h-1v1h-5v-1z"
                     Stretch="Fill" Width="{StaticResource PlayerButtonSize}"
                     Height="{StaticResource PlayerButtonSize}"
-                    Fill="{Binding Foreground, 
-                    Mode=TwoWay,  
+                    Fill="{Binding Foreground,
+                    Mode=TwoWay,
                     RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}">
-                </Path>
-            </Button>
-            
-            <Button IsVisible="true" Grid.Column="4" Command="{Binding ShuffleToogleCommand}" VerticalAlignment="Bottom" Background="Transparent">
-            
-                <i:Interaction.Behaviors>
-                    <ia:DataTriggerBehavior Binding="{Binding Shuffling}" ComparisonCondition="Equal" Value="True">
-                        <ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource ControlsColor}"/>
-                    </ia:DataTriggerBehavior>
-                    <ia:DataTriggerBehavior Binding="{Binding Shuffling}" ComparisonCondition="Equal" Value="False">
-                        <ia:ChangePropertyAction PropertyName="Foreground" Value="Gray"/>
-                    </ia:DataTriggerBehavior>
-                </i:Interaction.Behaviors>
-                <Path
+				</Path>
+			</Button>
+
+			<Button IsVisible="true" Grid.Column="4" Command="{Binding ShuffleToogleCommand}" VerticalAlignment="Bottom" Background="Transparent">
+
+				<i:Interaction.Behaviors>
+					<ia:DataTriggerBehavior Binding="{Binding Shuffling}" ComparisonCondition="Equal" Value="True">
+						<ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource ControlsColor}" />
+					</ia:DataTriggerBehavior>
+					<ia:DataTriggerBehavior Binding="{Binding Shuffling}" ComparisonCondition="Equal" Value="False">
+						<ia:ChangePropertyAction PropertyName="Foreground" Value="Gray" />
+					</ia:DataTriggerBehavior>
+				</i:Interaction.Behaviors>
+				<Path
                     Data="M6 0v1h-.5c-.35 0-.56.1-.78.38l-1.41 1.78-1.53-1.78c-.22-.26-.44-.38-.78-.38h-1v1h1c-.05 0 .01.04.03.03l1.63 1.91-1.66 2.06h-1v1h1c.35 0 .56-.1.78-.38l1.53-1.91 1.66 1.91c.22.26.44.38.78.38h.25v1l2-1.5-2-1.5v1h-.22c-.01-.01-.05-.04-.06-.03l-1.75-2.06 1.53-1.91h.5v1l2-1.5-2-1.5z"
                     Stretch="Fill" Width="{StaticResource PlayerButtonSize}"
-                    Height="{StaticResource PlayerButtonSize}" 
-                    Fill="{Binding Foreground, 
-                    Mode=TwoWay,  
+                    Height="{StaticResource PlayerButtonSize}"
+                    Fill="{Binding Foreground,
+                    Mode=TwoWay,
                     RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}">
-                </Path>
+				</Path>
+			</Button>
 
-
-            </Button>
-            
-            <Button  Command="{Binding MuteToggleCommand}" Grid.Column="5" VerticalAlignment="Bottom" Foreground="Gray" Background="Transparent">
-                <i:Interaction.Behaviors>
-                    <ia:DataTriggerBehavior Binding="{Binding Mute}" ComparisonCondition="Equal" Value="False">
-                        <ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource ControlsColor}"/>
-                    </ia:DataTriggerBehavior>
-                    <ia:DataTriggerBehavior Binding="{Binding Mute}" ComparisonCondition="Equal" Value="True">
-                        <ia:ChangePropertyAction PropertyName="Foreground" Value="Gray"/>
-                    </ia:DataTriggerBehavior>
-                </i:Interaction.Behaviors>
-                <Path
+			<Button  Command="{Binding MuteToggleCommand}" Grid.Column="5" VerticalAlignment="Bottom" Foreground="Gray" Background="Transparent">
+				<i:Interaction.Behaviors>
+					<ia:DataTriggerBehavior Binding="{Binding Mute}" ComparisonCondition="Equal" Value="False">
+						<ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource ControlsColor}" />
+					</ia:DataTriggerBehavior>
+					<ia:DataTriggerBehavior Binding="{Binding Mute}" ComparisonCondition="Equal" Value="True">
+						<ia:ChangePropertyAction PropertyName="Foreground" Value="Gray" />
+					</ia:DataTriggerBehavior>
+				</i:Interaction.Behaviors>
+				<Path
                     Data="M3.34 0l-1.34 2h-2v4h2l1.34 2h.66v-8h-.66zm1.66 1v1c.17 0 .34.02.5.06.86.22 1.5 1 1.5 1.94s-.63 1.72-1.5 1.94c-.16.04-.33.06-.5.06v1c.25 0 .48-.04.72-.09h.03c1.3-.33 2.25-1.51 2.25-2.91 0-1.4-.95-2.58-2.25-2.91-.23-.06-.49-.09-.75-.09zm0 2v2c.09 0 .18-.01.25-.03.43-.11.75-.51.75-.97 0-.46-.31-.86-.75-.97-.08-.02-.17-.03-.25-.03z"
                     Stretch="Fill" Width="{StaticResource PlayerButtonSize}" Height="{StaticResource PlayerButtonSize}"
-                    Fill="{Binding Foreground, 
-                    Mode=TwoWay,  
+                    Fill="{Binding Foreground,
+                    Mode=TwoWay,
                     RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}">
-                </Path>
-            </Button>
+				</Path>
+			</Button>
 
-            <Slider  Grid.Column="6" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="0,0,0,-3" 
+			<Slider  Grid.Column="6" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="0,0,0,-3"
                     Minimum="0"
                     Maximum="1"
-                    SmallChange="0.1" 
-                    Value="{Binding Volume}" >
-                <Slider.Styles>
-                    <StyleInclude Source="/Styles/SliderStyle.axaml"></StyleInclude>
-                </Slider.Styles>
-            </Slider>
-        </Grid>
-    </Grid>
+                    SmallChange="0.1"
+                    Value="{Binding Volume}">
+				<Slider.Styles>
+					<StyleInclude Source="/Styles/SliderStyle.axaml"></StyleInclude>
+				</Slider.Styles>
+			</Slider>
+		</Grid>
+	</Grid>
 </UserControl>

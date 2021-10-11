@@ -11,18 +11,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using VKAvaloniaPlayer.Models.Interfaces;
+using Avalonia.Visuals.Media.Imaging;
 
 namespace VKAvaloniaPlayer.Models.Base
 {
 	public class ImageModelBase : INotifyPropertyChanged, IImageBase
 	{
-		
+		public static Semaphore _Semaphore = new Semaphore(5, 5);
 
 		public event PropertyChangedEventHandler? PropertyChanged;
-		
+
 		[JsonIgnore]
 		private Bitmap? _Image = null;
-		
+
+		public int DecodeWidth { get; set; }
+
 		public string ImageUrl { get; set; }
 		public bool ImageIsloaded { get; set; }
 
@@ -56,8 +59,31 @@ namespace VKAvaloniaPlayer.Models.Base
 			}
 		}
 
-		public virtual async void LoadBitmap()
+		public virtual async void LoadBitmapAsync()
 		{
+			if ((!string.IsNullOrEmpty(ImageUrl)) && !ImageIsloaded)
+			{
+				try
+				{
+					_Semaphore.WaitOne();
+					using (var imageStream = await LoadImageStreamAsync())
+					{
+						if (imageStream is null)
+							return;
+
+						Image = await Task.Run(() =>
+							 DecodeWidth <= 0 ? new Bitmap(imageStream) :
+							 Bitmap.DecodeToWidth(imageStream, DecodeWidth)
+						);
+
+						ImageIsloaded = true;
+					}
+				}
+				finally
+				{
+					_Semaphore.Release();
+				}
+			}
 		}
 
 		public void OnPropertyChanged([CallerMemberName] string prop = "")

@@ -20,7 +20,7 @@ namespace VKAvaloniaPlayer.Models
         
         public  bool Default { get; set; }=false;
         
-        public override void LoadBitmap()
+        public override void LoadBitmapAsync()
         {
             try
             {

@@ -7,7 +7,7 @@ using VkNet;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public class AlbumsViewModel : DataViewModelBase
+	public class AlbumsViewModel : VkDataViewModelBase
 	{
 		private MusicFromAlbumViewModel? _MusicFromAlbumViewModel;
 
@@ -40,19 +40,17 @@ namespace VKAvaloniaPlayer.ViewModels
 
 		public override void LoadData()
 		{
-		
-				if (GlobalVars.CurrentAccount?.UserID != null)
+			if (GlobalVars.CurrentAccount?.UserID != null)
+			{
+				var res = GlobalVars.VkApi.Audio.GetPlaylists((long)GlobalVars.CurrentAccount.UserID, 200,
+					(uint)Offset);
+				if (res != null)
 				{
-					var res = GlobalVars.VkApi.Audio.GetPlaylists((long) GlobalVars.CurrentAccount.UserID, 200,
-						(uint) Offset);
-					if (res != null)
-					{
-						DataCollection.AddRange(res);
+					DataCollection.AddRange(res);
 
-						Task.Run(() => { DataCollection.StartLoadImages(); });
-					}
+					Task.Run(() => { DataCollection.StartLoadImages(); });
 				}
-				
+			}
 		}
 
 		public AlbumsViewModel()

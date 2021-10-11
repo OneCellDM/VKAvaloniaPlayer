@@ -7,8 +7,7 @@
 			 xmlns:views="using:VKAvaloniaPlayer.Views"
              x:Class="VKAvaloniaPlayer.Views.AlbumListControl"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-             >
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
 	<Grid>
 		<ListBox Background="White" SelectedIndex="{Binding SelectedIndex}" Items="{Binding  DataCollection}">
 			<ListBox.Styles>
@@ -33,27 +32,21 @@
 									                ItemsPanel="{TemplateBinding ItemsPanel}"
 									                ItemTemplate="{TemplateBinding ItemTemplate}"
 									                Margin="{TemplateBinding Padding}"
-									                VirtualizationMode="{TemplateBinding VirtualizationMode}"
-									>
-											
-										<i:Interaction.Behaviors>
-											<ia:EventTriggerBehavior EventName="PointerPressed" >
-												<ia:InvokeCommandAction Command="{Binding SelectedItemCommand}"  />
-											</ia:EventTriggerBehavior>
-										</i:Interaction.Behaviors>		
-								
-									</ItemsPresenter>
-													
+									                VirtualizationMode="{TemplateBinding VirtualizationMode}">
 
-								
+										<i:Interaction.Behaviors>
+											<ia:EventTriggerBehavior EventName="PointerPressed">
+												<ia:InvokeCommandAction Command="{Binding SelectedItemCommand}" />
+											</ia:EventTriggerBehavior>
+										</i:Interaction.Behaviors>
+									</ItemsPresenter>
 								</ScrollViewer>
 							</Border>
 						</ControlTemplate>
 					</Setter>
 				</Style>
 			</ListBox.Styles>
-			
-		
+
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
 					<WrapPanel  Orientation="Horizontal"></WrapPanel>
@@ -64,7 +57,7 @@
 					<StackPanel>
 						<Border IsHitTestVisible="False" CornerRadius="10" Width="120" Height="120">
 							<Border.Background>
-								<ImageBrush Source="{Binding Image}"></ImageBrush>
+								<ImageBrush Source="{Binding Cover.Image}"></ImageBrush>
 							</Border.Background>
 						</Border>
 						<TextBlock IsHitTestVisible="False" Width="120"  Margin="10,3" TextAlignment="Center" TextWrapping="Wrap"  HorizontalAlignment="Center"  Height="40" Text="{Binding Title}"></TextBlock>

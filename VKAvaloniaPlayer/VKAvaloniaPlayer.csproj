@@ -7,7 +7,7 @@
 		<StartupObject />
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<Optimize>true</Optimize>
+		<Optimize>false</Optimize>
 		<AllowUnsafeBlocks>false</AllowUnsafeBlocks>
 		<DefineConstants>DEBUG</DefineConstants>
 	</PropertyGroup>
@@ -38,7 +38,7 @@
 		<PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.7" />
 		<PackageReference Include="ManagedBass" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-		<PackageReference Include="VkNet" Version="1.65.0" />
+		<PackageReference Include="VkNet" Version="1.67.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Views\ExceptionView.axaml.cs">

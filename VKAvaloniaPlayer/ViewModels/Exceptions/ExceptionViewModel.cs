@@ -62,7 +62,7 @@ namespace VKAvaloniaPlayer.ViewModels.Exceptions
 		}
 
 		public Action Action { get; set; }
-		public DataViewModelBase View { get; set; }
+		public VkDataViewModelBase View { get; set; }
 
 		public IReactiveCommand ExitCommand { get; set; }
 		public IReactiveCommand CallActionCommand { get; set; }

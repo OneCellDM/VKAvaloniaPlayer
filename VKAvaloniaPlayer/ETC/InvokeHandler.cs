@@ -10,9 +10,9 @@ namespace VKAvaloniaPlayer.ETC
 	public class InvokeHandlerObject
 	{
 		public Action Action { get; set; }
-		public DataViewModelBase View { get; set; }
+		public VkDataViewModelBase View { get; set; }
 
-		public InvokeHandlerObject(Action action, DataViewModelBase view)
+		public InvokeHandlerObject(Action action, VkDataViewModelBase view)
 		{
 			this.Action = action;
 			this.View = view;

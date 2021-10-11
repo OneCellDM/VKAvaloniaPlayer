@@ -49,29 +49,31 @@ namespace VKAvaloniaPlayer.ETC
 			{
 				int itemCount = DataCollection.Count;
 				for (int i = 0; i < itemCount; i++)
-					if(!DataCollection[i].ImageIsloaded)
-						DataCollection[i].LoadBitmap();
-				
+					if (!DataCollection[i].Cover.ImageIsloaded)
+						DataCollection[i].Cover.LoadBitmapAsync();
 			}
 			catch (Exception EX)
 			{
 				return;
 			}
 		}
-		
+
 		public static ObservableCollection<T> Shuffle<T>(this IEnumerable<T> collection)
 		{
-				ObservableCollection<T> obscollection = new ObservableCollection<T>(collection);
-				Random rand = new Random();
-				int itercount = collection.Count();
-				
-				for (int i = 0; i < itercount; i++)
-				{
-						var element = obscollection.ElementAt(rand.Next(itercount));
-						obscollection.Remove(element);
-						obscollection.Insert(rand.Next(itercount), element);
-				}
-				return obscollection;
+			ObservableCollection<T> obscollection = new ObservableCollection<T>(collection);
+			Random rand = new Random();
+			int itercount = collection.Count();
+
+			for (int i = 0; i < itercount; i++)
+			{
+				var element = obscollection.ElementAt(rand.Next(itercount));
+				obscollection.Remove(element);
+				obscollection.Insert(rand.Next(itercount), element);
+			}
+			return obscollection;
 		}
+		public static string GetAudioIDFormatWithAccessKey(this AudioModel audioModel)=>$"{audioModel.OwnerID}_{audioModel.ID}_{audioModel.AccessKey}";
+		public static string GetAudioIDFormatNoAccessKey(this AudioModel audioModel) => $"{audioModel.OwnerID}_{audioModel.ID}";
+
 	}
 }

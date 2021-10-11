@@ -58,7 +58,7 @@
 						<StackPanel  Spacing="5" Orientation="Horizontal">
 							<Border IsHitTestVisible="False" CornerRadius="10" Width="50" Height="50">
 								<Border.Background>
-									<ImageBrush Source="{Binding Image}" Stretch="Uniform" />
+									<ImageBrush Source="{Binding Cover.Image}" Stretch="Uniform" />
 								</Border.Background>
 							</Border>
 							<StackPanel Margin="5" Spacing="5">
@@ -77,15 +77,71 @@
 								</TextBlock>
 							</StackPanel>
 						</StackPanel>
-						<StackPanel IsVisible="False" Margin="10,0"   Spacing="5"   Grid.Column="1" Orientation="Horizontal">
-							<Button Background="Transparent">
-								<Path  Data="M3 0v3h-2l3 3 3-3h-2v-3h-2zm-3 7v1h8v-1h-8z" />
+						<StackPanel  Margin="10,0"   Spacing="5"   Grid.Column="1" Orientation="Horizontal">
+							<Button   Background="Transparent" IsVisible="{Binding DataContext.AudioListButtons.AudioDownloadIsVisible,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
+								<StackPanel Orientation="Horizontal">
+									<Path Data="M3 0v3h-2l3 3 3-3h-2v-3h-2zm-3 7v1h8v-1h-8z" Fill="Gray">
+										<i:Interaction.Behaviors>
+											<ia:DataTriggerBehavior Binding="{Binding IsDownload}" Value="False">
+												<ia:ChangePropertyAction PropertyName="Fill" Value="Gray" ></ia:ChangePropertyAction>
+											</ia:DataTriggerBehavior>
+											<ia:DataTriggerBehavior Binding="{Binding IsDownload}" Value="True">
+												<ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource ControlsColor}">
+												</ia:ChangePropertyAction>
+											</ia:DataTriggerBehavior>
+										</i:Interaction.Behaviors>
+									</Path>
+									<TextBlock  Margin="5,0,0,0">
+										<TextBlock.Text>
+											<MultiBinding StringFormat="{} {0}%">
+												<Binding Path="DownloadPercent" />
+											</MultiBinding>
+										</TextBlock.Text>
+
+										<i:Interaction.Behaviors>
+
+											<ia:DataTriggerBehavior Binding="{Binding DownloadPercent}" ComparisonCondition="Equal" Value="0">
+												<ia:ChangePropertyAction PropertyName="IsVisible" Value="False" />
+											</ia:DataTriggerBehavior>
+
+											<ia:DataTriggerBehavior Binding="{Binding DownloadPercent}" ComparisonCondition="NotEqual" Value="0">
+												<ia:ChangePropertyAction PropertyName="IsVisible" Value="True" />
+											</ia:DataTriggerBehavior>
+										</i:Interaction.Behaviors>
+									</TextBlock>
+								</StackPanel>
+
+								<i:Interaction.Behaviors>
+									<ia:EventTriggerBehavior EventName="Click">
+										<ia:InvokeCommandAction
+											Command="{Binding DataContext.AudioListButtons.AudioDownloadCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
+										</ia:InvokeCommandAction>
+									</ia:EventTriggerBehavior>
+								</i:Interaction.Behaviors>
 							</Button>
-							<Button Background="Transparent">
+							
+							<Button  Background="Transparent"
+
+									 IsVisible="{Binding DataContext.AudioListButtons.AudioAddIsVisible, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
 								<Path  Data="M3 0v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2z" />
+								<i:Interaction.Behaviors>
+									<ia:EventTriggerBehavior EventName="Click">
+										<ia:InvokeCommandAction
+											Command="{Binding DataContext.AudioListButtons.AudioAddCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
+										</ia:InvokeCommandAction>
+									</ia:EventTriggerBehavior>
+								</i:Interaction.Behaviors>
 							</Button>
-							<Button Background="Transparent">
+							<Button  Background="Transparent"
+									 IsVisible="{Binding DataContext.AudioListButtons.AudioRemoveIsVisible,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
 								<Path Data="M3 0c-.55 0-1 .45-1 1h-1c-.55 0-1 .45-1 1h7c0-.55-.45-1-1-1h-1c0-.55-.45-1-1-1h-1zm-2 3v4.81c0 .11.08.19.19.19h4.63c.11 0 .19-.08.19-.19v-4.81h-1v3.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-3.5h-1v3.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-3.5h-1z" />
+								<i:Interaction.Behaviors>
+									<ia:EventTriggerBehavior EventName="Click">
+										<ia:InvokeCommandAction
+											Command="{Binding DataContext.AudioListButtons.AudioRemoveCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
+										</ia:InvokeCommandAction>
+									</ia:EventTriggerBehavior>
+								</i:Interaction.Behaviors>
 							</Button>
 						</StackPanel>
 						<TextBlock VerticalAlignment="Center"  Grid.Column="2" Text="{Binding Duration, Converter={StaticResource durationConverter}}"></TextBlock>

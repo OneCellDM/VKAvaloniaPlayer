@@ -1,163 +1,168 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using ReactiveUI;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
+using VkNet.Exception;
+using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public class AudioListButtons : ReactiveObject
-	{
-		public AudioAlbumModel Album { get; set; } = null;
+    public class AudioListButtons : ReactiveObject
+    {
+        private bool _AudioAddIsVisible;
+        private bool _AudioAddToAlbumIsVisible;
 
-		private bool _AudioDownloadIsVisible;
-		private bool _AudioAddIsVisible;
-		private bool _AudioRemoveIsVisible;
-		private bool _AudioAddToAlbumIsVisible;
+        private bool _AudioDownloadIsVisible;
+        private bool _AudioRemoveIsVisible;
 
-		public bool AudioDownloadIsVisible
-		{
-			get => _AudioDownloadIsVisible;
+        public AudioListButtons()
+        {
+            _AudioAddIsVisible = true;
+            _AudioAddToAlbumIsVisible = true;
+            _AudioDownloadIsVisible = true;
+            _AudioRemoveIsVisible = true;
+            AudioAddCommand = ReactiveCommand.Create(async (RoutedEventArgs e) =>
+            {
+                var button = (e.Source as Button);
 
-			set => this.RaiseAndSetIfChanged(ref _AudioDownloadIsVisible, value);
-		}
+                var vkModel = button.DataContext as AudioModel;
 
-		public bool AudioAddIsVisible
-		{
-			get => _AudioAddIsVisible;
-			set => this.RaiseAndSetIfChanged(ref _AudioAddIsVisible, value);
-		}
+                if (vkModel != null)
+                {
+                    var res = await GlobalVars.VkApi.Audio.AddAsync(vkModel.ID, vkModel.OwnerID, vkModel.AccessKey);
+                    if (res > 0)
+                        AllMusicViewModel.AudioAddEventCall(vkModel);
+                }
+            });
+            AudioAddToAlbumCommand = ReactiveCommand.Create((RoutedEventArgs e) => { });
 
-		public bool AudioRemoveIsVisible
-		{
-			get => _AudioRemoveIsVisible;
-			set => this.RaiseAndSetIfChanged(ref _AudioRemoveIsVisible, value);
-		}
+            AudioDownloadCommand = ReactiveCommand.Create(async (RoutedEventArgs e) =>
+            {
+                var button = (e.Source as Button);
 
-		public bool AudioAddToAlbumIsVisible
-		{
-			get => _AudioAddToAlbumIsVisible;
-			set => this.RaiseAndSetIfChanged(ref _AudioAddToAlbumIsVisible, value);
-		}
+                var vkModel = button.DataContext as AudioModel;
 
-		public IReactiveCommand AudioAddCommand { get; set; }
-		public IReactiveCommand AudioDownloadCommand { get; set; }
-		public IReactiveCommand AudioRemoveCommand { get; set; }
-		public IReactiveCommand AudioAddToAlbumCommand { get; set; }
+                if (vkModel != null)
+                {
+                    if (vkModel.IsDownload)
+                        return;
 
-		public AudioListButtons()
-		{
-			_AudioAddIsVisible = true;
-			_AudioAddToAlbumIsVisible = true;
-			_AudioDownloadIsVisible = true;
-			_AudioRemoveIsVisible = true;
-			AudioAddCommand = ReactiveCommand.Create(async (Avalonia.Interactivity.RoutedEventArgs e) =>
-			{
-				var button = (e.Source as Button);
+                    vkModel.IsDownload = true;
 
-				var vkModel = button.DataContext as AudioModel;
+                    try
+                    {
+                        var res = await GlobalVars.VkApi.Audio.GetByIdAsync(new string[]
+                            {vkModel.GetAudioIDFormatWithAccessKey()});
 
-				if (vkModel != null)
-				{
-					var res = await ETC.GlobalVars.VkApi.Audio.AddAsync(vkModel.ID, vkModel.OwnerID, vkModel.AccessKey);
-					if (res > 0)
-						AllMusicViewModel.AudioAddEventCall(vkModel);
-				}
-			});
-			AudioAddToAlbumCommand = ReactiveCommand.Create((Avalonia.Interactivity.RoutedEventArgs e) =>
-			{
-			});
+                        using (WebClient webClient = new WebClient())
+                        {
+                            webClient.DownloadFileAsync(res.ElementAt(0).Url,
+                                string.Format("{0}-{1}.mp3", vkModel.Artist, vkModel.Title));
+                            webClient.DownloadFileCompleted += delegate { vkModel.IsDownload = false; };
+                            webClient.DownloadProgressChanged += (object o, DownloadProgressChangedEventArgs e) =>
+                                vkModel.DownloadPercent = e.ProgressPercentage;
+                        }
+                    }
+                    catch
+                    {
+                        vkModel.IsDownload = false;
+                    }
+                }
+            });
 
-			AudioDownloadCommand = ReactiveCommand.Create(async (Avalonia.Interactivity.RoutedEventArgs e) =>
-			{
-				var button = (e.Source as Button);
+            AudioRemoveCommand = ReactiveCommand.Create(async (RoutedEventArgs e) =>
+            {
+                var button = (e.Source as Button);
 
-				var vkModel = button.DataContext as AudioModel;
+                var vkModel = button.DataContext as AudioModel;
 
-				if (vkModel != null)
-				{
-					if (vkModel.IsDownload)
-						return;
+                if (vkModel != null)
+                {
+                    if (Album is null)
+                    {
+                        var Awaiter = await GlobalVars.VkApi.Audio.DeleteAsync(vkModel.ID, vkModel.OwnerID);
+                        try
+                        {
+                            var taskAwaiter2 = await GlobalVars.VkApi.Audio.GetByIdAsync(
+                                new string[] {vkModel.GetAudioIDFormatWithAccessKey()});
+                        }
+                        catch (ParameterMissingOrInvalidException ex)
+                        {
+                            AllMusicViewModel.AudioRemoveEventCall(vkModel);
+                        }
+                    }
+                    else
+                    {
+                        List<string> audios = new List<string>();
+                        try
+                        {
+                            var Audiosres = await GlobalVars.VkApi.Audio.GetAsync(new AudioGetParams()
+                            {
+                                OwnerId = Album.OwnerID,
+                                PlaylistId = Album.ID,
+                                Count = 6000
+                            });
+                            for (int i = 0; i < Audiosres.Count; i++)
+                            {
+                                if (Audiosres[i].Id == vkModel.ID)
+                                    continue;
 
-					vkModel.IsDownload = true;
+                                audios.Add(vkModel.GetAudioIDFormatNoAccessKey());
+                            }
 
-					try
-					{
-						var res = await ETC.GlobalVars.VkApi.Audio.GetByIdAsync(new string[] { vkModel.GetAudioIDFormatWithAccessKey() });
+                            var res = GlobalVars.VkApi.Audio.EditPlaylist(Album.OwnerID, (int) Album.ID, Album.Title,
+                                null, audios);
 
-						using (WebClient webClient = new WebClient())
-						{
-							webClient.DownloadFileAsync(res.ElementAt(0).Url, string.Format("{0}-{1}.mp3", vkModel.Artist, vkModel.Title));
-							webClient.DownloadFileCompleted += delegate { vkModel.IsDownload = false; };
-							webClient.DownloadProgressChanged += (object o, DownloadProgressChangedEventArgs e) => vkModel.DownloadPercent = e.ProgressPercentage;
-						}
-					}
-					catch
-					{
-						vkModel.IsDownload = false;
-					}
-				}
-			});
+                            if (res)
+                                MusicFromAlbumViewModel.AudioRemoveEventCall(vkModel);
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                        finally
+                        {
+                            audios.Clear();
+                        }
+                    }
+                }
+            });
+        }
 
-			AudioRemoveCommand = ReactiveCommand.Create(async (Avalonia.Interactivity.RoutedEventArgs e) =>
-			{
-				var button = (e.Source as Button);
+        public AudioAlbumModel Album { get; set; } = null;
 
-				var vkModel = button.DataContext as AudioModel;
+        public bool AudioDownloadIsVisible
+        {
+            get => _AudioDownloadIsVisible;
 
-				if (vkModel != null)
-				{
-					if (Album is null)
-					{
-						var Awaiter = await ETC.GlobalVars.VkApi.Audio.DeleteAsync(vkModel.ID, vkModel.OwnerID);
-						try
-						{
-							var taskAwaiter2 = await ETC.GlobalVars.VkApi.Audio.GetByIdAsync(
-								new string[] { vkModel.GetAudioIDFormatWithAccessKey() });
-						}
-						catch (VkNet.Exception.ParameterMissingOrInvalidException ex)
-						{
-							AllMusicViewModel.AudioRemoveEventCall(vkModel);
-						}
-					}
-					else
-					{
-						List<string> audios = new List<string>();
-						try
-						{
-							var Audiosres = await ETC.GlobalVars.VkApi.Audio.GetAsync(new VkNet.Model.RequestParams.AudioGetParams()
-							{
-								OwnerId = Album.OwnerID,
-								PlaylistId = Album.ID,
-								Count = 6000,
-							});
-							for (int i = 0; i < Audiosres.Count; i++)
-							{
-								if (Audiosres[i].Id == vkModel.ID)
-									continue;
+            set => this.RaiseAndSetIfChanged(ref _AudioDownloadIsVisible, value);
+        }
 
-								audios.Add(vkModel.GetAudioIDFormatNoAccessKey());
-							}
+        public bool AudioAddIsVisible
+        {
+            get => _AudioAddIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _AudioAddIsVisible, value);
+        }
 
-							var res = ETC.GlobalVars.VkApi.Audio.EditPlaylist(Album.OwnerID, (int)Album.ID, Album.Title, null, audios);
+        public bool AudioRemoveIsVisible
+        {
+            get => _AudioRemoveIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _AudioRemoveIsVisible, value);
+        }
 
-							if (res)
-								MusicFromAlbumViewModel.AudioRemoveEventCall(vkModel);
-						}
-						catch (Exception ex) { }
-						finally
-						{
-							audios.Clear();
-						}
-					}
-				}
-			});
-		}
-	}
+        public bool AudioAddToAlbumIsVisible
+        {
+            get => _AudioAddToAlbumIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _AudioAddToAlbumIsVisible, value);
+        }
+
+        public IReactiveCommand AudioAddCommand { get; set; }
+        public IReactiveCommand AudioDownloadCommand { get; set; }
+        public IReactiveCommand AudioRemoveCommand { get; set; }
+        public IReactiveCommand AudioAddToAlbumCommand { get; set; }
+    }
 }

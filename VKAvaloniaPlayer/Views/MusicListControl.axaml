@@ -3,153 +3,156 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
-             xmlns:views="using:VKAvaloniaPlayer.Views"
-			 xmlns:etc="using:VKAvaloniaPlayer.ETC"
-			 xmlns:converters="using:VKAvaloniaPlayer.Converters"
-			 xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:etc="using:VKAvaloniaPlayer.ETC"
+             xmlns:converters="using:VKAvaloniaPlayer.Converters"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-			 xmlns:v="using:VKAvaloniaPlayer.Models"
              x:Class="VKAvaloniaPlayer.Views.MusicListControl">
 
-	<UserControl.Resources>
-		<converters:DurationConverter x:Key="durationConverter" />
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <converters:DurationConverter x:Key="durationConverter" />
+    </UserControl.Resources>
 
-	<Grid>
-		<Grid.Styles>
-			<Style Selector="Path">
-				<Setter Property="Fill" Value="Gray" />
-				<Setter Property="Width" Value="16" />
-				<Setter Property="Height" Value="16" />
-				<Setter Property="Stretch" Value="Fill" />
-			</Style>
-			<Style Selector="Path:pointerover">
-				<Setter Property="Fill" Value="{DynamicResource ControlsColor}" />
-			</Style>
-		</Grid.Styles>
-		<Grid.RowDefinitions>
+    <Grid>
+        <Grid.Styles>
+            <Style Selector="Path">
+                <Setter Property="Fill" Value="Gray" />
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="16" />
+                <Setter Property="Stretch" Value="Fill" />
+            </Style>
+            <Style Selector="Path:pointerover">
+                <Setter Property="Fill" Value="{DynamicResource ControlsColor}" />
+            </Style>
+        </Grid.Styles>
+        <Grid.RowDefinitions>
 
-			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition></RowDefinition>
-		</Grid.RowDefinitions>
-		<TextBox IsVisible="{Binding SearchIsVisible}" Grid.Row="0"  Text="{Binding SearchText}" Watermark="Поиск..." Height="8" Margin="10"  Background="{DynamicResource TextBoxColor}">
-			<TextBox.Styles>
-				<StyleInclude Source="/Styles/TextBoxStyle.axaml"></StyleInclude>
-			</TextBox.Styles>
-		</TextBox>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBox IsVisible="{Binding SearchIsVisible}" Grid.Row="0" Text="{Binding SearchText}" Watermark="Поиск..."
+                 Height="8" Margin="10" Background="{DynamicResource TextBoxColor}">
+            <TextBox.Styles>
+                <StyleInclude Source="/Styles/TextBoxStyle.axaml" />
+            </TextBox.Styles>
+        </TextBox>
 
-		<ListBox    AutoScrollToSelectedItem="True"   Grid.Row="1" UseLayoutRounding="True" VirtualizationMode="Simple"
-					 Background="White"
-					SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
-			 Items="{Binding  DataCollection}">
+        <ListBox AutoScrollToSelectedItem="True" Grid.Row="1" UseLayoutRounding="True" VirtualizationMode="Simple"
+                 Background="White"
+                 SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+                 Items="{Binding  DataCollection}">
 
-			<ListBox.Styles>
-				<StyleInclude Source="/Styles/ListBoxStyle.axaml" />
-			</ListBox.Styles>
+            <ListBox.Styles>
+                <StyleInclude Source="/Styles/ListBoxStyle.axaml" />
+            </ListBox.Styles>
 
-			<ListBox.DataTemplates>
-				<DataTemplate>
-					<Grid IsHitTestVisible="True">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="1*"></ColumnDefinition>
-							<ColumnDefinition Width="Auto"></ColumnDefinition>
-							<ColumnDefinition Width="Auto"></ColumnDefinition>
-						</Grid.ColumnDefinitions>
-						<StackPanel  Spacing="5" Orientation="Horizontal">
-							<Border IsHitTestVisible="False" CornerRadius="10" Width="50" Height="50">
-								<Border.Background>
-									<ImageBrush Source="{Binding Cover.Image}" Stretch="Uniform" />
-								</Border.Background>
-							</Border>
-							<StackPanel Margin="5" Spacing="5">
-								<TextBlock IsHitTestVisible="False" FontSize="14"  Text="{Binding Title}" />
-								<TextBlock IsHitTestVisible="True"  FontSize="14" Text="{Binding Artist}">
-									<TextBlock.Styles>
-										<Style Selector="TextBlock">
-											<Setter Property="Foreground" Value="#737272"></Setter>
-										</Style>
-										<Style Selector="TextBlock:pointerover">
-											<Setter Property="Foreground" Value="{DynamicResource ControlsColor}" />
+            <ListBox.DataTemplates>
+                <DataTemplate>
+                    <Grid IsHitTestVisible="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Spacing="5" Orientation="Horizontal">
+                            <Border IsHitTestVisible="False" CornerRadius="10" Width="50" Height="50">
+                                <Border.Background>
+                                    <ImageBrush Source="{Binding Cover.Image}" Stretch="Uniform" />
+                                </Border.Background>
+                            </Border>
+                            <StackPanel Margin="5" Spacing="5">
+                                <TextBlock IsHitTestVisible="False" TextTrimming="WordEllipsis" FontSize="14"
+                                           Text="{Binding Title}" />
+                                <TextBlock IsHitTestVisible="True" TextTrimming="WordEllipsis" FontSize="14"
+                                           Text="{Binding Artist}">
+                                    <TextBlock.Styles>
+                                        <Style Selector="TextBlock">
+                                            <Setter Property="Foreground" Value="#737272" />
+                                        </Style>
+                                        <Style Selector="TextBlock:pointerover">
+                                            <Setter Property="Foreground" Value="{DynamicResource ControlsColor}" />
 
-											<Setter Property="Cursor" Value="Hand"></Setter>
-										</Style>
-									</TextBlock.Styles>
-								</TextBlock>
-							</StackPanel>
-						</StackPanel>
-						<StackPanel  Margin="10,0"   Spacing="5"   Grid.Column="1" Orientation="Horizontal">
-							<Button   Background="Transparent" IsVisible="{Binding DataContext.AudioListButtons.AudioDownloadIsVisible,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
-								<StackPanel Orientation="Horizontal">
-									<Path Data="M3 0v3h-2l3 3 3-3h-2v-3h-2zm-3 7v1h8v-1h-8z" Fill="Gray">
-										<i:Interaction.Behaviors>
-											<ia:DataTriggerBehavior Binding="{Binding IsDownload}" Value="False">
-												<ia:ChangePropertyAction PropertyName="Fill" Value="Gray" ></ia:ChangePropertyAction>
-											</ia:DataTriggerBehavior>
-											<ia:DataTriggerBehavior Binding="{Binding IsDownload}" Value="True">
-												<ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource ControlsColor}">
-												</ia:ChangePropertyAction>
-											</ia:DataTriggerBehavior>
-										</i:Interaction.Behaviors>
-									</Path>
-									<TextBlock  Margin="5,0,0,0">
-										<TextBlock.Text>
-											<MultiBinding StringFormat="{} {0}%">
-												<Binding Path="DownloadPercent" />
-											</MultiBinding>
-										</TextBlock.Text>
+                                            <Setter Property="Cursor" Value="Hand" />
+                                        </Style>
+                                    </TextBlock.Styles>
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Margin="10,0" Spacing="5" Grid.Column="1" Orientation="Horizontal">
+                            <Button Background="Transparent"
+                                    IsVisible="{Binding DataContext.AudioListButtons.AudioDownloadIsVisible,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="M3 0v3h-2l3 3 3-3h-2v-3h-2zm-3 7v1h8v-1h-8z" Fill="Gray">
+                                        <i:Interaction.Behaviors>
+                                            <ia:DataTriggerBehavior Binding="{Binding IsDownload}" Value="False">
+                                                <ia:ChangePropertyAction PropertyName="Fill" Value="Gray" />
+                                            </ia:DataTriggerBehavior>
+                                            <ia:DataTriggerBehavior Binding="{Binding IsDownload}" Value="True">
+                                                <ia:ChangePropertyAction PropertyName="Fill"
+                                                                         Value="{DynamicResource ControlsColor}" />
+                                            </ia:DataTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                    </Path>
+                                    <TextBlock Margin="5,0,0,0" Width="30">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{} {0}%">
+                                                <Binding Path="DownloadPercent" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
 
-										<i:Interaction.Behaviors>
+                                        <i:Interaction.Behaviors>
 
-											<ia:DataTriggerBehavior Binding="{Binding DownloadPercent}" ComparisonCondition="Equal" Value="0">
-												<ia:ChangePropertyAction PropertyName="IsVisible" Value="False" />
-											</ia:DataTriggerBehavior>
+                                            <ia:DataTriggerBehavior Binding="{Binding DownloadPercent}"
+                                                                    ComparisonCondition="Equal" Value="0">
+                                                <ia:ChangePropertyAction PropertyName="IsVisible" Value="False" />
+                                            </ia:DataTriggerBehavior>
 
-											<ia:DataTriggerBehavior Binding="{Binding DownloadPercent}" ComparisonCondition="NotEqual" Value="0">
-												<ia:ChangePropertyAction PropertyName="IsVisible" Value="True" />
-											</ia:DataTriggerBehavior>
-										</i:Interaction.Behaviors>
-									</TextBlock>
-								</StackPanel>
+                                            <ia:DataTriggerBehavior Binding="{Binding DownloadPercent}"
+                                                                    ComparisonCondition="NotEqual" Value="0">
+                                                <ia:ChangePropertyAction PropertyName="IsVisible" Value="True" />
+                                            </ia:DataTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                    </TextBlock>
+                                </StackPanel>
 
-								<i:Interaction.Behaviors>
-									<ia:EventTriggerBehavior EventName="Click">
-										<ia:InvokeCommandAction
-											Command="{Binding DataContext.AudioListButtons.AudioDownloadCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
-										</ia:InvokeCommandAction>
-									</ia:EventTriggerBehavior>
-								</i:Interaction.Behaviors>
-							</Button>
-							
-							<Button  Background="Transparent"
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="Click">
+                                        <ia:InvokeCommandAction
+                                            Command="{Binding DataContext.AudioListButtons.AudioDownloadCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
 
-									 IsVisible="{Binding DataContext.AudioListButtons.AudioAddIsVisible, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
-								<Path  Data="M3 0v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2z" />
-								<i:Interaction.Behaviors>
-									<ia:EventTriggerBehavior EventName="Click">
-										<ia:InvokeCommandAction
-											Command="{Binding DataContext.AudioListButtons.AudioAddCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
-										</ia:InvokeCommandAction>
-									</ia:EventTriggerBehavior>
-								</i:Interaction.Behaviors>
-							</Button>
-							<Button  Background="Transparent"
-									 IsVisible="{Binding DataContext.AudioListButtons.AudioRemoveIsVisible,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
-								<Path Data="M3 0c-.55 0-1 .45-1 1h-1c-.55 0-1 .45-1 1h7c0-.55-.45-1-1-1h-1c0-.55-.45-1-1-1h-1zm-2 3v4.81c0 .11.08.19.19.19h4.63c.11 0 .19-.08.19-.19v-4.81h-1v3.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-3.5h-1v3.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-3.5h-1z" />
-								<i:Interaction.Behaviors>
-									<ia:EventTriggerBehavior EventName="Click">
-										<ia:InvokeCommandAction
-											Command="{Binding DataContext.AudioListButtons.AudioRemoveCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
-										</ia:InvokeCommandAction>
-									</ia:EventTriggerBehavior>
-								</i:Interaction.Behaviors>
-							</Button>
-						</StackPanel>
-						<TextBlock VerticalAlignment="Center"  Grid.Column="2" Text="{Binding Duration, Converter={StaticResource durationConverter}}"></TextBlock>
-					</Grid>
-				</DataTemplate>
-			</ListBox.DataTemplates>
-		</ListBox>
+                            <Button Background="Transparent"
 
-		<etc:LoadingControl Grid.Row="1" VerticalContentAlignment="Center"  IsVisible="{Binding IsLoading}" />
-	</Grid>
+                                    IsVisible="{Binding DataContext.AudioListButtons.AudioAddIsVisible, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
+                                <Path Data="M3 0v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2z" />
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="Click">
+                                        <ia:InvokeCommandAction
+                                            Command="{Binding DataContext.AudioListButtons.AudioAddCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                            <Button Background="Transparent"
+                                    IsVisible="{Binding DataContext.AudioListButtons.AudioRemoveIsVisible,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
+                                <Path
+                                    Data="M3 0c-.55 0-1 .45-1 1h-1c-.55 0-1 .45-1 1h7c0-.55-.45-1-1-1h-1c0-.55-.45-1-1-1h-1zm-2 3v4.81c0 .11.08.19.19.19h4.63c.11 0 .19-.08.19-.19v-4.81h-1v3.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-3.5h-1v3.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-3.5h-1z" />
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="Click">
+                                        <ia:InvokeCommandAction
+                                            Command="{Binding DataContext.AudioListButtons.AudioRemoveCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                        </StackPanel>
+                        <TextBlock Width="60" VerticalAlignment="Center" Grid.Column="2"
+                                   Text="{Binding Duration, Converter={StaticResource durationConverter}}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.DataTemplates>
+        </ListBox>
+
+        <etc:LoadingControl Grid.Row="1" VerticalContentAlignment="Center" IsVisible="{Binding IsLoading}" />
+    </Grid>
 </UserControl>

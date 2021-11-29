@@ -3,16 +3,16 @@ using Avalonia.Markup.Xaml;
 
 namespace VKAvaloniaPlayer.ETC
 {
-	public partial class LoadingControl : UserControl
-	{
-		public LoadingControl()
-		{
-			InitializeComponent();
-		}
+    public class LoadingControl : UserControl
+    {
+        public LoadingControl()
+        {
+            InitializeComponent();
+        }
 
-		private void InitializeComponent()
-		{
-			AvaloniaXamlLoader.Load(this);
-		}
-	}
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
+        }
+    }
 }

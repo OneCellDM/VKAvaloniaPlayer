@@ -2,7 +2,7 @@
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public class ViewModelBase : ReactiveObject
-	{
-	}
+    public class ViewModelBase : ReactiveObject
+    {
+    }
 }

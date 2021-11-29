@@ -1,27 +1,28 @@
-﻿using Avalonia.Media.Imaging;
-using System.ComponentModel;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using ReactiveUI;
 using VKAvaloniaPlayer.Models.Interfaces;
+using VkNet.Model;
 
 namespace VKAvaloniaPlayer.Models.Base
 {
-	public enum ModelTypes
-	{
-		Audio,
-		Album
-	}
+    public enum ModelTypes
+    {
+        Audio,
+        Album
+    }
 
-	public class VkModelBase : ReactiveUI.ReactiveObject, Interfaces.IVkModelBase
+    public class VkModelBase : ReactiveObject, IVkModelBase
 
-	{
-		public ModelTypes ModelType { get; set; }
-		public long ID { get; set; }
-		public long OwnerID { get; set; }
-		public string Artist { get; set; }
-		public string Title { get; set; }
-		public IImageBase Cover { get; set; }
+    {
+        public ModelTypes ModelType { get; set; }
+        public long ID { get; set; }
+        public long OwnerID { get; set; }
+        public string Artist { get; set; }
+        public string Title { get; set; }
+        public IImageBase Cover { get; set; }
 
-		public virtual string GetThumbUrl(VkNet.Model.AudioCover audioCover) => string.Empty;
-	}
+        public virtual string GetThumbUrl(AudioCover audioCover)
+        {
+            return string.Empty;
+        }
+    }
 }

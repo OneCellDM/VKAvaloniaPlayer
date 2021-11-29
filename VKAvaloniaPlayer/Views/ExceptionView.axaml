@@ -5,11 +5,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VKAvaloniaPlayer.Views.ExceptionView">
 
-	<StackPanel VerticalAlignment="Center" Spacing="20">
-		<TextBlock FontWeight="UltraBold" Text="{Binding ErrorMessage}" HorizontalAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis">
-		</TextBlock>
-		<StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal" Spacing="10">
-			<Button Command="{Binding CallActionCommand}"  Content="{Binding ButtonMessage}" />
-		</StackPanel>
-	</StackPanel>
+    <StackPanel VerticalAlignment="Center" Spacing="20">
+        <TextBlock FontWeight="UltraBold" Text="{Binding ErrorMessage}" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10">
+            <Button Command="{Binding CallActionCommand}" Content="{Binding ButtonMessage}" />
+        </StackPanel>
+    </StackPanel>
 </UserControl>

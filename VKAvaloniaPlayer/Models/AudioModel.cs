@@ -1,76 +1,78 @@
-﻿using Avalonia.Media.Imaging;
-using System.IO;
-using System.Threading.Tasks;
+﻿using ReactiveUI;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models.Base;
 using VkNet.Model;
-using ReactiveUI;
+using VkNet.Model.Attachments;
 
 namespace VKAvaloniaPlayer.Models
 {
-	public class AudioModel : VkModelBase
-	{
-		private bool _IsDownload = false;
-		private int _DownloadPercent;
+    public class AudioModel : VkModelBase
+    {
+        private int _DownloadPercent;
+        private bool _IsDownload;
 
-		public int DownloadPercent { get => _DownloadPercent; set => this.RaiseAndSetIfChanged(ref _DownloadPercent, value); }
+        public AudioModel()
+        {
+            Title = "Название";
+            Artist = "Исполнитель";
+            Cover = new ImageModelBase {Image = GlobalVars.DefaultMusicImage};
+        }
 
-		public bool IsDownload
-		{
-			get => _IsDownload;
-			set
-			{
-				if (value == false)
-					DownloadPercent = 0;
+        public AudioModel(Audio VkModel)
+        {
+            Cover = new ImageModelBase
+            {
+                DecodeWidth = 50,
+                Image = GlobalVars.DefaultMusicImage
+            };
+            AccessKey = VkModel.AccessKey;
 
-				this.RaiseAndSetIfChanged(ref _IsDownload, value);
-			}
-		}
-		
+            ModelType = ModelTypes.Audio;
 
-		public int Duration { get; set; }
-		public string AccessKey{ get; set; }
+            Duration = VkModel.Duration;
 
-		public AudioModel()
-		{
-			Title = "Название";
-			Artist = "Исполнитель";
-			Cover = new ImageModelBase() { Image = GlobalVars.DefaultMusicImage };
-		}
+            ID = (long) VkModel.Id;
 
-		public AudioModel(VkNet.Model.Attachments.Audio VkModel)
-		{
-			Cover = new ImageModelBase()
-			{
-				DecodeWidth = 50,
-				Image = GlobalVars.DefaultMusicImage,
-			};
-			AccessKey = VkModel.AccessKey;
+            OwnerID = (long) VkModel.OwnerId;
 
-			ModelType = ModelTypes.Audio;
+            Artist = VkModel.Artist;
 
-			Duration = VkModel.Duration;
+            Title = VkModel.Title;
 
-			ID = (long)VkModel.Id;
+            if (VkModel.Album != null && VkModel.Album.Thumb != null)
+                Cover.ImageUrl = GetThumbUrl(VkModel.Album.Thumb);
+        }
 
-			OwnerID = (long)VkModel.OwnerId;
+        public int DownloadPercent
+        {
+            get => _DownloadPercent;
+            set => this.RaiseAndSetIfChanged(ref _DownloadPercent, value);
+        }
 
-			Artist = VkModel.Artist;
+        public bool IsDownload
+        {
+            get => _IsDownload;
+            set
+            {
+                if (value == false)
+                    DownloadPercent = 0;
 
-			Title = VkModel.Title;
+                this.RaiseAndSetIfChanged(ref _IsDownload, value);
+            }
+        }
 
-			if (VkModel.Album != null && VkModel.Album.Thumb != null)
-				Cover.ImageUrl = GetThumbUrl(VkModel.Album.Thumb);
-		}
 
-		public override string GetThumbUrl(AudioCover audioCover)
-		{
-			if (audioCover.Photo68 != null)
-				return audioCover.Photo68;
+        public int Duration { get; set; }
+        public string AccessKey { get; set; }
 
-			if (audioCover.Photo135 != null)
-				return audioCover.Photo135;
-			else return string.Empty;
-		}
-	}
+        public override string GetThumbUrl(AudioCover audioCover)
+        {
+            if (audioCover.Photo68 != null)
+                return audioCover.Photo68;
+
+            if (audioCover.Photo135 != null)
+                return audioCover.Photo135;
+            return string.Empty;
+        }
+    }
 }

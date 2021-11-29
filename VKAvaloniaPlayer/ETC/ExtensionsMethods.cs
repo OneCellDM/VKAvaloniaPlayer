@@ -1,79 +1,82 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Avalonia.Threading;
 using VKAvaloniaPlayer.Models;
-using VkNet.Model.Attachments;
 using VKAvaloniaPlayer.Models.Interfaces;
+using VkNet.Model.Attachments;
 using VkNet.Utils;
 
 namespace VKAvaloniaPlayer.ETC
 {
-	public static class ExtensionsMethods
-	{
-		public static void AddRange(this ObservableCollection<IVkModelBase>? DataCollection, VkCollection<Audio>? audios)
-		{
-			try
-			{
-				int itemCount = audios.Count();
-				for (int i = 0; i < itemCount; i++)
-					DataCollection.Add(new AudioModel(audios[i]));
-			}
-			catch (Exception EX)
-			{
-				return;
-			}
-		}
+    public static class ExtensionsMethods
+    {
+        public static void AddRange(this ObservableCollection<IVkModelBase>? DataCollection,
+            IEnumerable<Audio>? audios)
+        {
+            try
+            {
+                var itemCount = audios.Count();
+                for (var i = 0; i < itemCount; i++)
+                    DataCollection.Add(new AudioModel(audios.ElementAt(i)));
+            }
+            catch (Exception EX)
+            {
+            }
+        }
 
-		public static void AddRange(this ObservableCollection<IVkModelBase>? DataCollection, VkCollection<AudioPlaylist> audios)
-		{
-			try
-			{
-				int itemCount = audios.Count();
-				for (int i = 0; i < itemCount; i++)
-					DataCollection.Add(new AudioAlbumModel(audios[i]));
-			}
-			catch (Exception EX)
-			{
-				return;
-			}
-		}
+        public static void AddRange(this ObservableCollection<IVkModelBase>? DataCollection,
+            VkCollection<AudioPlaylist> audios)
+        {
+            try
+            {
+                var itemCount = audios.Count();
+                for (var i = 0; i < itemCount; i++)
+                    DataCollection.Add(new AudioAlbumModel(audios[i]));
+            }
+            catch (Exception EX)
+            {
+            }
+        }
 
-		public static void StartLoadImages(this ObservableCollection<IVkModelBase>? DataCollection)
-		{
-			try
-			{
-				int itemCount = DataCollection.Count;
-				for (int i = 0; i < itemCount; i++)
-					if (!DataCollection[i].Cover.ImageIsloaded)
-						DataCollection[i].Cover.LoadBitmapAsync();
-			}
-			catch (Exception EX)
-			{
-				return;
-			}
-		}
+        public static void StartLoadImages(this ObservableCollection<IVkModelBase>? DataCollection)
+        {
+            try
+            {
+                var itemCount = DataCollection.Count;
+                for (var i = 0; i < itemCount; i++)
+                    if (!DataCollection[i].Cover.ImageIsloaded)
+                        DataCollection[i].Cover.LoadBitmapAsync();
+            }
+            catch (Exception EX)
+            {
+            }
+        }
 
-		public static ObservableCollection<T> Shuffle<T>(this IEnumerable<T> collection)
-		{
-			ObservableCollection<T> obscollection = new ObservableCollection<T>(collection);
-			Random rand = new Random();
-			int itercount = collection.Count();
+        public static ObservableCollection<T> Shuffle<T>(this IEnumerable<T> collection)
+        {
+            ObservableCollection<T> obscollection = new(collection);
+            Random rand = new();
+            var itercount = collection.Count();
 
-			for (int i = 0; i < itercount; i++)
-			{
-				var element = obscollection.ElementAt(rand.Next(itercount));
-				obscollection.Remove(element);
-				obscollection.Insert(rand.Next(itercount), element);
-			}
-			return obscollection;
-		}
-		public static string GetAudioIDFormatWithAccessKey(this AudioModel audioModel)=>$"{audioModel.OwnerID}_{audioModel.ID}_{audioModel.AccessKey}";
-		public static string GetAudioIDFormatNoAccessKey(this AudioModel audioModel) => $"{audioModel.OwnerID}_{audioModel.ID}";
+            for (var i = 0; i < itercount; i++)
+            {
+                var element = obscollection.ElementAt(rand.Next(itercount));
+                obscollection.Remove(element);
+                obscollection.Insert(rand.Next(itercount), element);
+            }
 
-	}
+            return obscollection;
+        }
+
+        public static string GetAudioIDFormatWithAccessKey(this AudioModel audioModel)
+        {
+            return $"{audioModel.OwnerID}_{audioModel.ID}_{audioModel.AccessKey}";
+        }
+
+        public static string GetAudioIDFormatNoAccessKey(this AudioModel audioModel)
+        {
+            return $"{audioModel.OwnerID}_{audioModel.ID}";
+        }
+    }
 }

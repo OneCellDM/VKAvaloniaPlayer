@@ -8,22 +8,21 @@
              mc:Ignorable="d" Background="white" d:DesignWidth="800" d:DesignHeight="700"
              x:Class="VKAvaloniaPlayer.Views.VKLoginControl">
     <UserControl.DataContext>
-        <vm:VkLoginControlViewModel></vm:VkLoginControlViewModel>
+        <vm:VkLoginControlViewModel />
     </UserControl.DataContext>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <Border Background="#2787F5" Grid.ColumnSpan="2">
             <Label HorizontalContentAlignment="Center" Margin="0,20" Foreground="White" FontSize="18"
-                   Content="VK AVALONIA PLAYER" FontWeight="Bold">
-            </Label>
+                   Content="VK AVALONIA PLAYER" FontWeight="Bold" />
         </Border>
 
         <StackPanel Grid.Row="1" Spacing="20" IsVisible="{Binding Path=LoginPanelIsVisible}" Margin="50,10">
@@ -44,6 +43,7 @@
             <TextBox Text="{Binding  Path=Code}" />
             <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Content="Отправить"
                     Command="{Binding SendCodeCommand}" />
+			<Label Content="Отправить Код по СМС"/>
         </StackPanel>
 
         <Grid IsVisible="{Binding SavedAccountsIsVisible}" Grid.Row="1" Background="#2272CE" Grid.Column="1">
@@ -55,22 +55,21 @@
             <TextBlock Grid.Row="0" Foreground="White" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="20"
                        Margin="10" Text="Активные аккаунты" />
             <TextBlock Grid.Row="1" Margin="20" FontSize="16" FontWeight="ExtraBold"
-                       Text="Выберите аккаунт из списка для входа" Foreground="White">
-            </TextBlock>
-            <ListBox SelectedIndex="{Binding ActiveAccountSelectIndex,Mode=TwoWay}" 
+                       Text="Выберите аккаунт из списка для входа" Foreground="White" />
+            <ListBox SelectedIndex="{Binding ActiveAccountSelectIndex,Mode=TwoWay}"
                      Items="{Binding SavedAccounts}" Grid.Row="2" VirtualizationMode="None" VerticalAlignment="Top"
                      Margin="30,0" Background="Transparent">
                 <ListBox.Styles>
-                   
-                    <StyleInclude Source="/Styles/ListBoxStyle.axaml"/>
-                    
+
+                    <StyleInclude Source="/Styles/ListBoxStyle.axaml" />
+
                     <Style Selector="ListBoxItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         <Setter Property="Margin" Value="0,10" />
                         <Setter Property="CornerRadius" Value="5" />
                         <Setter Property="Background" Value="White" />
                     </Style>
-                  
+
                     <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
                         <Setter Property="Background" Value="White" />
                     </Style>
@@ -81,18 +80,19 @@
                         <Setter Property="Background" Value="white" />
                     </Style>
                     <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                        <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlHighlightAltBaseHighBrush}" />
+                        <Setter Property="TextBlock.Foreground"
+                                Value="{DynamicResource SystemControlHighlightAltBaseHighBrush}" />
                     </Style>
- 
+
                 </ListBox.Styles>
 
                 <ListBox.DataTemplates>
                     <DataTemplate>
-                        <Grid >
+                        <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"></ColumnDefinition>
-                                <ColumnDefinition Width="1*"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <Ellipse IsHitTestVisible="False" Grid.Column="0" Fill="White" Width="50" Height="50">
@@ -112,8 +112,7 @@
                             </Ellipse>
 
                             <TextBlock IsHitTestVisible="False" Grid.Column="1" Text="{Binding Name}" FontWeight="Bold"
-                                       VerticalAlignment="Center" Margin="10">
-                            </TextBlock>
+                                       VerticalAlignment="Center" Margin="10" />
                             <Button Grid.Column="2" IsHitTestVisible="True">
 
                                 <i:Interaction.Behaviors>
@@ -123,7 +122,7 @@
                                             RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={ x:Type UserControl }}}" />
                                     </ia:EventTriggerBehavior>
                                 </i:Interaction.Behaviors>
-                                
+
                                 <Button.Content>
                                     <TextBlock Text="Удалить" />
                                 </Button.Content>

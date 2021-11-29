@@ -6,32 +6,60 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0020a13f-137f-48af-b3c2-8e3c2cc79602" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.VKAvaloniaPlayer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VKAvaloniaPlayer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/App.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/App.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/App.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/App.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Assets/DefaultResources.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Assets/DefaultResources.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Converters/DurationConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Converters/DurationConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/AudioListButtons.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/AudioListButtons.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/ExtensionsMethods.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/ExtensionsMethods.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/StaticObjects.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/StaticObjects.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/GlobalVars.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/GlobalVars.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/InvokeHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/InvokeHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/LoadingControl.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/LoadingControl.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/LoadingControl.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/LoadingControl.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/Utils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ETC/Utils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/FodyWeavers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/FodyWeavers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/AudioAlbumModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/AudioAlbumModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/AudioModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/AudioModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/BaseModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/IBaseModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/SaveAccountModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/SaveAccountModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Styles/TextBlockStyle.axaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/Base/ImageModelBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/Base/ImageModelBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/Base/VkModelBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/Base/VkModelBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/Interfaces/IImageBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/Interfaces/IImageBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/Interfaces/IVkModelBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/Interfaces/IVkModelBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/SavedAccountModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Models/SavedAccountModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Styles/ListBoxStyle.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Styles/ListBoxStyle.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Styles/MenuListBoxStyle.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Styles/MenuListBoxStyle.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Styles/SliderStyle.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Styles/SliderStyle.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Styles/TextBoxStyle.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Styles/TextBoxStyle.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/UserControl1.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/UserControl1.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/UserControl1.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/UserControl1.axaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewLocator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewLocator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/AlbumsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/AlbumsViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/AllMusicViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/AllMusicViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/AudioSearchViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/AudioSearchViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/Base/DataViewModelBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/Base/DataViewModelBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/Base/ViewModelBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/Base/ViewModelBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/Base/VkDataViewModelBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/Base/VkDataViewModelBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/CurrentMusicListViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/CurrentMusicListViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/Exceptions/ExceptionViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/Exceptions/ExceptionViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/MusicFromAlbumViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/MusicFromAlbumViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/PlayerControlViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/RecomendationsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/RecomendationsViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/VKLoginControlViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/AudioSearchContol.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/AudioSearchControl.axaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/AudioSearchControl.axaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/AlbumListControl.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/AlbumListControl.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/AlbumListControl.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/AlbumListControl.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/ExceptionView.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/ExceptionView.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/ExceptionView.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/ExceptionView.axaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MainWindow.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MainWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MainWindow.axaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MusicListControl.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MusicListControl.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MusicListControl.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MusicListControl.axaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/PlayerControl.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/PlayerControl.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/PlayerControl.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/PlayerControl.axaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/VKLoginControl.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/VKLoginControl.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/VKLoginControl.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/VKLoginControl.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/nuget.config" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/nuget.config" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +69,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92ccbe078f6045a19ca779953265febd162000/b5/9cabd7d8/VkErrorCode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/92ccbe078f6045a19ca779953265febd162000/71/78cbfb1d/VkApiException.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1xAsgQZa5nfAAUwrk6k18rJ1AEx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -48,13 +80,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.3502052" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/VKAvaloniaPlayer/VKAvaloniaPlayer.sln" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Project.fds">
+  <component name="RunManager" selected=".NET Launch Settings Profile.VKAvaloniaPlayer">
     <configuration name="fds" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -98,6 +132,7 @@
       <option name="presentableId" value="Default" />
       <updated>1629809344745</updated>
       <workItem from="1629809345425" duration="78000" />
+      <workItem from="1638094747781" duration="3112000" />
     </task>
     <servers />
   </component>
@@ -105,7 +140,7 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -117,6 +152,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

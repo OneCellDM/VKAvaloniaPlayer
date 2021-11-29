@@ -1,343 +1,361 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using ReactiveUI;
-using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Avalonia.Controls.Shapes;
-using Avalonia.Media;
+using Avalonia.Controls;
+using Avalonia.Threading;
+using ReactiveUI;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
-using VKAvaloniaPlayer.Models.Interfaces;
 using VKAvaloniaPlayer.ViewModels.Base;
-using VkNet.Exception;
-using VkNet.Utils;
+using VKAvaloniaPlayer.ViewModels.Exceptions;
 using VKAvaloniaPlayer.Views;
+using VkNet.Exception;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public class MainWindowViewModel : ViewModelBase
-	{
-		private int _MenuSelectionIndex = -1;
-		private const double _menuColumnWidth = 60;
-		private bool _SiderBarAnimationIsPlaying;
-		private bool _MenuTextIsVisible;
-		private bool _AlbumsIsVisible;
-		private bool _CurrentDataViewIsVisible;
-		private bool _VkLoginIsVisible = true;
-		private bool _MenuIsOpen = false;
+    public class MainWindowViewModel : ViewModelBase
+    {
+        private const double _menuColumnWidth = 60;
+        private bool _AlbumsIsVisible;
+        private AlbumsViewModel? _AlbumsViewModel;
+        private AllMusicViewModel? _AllMusicViewModel;
+        private AudioSearchViewModel? _AudioSearchViewModel;
 
-		private bool _ExceptionIsVisible = false;
-		private AlbumsViewModel? _AlbumsViewModel;
-		private VkDataViewModelBase? _CurrentDataViewModel;
-		private AllMusicViewModel? _AllMusicViewModel;
-		private AudioSearchViewModel? _AudioSearchViewModel;
-		private RecomendationsViewModel? _RecomendationsViewModel;
-		private CurrentMusicListViewModel? _CurrentMusicListViewModel;
-		private Exceptions.ExceptionViewModel _ExceptionViewModel;
+        private SavedAccountModel _CurrentAccountModel;
+        private bool _CurrentDataViewIsVisible;
+        private VkDataViewModelBase? _CurrentDataViewModel;
+        private CurrentMusicListViewModel? _CurrentMusicListViewModel;
 
-		private SavedAccountModel _CurrentAccountModel;
-		private GridLength _MenuColumnWidth = new GridLength(_menuColumnWidth);
+        private bool _ExceptionIsVisible;
+        private ExceptionViewModel? _ExceptionViewModel;
+        private GridLength _MenuColumnWidth = new(_menuColumnWidth);
+        private bool _MenuIsOpen;
+        private int _MenuSelectionIndex = -1;
+        private bool _MenuTextIsVisible;
+        private RecomendationsViewModel? _RecomendationsViewModel;
+        private bool _SiderBarAnimationIsPlaying;
+        private bool _VkLoginIsVisible = true;
+        private VkLoginControlViewModel? _VkLoginViewModel;
 
-		public Exceptions.ExceptionViewModel ExceptionViewModel
-		{
-			get => _ExceptionViewModel;
-			set => this.RaiseAndSetIfChanged(ref _ExceptionViewModel, value);
-		}
+        private bool Ismini;
 
-		public SavedAccountModel CurrentAccountModel
-		{
-			get => _CurrentAccountModel;
-			set => this.RaiseAndSetIfChanged(ref _CurrentAccountModel, value);
-		}
+        public MainWindowViewModel()
+        {
+            ExceptionViewModel.ViewExitEvent += ExceptionViewModel_ViewExitEvent;
+            GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
 
-		public bool MenuTextIsVisible
-		{
-			get => _MenuTextIsVisible;
-			set => this.RaiseAndSetIfChanged(ref _MenuTextIsVisible, value);
-		}
+            VkLoginViewModel = new VkLoginControlViewModel();
 
-		public bool AlbumsIsVisible
-		{
-			get => _AlbumsIsVisible;
-			set => this.RaiseAndSetIfChanged(ref _AlbumsIsVisible, value);
-		}
+            OpenHideMiniPlayerCommand = ReactiveCommand.Create(() =>
+            {
+                if (!Ismini)
+                {
+                    Ismini = true;
+                    MainWindow.Instance.Topmost = true;
+                    MainWindow.Instance.MinHeight = 200;
+                    MainWindow.Instance.Height = 200;
+                    MainWindow.Instance.MaxHeight = 200;
+                }
+                else
+                {
+                    Ismini = false;
+                    MainWindow.Instance.Topmost = false;
+                    MainWindow.Instance.MinHeight = 0;
+                    MainWindow.Instance.Height = 500;
+                    MainWindow.Instance.MaxHeight = 0;
+                }
+            });
 
-		public bool CurrentDataViewIsVisible
-		{
-			get => _CurrentDataViewIsVisible;
-			set => this.RaiseAndSetIfChanged(ref _CurrentDataViewIsVisible, value);
-		}
+            InvokeHandler.TaskErrorResponsedEvent += (handlerObject, exception) =>
+            {
+                if (exception is UserAuthorizationFailException)
+                {
+                    ExceptionIsVisible = true;
+                    handlerObject.View.ExceptionModel = new ExceptionViewModel
+                    {
+                        Action = AccountExit,
+                        View = handlerObject.View,
+                        ErrorMessage = "ÐžÑˆÐ¸Ð±ÐºÐ°: Ñ‚Ñ€ÐµÐ±ÑƒÐµÑ‚ÑÑ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ",
+                        ButtonMessage = "ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸ÑŽ",
+                        GridColumn = 0,
+                        GridRow = 0,
+                        GridColumnSpan = 2,
+                        GridRowSpan = 2
+                    };
+                }
+                else
+                {
+                    handlerObject.View.IsError = true;
+                    handlerObject.View.ExceptionModel = new ExceptionViewModel
+                    {
+                        Action = handlerObject.Action,
+                        View = handlerObject.View,
+                        ErrorMessage = "ÐžÑˆÐ¸Ð±ÐºÐ°:" + exception.Message,
+                        ButtonMessage = "ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚ÑŒ",
+                        GridColumn = 1,
+                        GridRow = 1,
+                        GridColumnSpan = 0,
+                        GridRowSpan = 0
+                    };
+                }
 
-		public bool VkLoginIsVisible
-		{
-			get => _VkLoginIsVisible;
-			set => this.RaiseAndSetIfChanged(ref _VkLoginIsVisible, value);
-		}
+                if (CurrentDataViewModel == null)
+                {
+                    ExceptionViewModel = handlerObject.View.ExceptionModel;
+                    ExceptionIsVisible = true;
+                }
+                else if (CurrentDataViewModel.GetType().Name == handlerObject.Action.Target.GetType().Name)
+                {
+                    ExceptionViewModel = CurrentDataViewModel.ExceptionModel;
+                    ExceptionIsVisible = true;
+                }
+            };
 
-		public AlbumsViewModel? AlbumsViewModel
-		{
-			get => _AlbumsViewModel;
-			set => this.RaiseAndSetIfChanged(ref _AlbumsViewModel, value);
-		}
+            AvatarPressedCommand = ReactiveCommand.Create((object obj) =>
+            {
+                if (_SiderBarAnimationIsPlaying == false && !_MenuIsOpen)
+                {
+                    _SiderBarAnimationIsPlaying = true;
+                    Task.Run(async () =>
+                    {
+                        MenuTextIsVisible = true;
 
-		public VkDataViewModelBase? CurrentDataViewModel
-		{
-			get => _CurrentDataViewModel;
-			set => this.RaiseAndSetIfChanged(ref _CurrentDataViewModel, value);
-		}
+                        for (var i = 60; i < 200; i += 5)
+                        {
+                            MenuColumnWidth = new GridLength(i);
+                            await Task.Delay(new TimeSpan(0, 0, 0, 0, 1));
+                        }
 
-		public int MenuSelectionIndex
-		{
-			get => _MenuSelectionIndex;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref _MenuSelectionIndex, value);
-				OpenView(value);
-			}
-		}
+                        _SiderBarAnimationIsPlaying = false;
+                        _MenuIsOpen = true;
+                    });
+                }
+                else if (_SiderBarAnimationIsPlaying == false && _MenuIsOpen)
+                {
+                    _SiderBarAnimationIsPlaying = true;
+                    Task.Run(async () =>
+                    {
+                        for (var i = 200; i >= 60; i -= 5)
+                        {
+                            MenuColumnWidth = new GridLength(i);
+                            await Task.Delay(new TimeSpan(0, 0, 0, 0, 1));
+                        }
 
-		public GridLength MenuColumnWidth
-		{
-			get => _MenuColumnWidth;
-			set => this.RaiseAndSetIfChanged(ref _MenuColumnWidth, value);
-		}
+                        MenuTextIsVisible = false;
+                        _SiderBarAnimationIsPlaying = false;
+                        _MenuIsOpen = false;
+                    });
+                }
+            });
+        }
 
-		public bool ExceptionIsVisible
-		{
-			get => _ExceptionIsVisible;
-			set => this.RaiseAndSetIfChanged(ref _ExceptionIsVisible, value);
-		}
 
-		public IReactiveCommand AvatarPressedCommand { get; set; }
-		public IReactiveCommand OpenHideMiniPlayerCommand { get; set; }
+        public PlayerControlViewModel PlayerContext => PlayerControlViewModel.Instance;
 
-		public void OpenView(int menuIndex)
-		{
-			Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
-			{
-				ExceptionIsVisible = false;
-				CurrentDataViewIsVisible = true;
-				CurrentDataViewModel = null;
-				AlbumsIsVisible = false;
+        public VkLoginControlViewModel? VkLoginViewModel
+        {
+            get => _VkLoginViewModel;
+            set => this.RaiseAndSetIfChanged(ref _VkLoginViewModel, value);
+        }
 
-				switch (menuIndex)
-				{
-					case 0:
-						{
-							CurrentDataViewModel = _CurrentMusicListViewModel;
-							break;
-						}
-					case 1:
-						{
-							if (_AllMusicViewModel == null)
-							{
-								_AllMusicViewModel = new AllMusicViewModel();
-								_AllMusicViewModel.StartLoad();
-							}
+        public ExceptionViewModel ExceptionViewModel
+        {
+            get => _ExceptionViewModel;
+            set => this.RaiseAndSetIfChanged(ref _ExceptionViewModel, value);
+        }
 
-							CurrentDataViewModel = _AllMusicViewModel;
-							break;
-						}
-					case 2:
-						{
-							if (_AlbumsViewModel == null)
-							{
-								AlbumsViewModel = new AlbumsViewModel();
-								AlbumsViewModel.StartLoad();
-							}
+        public SavedAccountModel CurrentAccountModel
+        {
+            get => _CurrentAccountModel;
+            set => this.RaiseAndSetIfChanged(ref _CurrentAccountModel, value);
+        }
 
-							CurrentDataViewIsVisible = false;
-							AlbumsIsVisible = true;
-							break;
-						}
-					case 3:
-						{
-							if (_AudioSearchViewModel == null) _AudioSearchViewModel = new AudioSearchViewModel();
-							CurrentDataViewModel = _AudioSearchViewModel;
-							break;
-						}
-					case 4:
-						{
-							if (_RecomendationsViewModel is null)
-							{
-								_RecomendationsViewModel = new RecomendationsViewModel();
-								_RecomendationsViewModel.StartLoad();
-							}
+        public bool MenuTextIsVisible
+        {
+            get => _MenuTextIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _MenuTextIsVisible, value);
+        }
 
-							CurrentDataViewModel = _RecomendationsViewModel;
-							break;
-						}
-					case 5:
-						{
-							AccountExit();
-							break;
-						}
-				}
+        public bool AlbumsIsVisible
+        {
+            get => _AlbumsIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _AlbumsIsVisible, value);
+        }
 
-				if (CurrentDataViewModel != null)
-					if (CurrentDataViewModel.IsError)
-					{
-						ExceptionIsVisible = true;
-						ExceptionViewModel = CurrentDataViewModel.ExceptionModel;
-					}
-			});
-		}
+        public bool CurrentDataViewIsVisible
+        {
+            get => _CurrentDataViewIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _CurrentDataViewIsVisible, value);
+        }
 
-		private void StaticObjects_VkApiChanged()
-		{
-			Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
-			{
-				_CurrentMusicListViewModel = new CurrentMusicListViewModel();
-				VkLoginIsVisible = false;
-				CurrentAccountModel = GlobalVars.CurrentAccount;
-				MenuSelectionIndex = 1;
+        public bool VkLoginIsVisible
+        {
+            get => _VkLoginIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _VkLoginIsVisible, value);
+        }
 
-				if (CurrentAccountModel.Image is null)
-					CurrentAccountModel.LoadBitmapAsync();
-			});
+        public AlbumsViewModel? AlbumsViewModel
+        {
+            get => _AlbumsViewModel;
+            set => this.RaiseAndSetIfChanged(ref _AlbumsViewModel, value);
+        }
 
-			GlobalVars.VkApiChanged -= StaticObjects_VkApiChanged;
-		}
+        public VkDataViewModelBase? CurrentDataViewModel
+        {
+            get => _CurrentDataViewModel;
+            set => this.RaiseAndSetIfChanged(ref _CurrentDataViewModel, value);
+        }
 
-		private void AccountExit()
-		{
-			PlayerControlViewModel.Player.Pause();
+        public int MenuSelectionIndex
+        {
+            get => _MenuSelectionIndex;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _MenuSelectionIndex, value);
+                OpenView(value);
+            }
+        }
 
-			CurrentDataViewIsVisible = false;
-			AlbumsIsVisible = false;
-			VkLoginIsVisible = true;
+        public GridLength MenuColumnWidth
+        {
+            get => _MenuColumnWidth;
+            set => this.RaiseAndSetIfChanged(ref _MenuColumnWidth, value);
+        }
 
-			AlbumsViewModel?.DataCollection?.Clear();
-			_RecomendationsViewModel?.DataCollection?.Clear();
-			_AllMusicViewModel?.DataCollection?.Clear();
-			_AudioSearchViewModel?.DataCollection?.Clear();
-			CurrentDataViewModel = null;
-			AlbumsViewModel = null;
-			_RecomendationsViewModel = null;
-			_AllMusicViewModel = null;
-			_AudioSearchViewModel = null;
-			CurrentAccountModel = null;
+        public bool ExceptionIsVisible
+        {
+            get => _ExceptionIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _ExceptionIsVisible, value);
+        }
 
-			GC.Collect(0, GCCollectionMode.Optimized);
-			GC.Collect(1, GCCollectionMode.Optimized);
-			GC.Collect(2, GCCollectionMode.Optimized);
-			GC.Collect(3, GCCollectionMode.Optimized);
+        public IReactiveCommand AvatarPressedCommand { get; set; }
+        public IReactiveCommand OpenHideMiniPlayerCommand { get; set; }
 
-			GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
-		}
+        public void OpenView(int menuIndex)
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                ExceptionIsVisible = false;
+                CurrentDataViewIsVisible = true;
+                CurrentDataViewModel = null;
+                AlbumsIsVisible = false;
 
-		private bool Ismini = false;
+                switch (menuIndex)
+                {
+                    case 0:
+                    {
+                        CurrentDataViewModel = _CurrentMusicListViewModel;
+                        break;
+                    }
+                    case 1:
+                    {
+                        if (_AllMusicViewModel == null)
+                        {
+                            _AllMusicViewModel = new AllMusicViewModel();
+                            _AllMusicViewModel.StartLoad();
+                        }
 
-		public MainWindowViewModel()
-		{
-			Exceptions.ExceptionViewModel.ViewExitEvent += ExceptionViewModel_ViewExitEvent;
-			GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
+                        CurrentDataViewModel = _AllMusicViewModel;
+                        break;
+                    }
+                    case 2:
+                    {
+                        if (_AlbumsViewModel == null)
+                        {
+                            AlbumsViewModel = new AlbumsViewModel();
+                            AlbumsViewModel.StartLoad();
+                        }
 
-			OpenHideMiniPlayerCommand = ReactiveCommand.Create(() =>
-			{
-				if (!Ismini)
-				{
-					Ismini = true;
-					MainWindow.Instance.Topmost = true;
-					MainWindow.Instance.MinHeight = 200;
-					MainWindow.Instance.Height = 200;
-					MainWindow.Instance.MaxHeight = 200;
-				}
-				else
-				{
-					Ismini = false;
-					MainWindow.Instance.Topmost = false;
-					MainWindow.Instance.MinHeight = 0;
-					MainWindow.Instance.Height = 500;
-					MainWindow.Instance.MaxHeight = 0;
-				}
-			});
-			InvokeHandler.TaskErrorResponsedEvent += (handlerObject, exception) =>
-			{
-				if (exception is UserAuthorizationFailException)
-				{
-					ExceptionIsVisible = true;
-					handlerObject.View.ExceptionModel = new Exceptions.ExceptionViewModel()
-					{
-						Action = AccountExit,
-						View = handlerObject.View,
-						ErrorMessage = "Îøèáêà: òðåáóåòñÿ àâòîðèçàöèÿ",
-						ButtonMessage = "Îòêðûòü àâòîðèçàöèþ",
-						GridColumn = 0,
-						GridRow = 0,
-						GridColumnSpan = 2,
-						GridRowSpan = 2,
-					};
-				}
-				else
-				{
-					handlerObject.View.IsError = true;
-					handlerObject.View.ExceptionModel = new Exceptions.ExceptionViewModel()
-					{
-						Action = handlerObject.Action,
-						View = handlerObject.View,
-						ErrorMessage = "Îøèáêà:" + exception.Message,
-						ButtonMessage = "Ïîâòîðèòü",
-						GridColumn = 1,
-						GridRow = 1,
-						GridColumnSpan = 0,
-						GridRowSpan = 0,
-					};
-				}
-				if (CurrentDataViewModel.GetType().Name == handlerObject.Action.Target.GetType().Name)
-				{
-					ExceptionViewModel = CurrentDataViewModel.ExceptionModel;
-					ExceptionIsVisible = true;
-				}
-			};
+                        CurrentDataViewIsVisible = false;
+                        AlbumsIsVisible = true;
+                        break;
+                    }
+                    case 3:
+                    {
+                        if (_AudioSearchViewModel == null) _AudioSearchViewModel = new AudioSearchViewModel();
+                        CurrentDataViewModel = _AudioSearchViewModel;
+                        break;
+                    }
+                    case 4:
+                    {
+                        if (_RecomendationsViewModel is null)
+                        {
+                            _RecomendationsViewModel = new RecomendationsViewModel();
+                            _RecomendationsViewModel.StartLoad();
+                        }
 
-			AvatarPressedCommand = ReactiveCommand.Create((object obj) =>
-			{
-				if (_SiderBarAnimationIsPlaying == false && !_MenuIsOpen)
-				{
-					_SiderBarAnimationIsPlaying = true;
-					Task.Run(async () =>
-					{
-						MenuTextIsVisible = true;
+                        CurrentDataViewModel = _RecomendationsViewModel;
+                        break;
+                    }
+                    case 5:
+                    {
+                        AccountExit();
+                        break;
+                    }
+                }
 
-						for (int i = 60; i < 200; i += 5)
-						{
-							MenuColumnWidth = new GridLength(i);
-							await Task.Delay(new TimeSpan(0, 0, 0, 0, 1));
-						}
+                if (CurrentDataViewModel != null)
+                    if (CurrentDataViewModel.IsError)
+                    {
+                        ExceptionIsVisible = true;
+                        ExceptionViewModel = CurrentDataViewModel.ExceptionModel;
+                    }
+            });
+        }
 
-						_SiderBarAnimationIsPlaying = false;
-						_MenuIsOpen = true;
-					});
-				}
-				else if (_SiderBarAnimationIsPlaying == false && _MenuIsOpen)
-				{
-					_SiderBarAnimationIsPlaying = true;
-					Task.Run(async () =>
-					{
-						for (int i = 200; i >= 60; i -= 5)
-						{
-							MenuColumnWidth = new GridLength(i);
-							await Task.Delay(new TimeSpan(0, 0, 0, 0, 1));
-						}
-						MenuTextIsVisible = false;
-						_SiderBarAnimationIsPlaying = false;
-						_MenuIsOpen = false;
-					});
-				}
-			});
-		}
+        private void StaticObjects_VkApiChanged()
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                _CurrentMusicListViewModel = new CurrentMusicListViewModel();
+                VkLoginIsVisible = false;
+                CurrentAccountModel = GlobalVars.CurrentAccount;
+                MenuSelectionIndex = 1;
 
-		private void ExceptionViewModel_ViewExitEvent()
-		{
-			CurrentDataViewModel.IsLoading = true;
-			CurrentDataViewModel.IsError = false;
-			ExceptionIsVisible = false;
-		}
-	}
+                if (CurrentAccountModel.Image is null)
+                    CurrentAccountModel.LoadBitmapAsync();
+            });
+
+            GlobalVars.VkApiChanged -= StaticObjects_VkApiChanged;
+        }
+
+        private void AccountExit()
+        {
+            try
+            {
+                PlayerControlViewModel.Player.Stop();
+            }
+            catch (Exception EX)
+            {
+            }
+
+            CurrentDataViewIsVisible = false;
+            AlbumsIsVisible = false;
+            VkLoginIsVisible = true;
+
+            AlbumsViewModel?.DataCollection?.Clear();
+            _RecomendationsViewModel?.DataCollection?.Clear();
+            _AllMusicViewModel?.DataCollection?.Clear();
+            _AudioSearchViewModel?.DataCollection?.Clear();
+            CurrentDataViewModel = null;
+            AlbumsViewModel = null;
+            _RecomendationsViewModel = null;
+            _AllMusicViewModel = null;
+            _AudioSearchViewModel = null;
+            CurrentAccountModel = null;
+
+            GC.Collect(0, GCCollectionMode.Optimized);
+            GC.Collect(1, GCCollectionMode.Optimized);
+            GC.Collect(2, GCCollectionMode.Optimized);
+            GC.Collect(3, GCCollectionMode.Optimized);
+
+            GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
+        }
+
+        private void ExceptionViewModel_ViewExitEvent()
+        {
+            CurrentDataViewModel.IsLoading = true;
+            CurrentDataViewModel.IsError = false;
+            ExceptionIsVisible = false;
+        }
+    }
 }

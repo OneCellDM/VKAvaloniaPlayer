@@ -3,16 +3,16 @@ using Avalonia.Markup.Xaml;
 
 namespace VKAvaloniaPlayer.Views
 {
-	public sealed partial class PlayerControl : UserControl
-	{
-		public PlayerControl()
-		{
-			InitializeComponent();
-		}
+    public sealed class PlayerControl : UserControl
+    {
+        public PlayerControl()
+        {
+            InitializeComponent();
+        }
 
-		private void InitializeComponent()
-		{
-			AvaloniaXamlLoader.Load(this);
-		}
-	}
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
+        }
+    }
 }

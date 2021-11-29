@@ -2,91 +2,96 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:etc="using:VKAvaloniaPlayer.ETC"
+             xmlns:etc="using:VKAvaloniaPlayer.ETC"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-			 xmlns:views="using:VKAvaloniaPlayer.Views"
+             xmlns:views="using:VKAvaloniaPlayer.Views"
              x:Class="VKAvaloniaPlayer.Views.AlbumListControl"
              xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
-	<Grid>
-		<ListBox Background="White" SelectedIndex="{Binding SelectedIndex}" Items="{Binding  DataCollection}">
-			<ListBox.Styles>
-				<Style Selector="ListBoxItem">
-					<Setter Property="Margin" Value="5"></Setter>
-				</Style>
-				<Style Selector="ListBox">
-					<Setter Property="Template">
-						<ControlTemplate>
-							<Border Name="border"
-							        Background="{TemplateBinding Background}"
-							        BorderBrush="{TemplateBinding BorderBrush}"
-							        BorderThickness="{TemplateBinding BorderThickness}"
-							        CornerRadius="{TemplateBinding CornerRadius}">
-								<ScrollViewer  Name="PART_ScrollViewer"
+    <Grid>
+        <ListBox Background="White" SelectedIndex="{Binding SelectedIndex}" Items="{Binding  DataCollection}">
+            <ListBox.Styles>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="Margin" Value="5" />
+                </Style>
+                <Style Selector="ListBox">
+                    <Setter Property="Template">
+                        <ControlTemplate>
+                            <Border Name="border"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{TemplateBinding CornerRadius}">
+                                <ScrollViewer Name="PART_ScrollViewer"
 
-								               HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
-								               VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
-								               AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}">
-									<ItemsPresenter Name="PART_ItemsPresenter"
-									                Items="{TemplateBinding Items}"
-									                ItemsPanel="{TemplateBinding ItemsPanel}"
-									                ItemTemplate="{TemplateBinding ItemTemplate}"
-									                Margin="{TemplateBinding Padding}"
-									                VirtualizationMode="{TemplateBinding VirtualizationMode}">
+                                              HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                                              VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
+                                              AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}">
+                                    <ItemsPresenter Name="PART_ItemsPresenter"
+                                                    Items="{TemplateBinding Items}"
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                    ItemTemplate="{TemplateBinding ItemTemplate}"
+                                                    Margin="{TemplateBinding Padding}"
+                                                    VirtualizationMode="{TemplateBinding VirtualizationMode}">
 
-										<i:Interaction.Behaviors>
-											<ia:EventTriggerBehavior EventName="PointerPressed">
-												<ia:InvokeCommandAction Command="{Binding SelectedItemCommand}" />
-											</ia:EventTriggerBehavior>
-										</i:Interaction.Behaviors>
-									</ItemsPresenter>
-								</ScrollViewer>
-							</Border>
-						</ControlTemplate>
-					</Setter>
-				</Style>
-			</ListBox.Styles>
+                                        <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                <ia:InvokeCommandAction Command="{Binding SelectedItemCommand}" />
+                                            </ia:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                    </ItemsPresenter>
+                                </ScrollViewer>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter>
+                </Style>
+            </ListBox.Styles>
 
-			<ListBox.ItemsPanel>
-				<ItemsPanelTemplate>
-					<WrapPanel  Orientation="Horizontal"></WrapPanel>
-				</ItemsPanelTemplate>
-			</ListBox.ItemsPanel>
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<StackPanel>
-						<Border IsHitTestVisible="False" CornerRadius="10" Width="120" Height="120">
-							<Border.Background>
-								<ImageBrush Source="{Binding Cover.Image}"></ImageBrush>
-							</Border.Background>
-						</Border>
-						<TextBlock IsHitTestVisible="False" Width="120"  Margin="10,3" TextAlignment="Center" TextWrapping="Wrap"  HorizontalAlignment="Center"  Height="40" Text="{Binding Title}"></TextBlock>
-					</StackPanel>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
-		<Grid IsVisible="{Binding DataContext.MusicFromAlbumIsVisible, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Background="White">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"></RowDefinition>
-				<RowDefinition></RowDefinition>
-			</Grid.RowDefinitions>
-			<Button Command="{Binding BackToAlbumListCommand}" Background="Transparent" Margin="10,0,0,0">
-				<Button.Content>
-					<StackPanel Orientation="Horizontal" Spacing="5">
-						<Path UseLayoutRounding="True" VerticalAlignment="Center" Margin="-5,0,0,0"  Height="15" Width="10" Stretch="Fill" Fill="{DynamicResource ControlsColor}" Data="M172.548,256.005L388.82,39.729c9.089-9.089,9.089-23.824,0-32.912s-23.824-9.089-32.912,0.002
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Border IsHitTestVisible="False" CornerRadius="10" Width="120" Height="120">
+                            <Border.Background>
+                                <ImageBrush Source="{Binding Cover.Image}" />
+                            </Border.Background>
+                        </Border>
+                        <TextBlock IsHitTestVisible="False" Width="120" Margin="10,3" TextAlignment="Center"
+                                   TextWrapping="Wrap" HorizontalAlignment="Center" Height="40" Text="{Binding Title}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid
+            IsVisible="{Binding DataContext.MusicFromAlbumIsVisible, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+            Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button Command="{Binding BackToAlbumListCommand}" Background="Transparent" Margin="10,0,0,0">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <Path UseLayoutRounding="True" VerticalAlignment="Center" Margin="-5,0,0,0" Height="15"
+                              Width="10" Stretch="Fill" Fill="{DynamicResource ControlsColor}"
+                              Data="M172.548,256.005L388.82,39.729c9.089-9.089,9.089-23.824,0-32.912s-23.824-9.089-32.912,0.002
 	L123.18,239.551c-4.366,4.363-6.817,10.282-6.817,16.454c0,6.173,2.453,12.093,6.817,16.457l232.727,232.721
-	c4.543,4.544,10.499,6.816,16.455,6.816s11.913-2.271,16.457-6.817c9.089-9.089,9.089-23.824,0-32.912L172.548,256.005z"></Path>
-						<TextBlock Text="{Binding ElementName=MusicsContol, Path=DataContext.Album.Title, FallbackValue=альбом}"></TextBlock>
-					</StackPanel>
-				</Button.Content>
-			</Button>
+	c4.543,4.544,10.499,6.816,16.455,6.816s11.913-2.271,16.457-6.817c9.089-9.089,9.089-23.824,0-32.912L172.548,256.005z" />
+                        <TextBlock
+                            Text="{Binding ElementName=MusicsContol, Path=DataContext.Album.Title, FallbackValue=альбом}" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
 
-			<views:MusicListControl x:Name="MusicsContol"
-								   DataContext="{Binding DataContext.MusicFromAlbumViewModel, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-								   Background="White" Grid.Row="1" Grid.Column="1">
-			</views:MusicListControl>
-		</Grid>
+            <views:MusicListControl x:Name="MusicsContol"
+                                    DataContext="{Binding DataContext.MusicFromAlbumViewModel, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                    Background="White" Grid.Row="1" Grid.Column="1" />
+        </Grid>
 
-		<etc:LoadingControl Background="White" VerticalContentAlignment="Center"   IsVisible="{Binding IsLoading}" />
-	</Grid>
+        <etc:LoadingControl Background="White" VerticalContentAlignment="Center" IsVisible="{Binding IsLoading}" />
+    </Grid>
 </UserControl>

@@ -4,18 +4,21 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Timers;
+
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Threading;
-using ManagedBass;
+
 using ReactiveUI;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
+
 using Timer = System.Timers.Timer;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-    public class PlayerControlViewModel : ViewModelBase
+	public  class PlayerControlViewModel : ViewModelBase
     {
         public delegate void SetCollection(ObservableCollection<AudioModel> audioCollection, int selectedIndex);
 
@@ -269,97 +272,6 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 var index = PlayList.ToList().IndexOf(CurrentAudio);
                 if (index > 0) CurrentAudio = PlayList.ToList()[index - 1];
-            }
-        }
-
-
-        public static class Player
-        {
-            private static int _stream;
-
-            static Player()
-            {
-                Bass.Init();
-            }
-
-            public static int GetPositionSeconds()
-            {
-                return Convert.ToInt32(Bass.ChannelBytes2Seconds(_stream, Bass.ChannelGetPosition(_stream)));
-            }
-
-
-            public static void SetPositon(double val)
-            {
-                try
-                {
-                    Bass.ChannelSetPosition(_stream, Bass.ChannelSeconds2Bytes(_stream, val));
-                }
-                catch (Exception)
-                {
-                }
-            }
-
-            public static void Update()
-            {
-                Bass.ChannelUpdate(_stream, 0);
-            }
-
-            public static void SetStream(AudioModel audioModel)
-            {
-                var url = GlobalVars.VkApi?.Audio.GetById(new[] {audioModel.GetAudioIDFormatWithAccessKey()})
-                    .ElementAt(0).Url.AbsoluteUri;
-                _stream = Bass.CreateStream(url, 0, BassFlags.Default, null, IntPtr.Zero);
-            }
-
-            public static bool Play(AudioModel model)
-            {
-                try
-                {
-                    Stop();
-                    SetStream(model);
-                    return Play();
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-
-            public static bool Play()
-            {
-                return Bass.ChannelPlay(_stream);
-            }
-
-
-            public static bool Stop()
-            {
-                try
-                {
-                    Bass.ChannelStop(_stream);
-                    Bass.StreamFree(_stream);
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-
-            public static bool Pause()
-            {
-                try
-                {
-                    return Bass.ChannelPause(_stream);
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-
-            public static void SetVolume(double volume)
-            {
-                Bass.ChannelSetAttribute(_stream, ChannelAttribute.Volume, volume);
             }
         }
     }

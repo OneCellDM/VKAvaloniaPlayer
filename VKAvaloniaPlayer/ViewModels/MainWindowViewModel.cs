@@ -322,7 +322,9 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             try
             {
-                PlayerControlViewModel.Player.Stop();
+                Player.Stop();
+                PlayerControlViewModel.Instance.CurrentAudio = null;
+                
             }
             catch (Exception EX)
             {

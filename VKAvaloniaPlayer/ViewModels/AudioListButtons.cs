@@ -26,6 +26,7 @@ namespace VKAvaloniaPlayer.ViewModels
             _AudioAddToAlbumIsVisible = true;
             _AudioDownloadIsVisible = true;
             _AudioRemoveIsVisible = true;
+
             AudioAddCommand = ReactiveCommand.Create(async (AudioModel vkModel) =>
             {
               
@@ -59,6 +60,7 @@ namespace VKAvaloniaPlayer.ViewModels
                         {
                             webClient.DownloadFileAsync(res.ElementAt(0).Url,
                                 string.Format("{0}-{1}.mp3", vkModel.Artist, vkModel.Title));
+
                             webClient.DownloadFileCompleted += delegate { vkModel.IsDownload = false; };
                             webClient.DownloadProgressChanged += (object o, DownloadProgressChangedEventArgs e) =>
                                 vkModel.DownloadPercent = e.ProgressPercentage;

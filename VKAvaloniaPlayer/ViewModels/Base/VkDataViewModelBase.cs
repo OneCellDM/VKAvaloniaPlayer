@@ -29,12 +29,13 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         private IDisposable? _SearchDisposable;
 
-        private bool _SearchIsVisible = true;
+       
         private string _SearchText = string.Empty;
-        private int _SelectedIndex = -1;
+        
        
         public VkDataViewModelBase()
         {
+            SearchIsVisible = true;
             AudioListButtons = new AudioListButtons();
             LoadMusicsAction = () =>
             {
@@ -57,7 +58,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         public bool IsError { get; set; }
 
         [Reactive]
-        public bool SearchIsVisible { get; set; }
+        public bool SearchIsVisible { get; set; } 
 
         [Reactive]
         public ExceptionViewModel ExceptionModel { get; set; }
@@ -127,7 +128,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         public void StopScrollChandegObserVable()
         {
-            ScrolledDisposible.Dispose();
+            ScrolledDisposible?.Dispose();
             ScrolledDisposible=null;
         }
 
@@ -139,11 +140,13 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         {
             try
             {
+               
                 if (string.IsNullOrEmpty(text))
                 {
                     SelectedIndex = -1;
                     DataCollection = _AllDataCollection;
                     StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical);
+
                 }
                 else if (_AllDataCollection != null && _AllDataCollection.Count() > 0)
                 {

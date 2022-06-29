@@ -27,53 +27,66 @@ namespace VKAvaloniaPlayer.ViewModels
 
         public override void Search(string? text)
 		{
-            try
+            Task.Run(() =>
             {
-                DataCollection = _AllDataCollection;
-                if (string.IsNullOrEmpty(text))
-                {                
-                    SelectedIndex = -1;
-                    DataCollection = _AllDataCollection;
-                    Offset = DataCollection.Count();
-                    StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical);
-                }
-                else 
+                try
                 {
-                    Offset = 0;
-                    IsLoading = true;
-                    StopScrollChandegObserVable();
-                    _AllDataCollection = DataCollection;
-                    DataCollection = new ObservableCollection<Models.Interfaces.IVkModelBase>();
-                    while (true)
-                    {
-                        var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams
-                        {
-                            Offset = Offset,
-                            Count = 500,
-                        });
-                        if (res != null && res.Count > 0)
-                        {
-                            var searchRes=res.Where(x =>
-                            x.Title.ToLower().Contains(text.ToLower()) ||
-                            x.Artist.ToLower().Contains(text.ToLower())) .Distinct();
 
-                            DataCollection.AddRange(searchRes);
-                            ResponseCount = res.Count;
-                            Offset += res.Count;
-                        }
-                        else break;
+                    DataCollection = _AllDataCollection;
+                    if (string.IsNullOrEmpty(text))
+                    {
+                        SelectedIndex = -1;
+                        DataCollection = _AllDataCollection;
+                        Offset = DataCollection.Count();
+                        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(()=>
+                        StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical));
                     }
-                    Task.Run(() => { DataCollection.StartLoadImages(); });
-                }  
-            }
-            catch (Exception ex)
-            {
-                DataCollection = _AllDataCollection;
-                SearchText = "";
-            } 
-            finally{
-                IsLoading = false;
-            }
+                    else
+                    {
+                        Offset = 0;
+                        IsLoading = true;
+                        StopScrollChandegObserVable();
+                        _AllDataCollection = DataCollection;
+                        DataCollection = new ObservableCollection<Models.Interfaces.IVkModelBase>();
+                        while (true)
+                        {
+                            try
+                            {
+                                var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams
+                                {
+                                    Offset = Offset,
+                                    Count = 500,
+                                });
+                                if (res != null && res.Count > 0)
+                                {
+                                    var searchRes = res.Where(x =>
+                                    x.Title.ToLower().Contains(text.ToLower()) ||
+                                    x.Artist.ToLower().Contains(text.ToLower())).Distinct();
+
+                                    DataCollection.AddRange(searchRes);
+                                    ResponseCount = res.Count;
+                                    Offset += res.Count;
+                                }
+                                else break;
+                            }
+                            catch (Exception ex)
+                            {
+                                break;
+                            }
+                        }
+                        Task.Run(() => { DataCollection.StartLoadImages(); });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    DataCollection = _AllDataCollection;
+                    SearchText = "";
+                }
+                finally
+                {
+                    IsLoading = false;
+                }
+            });
         }
 		
 

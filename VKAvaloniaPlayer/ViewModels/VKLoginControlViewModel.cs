@@ -15,96 +15,132 @@ using ReactiveUI;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 using VkNet;
+using VkNet.Enums.Filters;
 using VkNet.Exception;
 using VkNet.Model;
 using VkNet.Utils;
 using Button = Avalonia.Controls.Button;
+using System.Windows;
+using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading;
+using Avalonia.Controls;
+using System.Net.Sockets;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
     public class VkLoginControlViewModel : ViewModelBase
     {
+        private const string AuthUrl =
+           @"https://oauth.vk.com/oauth/authorize?client_id=6121396" +
+           "&scope=1073737727" +
+           "&redirect_uri=https://oauth.vk.com/blank.html" +
+           "&display=mobile" +
+           "&response_type=token" +
+           "&revoke=1";
+
+        private Process _BrowserProcess;
+
+
+        private  WebElement.WebElementServer _webElementServer;
         private int _ActiveAccountSelectIndex = -1;
-        private string _Code = string.Empty;
-        private bool _CodeIsSend;
-        private bool _CodeSendPanelIsVisible;
         private string _InfoText = string.Empty;
-        private string _Login = string.Empty;
-        private bool _LoginPanelIsVisible = true;
-        private string _Passwod = string.Empty;
+        
+
         private bool _SavedAccountsIsVisible;
 
         public VkLoginControlViewModel()
         {
-            SelectedItemCommand = ReactiveCommand.Create((PointerPressedEventArgs e) =>
-            {
-                var selectedAccount = (e?.Source as ContentPresenter).Content as SavedAccountModel;
-                if (selectedAccount != null) AuthFromActiveAccount(selectedAccount);
-            });
-
+            
             LoadSavedAccounts();
             ToggleAccountsSidebarVisible();
             SavedAccounts.CollectionChanged += (sender, args) =>
             {
+                Console.WriteLine("collectionChanged");
                 SaveAccounts();
                 ToggleAccountsSidebarVisible();
             };
 
-            SendCodeCommand = ReactiveCommand.Create(() => { 
-                _CodeIsSend = true; 
-                VkAuth();  
-            },this.WhenAnyValue<VkLoginControlViewModel, bool, string>(x => x.Code,
-                    code => !string.IsNullOrEmpty(code)));
+            AuthCommand = ReactiveCommand.Create(()=>
+            {
+                       
+                        InfoText="Открытие авторизации";
+                        Task.Run(() =>
+                        {
+                            
+                            _webElementServer = new WebElement.WebElementServer(2654);
+                             _webElementServer.ErrorEvent += WebServer_ErrorEvent;
+                            _webElementServer.MessageRecived += WebServer_MessageEvent;
+                            _webElementServer.StartServerOnThread();
 
-            AuthCommand = ReactiveCommand.Create(() => VkAuth(),
-                this.WhenAnyValue(x => x.Login, x => x.Password,
-                    (login, password) => !string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password)));
+                           
 
+                            Thread.Sleep(1000);
+
+                            if(_webElementServer.ServerStarted)
+                            {
+                                string fileExecute = string.Empty;
+                                string args= $"{AuthUrl} 2654";
+                                
+
+                                if(ETC.GlobalVars.CurrentPlatform == OSPlatform.Linux)
+                                    fileExecute =  Path.Combine("WebElement","Linux");
+
+                                else if(ETC.GlobalVars.CurrentPlatform == OSPlatform.Windows)
+                                    fileExecute = Path.Combine("WebElement", "WindowsWebBrowser.exe");
+                                
+                                var start = new ProcessStartInfo
+                                {
+                                        UseShellExecute = false,
+                                        CreateNoWindow = true,
+                                        FileName = fileExecute,
+                                        Arguments = args,
+                                    
+                                };
+
+                                _BrowserProcess = new Process { StartInfo = start };
+                                
+                                   
+                                InfoText="Ожидание конца авторизации";
+                                   
+                                _BrowserProcess.Start();
+                                _BrowserProcess.WaitForExit();
+                                OffServerAndUnsubscribe();
+                                    
+                                
+                                
+
+                               
+                                
+                        }
+                    });
+            });
+
+                    
+            
             RemoveAccountCommand = ReactiveCommand.Create((RoutedEventArgs e) =>
             {
                 var accountModel = (e.Source as Button)?.DataContext as SavedAccountModel;
                 SavedAccounts.Remove(accountModel);
             });
+           
+          
         }
 
         public ObservableCollection<SavedAccountModel>? SavedAccounts { get; set; } = new();
 
-        public string Login
-        {
-            get => _Login;
-            set => this.RaiseAndSetIfChanged(ref _Login, value);
-        }
+        private bool _AuthButtonIsActive;
+        public bool AuthButtonIsActive{get=>_AuthButtonIsActive; set=>this.RaiseAndSetIfChanged(ref _AuthButtonIsActive, value);}
+        
 
-        public string Password
-        {
-            get => _Passwod;
-            set => this.RaiseAndSetIfChanged(ref _Passwod, value);
-        }
-
-        public string Code
-        {
-            get => _Code;
-            set => this.RaiseAndSetIfChanged(ref _Code, value);
-        }
-
+     
         public string InfoText
         {
             get => _InfoText;
             set => this.RaiseAndSetIfChanged(ref _InfoText, value);
         }
 
-        public bool CodeSendPanelIsVisible
-        {
-            get => _CodeSendPanelIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _CodeSendPanelIsVisible, value);
-        }
-
-        public bool LoginPanelIsVisible
-        {
-            get => _LoginPanelIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _LoginPanelIsVisible, value);
-        }
-
+     
         public bool SavedAccountsIsVisible
         {
             get => _SavedAccountsIsVisible;
@@ -117,29 +153,58 @@ namespace VKAvaloniaPlayer.ViewModels
             set => this.RaiseAndSetIfChanged(ref _ActiveAccountSelectIndex, value);
         }
 
-        public IReactiveCommand? SendCodeCommand { get; set; }
         public IReactiveCommand? AuthCommand { get; set; }
         public IReactiveCommand? RemoveAccountCommand { get; set; }
 
-        public IReactiveCommand SelectedItemCommand { get; set; }
-
-        public IReactiveCommand UrlParseCommand { get; set; }
-        public IReactiveCommand StartAuthBrowserCommand { get; set; }
 
         private void ToggleAccountsSidebarVisible()
         {
             SavedAccountsIsVisible = SavedAccounts.Count > 0;
         }
+        private void OffServerAndUnsubscribe()
+        {
+            if(_webElementServer!=null)
+            {
+                _webElementServer.Stop();     
+                _webElementServer.ErrorEvent -= WebServer_ErrorEvent;
+                _webElementServer.MessageRecived -= WebServer_MessageEvent;
+            }
+        }
+        private void WebServer_ErrorEvent(Exception ex)
+        {
+                    InfoText = "$Произошла ошибка {ex.Message}";
+                    OffServerAndUnsubscribe();
+        }
+        private void WebServer_MessageEvent(String message)
+        {      
+                if(message.Contains("#access_token"))
+                {
+                    string token = message.Split("=")[1].Split("&")[0];
+                    string id = message.Split("=")[3].Split("&")[0];
+                    
+                     _BrowserProcess.Kill();
+                    
+                    OffServerAndUnsubscribe();
+                    InfoText = "Авторизация успешна";
+                    var api = Auth(token,long.Parse(id));
+                    SaveAccount(api);
+                    GlobalVars.VkApi = api;
+                    
 
+                }
+        }
         private void LoadSavedAccounts()
         {
             try
             {
                 if (GlobalVars.CurrentPlatform == OSPlatform.Windows)
                     LoadSavedAccountsOnWindows();
+
                 else if (GlobalVars.CurrentPlatform == OSPlatform.Linux)
                     LoadSavedAccountsOnLinuxOrMac();
-                else if (GlobalVars.CurrentPlatform == OSPlatform.OSX) LoadSavedAccountsOnLinuxOrMac();
+
+                else if (GlobalVars.CurrentPlatform == OSPlatform.OSX) 
+                    LoadSavedAccountsOnLinuxOrMac();
 
                 SavedAccounts?.ToList().AsParallel().ForAll(x => x.LoadBitmapAsync());
             }
@@ -165,6 +230,8 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 key?.Close();
             }
+           
+           
         }
 
         private void LoadSavedAccountsOnLinuxOrMac()
@@ -179,11 +246,19 @@ namespace VKAvaloniaPlayer.ViewModels
 
         private void SaveAccount(VkApi? vkApi)
         {
-            var accountEnumerable = SavedAccounts.ToList().Where(x => x.UserID == vkApi.UserId);
+           
+            var accountEnumerable = SavedAccounts?.ToList().Where(x => x.UserID == vkApi?.UserId);
 
-            foreach (var savedAccountModel in accountEnumerable) SavedAccounts.Remove(savedAccountModel);
-
-            var accountData = vkApi.Account.GetProfileInfo();
+            foreach (var savedAccountModel in accountEnumerable) SavedAccounts?.Remove(savedAccountModel);
+           
+            VkNet.Model.RequestParams.AccountSaveProfileInfoParams accountData=null;
+            try{
+             accountData = vkApi?.Account.GetProfileInfo();
+          
+            }
+            catch(Exception ex){
+                InfoText = "Ошибка:"+ex.Message;
+            }
             SavedAccounts?.Insert(0,
                 new SavedAccountModel
                 {
@@ -191,8 +266,9 @@ namespace VKAvaloniaPlayer.ViewModels
                     UserID = vkApi.UserId,
                     Name = $"{accountData.FirstName} {accountData.LastName}"
                 });
-
-            GlobalVars.CurrentAccount = SavedAccounts.Last();
+           
+            GlobalVars.CurrentAccount = SavedAccounts.First();
+            
         }
 
         private void SaveAccounts()
@@ -228,109 +304,24 @@ namespace VKAvaloniaPlayer.ViewModels
             path = Path.Combine(path, GlobalVars.SavedAccountsFileName);
             File.WriteAllText(path, data);
         }
-        private void ShowCodePanel(){
-            CodeSendPanelIsVisible = true;
-            LoginPanelIsVisible = false;
-        }
-        private void ShowLoginPanel(){
-            CodeSendPanelIsVisible = false;
-            LoginPanelIsVisible = true;
-        }
-        private async void VkAuth()
+     
+
+        private VkApi Auth(string token, long id)
         {
-            var AuthUrl = "https://oauth.vk.com/token?" + $"username={Login}" + $"&password={Password}" +
-                          "&grant_type=password" + "&2fa_supported=1" + "&client_secret=L3yBidmMBtFRKO9hPCgF" +
-                          "&client_id=6121396";
+            var api = new VkApi();
 
-            var SendCodeUrl = $"{AuthUrl}&code={Code}";
-
-            JObject ResObject;
-            
-            try
-            {     
-                if (_CodeIsSend)
-                {
-                   ResObject = await VkRequest(SendCodeUrl);
-                   Code = string.Empty;
-                }
-
-                else ResObject = await VkRequest(AuthUrl);
-
-                if (ResObject.ContainsKey("access_token"))
-                {
-                        VkApi vkApi = new VkApi();
-                        vkApi.Authorize(new ApiAuthParams()
-                        {
-							AccessToken = ResObject["access_token"].ToObject<string>(),
-                            UserId = ResObject["user_id"].ToObject<long>()
-                        });
-                        SaveAccount(vkApi);
-                        GlobalVars.VkApi = vkApi;
-                        Login = string.Empty;
-                        Password = string.Empty;
-                }
-                else
-                {
-                    InfoText = "Произошла непредвиденная ошибка при авторизации";
-                    _CodeIsSend = false;
-                }
-                   
-            }
-            catch (NeedValidationException ex)
-            {
-                ShowCodePanel();
-            }
+            api.Authorize(new ApiAuthParams {AccessToken = token, UserId = id});
+            return api;
            
-            catch (Exception ex)
-            {
-                InfoText = ex.Message;
-                _CodeIsSend = false;
-                Code = string.Empty;
-                ShowLoginPanel();
-            }    
+
         }
-
-        public async Task<JObject> VkRequest(string url)
-        {
-            Utils.HttpClient.DefaultRequestHeaders.Add("Connection", "Keep-Alive");
-            Utils.HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var res = await Utils.HttpClient.GetAsync(url);
-            Utils.HttpClient.DefaultRequestHeaders.Clear();
-
-            var awaitdata = await res.Content.ReadAsStringAsync();
-            var obj = JObject.Parse(awaitdata);
-
-            if (obj.ContainsKey("error") is false)
-                return obj;
-
-            switch (obj["error"].ToObject<string>())
-            {
-                case "need_captcha":
-                    throw new CaptchaNeededException(new VkError()
-                    {
-                        ErrorCode = VkErrorCode.CaptchaNeeded,
-                        CaptchaSid = obj["captcha_sid"].ToObject<ulong>(),
-                        CaptchaImg = obj["captcha_img"].ToObject<Uri>(),
-                    });
-
-                case "need_validation":
-                    throw new NeedValidationException(new VkError());
-
-                default:
-                    throw new VkAuthorizationException(obj["error_description"].ToObject<string>());
-            }
-        }
-
         private void AuthFromActiveAccount(SavedAccountModel account)
         {
             try
             {
-                var api = new VkApi();
-
-                api.Authorize(new ApiAuthParams {AccessToken = account?.Token, UserId = (long) account?.UserID});
-
+               
                 GlobalVars.CurrentAccount = account;
-                GlobalVars.VkApi = api;
+                GlobalVars.VkApi =  Auth(account?.Token,  (long) account?.UserID);
                 ActiveAccountSelectIndex = -1;
                 _ActiveAccountSelectIndex = -1;
             }
@@ -339,58 +330,21 @@ namespace VKAvaloniaPlayer.ViewModels
                 ActiveAccountSelectIndex = -1;
             }
         }
+
+
+        public virtual  void SelectedItem(object sender,PointerPressedEventArgs args)
+        {
+               var selectedAccount = (args?.Source as ContentPresenter).Content as SavedAccountModel;
+                if (selectedAccount != null) AuthFromActiveAccount(selectedAccount);
+        }
+        public virtual void Scrolled(object sender, ScrollChangedEventArgs args){
+
+        }
+            
     }
+    
 }
 
-/*	var authAwauter = vkApi.AuthorizeAsync(new ApiAuthParams()
-			{
-				ApplicationId = 5776857,
-				Display = VkNet.Enums.SafetyEnums.Display.Mobile,
 
-				Login = Login,
-				Password = Password,
-				TwoFactorSupported = true,
-				TwoFactorAuthorization = () =>
-				{
-					if (LoginPanelIsVisible)
-					{
-						CodeSendPanelIsVisible = true;
-						LoginPanelIsVisible = false;
-					}
 
-					string tmpcode = "";
-					if (_CodeIsSend)
-					{
-						tmpcode = Code;
-						_CodeIsSend = false;
-						Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => Code = string.Empty);
-					}
-
-					return tmpcode;
-				}
-			}).GetAwaiter();
-
-			authAwauter.OnCompleted(() =>
-			{
-				try
-				{
-					authAwauter.GetResult();
-					SaveAccount(vkApi);
-					GlobalVars.VkApi = vkApi;
-				}
-				catch (Exception ex)
-				{
-					Debug.WriteLine(ex.Message);
-					Debug.WriteLine(ex.StackTrace);
-					InfoText = ex.Message;
-				}
-				finally
-				{
-					Login = string.Empty;
-					Password = string.Empty;
-					Code = string.Empty;
-					CodeSendPanelIsVisible = false;
-					LoginPanelIsVisible = true;
-				}
-			});
-			*/
+            

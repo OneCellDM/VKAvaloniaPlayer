@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.InteropServices;
 using Avalonia.Media.Imaging;
 using VKAvaloniaPlayer.Models;
@@ -56,7 +57,7 @@ namespace VKAvaloniaPlayer.ETC
             set
             {
                 _vkApi = value;
-
+                Console.WriteLine("ApiChanged");
                 VkApiChanged?.Invoke();
             }
         }

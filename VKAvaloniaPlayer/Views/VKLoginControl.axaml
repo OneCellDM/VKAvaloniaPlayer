@@ -29,22 +29,11 @@
             <TextBlock Foreground="#2787F5" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="20"
                        Text="Войти в аккаунт" />
             <TextBlock HorizontalAlignment="Center" FontWeight="UltraBold" Text="{Binding InfoText}" Foreground="Red" />
-            <Label HorizontalAlignment="Center" Content="Логин" />
-            <TextBox Watermark="Введите логин" Text="{Binding  Path=Login}" />
-            <Label HorizontalAlignment="Center" Content="Пароль" />
-            <TextBox VerticalContentAlignment="Center" PasswordChar="*" Watermark="Введите пароль"
-                     Text="{Binding Path=Password}" />
-
+           
             <Button Margin="0,10" Content="Войти" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                     Command="{Binding AuthCommand}" />
         </StackPanel>
-        <StackPanel Grid.Row="1" Spacing="20" IsVisible="{Binding Path=CodeSendPanelIsVisible}" Margin="180,50">
-            <Label HorizontalAlignment="Center" Content="Код авторизации" />
-            <TextBox Text="{Binding  Path=Code}" />
-            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Content="Отправить"
-                    Command="{Binding SendCodeCommand}" />
-			<Label Content="Отправить Код по СМС"/>
-        </StackPanel>
+      
 
         <Grid IsVisible="{Binding SavedAccountsIsVisible}" Grid.Row="1" Background="#2272CE" Grid.Column="1">
             <Grid.RowDefinitions>

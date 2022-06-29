@@ -6,8 +6,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:views="using:VKAvaloniaPlayer.Views"
              x:Class="VKAvaloniaPlayer.Views.AlbumListControl"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
+            xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+            xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions">
     <Grid>
         <ListBox Background="White" SelectedIndex="{Binding SelectedIndex}" Items="{Binding  DataCollection}">
             <ListBox.Styles>
@@ -34,11 +34,11 @@
                                                     Margin="{TemplateBinding Padding}"
                                                     VirtualizationMode="{TemplateBinding VirtualizationMode}">
 
-                                        <i:Interaction.Behaviors>
-                                            <ia:EventTriggerBehavior EventName="PointerPressed">
-                                                <ia:InvokeCommandAction Command="{Binding SelectedItemCommand}" />
-                                            </ia:EventTriggerBehavior>
-                                        </i:Interaction.Behaviors>
+                                         <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:CallMethodAction TargetObject="{Binding}" MethodName="SelectedItem"/>
+                                        </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
                                     </ItemsPresenter>
                                 </ScrollViewer>
                             </Border>

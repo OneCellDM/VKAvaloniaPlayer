@@ -6,11 +6,12 @@
         <local:ViewLocator />
     </Application.DataTemplates>
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="/styles/DefaultResources.axaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+		<SolidColorBrush x:Key="TextBoxColor" Color="#DDDDDD" />
+		<SolidColorBrush x:Key="MenuBackGroundColor" Color="#2888F5" />
+		<SolidColorBrush x:Key="ControlsColor" Color="#2888F5" />
+		<SolidColorBrush x:Key="SliderTickColor" Color="#2888F5" />
+		<SolidColorBrush x:Key="SliderBackGroundColor" Color="#DDDDDD" />
+		<SolidColorBrush x:Key="MenuForeGroundColor" Color="White" />
     </Application.Resources>
 
     <Application.Styles>

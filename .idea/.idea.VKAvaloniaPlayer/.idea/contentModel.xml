@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.Rider2019.2/system/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.2/system/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_VKAvaloniaPlayer.245417026.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="VKAvaloniaPlayer" t="IncludeRecursive">
+        <e p="App.axaml" t="Include" />
+        <e p="App.axaml.cs" t="Include" />
+        <e p="Assets" t="Include">
+          <e p="AlbumIcon.png" t="Include" />
+          <e p="Load.gif" t="Include" />
+          <e p="MusicIcon.jpg" t="Include" />
+          <e p="avalonia-logo.ico" t="Include" />
+          <e p="icons.ttf" t="Include" />
+          <e p="t.otf" t="Include" />
+          <e p="tenor.gif" t="Include" />
+        </e>
+        <e p="Converters" t="Include">
+          <e p="DurationConverter.cs" t="Include" />
+        </e>
+        <e p="ETC" t="Include">
+          <e p="ExtensionsMethods.cs" t="Include" />
+          <e p="GlobalVars.cs" t="Include" />
+          <e p="InvokeHandler.cs" t="Include" />
+          <e p="LoadingControl.axaml" t="Include" />
+          <e p="LoadingControl.axaml.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+          <e p="Utils.cs" t="Include" />
+        </e>
+        <e p="FodyWeavers.xml" t="Include" />
+        <e p="Models" t="Include">
+          <e p="AudioAlbumModel.cs" t="Include" />
+          <e p="AudioModel.cs" t="Include" />
+          <e p="Base" t="Include">
+            <e p="ImageModelBase.cs" t="Include" />
+            <e p="VkModelBase.cs" t="Include" />
+          </e>
+          <e p="Interfaces" t="Include">
+            <e p="IImageBase.cs" t="Include" />
+            <e p="IVkModelBase.cs" t="Include" />
+          </e>
+          <e p="SavedAccountModel.cs" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Styles" t="Include">
+          <e p="ListBoxStyle.axaml" t="Include" />
+          <e p="MenuListBoxStyle.axaml" t="Include" />
+          <e p="SliderStyle.axaml" t="Include" />
+          <e p="TextBoxStyle.axaml" t="Include" />
+        </e>
+        <e p="UserControl1.axaml" t="Include" />
+        <e p="UserControl1.axaml.cs" t="Include" />
+        <e p="VKAvaloniaPlayer.csproj" t="IncludeRecursive" />
+        <e p="ViewLocator.cs" t="Include" />
+        <e p="ViewModels" t="Include">
+          <e p="AlbumsViewModel.cs" t="Include" />
+          <e p="AllMusicViewModel.cs" t="Include" />
+          <e p="AudioListButtons.cs" t="Include" />
+          <e p="AudioSearchViewModel.cs" t="Include" />
+          <e p="Base" t="Include">
+            <e p="ViewModelBase.cs" t="Include" />
+            <e p="VkDataViewModelBase.cs" t="Include" />
+          </e>
+          <e p="CurrentMusicListViewModel.cs" t="Include" />
+          <e p="Exceptions" t="Include">
+            <e p="ExceptionViewModel.cs" t="Include" />
+          </e>
+          <e p="FriendsViewModel.cs" t="Include" />
+          <e p="MainWindowViewModel.cs" t="Include" />
+          <e p="MusicFromAlbumViewModel.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+          <e p="PlayerControlViewModel.cs" t="Include" />
+          <e p="RecomendationsViewModel.cs" t="Include" />
+          <e p="VKLoginControlViewModel.cs" t="Include" />
+        </e>
+        <e p="Views" t="Include">
+          <e p="AlbumListControl.axaml" t="Include" />
+          <e p="AlbumListControl.axaml.cs" t="Include" />
+          <e p="ExceptionView.axaml" t="Include" />
+          <e p="ExceptionView.axaml.cs" t="Include" />
+          <e p="MainWindow.axaml" t="Include" />
+          <e p="MainWindow.axaml.cs" t="Include" />
+          <e p="MusicListControl.axaml" t="Include" />
+          <e p="MusicListControl.axaml.cs" t="Include" />
+          <e p="PlayerControl.axaml" t="Include" />
+          <e p="PlayerControl.axaml.cs" t="Include" />
+          <e p="RepostView.axaml" t="Include" />
+          <e p="RepostView.axaml.cs" t="Include" />
+          <e p="VKLoginControl.axaml" t="Include" />
+          <e p="VKLoginControl.axaml.cs" t="Include" />
+        </e>
+        <e p="VkNet.1.63.0-621" t="Include">
+          <e p="LICENCE" t="Include" />
+          <e p="lib" t="Include">
+            <e p="net45" t="Include">
+              <e p="VkNet.dll" t="Include" />
+              <e p="VkNet.xml" t="Include" />
+            </e>
+            <e p="net461" t="Include">
+              <e p="VkNet.dll" t="Include" />
+              <e p="VkNet.xml" t="Include" />
+            </e>
+            <e p="net5.0" t="Include">
+              <e p="VkNet.dll" t="Include" />
+              <e p="VkNet.xml" t="Include" />
+            </e>
+            <e p="netstandard2.0" t="Include">
+              <e p="VkNet.dll" t="Include" />
+              <e p="VkNet.xml" t="Include" />
+            </e>
+          </e>
+          <e p="vknet-icon.PNG" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="nuget.config" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net6.0" t="Include">
+              <e p="VKAvaloniaPlayer.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="VKAvaloniaPlayer.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

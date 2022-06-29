@@ -1,7 +1,7 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:i="using:Avalonia.Xaml.Interactivity"
-        xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
+          xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+            xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions">
     <Style Selector="ListBoxItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     </Style>
@@ -25,10 +25,10 @@
                                         Margin="{TemplateBinding Padding}"
                                         VirtualizationMode="{TemplateBinding VirtualizationMode}">
 
-                            <i:Interaction.Behaviors>
-                                <ia:EventTriggerBehavior EventName="PointerPressed">
-                                    <ia:InvokeCommandAction Command="{Binding SelectedItemCommand}" />
-                                </ia:EventTriggerBehavior>
+                           <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:CallMethodAction TargetObject="{Binding}" MethodName="SelectedItem"/>
+                                        </ia:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
 
                         </ItemsPresenter>
@@ -36,7 +36,7 @@
 
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="ScrollChanged">
-                                <ia:InvokeCommandAction Command="{Binding ScrollingListEventCommand}" />
+                                  <ia:CallMethodAction TargetObject="{Binding}" MethodName="Scrolled"/>
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </ScrollViewer>

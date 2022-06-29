@@ -18,8 +18,9 @@ using Timer = System.Timers.Timer;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public  class PlayerControlViewModel : ViewModelBase
+	public  partial class PlayerControlViewModel : ViewModelBase
     {
+        public delegate void OpenRepostWindowDelegate(AudioModel audioModel);
         public delegate void SetCollection(ObservableCollection<AudioModel> audioCollection, int selectedIndex);
 
         private static ObservableCollection<AudioModel>? PlayList;
@@ -40,62 +41,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private readonly Timer _Timer = new();
         private double _Volume = 1;
 
-        public PlayerControlViewModel()
-        {
-            PlayCommand = ReactiveCommand.Create(() =>
-            {
-                if (Player.Play())
-                    PauseButtonVisible();
-            });
-            PauseCommand = ReactiveCommand.Create(() =>
-            {
-                if (Player.Pause())
-                    PlayButtonVisible();
-            });
-            NextCommand = ReactiveCommand.Create(() => PlayNext());
-
-            PreviousCommand = ReactiveCommand.Create(() => PlayPrevious());
-            AudioPositionChangeCommand = ReactiveCommand.Create((PointerCaptureLostEventArgs e) =>
-            {
-                Slider s = e.Source as Slider;
-                if (s != null)
-                    Player.SetPositon(s.Value);
-            });
-
-            RepeatToggleCommand = ReactiveCommand.Create(() =>
-            {
-                if (Repeat)
-                    Repeat = false;
-                else Repeat = true;
-            });
-            ShuffleToogleCommand = ReactiveCommand.Create(() =>
-            {
-                if (!Shuffling)
-                    Shuffling = true;
-                else Shuffling = false;
-            });
-
-            MuteToggleCommand = ReactiveCommand.Create(() =>
-            {
-                if (Mute)
-                {
-                    if (Volume == 0)
-                        return;
-                    Mute = false;
-                    Player.SetVolume(Volume);
-                }
-                else
-                {
-                    Mute = true;
-                    Player.SetVolume(0);
-                }
-            });
-
-            _Timer.Interval = 1000;
-            _Timer.Elapsed += _Timer_Elapsed;
-            SetPlaylistEvent += PlayerControlViewModel_SetPlaylistEvent;
-        }
-
+       
         public static PlayerControlViewModel Instance =>
             _Instance is null ? _Instance = new PlayerControlViewModel() : _Instance;
 
@@ -214,8 +160,69 @@ namespace VKAvaloniaPlayer.ViewModels
         public IReactiveCommand MuteToggleCommand { get; set; }
 
         public IReactiveCommand ShuffleToogleCommand { get; set; }
+        public IReactiveCommand RepostCommand{ get; set; }
+
 
         public static event SetCollection? SetPlaylistEvent;
+
+        public PlayerControlViewModel()
+        {
+            PlayCommand = ReactiveCommand.Create(() =>
+            {
+                if (Player.Play())
+                    PauseButtonVisible();
+            });
+            PauseCommand = ReactiveCommand.Create(() =>
+            {
+                if (Player.Pause())
+                    PlayButtonVisible();
+            });
+            NextCommand = ReactiveCommand.Create(() => PlayNext());
+            PreviousCommand = ReactiveCommand.Create(() => PlayPrevious());
+            AudioPositionChangeCommand = ReactiveCommand.Create((PointerCaptureLostEventArgs e) =>
+            {
+                Slider s = e.Source as Slider;
+                if (s != null)
+                    Player.SetPositon(s.Value);
+            });
+
+            RepeatToggleCommand = ReactiveCommand.Create(() =>
+            {
+                if (Repeat)
+                    Repeat = false;
+                else Repeat = true;
+            });
+            ShuffleToogleCommand = ReactiveCommand.Create(() =>
+            {
+                if (!Shuffling)
+                    Shuffling = true;
+                else Shuffling = false;
+            });
+
+            MuteToggleCommand = ReactiveCommand.Create(() =>
+            {
+                if (Mute)
+                {
+                    if (Volume == 0)
+                        return;
+                    Mute = false;
+                    Player.SetVolume(Volume);
+                }
+                else
+                {
+                    Mute = true;
+                    Player.SetVolume(0);
+                }
+            });
+
+            RepostCommand = ReactiveCommand.Create(() => { 
+                
+            });
+            _Timer.Interval = 1000;
+            _Timer.Elapsed += _Timer_Elapsed;
+            SetPlaylistEvent += PlayerControlViewModel_SetPlaylistEvent;
+        }
+
 
         public static void SetPlaylist(ObservableCollection<AudioModel> audioCollection, int selectedIndex)
         {

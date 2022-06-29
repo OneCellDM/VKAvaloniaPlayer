@@ -27,7 +27,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         private bool _SearchIsVisible = true;
         private string _SearchText = string.Empty;
         private int _SelectedIndex = -1;
-
+       
         public VkDataViewModelBase()
         {
             AudioListButtons = new AudioListButtons();
@@ -37,27 +37,16 @@ namespace VKAvaloniaPlayer.ViewModels.Base
                     if (ResponseCount > 0 && IsLoading is false)
                         InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
             };
-            SelectedItemCommand = ReactiveCommand.Create((PointerPressedEventArgs e) =>
-            {
-                var contentpress = e?.Source as ContentPresenter;
-
-                var model = contentpress?.Content as IVkModelBase;
-
-                if (model != null)
-                {
-                    SelectedIndex = DataCollection.IndexOf(model);
-                    SelectedItem();
-                }
-            });
-
+            
+         
             _AllDataCollection = new ObservableCollection<IVkModelBase>();
             DataCollection = _AllDataCollection;
         }
 
         public AudioListButtons AudioListButtons { get; set; }
-        public IReactiveCommand? ScrollingListEventCommand { get; set; }
-        public IReactiveCommand? SelectedItemCommand { get; set; }
-        public IReactiveCommand? ListBoxInitializedCommand { get; set; }
+       
+        private IDisposable ScrolledDisposible;
+        private ScrollChangedEventArgs ScrolledEventArgs { get; set; }
 
         public bool IsError
         {
@@ -107,36 +96,44 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         {
             InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
         }
-
+        
         public void StartScrollChangedObservable(Action? action, Orientation orientation)
         {
-            if (ScrollingListEventCommand is null)
-                ScrollingListEventCommand = ReactiveCommand.Create((ScrollChangedEventArgs e) =>
+           
+            ScrolledDisposible =  this.WhenAnyValue(vm=>vm.ScrolledEventArgs)
+                .Subscribe((e) =>
                 {
-                    double max = 0;
-                    double current = 0;
-
-                    if (e.Source is ScrollViewer scrollViewer)
+                    try
                     {
-                        if (orientation == Orientation.Vertical)
-                        {
-                            max = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarMaximumProperty);
-                            current = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarValueProperty);
-                        }
-                        else
-                        {
-                            max = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarMaximumProperty);
-                            current = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarValueProperty);
-                        }
+                        double max = 0;
+                        double current = 0;
 
-                        if (max == current) action?.Invoke();
+                        if (e?.Source is ScrollViewer scrollViewer)
+                        {
+                            if (orientation == Orientation.Vertical)
+                            {
+
+                                max = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarMaximumProperty);
+                                current = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarValueProperty);
+                            }
+                            else
+                            {
+                                max = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarMaximumProperty);
+                                current = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarValueProperty);
+                            }
+
+                            if (max == current) action?.Invoke();
+                        }
                     }
+                    catch(Exception ex) { }
                 });
+        
         }
 
         public void StopScrollChandegObserVable()
         {
-            ScrollingListEventCommand = null;
+            ScrolledDisposible.Dispose();
+            ScrolledDisposible=null;
         }
 
         public virtual async void LoadData()
@@ -175,6 +172,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         public virtual void SelectedItem()
         {
+            Console.WriteLine("Item selected");
             if (SelectedIndex > -1)
                 PlayerControlViewModel.SetPlaylist(
                     new ObservableCollection<AudioModel>(DataCollection.Cast<AudioModel>().ToList()),
@@ -200,5 +198,27 @@ namespace VKAvaloniaPlayer.ViewModels.Base
             _SearchDisposable?.Dispose();
             _SearchDisposable = null;
         }
+
+
+        public virtual  void SelectedItem(object sender,PointerPressedEventArgs args)
+        {
+                Console.WriteLine("pressed");
+                var contentpress = args?.Source as ContentPresenter;
+                Console.WriteLine("null:"+ (contentpress==null?"true":"false"));
+                
+                var model = contentpress?.Content as IVkModelBase;
+                
+                if (model != null)
+                {
+                    Console.WriteLine("Model not null");
+                    SelectedIndex = DataCollection.IndexOf(model);
+                    SelectedItem();
+                }
+                else Console.WriteLine("model is null");
+        }
+        public virtual void Scrolled(object sender, ScrollChangedEventArgs args)=>
+            ScrolledEventArgs = args;
+            
+        
     }
 }

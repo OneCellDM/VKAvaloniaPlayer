@@ -16,6 +16,7 @@ namespace VKAvaloniaPlayer.ViewModels
             AudioListButtons.AudioRemoveIsVisible = false;
         }
 
+
         public override void LoadData()
         {
             Task.Run(() =>

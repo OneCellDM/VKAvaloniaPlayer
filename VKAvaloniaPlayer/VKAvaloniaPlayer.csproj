@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ApplicationIcon />
         <StartupObject />
@@ -27,18 +27,20 @@
         <None Remove="Views\AudioSearchContol.xaml" />
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Assets\t.otf" />
+      <PackageReference Include="Avalonia" Version="0.10.15" />
+      <PackageReference Include="Avalonia.Desktop" Version="0.10.15" />
+      <PackageReference Include="Avalonia.Diagnostics" Version="0.10.15" />
+      <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.15" />
+      <PackageReference Include="Avalonia.ReactiveUI.Events" Version="0.10.15" />
+      <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.15" />
+      <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.10.15" />
+      <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.15" />
+      <PackageReference Include="ManagedBass" Version="3.1.1" />
+      <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+      <PackageReference Include="VkNet" Version="1.69.0" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="0.10.10" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.10.10" />
-        <PackageReference Include="Avalonia.Diagnostics" Version="0.10.10" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.10" />
-        <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.10.10.4" />
-        <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.10.4" />
-        <PackageReference Include="ManagedBass" Version="3.1.0" />
-        <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-        <PackageReference Include="VkNet" Version="1.67.0" />
+        <Resource Include="Assets\t.otf" />
     </ItemGroup>
     <ItemGroup>
         <Compile Update="Views\ExceptionView.axaml.cs">

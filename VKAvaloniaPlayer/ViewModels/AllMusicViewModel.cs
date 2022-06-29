@@ -49,7 +49,7 @@ namespace VKAvaloniaPlayer.ViewModels
                         var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams
                         {
                             Offset = Offset,
-                            Count = 500
+                            Count = 500,
                         });
                         if (res != null && res.Count > 0)
                         {

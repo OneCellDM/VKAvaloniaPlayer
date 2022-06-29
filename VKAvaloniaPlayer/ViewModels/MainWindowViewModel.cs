@@ -1,8 +1,13 @@
 using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Threading;
+
 using ReactiveUI;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Base;
@@ -10,12 +15,15 @@ using VKAvaloniaPlayer.ViewModels.Exceptions;
 using VKAvaloniaPlayer.Views;
 using VkNet.Exception;
 
+
 namespace VKAvaloniaPlayer.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
         private const double _menuColumnWidth = 60;
         private bool _AlbumsIsVisible;
+        private bool _MenuIsOpen;
+        
         private AlbumsViewModel? _AlbumsViewModel;
         private AllMusicViewModel? _AllMusicViewModel;
         private AudioSearchViewModel? _AudioSearchViewModel;
@@ -28,18 +36,24 @@ namespace VKAvaloniaPlayer.ViewModels
         private bool _ExceptionIsVisible;
         private ExceptionViewModel? _ExceptionViewModel;
         private GridLength _MenuColumnWidth = new(_menuColumnWidth);
-        private bool _MenuIsOpen;
+       
         private int _MenuSelectionIndex = -1;
         private bool _MenuTextIsVisible;
         private RecomendationsViewModel? _RecomendationsViewModel;
         private bool _SiderBarAnimationIsPlaying;
         private bool _VkLoginIsVisible = true;
         private VkLoginControlViewModel? _VkLoginViewModel;
+        
 
         private bool Ismini;
 
+      
         public MainWindowViewModel()
         {
+
+             
+
+           
             ExceptionViewModel.ViewExitEvent += ExceptionViewModel_ViewExitEvent;
             GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
 
@@ -110,7 +124,7 @@ namespace VKAvaloniaPlayer.ViewModels
                 }
             };
 
-            AvatarPressedCommand = ReactiveCommand.Create((object obj) =>
+            AvatarPressedCommand = ReactiveCommand.Create(() =>
             {
                 if (_SiderBarAnimationIsPlaying == false && !_MenuIsOpen)
                 {
@@ -148,7 +162,7 @@ namespace VKAvaloniaPlayer.ViewModels
             });
         }
 
-
+        
         public PlayerControlViewModel PlayerContext => PlayerControlViewModel.Instance;
 
         public VkLoginControlViewModel? VkLoginViewModel
@@ -304,6 +318,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
         private void StaticObjects_VkApiChanged()
         {
+            Console.WriteLine("VKapIChanged");
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 _CurrentMusicListViewModel = new CurrentMusicListViewModel();

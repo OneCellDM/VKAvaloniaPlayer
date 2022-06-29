@@ -155,7 +155,6 @@ namespace VKAvaloniaPlayer.ViewModels
 
         public IReactiveCommand PreviousCommand { get; set; }
 
-        public IReactiveCommand AudioPositionChangeCommand { get; set; }
         public IReactiveCommand RepeatToggleCommand { get; set; }
         public IReactiveCommand MuteToggleCommand { get; set; }
 
@@ -179,13 +178,8 @@ namespace VKAvaloniaPlayer.ViewModels
             });
             NextCommand = ReactiveCommand.Create(() => PlayNext());
             PreviousCommand = ReactiveCommand.Create(() => PlayPrevious());
-            AudioPositionChangeCommand = ReactiveCommand.Create((PointerCaptureLostEventArgs e) =>
-            {
-                Slider s = e.Source as Slider;
-                if (s != null)
-                    Player.SetPositon(s.Value);
-            });
-
+            
+        
             RepeatToggleCommand = ReactiveCommand.Create(() =>
             {
                 if (Repeat)
@@ -223,7 +217,12 @@ namespace VKAvaloniaPlayer.ViewModels
             SetPlaylistEvent += PlayerControlViewModel_SetPlaylistEvent;
         }
 
-
+        public void VolumeChanged(object sender,PointerCaptureLostEventArgs e)
+        {
+            Slider s = e.Source as Slider;
+            if (s != null)
+                Player.SetPositon(s.Value);
+        }
         public static void SetPlaylist(ObservableCollection<AudioModel> audioCollection, int selectedIndex)
         {
             SetPlaylistEvent?.Invoke(audioCollection, selectedIndex);

@@ -6,8 +6,9 @@
              x:Class="VKAvaloniaPlayer.Views.PlayerControl"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:VKAvaloniaPlayer.Converters"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:ia="using:Avalonia.Xaml.Interactions.Core">
+			 xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+            >
 
     <UserControl.Resources>
         <converters:DurationConverter x:Key="DurationConverter" />
@@ -65,7 +66,7 @@
                     Maximum="{Binding Path=CurrentAudio.Duration}" Margin="11,-10,0,0">
                 <i:Interaction.Behaviors>
                     <ia:EventTriggerBehavior EventName="PointerCaptureLost">
-                        <ia:InvokeCommandAction Command="{Binding AudioPositionChangeCommand}" />
+                        <ia:CallMethodAction TargetObject="{Binding }" MethodName="VolumeChanged" />
                     </ia:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
                 <Slider.Styles>

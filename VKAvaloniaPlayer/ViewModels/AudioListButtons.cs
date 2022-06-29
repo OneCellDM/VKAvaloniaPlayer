@@ -26,11 +26,9 @@ namespace VKAvaloniaPlayer.ViewModels
             _AudioAddToAlbumIsVisible = true;
             _AudioDownloadIsVisible = true;
             _AudioRemoveIsVisible = true;
-            AudioAddCommand = ReactiveCommand.Create(async (RoutedEventArgs e) =>
+            AudioAddCommand = ReactiveCommand.Create(async (AudioModel vkModel) =>
             {
-                var button = (e.Source as Button);
-
-                var vkModel = button.DataContext as AudioModel;
+              
 
                 if (vkModel != null)
                 {
@@ -41,11 +39,9 @@ namespace VKAvaloniaPlayer.ViewModels
             });
             AudioAddToAlbumCommand = ReactiveCommand.Create((RoutedEventArgs e) => { });
 
-            AudioDownloadCommand = ReactiveCommand.Create(async (RoutedEventArgs e) =>
+            AudioDownloadCommand = ReactiveCommand.Create(async (AudioModel vkModel) =>
             {
-                var button = (e.Source as Button);
-
-                var vkModel = button.DataContext as AudioModel;
+             
 
                 if (vkModel != null)
                 {
@@ -75,11 +71,9 @@ namespace VKAvaloniaPlayer.ViewModels
                 }
             });
 
-            AudioRemoveCommand = ReactiveCommand.Create(async (RoutedEventArgs e) =>
+            AudioRemoveCommand = ReactiveCommand.Create(async (AudioModel vkModel) =>
             {
-                var button = (e.Source as Button);
-
-                var vkModel = button.DataContext as AudioModel;
+               
 
                 if (vkModel != null)
                 {

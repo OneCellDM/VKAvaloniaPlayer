@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -7,7 +8,11 @@ using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Input;
 using Avalonia.Layout;
+using Avalonia.Threading;
+
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.Models.Interfaces;
@@ -46,61 +51,45 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         public AudioListButtons AudioListButtons { get; set; }
        
         private IDisposable ScrolledDisposible;
+        [Reactive]
         private ScrollChangedEventArgs ScrolledEventArgs { get; set; }
+        [Reactive]
+        public bool IsError { get; set; }
 
-        public bool IsError
-        {
-            get => _IsError;
-            set => this.RaiseAndSetIfChanged(ref _IsError, value);
-        }
+        [Reactive]
+        public bool SearchIsVisible { get; set; }
 
-        public bool SearchIsVisible
-        {
-            get => _SearchIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _SearchIsVisible, value);
-        }
-
+        [Reactive]
         public ExceptionViewModel ExceptionModel { get; set; }
 
         public static Action? LoadMusicsAction { get; set; }
 
         public int ResponseCount { get; set; }
+        [Reactive]
+        public ObservableCollection<IVkModelBase>? DataCollection { get; set; }
 
-        public ObservableCollection<IVkModelBase>? DataCollection
-        {
-            get => _DataCollection;
-            set => this.RaiseAndSetIfChanged(ref _DataCollection, value);
-        }
 
-        public bool IsLoading
-        {
-            get => _Loading;
-            set => this.RaiseAndSetIfChanged(ref _Loading, value);
-        }
+        [Reactive]
+        public bool IsLoading { get; set; }
+       
 
         public int Offset { get; set; } = 0;
+        [Reactive]
+        public string SearchText { get; set; }
+        [Reactive]
+        public int SelectedIndex { get; set; }
+       
 
-        public string SearchText
-        {
-            get => _SearchText;
-            set => this.RaiseAndSetIfChanged(ref _SearchText, value);
-        }
+        public virtual void StartLoad()=> 
 
-        public int SelectedIndex
-        {
-            get => _SelectedIndex;
-            set => this.RaiseAndSetIfChanged(ref _SelectedIndex, value);
-        }
-
-        public virtual void StartLoad()
-        {
             InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
-        }
+        
         
         public void StartScrollChangedObservable(Action? action, Orientation orientation)
         {
            
-            ScrolledDisposible =  this.WhenAnyValue(vm=>vm.ScrolledEventArgs)
+            ScrolledDisposible =  
+                this.WhenAnyValue(vm=>vm.ScrolledEventArgs)
                 .Subscribe((e) =>
                 {
                     try
@@ -110,22 +99,28 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
                         if (e?.Source is ScrollViewer scrollViewer)
                         {
-                            if (orientation == Orientation.Vertical)
+                            Dispatcher.UIThread.InvokeAsync(() =>
                             {
+                                if (orientation == Orientation.Vertical)
+                                {
 
-                                max = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarMaximumProperty);
-                                current = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarValueProperty);
-                            }
-                            else
-                            {
-                                max = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarMaximumProperty);
-                                current = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarValueProperty);
-                            }
+                                    max = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarMaximumProperty);
+                                    current = scrollViewer.GetValue(ScrollViewer.VerticalScrollBarValueProperty);
+                                }
+                                else
+                                {
+                                    max = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarMaximumProperty);
+                                    current = scrollViewer.GetValue(ScrollViewer.HorizontalScrollBarValueProperty);
+                                }
+                                if (max > 0 && (max == current)) action?.Invoke();
+                            });
+                           
 
-                            if (max == current) action?.Invoke();
                         }
                     }
-                    catch(Exception ex) { }
+                    catch(Exception ex) {
+                        Debug.WriteLine(ex.Message);
+                    }
                 });
         
         }
@@ -182,13 +177,16 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         public virtual void StartSearchObservable()
         {
             if (_SearchDisposable is null)
-                _SearchDisposable = this.WhenAnyValue(x => x.SearchText).Subscribe(text => Search(text?.ToLower()));
+                _SearchDisposable = this.WhenAnyValue(x => x.SearchText)
+                                        .WhereNotNull()
+                                        .Subscribe(text => Search(text?.ToLower()));
         }
 
         public virtual void StartSearchObservable(TimeSpan timeSpan)
         {
             if (_SearchDisposable is null)
                 _SearchDisposable = this.WhenAnyValue(x => x.SearchText)
+                    .WhereNotNull()
                     .Throttle(timeSpan)
                     .Subscribe(text => Search(text.ToLower()));
         }

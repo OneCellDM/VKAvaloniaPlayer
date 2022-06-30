@@ -7,6 +7,7 @@ using Avalonia.Controls;
 using Avalonia.Threading;
 
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
@@ -20,40 +21,64 @@ namespace VKAvaloniaPlayer.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private const double _menuColumnWidth = 60;
-        private bool _AlbumsIsVisible;
-        private bool _MenuIsOpen;
-        
-        private AlbumsViewModel? _AlbumsViewModel;
-        private AllMusicViewModel? _AllMusicViewModel;
-        private AudioSearchViewModel? _AudioSearchViewModel;
 
-        private SavedAccountModel _CurrentAccountModel;
-        private bool _CurrentDataViewIsVisible;
-        private VkDataViewModelBase? _CurrentDataViewModel;
-        private CurrentMusicListViewModel? _CurrentMusicListViewModel;
-
-        private bool _ExceptionIsVisible;
-        private ExceptionViewModel? _ExceptionViewModel;
-        private GridLength _MenuColumnWidth = new(_menuColumnWidth);
-       
-        private int _MenuSelectionIndex = -1;
-        private bool _MenuTextIsVisible;
-        private RecomendationsViewModel? _RecomendationsViewModel;
+        private bool _IsMini;
         private bool _SiderBarAnimationIsPlaying;
-        private bool _VkLoginIsVisible = true;
-        private VkLoginControlViewModel? _VkLoginViewModel;
+        private bool _MenuIsOpen;
+
+        private CurrentMusicListViewModel? _CurrentMusicListViewModel;
+        private AllMusicViewModel? _AllMusicListViewModel;
+        private AudioSearchViewModel? _SearchViewModel;
+        private RecomendationsViewModel? _RecomendationsViewModel;
         
 
-        private bool Ismini;
 
-      
+        public PlayerControlViewModel PlayerContext => PlayerControlViewModel.Instance;
+
+       
+        public VkLoginControlViewModel? VkLoginViewModel { get; set; }
+     
+        [Reactive]
+        public ExceptionViewModel ExceptionViewModel { get; set; }
+        [Reactive]
+        public AlbumsViewModel? AlbumsViewModel { get; set; }
+
+        [Reactive]
+
+        public VkDataViewModelBase? CurrentDataViewModel { get; set; }
+
+        [Reactive]
+        public SavedAccountModel CurrentAccountModel { get; set; }
+
+        [Reactive]
+        public bool MenuTextIsVisible { get; set; }
+
+        [Reactive]
+        public bool AlbumsIsVisible { get; set; }
+
+        [Reactive]
+        public bool CurrentDataViewIsVisible { get; set; }
+
+        [Reactive]
+        public bool VkLoginIsVisible { get; set; } = true;
+        [Reactive]       
+        
+        public int MenuSelectionIndex { get; set; }
+
+        [Reactive]
+        public GridLength MenuColumnWidth { get; set; }
+
+        [Reactive]
+        public bool ExceptionIsVisible { get; set; }
+
+        [Reactive]
+        public IReactiveCommand AvatarPressedCommand { get; set; }
+        [Reactive]
+        public IReactiveCommand OpenHideMiniPlayerCommand { get; set; }
+
         public MainWindowViewModel()
         {
 
-             
-
-           
             ExceptionViewModel.ViewExitEvent += ExceptionViewModel_ViewExitEvent;
             GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
 
@@ -61,9 +86,9 @@ namespace VKAvaloniaPlayer.ViewModels
 
             OpenHideMiniPlayerCommand = ReactiveCommand.Create(() =>
             {
-                if (!Ismini)
+                if (!_IsMini)
                 {
-                    Ismini = true;
+                    _IsMini = true;
                     MainWindow.Instance.Topmost = true;
                     MainWindow.Instance.MinHeight = 200;
                     MainWindow.Instance.Height = 200;
@@ -71,7 +96,7 @@ namespace VKAvaloniaPlayer.ViewModels
                 }
                 else
                 {
-                    Ismini = false;
+                    _IsMini = false;
                     MainWindow.Instance.Topmost = false;
                     MainWindow.Instance.MinHeight = 0;
                     MainWindow.Instance.Height = 500;
@@ -160,89 +185,9 @@ namespace VKAvaloniaPlayer.ViewModels
                     });
                 }
             });
+
+            this.WhenAnyValue(vm => vm.MenuSelectionIndex).Subscribe(value => OpenView(value));
         }
-
-        
-        public PlayerControlViewModel PlayerContext => PlayerControlViewModel.Instance;
-
-        public VkLoginControlViewModel? VkLoginViewModel
-        {
-            get => _VkLoginViewModel;
-            set => this.RaiseAndSetIfChanged(ref _VkLoginViewModel, value);
-        }
-
-        public ExceptionViewModel ExceptionViewModel
-        {
-            get => _ExceptionViewModel;
-            set => this.RaiseAndSetIfChanged(ref _ExceptionViewModel, value);
-        }
-
-        public SavedAccountModel CurrentAccountModel
-        {
-            get => _CurrentAccountModel;
-            set => this.RaiseAndSetIfChanged(ref _CurrentAccountModel, value);
-        }
-
-        public bool MenuTextIsVisible
-        {
-            get => _MenuTextIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _MenuTextIsVisible, value);
-        }
-
-        public bool AlbumsIsVisible
-        {
-            get => _AlbumsIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _AlbumsIsVisible, value);
-        }
-
-        public bool CurrentDataViewIsVisible
-        {
-            get => _CurrentDataViewIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _CurrentDataViewIsVisible, value);
-        }
-
-        public bool VkLoginIsVisible
-        {
-            get => _VkLoginIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _VkLoginIsVisible, value);
-        }
-
-        public AlbumsViewModel? AlbumsViewModel
-        {
-            get => _AlbumsViewModel;
-            set => this.RaiseAndSetIfChanged(ref _AlbumsViewModel, value);
-        }
-
-        public VkDataViewModelBase? CurrentDataViewModel
-        {
-            get => _CurrentDataViewModel;
-            set => this.RaiseAndSetIfChanged(ref _CurrentDataViewModel, value);
-        }
-
-        public int MenuSelectionIndex
-        {
-            get => _MenuSelectionIndex;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _MenuSelectionIndex, value);
-                OpenView(value);
-            }
-        }
-
-        public GridLength MenuColumnWidth
-        {
-            get => _MenuColumnWidth;
-            set => this.RaiseAndSetIfChanged(ref _MenuColumnWidth, value);
-        }
-
-        public bool ExceptionIsVisible
-        {
-            get => _ExceptionIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _ExceptionIsVisible, value);
-        }
-
-        public IReactiveCommand AvatarPressedCommand { get; set; }
-        public IReactiveCommand OpenHideMiniPlayerCommand { get; set; }
 
         public void OpenView(int menuIndex)
         {
@@ -262,21 +207,21 @@ namespace VKAvaloniaPlayer.ViewModels
                     }
                     case 1:
                     {
-                        if (_AllMusicViewModel == null)
+                        if (_AllMusicListViewModel == null)
                         {
-                            _AllMusicViewModel = new AllMusicViewModel();
-                            _AllMusicViewModel.StartLoad();
+                            _AllMusicListViewModel = new AllMusicViewModel();
+                            _AllMusicListViewModel.StartLoad();
                         }
 
-                        CurrentDataViewModel = _AllMusicViewModel;
+                        CurrentDataViewModel = _AllMusicListViewModel;
                         break;
                     }
                     case 2:
                     {
-                        if (_AlbumsViewModel == null)
+                        if (AlbumsViewModel == null)
                         {
-                            AlbumsViewModel = new AlbumsViewModel();
-                            AlbumsViewModel.StartLoad();
+                                AlbumsViewModel = new AlbumsViewModel();
+                                AlbumsViewModel.StartLoad();
                         }
 
                         CurrentDataViewIsVisible = false;
@@ -285,8 +230,9 @@ namespace VKAvaloniaPlayer.ViewModels
                     }
                     case 3:
                     {
-                        if (_AudioSearchViewModel == null) _AudioSearchViewModel = new AudioSearchViewModel();
-                        CurrentDataViewModel = _AudioSearchViewModel;
+                        if (_SearchViewModel == null)
+                                _SearchViewModel = new AudioSearchViewModel();
+                        CurrentDataViewModel = _SearchViewModel;
                         break;
                     }
                     case 4:
@@ -351,13 +297,14 @@ namespace VKAvaloniaPlayer.ViewModels
 
             AlbumsViewModel?.DataCollection?.Clear();
             _RecomendationsViewModel?.DataCollection?.Clear();
-            _AllMusicViewModel?.DataCollection?.Clear();
-            _AudioSearchViewModel?.DataCollection?.Clear();
+            _AllMusicListViewModel?.DataCollection?.Clear();
+            _SearchViewModel?.DataCollection?.Clear();
+
             CurrentDataViewModel = null;
             AlbumsViewModel = null;
             _RecomendationsViewModel = null;
-            _AllMusicViewModel = null;
-            _AudioSearchViewModel = null;
+            _AllMusicListViewModel = null;
+            _SearchViewModel = null;
             CurrentAccountModel = null;
 
             GC.Collect(0, GCCollectionMode.Optimized);

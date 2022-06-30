@@ -19,7 +19,9 @@ namespace VKAvaloniaPlayer.ViewModels
 
             StartSearchObservable(new TimeSpan(0, 0, 0, 0, 500));
             StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical);
+
             AudioRemoveEvent += MusicFromAlbumViewModel_AudioRemoveEvent;
+
             if (Album.OwnerID == GlobalVars.VkApi.UserId && !Album.IsFollowing)
                 AudioListButtons.AudioAddIsVisible = false;
             else

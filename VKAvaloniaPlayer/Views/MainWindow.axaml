@@ -204,9 +204,9 @@
             IsVisible="{Binding DataContext.ExceptionIsVisible,
 							 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
             Background="white"
-            Grid.Row="{Binding GridRow}"
-            Grid.Column="{Binding GridColumn}"
-            Grid.RowSpan="{Binding GridRowSpan}"
-            Grid.ColumnSpan="{Binding GridColumnSpan}" />
+            Grid.Row="1"
+            Grid.Column="2"
+            Grid.RowSpan="6"
+            Grid.ColumnSpan="2" />
     </Grid>
 </Window>

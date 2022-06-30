@@ -26,6 +26,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading;
 using Avalonia.Controls;
 using System.Net.Sockets;
+using ReactiveUI.Fody.Helpers;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
@@ -43,10 +44,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
 
         private  WebElement.WebElementServer _webElementServer;
-        private int _ActiveAccountSelectIndex = -1;
-        private string _InfoText = string.Empty;
         
-
         private bool _SavedAccountsIsVisible;
 
         public VkLoginControlViewModel()
@@ -129,29 +127,19 @@ namespace VKAvaloniaPlayer.ViewModels
 
         public ObservableCollection<SavedAccountModel>? SavedAccounts { get; set; } = new();
 
-        private bool _AuthButtonIsActive;
-        public bool AuthButtonIsActive{get=>_AuthButtonIsActive; set=>this.RaiseAndSetIfChanged(ref _AuthButtonIsActive, value);}
-        
+        [Reactive]
+        public bool AuthButtonIsActive{ get; set; }
 
-     
-        public string InfoText
-        {
-            get => _InfoText;
-            set => this.RaiseAndSetIfChanged(ref _InfoText, value);
-        }
 
-     
-        public bool SavedAccountsIsVisible
-        {
-            get => _SavedAccountsIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _SavedAccountsIsVisible, value);
-        }
+        [Reactive]
+        public string InfoText { get; set; }
 
-        public int ActiveAccountSelectIndex
-        {
-            get => _ActiveAccountSelectIndex;
-            set => this.RaiseAndSetIfChanged(ref _ActiveAccountSelectIndex, value);
-        }
+
+        [Reactive]
+        public bool SavedAccountsIsVisible { get; set; }
+        [Reactive]
+        public int ActiveAccountSelectIndex { get; set; }
+      
 
         public IReactiveCommand? AuthCommand { get; set; }
         public IReactiveCommand? RemoveAccountCommand { get; set; }
@@ -323,7 +311,7 @@ namespace VKAvaloniaPlayer.ViewModels
                 GlobalVars.CurrentAccount = account;
                 GlobalVars.VkApi =  Auth(account?.Token,  (long) account?.UserID);
                 ActiveAccountSelectIndex = -1;
-                _ActiveAccountSelectIndex = -1;
+                
             }
             catch (Exception)
             {

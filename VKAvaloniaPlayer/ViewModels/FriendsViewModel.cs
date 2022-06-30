@@ -15,6 +15,7 @@ namespace VKAvaloniaPlayer.ViewModels
 				 
 			});
 			
+			
 		}
 	}
 }

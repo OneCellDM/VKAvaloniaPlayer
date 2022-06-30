@@ -118,7 +118,7 @@ namespace VKAvaloniaPlayer.ViewModels
                                 if (Audiosres[i].Id == vkModel.ID)
                                     continue;
 
-                                audios.Add(Audiosres[0].GetAudioIDFormatWithAccessKey());
+                                audios.Add(Audiosres[i].GetAudioIDFormatWithAccessKey());
                             }
 
                             var res = GlobalVars.VkApi.Audio.EditPlaylist(Album.OwnerID, (int) Album.ID, Album.Title,

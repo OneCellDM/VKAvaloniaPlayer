@@ -58,7 +58,7 @@ namespace VKAvaloniaPlayer.ETC
             {
                 _vkApi = value;
                 Console.WriteLine("ApiChanged");
-                VkApiChanged?.Invoke();
+                Events.VkaPiChangedCall();
             }
         }
 
@@ -71,6 +71,6 @@ namespace VKAvaloniaPlayer.ETC
             }
         }
 
-        public static event Api? VkApiChanged;
+       
     }
 }

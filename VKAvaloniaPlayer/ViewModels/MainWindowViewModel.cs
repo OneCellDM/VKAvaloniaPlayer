@@ -80,7 +80,7 @@ namespace VKAvaloniaPlayer.ViewModels
         {
 
             ExceptionViewModel.ViewExitEvent += ExceptionViewModel_ViewExitEvent;
-            GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
+            Events.VkApiChanged += StaticObjects_VkApiChanged;
 
             VkLoginViewModel = new VkLoginControlViewModel();
 
@@ -276,7 +276,7 @@ namespace VKAvaloniaPlayer.ViewModels
                     CurrentAccountModel.LoadBitmapAsync();
             });
 
-            GlobalVars.VkApiChanged -= StaticObjects_VkApiChanged;
+            Events.VkApiChanged -= StaticObjects_VkApiChanged;
         }
 
         private void AccountExit()
@@ -312,7 +312,7 @@ namespace VKAvaloniaPlayer.ViewModels
             GC.Collect(2, GCCollectionMode.Optimized);
             GC.Collect(3, GCCollectionMode.Optimized);
 
-            GlobalVars.VkApiChanged += StaticObjects_VkApiChanged;
+            Events.VkApiChanged += StaticObjects_VkApiChanged;
         }
 
         private void ExceptionViewModel_ViewExitEvent()

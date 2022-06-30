@@ -10,7 +10,7 @@ namespace VKAvaloniaPlayer.ViewModels
     {
         private bool _MusicFromAlbumIsVisible;
         private MusicFromAlbumViewModel? _MusicFromAlbumViewModel;
-
+      
         public AlbumsViewModel()
         {
             BackToAlbumListCommand = ReactiveCommand.Create(() =>

@@ -69,14 +69,23 @@ namespace VKAvaloniaPlayer.ETC
             return obscollection;
         }
 
-        public static string GetAudioIDFormatWithAccessKey(this AudioModel audioModel)
+        public static string GetAudioIDFormatWithAccessKey(this Audio audioModel)
         {
-            return $"{audioModel.OwnerID}_{audioModel.ID}_{audioModel.AccessKey}";
+            return $"{audioModel.OwnerId}_{audioModel.Id}_{audioModel.AccessKey}";
         }
 
         public static string GetAudioIDFormatNoAccessKey(this AudioModel audioModel)
         {
             return $"{audioModel.OwnerID}_{audioModel.ID}";
+        }
+        public static string GetAudioIDFormatWithAccessKey(this AudioModel audioModel)
+        {
+            return $"{audioModel.OwnerID}_{audioModel.ID}_{audioModel.AccessKey}";
+        }
+
+        public static string GetAudioIDFormatNoAccessKey(this Audio audioModel)
+        {
+            return $"{audioModel.OwnerId}_{audioModel.Id}";
         }
     }
 }

@@ -23,7 +23,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
     public abstract class VkDataViewModelBase : ViewModelBase
     {
         public ObservableCollection<IVkModelBase>? _AllDataCollection;
-        private ObservableCollection<IVkModelBase>? _DataCollection;
+       
         private bool _IsError;
         private bool _Loading = true;
 
@@ -36,7 +36,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         public VkDataViewModelBase()
         {
             SearchIsVisible = true;
-            AudioListButtons = new AudioListButtons();
+            AudioListButtons = new AudioListButtonsViewModel();
             LoadMusicsAction = () =>
             {
                 if (string.IsNullOrEmpty(_SearchText))
@@ -49,7 +49,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
             DataCollection = _AllDataCollection;
         }
 
-        public AudioListButtons AudioListButtons { get; set; }
+        public AudioListButtonsViewModel AudioListButtons { get; set; }
        
         private IDisposable ScrolledDisposible;
         [Reactive]
@@ -66,6 +66,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         public static Action? LoadMusicsAction { get; set; }
 
         public int ResponseCount { get; set; }
+
         [Reactive]
         public ObservableCollection<IVkModelBase>? DataCollection { get; set; }
 

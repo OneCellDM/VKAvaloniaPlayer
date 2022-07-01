@@ -1,19 +1,18 @@
-using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Threading;
 
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
+using System;
+using System.Threading.Tasks;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Base;
 using VKAvaloniaPlayer.ViewModels.Exceptions;
 using VKAvaloniaPlayer.Views;
+
 using VkNet.Exception;
 
 
@@ -30,14 +29,14 @@ namespace VKAvaloniaPlayer.ViewModels
         private AllMusicViewModel? _AllMusicListViewModel;
         private AudioSearchViewModel? _SearchViewModel;
         private RecomendationsViewModel? _RecomendationsViewModel;
-        
+
 
 
         public PlayerControlViewModel PlayerContext => PlayerControlViewModel.Instance;
 
-       
+
         public VkLoginControlViewModel? VkLoginViewModel { get; set; }
-     
+
         [Reactive]
         public ExceptionViewModel ExceptionViewModel { get; set; }
         [Reactive]
@@ -61,8 +60,8 @@ namespace VKAvaloniaPlayer.ViewModels
 
         [Reactive]
         public bool VkLoginIsVisible { get; set; } = true;
-        [Reactive]       
-        
+        [Reactive]
+
         public int MenuSelectionIndex { get; set; }
 
         [Reactive]
@@ -201,56 +200,56 @@ namespace VKAvaloniaPlayer.ViewModels
                 switch (menuIndex)
                 {
                     case 0:
-                    {
-                        CurrentDataViewModel = _CurrentMusicListViewModel;
-                        break;
-                    }
-                    case 1:
-                    {
-                        if (_AllMusicListViewModel == null)
                         {
-                            _AllMusicListViewModel = new AllMusicViewModel();
-                            _AllMusicListViewModel.StartLoad();
+                            CurrentDataViewModel = _CurrentMusicListViewModel;
+                            break;
                         }
-
-                        CurrentDataViewModel = _AllMusicListViewModel;
-                        break;
-                    }
-                    case 2:
-                    {
-                        if (AlbumsViewModel == null)
+                    case 1:
                         {
+                            if (_AllMusicListViewModel == null)
+                            {
+                                _AllMusicListViewModel = new AllMusicViewModel();
+                                _AllMusicListViewModel.StartLoad();
+                            }
+
+                            CurrentDataViewModel = _AllMusicListViewModel;
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (AlbumsViewModel == null)
+                            {
                                 AlbumsViewModel = new AlbumsViewModel();
                                 AlbumsViewModel.StartLoad();
-                        }
+                            }
 
-                        CurrentDataViewIsVisible = false;
-                        AlbumsIsVisible = true;
-                        break;
-                    }
+                            CurrentDataViewIsVisible = false;
+                            AlbumsIsVisible = true;
+                            break;
+                        }
                     case 3:
-                    {
-                        if (_SearchViewModel == null)
-                                _SearchViewModel = new AudioSearchViewModel();
-                        CurrentDataViewModel = _SearchViewModel;
-                        break;
-                    }
-                    case 4:
-                    {
-                        if (_RecomendationsViewModel is null)
                         {
-                            _RecomendationsViewModel = new RecomendationsViewModel();
-                            _RecomendationsViewModel.StartLoad();
+                            if (_SearchViewModel == null)
+                                _SearchViewModel = new AudioSearchViewModel();
+                            CurrentDataViewModel = _SearchViewModel;
+                            break;
                         }
+                    case 4:
+                        {
+                            if (_RecomendationsViewModel is null)
+                            {
+                                _RecomendationsViewModel = new RecomendationsViewModel();
+                                _RecomendationsViewModel.StartLoad();
+                            }
 
-                        CurrentDataViewModel = _RecomendationsViewModel;
-                        break;
-                    }
+                            CurrentDataViewModel = _RecomendationsViewModel;
+                            break;
+                        }
                     case 5:
-                    {
-                        AccountExit();
-                        break;
-                    }
+                        {
+                            AccountExit();
+                            break;
+                        }
                 }
 
                 if (CurrentDataViewModel != null)
@@ -285,7 +284,7 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 Player.Stop();
                 PlayerControlViewModel.Instance.CurrentAudio = null;
-                
+
             }
             catch (Exception EX)
             {

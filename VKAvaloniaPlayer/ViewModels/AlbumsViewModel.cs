@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
-using ReactiveUI;
+﻿using ReactiveUI;
+
+using System.Threading.Tasks;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Base;
@@ -10,7 +12,7 @@ namespace VKAvaloniaPlayer.ViewModels
     {
         private bool _MusicFromAlbumIsVisible;
         private MusicFromAlbumViewModel? _MusicFromAlbumViewModel;
-      
+
         public AlbumsViewModel()
         {
             BackToAlbumListCommand = ReactiveCommand.Create(() =>
@@ -40,7 +42,7 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             if (SelectedIndex > -1 && DataCollection.Count > 0)
             {
-                MusicFromAlbumViewModel = new MusicFromAlbumViewModel((AudioAlbumModel) DataCollection[SelectedIndex]);
+                MusicFromAlbumViewModel = new MusicFromAlbumViewModel((AudioAlbumModel)DataCollection[SelectedIndex]);
                 MusicFromAlbumViewModel.StartLoad();
                 MusicFromAlbumIsVisible = true;
             }
@@ -50,8 +52,8 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             if (GlobalVars.CurrentAccount?.UserID != null)
             {
-                var res = GlobalVars.VkApi.Audio.GetPlaylists((long) GlobalVars.CurrentAccount.UserID, 200,
-                    (uint) Offset);
+                var res = GlobalVars.VkApi.Audio.GetPlaylists((long)GlobalVars.CurrentAccount.UserID, 200,
+                    (uint)Offset);
                 if (res != null)
                 {
                     DataCollection.AddRange(res);

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using DynamicData;
+
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using DynamicData;
+
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.Models.Interfaces;
 using VKAvaloniaPlayer.ViewModels;

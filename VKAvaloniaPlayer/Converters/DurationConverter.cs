@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Avalonia.Data.Converters;
+
+using System;
 using System.Globalization;
-using Avalonia.Data.Converters;
 
 namespace VKAvaloniaPlayer.Converters
 {
@@ -10,7 +11,7 @@ namespace VKAvaloniaPlayer.Converters
         {
             try
             {
-                var time = new TimeSpan(0, 0, (int) value);
+                var time = new TimeSpan(0, 0, (int)value);
                 return time.Hours > 0 ? time.ToString(@"hh\:mm\:ss") : time.ToString(@"m\:ss");
             }
             catch (Exception EX)

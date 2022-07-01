@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Avalonia.Layout;
+
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Avalonia.Layout;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Base;
+
 using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels
@@ -52,7 +55,7 @@ namespace VKAvaloniaPlayer.ViewModels
                     var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams
                     {
                         Count = 500,
-                        Offset = (uint) Offset,
+                        Offset = (uint)Offset,
                         PlaylistId = Album.ID
                     });
                     if (res != null)

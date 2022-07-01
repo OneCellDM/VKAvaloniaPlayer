@@ -1,21 +1,21 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System;
 using System.Threading;
 namespace WebElement
 {
-   public class WebElementServer
+    public class WebElementServer
     {
         public delegate void Message(string Data);
         public delegate void Error(Exception ex);
         public event Message MessageRecived;
         public event Error ErrorEvent;
-       
+
 
         Thread ServerThread { get; set; }
         public int Port { get; private set; }
-       
+
         public TcpListener TcpListener { get; set; }
         public TcpClient Client { get; set; }
         public WebElementServer(int port) => this.Port = port;
@@ -37,16 +37,16 @@ namespace WebElement
                 IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), Port);
                 TcpListener = new TcpListener(ipPoint);
                 TcpListener?.Start();
-                Console.WriteLine("Server started on port {0}",Port);
+                Console.WriteLine("Server started on port {0}", Port);
                 ServerStarted = true;
-                
+
                 ReadConnections();
             }
             catch (Exception)
             {
                 ServerStarted = false;
             }
-           
+
         }
         public bool Stop()
         {
@@ -56,7 +56,7 @@ namespace WebElement
                 Client?.Dispose();
                 TcpListener?.Stop();
 
-                
+
                 ServerStarted = false;
                 Console.WriteLine("Stopped");
                 return true;
@@ -68,8 +68,9 @@ namespace WebElement
         }
         public void ReadConnections()
         {
-           
-           while(ServerStarted){
+
+            while (ServerStarted)
+            {
                 try
                 {
                     Client = TcpListener.AcceptTcpClient();
@@ -81,10 +82,10 @@ namespace WebElement
                         StringBuilder response = new StringBuilder();
 
                         var stream = Client.GetStream();
-                      
+
                         do
                         {
-                           
+
                             int bytes = stream.Read(data, 0, data.Length);
                             response.Append(Encoding.UTF8.GetString(data, 0, bytes));
                         }
@@ -93,20 +94,20 @@ namespace WebElement
 
                         MessageRecived?.Invoke(response.ToString());
                     }
-                    
-                    
-                   
+
+
+
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ServerStarted = false;
                     ErrorEvent?.Invoke(ex);
 
                 }
-           }
+            }
 
-            
+
         }
-      
+
     }
 }

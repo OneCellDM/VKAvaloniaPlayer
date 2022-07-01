@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Avalonia.Layout;
+
+using System;
 using System.Threading.Tasks;
-using Avalonia.Layout;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.ViewModels.Base;
+
 using VkNet.Exception;
 
 namespace VKAvaloniaPlayer.ViewModels
@@ -24,7 +27,7 @@ namespace VKAvaloniaPlayer.ViewModels
                 IsLoading = true;
                 try
                 {
-                    var res = GlobalVars.VkApi?.Audio.GetRecommendations(count: 500, offset: (uint) Offset);
+                    var res = GlobalVars.VkApi?.Audio.GetRecommendations(count: 500, offset: (uint)Offset);
                     if (res != null)
                     {
                         DataCollection.AddRange(res);

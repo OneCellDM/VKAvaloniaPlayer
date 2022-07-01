@@ -1,7 +1,9 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Avalonia.Media.Imaging;
+﻿using Avalonia.Media.Imaging;
+
 using Newtonsoft.Json;
+
+using System.IO;
+using System.Threading.Tasks;
 
 namespace VKAvaloniaPlayer.Models.Interfaces
 {

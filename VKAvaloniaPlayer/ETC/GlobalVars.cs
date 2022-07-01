@@ -1,7 +1,10 @@
+using Avalonia.Media.Imaging;
+
 using System;
 using System.Runtime.InteropServices;
-using Avalonia.Media.Imaging;
+
 using VKAvaloniaPlayer.Models;
+
 using VkNet;
 using VkNet.Model;
 
@@ -71,6 +74,6 @@ namespace VKAvaloniaPlayer.ETC
             }
         }
 
-       
+
     }
 }

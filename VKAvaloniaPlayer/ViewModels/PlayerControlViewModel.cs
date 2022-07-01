@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Threading;
+
+using ReactiveUI;
+
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Timers;
-
-using Avalonia.Controls;
-using Avalonia.Input;
-using Avalonia.Threading;
-
-using ReactiveUI;
 
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
@@ -18,7 +18,7 @@ using Timer = System.Timers.Timer;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public  partial class PlayerControlViewModel : ViewModelBase
+    public partial class PlayerControlViewModel : ViewModelBase
     {
         public delegate void OpenRepostWindowDelegate(AudioModel audioModel);
         public delegate void SetCollection(ObservableCollection<AudioModel> audioCollection, int selectedIndex);
@@ -33,7 +33,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private bool _Mute;
         private bool _pauseButtonIsVisible;
         private bool _playButtonIsVisible = true;
-        private int _PlayPosition=20;
+        private int _PlayPosition = 20;
         private bool _Repeat;
         private bool _Shuffling;
         private Thread? _thread;
@@ -41,7 +41,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private readonly Timer _Timer = new();
         private double _Volume = 1;
 
-       
+
         public static PlayerControlViewModel Instance =>
             _Instance is null ? _Instance = new PlayerControlViewModel() : _Instance;
 
@@ -159,7 +159,7 @@ namespace VKAvaloniaPlayer.ViewModels
         public IReactiveCommand MuteToggleCommand { get; set; }
 
         public IReactiveCommand ShuffleToogleCommand { get; set; }
-        public IReactiveCommand RepostCommand{ get; set; }
+        public IReactiveCommand RepostCommand { get; set; }
 
 
         public static event SetCollection? SetPlaylistEvent;
@@ -178,8 +178,8 @@ namespace VKAvaloniaPlayer.ViewModels
             });
             NextCommand = ReactiveCommand.Create(() => PlayNext());
             PreviousCommand = ReactiveCommand.Create(() => PlayPrevious());
-            
-        
+
+
             RepeatToggleCommand = ReactiveCommand.Create(() =>
             {
                 if (Repeat)
@@ -209,15 +209,16 @@ namespace VKAvaloniaPlayer.ViewModels
                 }
             });
 
-            RepostCommand = ReactiveCommand.Create(() => { 
-                
+            RepostCommand = ReactiveCommand.Create(() =>
+            {
+
             });
             _Timer.Interval = 1000;
             _Timer.Elapsed += _Timer_Elapsed;
             SetPlaylistEvent += PlayerControlViewModel_SetPlaylistEvent;
         }
 
-        public void VolumeChanged(object sender,PointerCaptureLostEventArgs e)
+        public void VolumeChanged(object sender, PointerCaptureLostEventArgs e)
         {
             Slider s = e.Source as Slider;
             if (s != null)

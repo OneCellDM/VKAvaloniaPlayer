@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Avalonia.Layout;
+
+using ReactiveUI;
+
+using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Avalonia.Layout;
-using ReactiveUI;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.ViewModels.Base;
+
 using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels

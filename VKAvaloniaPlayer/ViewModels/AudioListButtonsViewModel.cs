@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Avalonia.Interactivity;
+
+using ReactiveUI;
+
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using Avalonia.Controls;
-using Avalonia.Interactivity;
-using ReactiveUI;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
-using VkNet.Exception;
+
 using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels
@@ -34,18 +35,18 @@ namespace VKAvaloniaPlayer.ViewModels
                 {
                     try
                     {
-                        var res = await GlobalVars.VkApi.Audio.AddAsync(vkModel.ID, 
-                                                                    vkModel.OwnerID, 
+                        var res = await GlobalVars.VkApi.Audio.AddAsync(vkModel.ID,
+                                                                    vkModel.OwnerID,
                                                                     vkModel.AccessKey);
                         if (res > 0)
                         {
                             vkModel.ID = res;
                             vkModel.OwnerID = (long)(GlobalVars.VkApi?.UserId ?? 0);
-                           
+
                             Events.AudioAddCall(vkModel);
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
 
                     }
@@ -86,12 +87,12 @@ namespace VKAvaloniaPlayer.ViewModels
 
             AudioRemoveCommand = ReactiveCommand.Create(async (AudioModel vkModel) =>
             {
-               
+
                 if (vkModel != null)
                 {
                     if (Album is null)
                     {
-                        
+
                         var Awaiter = await GlobalVars.VkApi.Audio.DeleteAsync(vkModel.ID, vkModel.OwnerID);
                         if (Awaiter == true)
                         {
@@ -117,8 +118,8 @@ namespace VKAvaloniaPlayer.ViewModels
                                 audios.Add(Audiosres[i].GetAudioIDFormatWithAccessKey());
                             }
 
-                            var res = GlobalVars.VkApi.Audio.EditPlaylist(Album.OwnerID, (int) Album.ID, Album.Title,
-                                null,audios);
+                            var res = GlobalVars.VkApi.Audio.EditPlaylist(Album.OwnerID, (int)Album.ID, Album.Title,
+                                null, audios);
 
                             if (res)
                                 MusicFromAlbumViewModel.AudioRemoveEventCall(vkModel);

@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Avalonia.Media.Imaging;
+
+using System;
 using System.IO;
-using Avalonia.Media.Imaging;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models.Base;
+
 using VkNet.Enums.Filters;
 
 namespace VKAvaloniaPlayer.Models
@@ -20,7 +23,7 @@ namespace VKAvaloniaPlayer.Models
             try
             {
                 var profileInfoAwaiter = GlobalVars.VkApi.Users
-                    .GetAsync(new[] {(long) UserID}, ProfileFields.Photo50)
+                    .GetAsync(new[] { (long)UserID }, ProfileFields.Photo50)
                     .GetAwaiter();
 
                 profileInfoAwaiter.OnCompleted(async () =>

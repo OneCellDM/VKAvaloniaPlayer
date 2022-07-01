@@ -26,18 +26,13 @@ namespace VKAvaloniaPlayer.Models
                 Image = GlobalVars.DefaultMusicImage
             };
             AccessKey = VkModel.AccessKey;
-
             ModelType = ModelTypes.Audio;
-
             Duration = VkModel.Duration;
-
             ID = (long) VkModel.Id;
-
             OwnerID = (long) VkModel.OwnerId;
-
             Artist = VkModel.Artist;
-
             Title = VkModel.Title;
+            Subtitle = VkModel.Subtitle;
 
             if (VkModel.Album != null && VkModel.Album.Thumb != null)
                 Cover.ImageUrl = GetThumbUrl(VkModel.Album.Thumb);

@@ -30,8 +30,6 @@ namespace VKAvaloniaPlayer.ViewModels
 
             AudioAddCommand = ReactiveCommand.Create(async (AudioModel vkModel) =>
             {
-              
-
                 if (vkModel != null)
                 {
                     try
@@ -57,8 +55,6 @@ namespace VKAvaloniaPlayer.ViewModels
 
             AudioDownloadCommand = ReactiveCommand.Create(async (AudioModel vkModel) =>
             {
-             
-
                 if (vkModel != null)
                 {
                     if (vkModel.IsDownload)

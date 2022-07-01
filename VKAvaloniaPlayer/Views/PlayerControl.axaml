@@ -59,7 +59,17 @@
                 </Border.Background>
             </Border>
             <StackPanel Grid.Column="1" Margin="10,12,0,0">
-                <TextBlock Text="{Binding CurrentAudio.Title}" TextTrimming="CharacterEllipsis" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding CurrentAudio.Title}" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="{Binding CurrentAudio.Subtitle}" TextTrimming="CharacterEllipsis"
+                            Margin="5,0,0,0">
+                        <TextBlock.Styles>
+                            <Style Selector="TextBlock">
+                                <Setter Property="Foreground" Value="#aaaaaa" />
+                            </Style>
+                        </TextBlock.Styles>
+                    </TextBlock>
+                </StackPanel>
                 <TextBlock Text="{Binding CurrentAudio.Artist}" TextTrimming="CharacterEllipsis" />
             </StackPanel>
             <Slider Grid.Row="1" Grid.ColumnSpan="6" Grid.Column="1" Value="{Binding Path=PlayPosition}"

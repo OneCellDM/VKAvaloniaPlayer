@@ -19,6 +19,7 @@ namespace VKAvaloniaPlayer.Models.Base
         public string Artist { get; set; }
         public string Title { get; set; }
         public IImageBase Cover { get; set; }
+        public string Subtitle { get; set; }
 
         public virtual string GetThumbUrl(AudioCover audioCover)
         {

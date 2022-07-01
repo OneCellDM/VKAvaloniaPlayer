@@ -3,7 +3,6 @@
 namespace VKAvaloniaPlayer.Models.Interfaces
 {
     public interface IVkModelBase
-
     {
         public ModelTypes ModelType { get; set; }
         public long ID { get; set; }
@@ -11,5 +10,6 @@ namespace VKAvaloniaPlayer.Models.Interfaces
         public string Artist { get; set; }
         public string Title { get; set; }
         public IImageBase Cover { get; set; }
+        public string Subtitle { get; set; }
     }
 }

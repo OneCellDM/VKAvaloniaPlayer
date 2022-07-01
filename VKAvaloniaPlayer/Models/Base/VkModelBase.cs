@@ -1,5 +1,7 @@
 ﻿using ReactiveUI;
+
 using VKAvaloniaPlayer.Models.Interfaces;
+
 using VkNet.Model;
 
 namespace VKAvaloniaPlayer.Models.Base

@@ -1,5 +1,6 @@
 ﻿using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models.Base;
+
 using VkNet.Model;
 using VkNet.Model.Attachments;
 
@@ -18,9 +19,9 @@ namespace VKAvaloniaPlayer.Models
 
             Title = audioPlaylist.Title;
 
-            ID = (long) audioPlaylist.Id;
+            ID = (long)audioPlaylist.Id;
 
-            OwnerID = (long) audioPlaylist.OwnerId;
+            OwnerID = (long)audioPlaylist.OwnerId;
 
             IsFollowing = audioPlaylist.IsFollowing;
 

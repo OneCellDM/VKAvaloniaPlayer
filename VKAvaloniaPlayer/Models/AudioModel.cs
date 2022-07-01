@@ -1,6 +1,8 @@
 ﻿using ReactiveUI;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models.Base;
+
 using VkNet.Model;
 using VkNet.Model.Attachments;
 
@@ -15,7 +17,7 @@ namespace VKAvaloniaPlayer.Models
         {
             Title = "Название";
             Artist = "Исполнитель";
-            Cover = new ImageModelBase {Image = GlobalVars.DefaultMusicImage};
+            Cover = new ImageModelBase { Image = GlobalVars.DefaultMusicImage };
         }
 
         public AudioModel(Audio VkModel)
@@ -28,8 +30,8 @@ namespace VKAvaloniaPlayer.Models
             AccessKey = VkModel.AccessKey;
             ModelType = ModelTypes.Audio;
             Duration = VkModel.Duration;
-            ID = (long) VkModel.Id;
-            OwnerID = (long) VkModel.OwnerId;
+            ID = (long)VkModel.Id;
+            OwnerID = (long)VkModel.OwnerId;
             Artist = VkModel.Artist;
             Title = VkModel.Title;
             Subtitle = VkModel.Subtitle;

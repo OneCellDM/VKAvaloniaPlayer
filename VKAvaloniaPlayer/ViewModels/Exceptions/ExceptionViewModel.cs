@@ -1,5 +1,7 @@
-﻿using System;
-using ReactiveUI;
+﻿using ReactiveUI;
+
+using System;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.ViewModels.Base;
 

@@ -1,16 +1,16 @@
-﻿using System;
-using System.Linq;
+﻿using ManagedBass;
 
-using ManagedBass;
+using System;
+using System.Linq;
 
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-	public partial class PlayerControlViewModel
-	{
-		public static class Player
+    public partial class PlayerControlViewModel
+    {
+        public static class Player
         {
             private static int _stream;
 
@@ -43,7 +43,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
             public static void SetStream(AudioModel audioModel)
             {
-                var url = GlobalVars.VkApi?.Audio.GetById(new[] {audioModel.GetAudioIDFormatWithAccessKey()})
+                var url = GlobalVars.VkApi?.Audio.GetById(new[] { audioModel.GetAudioIDFormatWithAccessKey() })
                     .ElementAt(0).Url.AbsoluteUri;
                 _stream = Bass.CreateStream(url, 0, BassFlags.Default, null, IntPtr.Zero);
             }

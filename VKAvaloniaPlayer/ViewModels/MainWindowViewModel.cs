@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
+using VKAvaloniaPlayer.ViewModels.Audios;
 using VKAvaloniaPlayer.ViewModels.Base;
 using VKAvaloniaPlayer.ViewModels.Exceptions;
 using VKAvaloniaPlayer.Views;

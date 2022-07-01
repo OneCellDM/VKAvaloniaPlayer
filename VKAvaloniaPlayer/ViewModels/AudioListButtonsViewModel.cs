@@ -9,6 +9,7 @@ using System.Net;
 
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
+using VKAvaloniaPlayer.ViewModels.Audios;
 
 using VkNet.Model.RequestParams;
 

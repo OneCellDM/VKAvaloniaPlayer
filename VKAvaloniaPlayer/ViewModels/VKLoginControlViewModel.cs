@@ -49,8 +49,8 @@ namespace VKAvaloniaPlayer.ViewModels
 
         public VkLoginControlViewModel()
         {
-            
             LoadSavedAccounts();
+            SkipMenuIfOnlyOneAccount();
             ToggleAccountsSidebarVisible();
             SavedAccounts.CollectionChanged += (sender, args) =>
             {
@@ -181,6 +181,15 @@ namespace VKAvaloniaPlayer.ViewModels
 
                 }
         }
+
+        private void SkipMenuIfOnlyOneAccount() 
+        {
+            if (SavedAccounts?.Count == 1)
+            {
+                AuthFromActiveAccount(SavedAccounts.First());
+            }
+        }
+
         private void LoadSavedAccounts()
         {
             try
@@ -300,9 +309,8 @@ namespace VKAvaloniaPlayer.ViewModels
 
             api.Authorize(new ApiAuthParams {AccessToken = token, UserId = id});
             return api;
-           
-
         }
+
         private void AuthFromActiveAccount(SavedAccountModel account)
         {
             try
@@ -322,8 +330,8 @@ namespace VKAvaloniaPlayer.ViewModels
 
         public virtual  void SelectedItem(object sender,PointerPressedEventArgs args)
         {
-               var selectedAccount = (args?.Source as ContentPresenter).Content as SavedAccountModel;
-                if (selectedAccount != null) AuthFromActiveAccount(selectedAccount);
+            var selectedAccount = (args?.Source as ContentPresenter).Content as SavedAccountModel;
+            if (selectedAccount != null) AuthFromActiveAccount(selectedAccount);
         }
         public virtual void Scrolled(object sender, ScrollChangedEventArgs args){
 

@@ -83,7 +83,6 @@ namespace VKAvaloniaPlayer.ViewModels.Base
        
 
         public virtual void StartLoad()=> 
-
             InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
         
         

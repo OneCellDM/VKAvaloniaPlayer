@@ -61,8 +61,18 @@
                                 </Border.Background>
                             </Border>
                             <StackPanel Margin="5" Spacing="5">
-                                <TextBlock IsHitTestVisible="False" TextTrimming="WordEllipsis" FontSize="14"
-                                           Text="{Binding Title}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock IsHitTestVisible="False" TextTrimming="WordEllipsis" FontSize="14"
+                                            Text="{Binding Title}" />
+                                    <TextBlock IsHitTestVisible="false" TextTrimming="WordEllipsis" FontSize="14"
+                                            Text="{Binding Subtitle}" Margin="5,0,0,0">
+                                        <TextBlock.Styles>
+                                            <Style Selector="TextBlock">
+                                                <Setter Property="Foreground" Value="#aaaaaa" />
+                                            </Style>
+                                        </TextBlock.Styles>
+                                    </TextBlock>
+                                </StackPanel>
                                 <TextBlock IsHitTestVisible="True" TextTrimming="WordEllipsis" FontSize="14"
                                            Text="{Binding Artist}">
                                     <TextBlock.Styles>

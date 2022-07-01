@@ -12,6 +12,12 @@
     <UserControl.Resources>
         <converters:DurationConverter x:Key="durationConverter" />
     </UserControl.Resources>
+    <UserControl.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+            <Setter Property="Margin" Value="0, 0, -1, 0"/>
+        </Style>
+    </UserControl.Styles>
 
     <Grid>
         <Grid.Styles>
@@ -54,27 +60,28 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel Spacing="5" Orientation="Horizontal">
-                            <Border IsHitTestVisible="False" CornerRadius="10" Width="50" Height="50">
+                        <DockPanel>
+                            <Border IsHitTestVisible="False" CornerRadius="10" Width="50" Height="50" 
+                                Margin="0,0,5,0" DockPanel.Dock="Left">
                                 <Border.Background>
                                     <ImageBrush Source="{Binding Cover.Image}" Stretch="Uniform" />
                                 </Border.Background>
                             </Border>
-                            <StackPanel Margin="5" Spacing="5">
-                                <StackPanel Orientation="Horizontal">
+                            <DockPanel Margin="5" MaxWidth="{Binding $parent.ActualWidth}">
+                                <DockPanel DockPanel.Dock="Top" MaxWidth="{Binding $parent.ActualWidth}">
                                     <TextBlock IsHitTestVisible="False" TextTrimming="WordEllipsis" FontSize="14"
-                                            Text="{Binding Title}" />
+                                            Text="{Binding Title}" DockPanel.Dock="Left"/>
                                     <TextBlock IsHitTestVisible="false" TextTrimming="WordEllipsis" FontSize="14"
-                                            Text="{Binding Subtitle}" Margin="5,0,0,0">
+                                            Text="{Binding Subtitle}" Margin="5,0,0,0" DockPanel.Dock="Right">
                                         <TextBlock.Styles>
                                             <Style Selector="TextBlock">
                                                 <Setter Property="Foreground" Value="#aaaaaa" />
                                             </Style>
                                         </TextBlock.Styles>
                                     </TextBlock>
-                                </StackPanel>
+                                </DockPanel>
                                 <TextBlock IsHitTestVisible="True" TextTrimming="WordEllipsis" FontSize="14"
-                                           Text="{Binding Artist}">
+                                        Text="{Binding Artist}" DockPanel.Dock="Bottom">
                                     <TextBlock.Styles>
                                         <Style Selector="TextBlock">
                                             <Setter Property="Foreground" Value="#737272" />
@@ -86,8 +93,8 @@
                                         </Style>
                                     </TextBlock.Styles>
                                 </TextBlock>
-                            </StackPanel>
-                        </StackPanel>
+                            </DockPanel>
+                        </DockPanel>
                         <StackPanel Margin="10,0" Spacing="5" Grid.Column="1" Orientation="Horizontal">
                             <Button Background="Transparent"
                                     IsVisible="{Binding DataContext.AudioListButtons.AudioDownloadIsVisible,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">

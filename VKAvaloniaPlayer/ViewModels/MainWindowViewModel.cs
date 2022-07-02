@@ -45,7 +45,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
         [Reactive]
 
-        public VkDataViewModelBase? CurrentDataViewModel { get; set; }
+        public AudioViewModelBase? CurrentDataViewModel { get; set; }
 
         [Reactive]
         public SavedAccountModel CurrentAccountModel { get; set; }

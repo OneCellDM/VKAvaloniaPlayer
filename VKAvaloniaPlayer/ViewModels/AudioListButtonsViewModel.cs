@@ -1,6 +1,7 @@
 ﻿using Avalonia.Interactivity;
 
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 using System;
 using System.Collections.Generic;
@@ -17,18 +18,13 @@ namespace VKAvaloniaPlayer.ViewModels
 {
     public class AudioListButtonsViewModel : ReactiveObject
     {
-        private bool _AudioAddIsVisible;
-        private bool _AudioAddToAlbumIsVisible;
-
-        private bool _AudioDownloadIsVisible;
-        private bool _AudioRemoveIsVisible;
-
+      
         public AudioListButtonsViewModel()
         {
-            _AudioAddIsVisible = true;
-            _AudioAddToAlbumIsVisible = true;
-            _AudioDownloadIsVisible = true;
-            _AudioRemoveIsVisible = true;
+            AudioAddIsVisible = true;
+            AudioAddToAlbumIsVisible = true;
+            AudioDownloadIsVisible = true;
+            AudioRemoveIsVisible = true;
 
             AudioAddCommand = ReactiveCommand.Create(async (AudioModel vkModel) =>
             {
@@ -138,31 +134,18 @@ namespace VKAvaloniaPlayer.ViewModels
         }
 
         public AudioAlbumModel Album { get; set; } = null;
+        [Reactive]
+        public bool AudioDownloadIsVisible { get; set; }
+       
+        [Reactive]
+        public bool AudioAddIsVisible { get; set; }
+       
+        [Reactive]
+        public bool AudioRemoveIsVisible { get; set; }
+      
+        [Reactive]
+        public bool AudioAddToAlbumIsVisible { get; set; }
 
-        public bool AudioDownloadIsVisible
-        {
-            get => _AudioDownloadIsVisible;
-
-            set => this.RaiseAndSetIfChanged(ref _AudioDownloadIsVisible, value);
-        }
-
-        public bool AudioAddIsVisible
-        {
-            get => _AudioAddIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _AudioAddIsVisible, value);
-        }
-
-        public bool AudioRemoveIsVisible
-        {
-            get => _AudioRemoveIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _AudioRemoveIsVisible, value);
-        }
-
-        public bool AudioAddToAlbumIsVisible
-        {
-            get => _AudioAddToAlbumIsVisible;
-            set => this.RaiseAndSetIfChanged(ref _AudioAddToAlbumIsVisible, value);
-        }
 
         public IReactiveCommand AudioAddCommand { get; set; }
         public IReactiveCommand AudioDownloadCommand { get; set; }

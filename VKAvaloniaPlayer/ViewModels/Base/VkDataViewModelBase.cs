@@ -21,48 +21,38 @@ using VKAvaloniaPlayer.ViewModels.Exceptions;
 
 namespace VKAvaloniaPlayer.ViewModels.Base
 {
-    public abstract class VkDataViewModelBase : ViewModelBase
+    public abstract class DataViewModelBase : ViewModelBase
     {
-        public ObservableCollection<IVkModelBase>? _AllDataCollection;
-
-        private bool _IsError;
-        private bool _Loading = true;
-
-        private IDisposable? _SearchDisposable;
-
-
-        private string _SearchText = string.Empty;
-
-
-        public VkDataViewModelBase()
-        {
-            SearchIsVisible = true;
-            AudioListButtons = new AudioListButtonsViewModel();
-            LoadMusicsAction = () =>
-            {
-                if (string.IsNullOrEmpty(_SearchText))
-                    if (ResponseCount > 0 && IsLoading is false)
-                        InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
-            };
-
-
-            _AllDataCollection = new ObservableCollection<IVkModelBase>();
-            DataCollection = _AllDataCollection;
-        }
-
-        public AudioListButtonsViewModel AudioListButtons { get; set; }
-
-        private IDisposable ScrolledDisposible;
         [Reactive]
-        private ScrollChangedEventArgs ScrolledEventArgs { get; set; }
+        public ExceptionViewModel ExceptionModel { get; set; }
+
         [Reactive]
         public bool IsError { get; set; }
 
         [Reactive]
-        public bool SearchIsVisible { get; set; }
+        public bool IsLoading { get; set; }
+
+
+    }
+    public abstract class DataViewModelBase <T> : DataViewModelBase
+    {
+        protected ObservableCollection<IVkModelBase>? _AllDataCollection;
+
+        private IDisposable? _SearchDisposable;
+
+
+        protected string _SearchText = string.Empty;
+
+        private IDisposable ScrolledDisposible;
 
         [Reactive]
-        public ExceptionViewModel ExceptionModel { get; set; }
+        private ScrollChangedEventArgs ScrolledEventArgs { get; set; }
+
+      
+        [Reactive]
+        public bool SearchIsVisible { get; set; }
+
+      
 
         public static Action? LoadMusicsAction { get; set; }
 
@@ -72,19 +62,17 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         public ObservableCollection<IVkModelBase>? DataCollection { get; set; }
 
 
-        [Reactive]
-        public bool IsLoading { get; set; }
+      
 
+        public int Offset { get; set; }
 
-        public int Offset { get; set; } = 0;
         [Reactive]
         public string SearchText { get; set; }
+
         [Reactive]
         public int SelectedIndex { get; set; }
-
-
         public virtual void StartLoad() =>
-            InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
+          InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
 
 
         public void StartScrollChangedObservable(Action? action, Orientation orientation)
@@ -172,11 +160,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         public virtual void SelectedItem()
         {
-            Console.WriteLine("Item selected");
-            if (SelectedIndex > -1)
-                PlayerControlViewModel.SetPlaylist(
-                    new ObservableCollection<AudioModel>(DataCollection.Cast<AudioModel>().ToList()),
-                    SelectedIndex);
+           
         }
 
         public virtual void StartSearchObservable()
@@ -205,23 +189,63 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         public virtual void SelectedItem(object sender, PointerPressedEventArgs args)
         {
-            Console.WriteLine("pressed");
-            var contentpress = args?.Source as ContentPresenter;
-            Console.WriteLine("null:" + (contentpress == null ? "true" : "false"));
-
-            var model = contentpress?.Content as IVkModelBase;
-
-            if (model != null)
-            {
-                Console.WriteLine("Model not null");
-                SelectedIndex = DataCollection.IndexOf(model);
-                SelectedItem();
-            }
-            else Console.WriteLine("model is null");
+            
         }
         public virtual void Scrolled(object sender, ScrollChangedEventArgs args) =>
             ScrolledEventArgs = args;
 
 
     }
+
+
+public abstract class AudioViewModelBase : DataViewModelBase<IVkModelBase>
+{
+
+    public AudioListButtonsViewModel AudioListButtons { get; set; }
+
+ 
+
+    public AudioViewModelBase()
+    {
+        SearchIsVisible = true;
+        AudioListButtons = new AudioListButtonsViewModel();
+        LoadMusicsAction = () =>
+        {
+            if (string.IsNullOrEmpty(_SearchText))
+                if (ResponseCount > 0 && IsLoading is false)
+                    InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
+        };
+
+
+        _AllDataCollection = new ObservableCollection<IVkModelBase>();
+        DataCollection = _AllDataCollection;
+    }
+        public override void SelectedItem()
+        {
+            Console.WriteLine("Item selected");
+            if (SelectedIndex > -1)
+                PlayerControlViewModel.SetPlaylist(
+                    new ObservableCollection<AudioModel>(DataCollection.Cast<AudioModel>().ToList()),
+                    SelectedIndex);
+        }
+        public override void SelectedItem(object sender, PointerPressedEventArgs args)
+        {
+          
+            var contentpress = args?.Source as ContentPresenter;
+
+            var model = contentpress?.Content as IVkModelBase;
+
+            if (model != null)
+            {
+                SelectedIndex = DataCollection.IndexOf(model);
+                SelectedItem();
+            }
+          
+        }
+    }
+
+        
+
+
+      
 }

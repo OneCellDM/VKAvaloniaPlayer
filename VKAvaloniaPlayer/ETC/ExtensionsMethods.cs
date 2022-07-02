@@ -41,7 +41,7 @@ namespace VKAvaloniaPlayer.ETC
             }
         }
 
-        public static void StartLoadImages(this ObservableCollection<IVkModelBase>? DataCollection)
+        public static void StartLoadImages<T>(this ObservableCollection<T>? DataCollection) where T : IVkModelBase
         {
             try
             {

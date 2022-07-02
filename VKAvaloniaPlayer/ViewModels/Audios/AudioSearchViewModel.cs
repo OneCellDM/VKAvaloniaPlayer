@@ -13,7 +13,7 @@ using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels.Audios
 {
-    public class AudioSearchViewModel : VkDataViewModelBase
+    public class AudioSearchViewModel : AudioViewModelBase
     {
         public AudioSearchViewModel()
         {

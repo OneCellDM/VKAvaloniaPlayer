@@ -10,7 +10,7 @@ using VkNet.Exception;
 
 namespace VKAvaloniaPlayer.ViewModels.Audios
 {
-    public sealed class RecomendationsViewModel : VkDataViewModelBase
+    public sealed class RecomendationsViewModel : AudioViewModelBase
     {
         public RecomendationsViewModel()
         {

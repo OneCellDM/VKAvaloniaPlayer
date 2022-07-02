@@ -2,6 +2,9 @@
 
 using Newtonsoft.Json;
 
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -14,7 +17,7 @@ using VKAvaloniaPlayer.Models.Interfaces;
 
 namespace VKAvaloniaPlayer.Models.Base
 {
-    public class ImageModelBase : INotifyPropertyChanged, IImageBase
+    public class ImageModelBase : ReactiveObject, IImageBase
     {
         public static Semaphore _Semaphore = new(5, 5);
 
@@ -25,16 +28,11 @@ namespace VKAvaloniaPlayer.Models.Base
         public string ImageUrl { get; set; }
         public bool ImageIsloaded { get; set; }
 
+        
         [JsonIgnore]
-        public Bitmap? Image
-        {
-            get => _Image;
-            set
-            {
-                _Image = value;
-                OnPropertyChanged();
-            }
-        }
+        [Reactive]
+        public Bitmap? Image { get; set; }
+   
 
         public async Task<Stream?>? LoadImageStreamAsync()
         {
@@ -80,12 +78,6 @@ namespace VKAvaloniaPlayer.Models.Base
                 }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+     
     }
 }

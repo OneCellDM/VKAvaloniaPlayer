@@ -12,7 +12,7 @@ using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels.Audios
 {
-    public sealed class MusicFromAlbumViewModel : VkDataViewModelBase
+    public sealed class MusicFromAlbumViewModel : AudioViewModelBase
     {
         public delegate void AudioRemove(AudioModel audioModel);
 

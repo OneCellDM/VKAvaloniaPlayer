@@ -1,5 +1,7 @@
 ﻿using ReactiveUI;
 
+using System.Reactive.Linq;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models.Base;
 
@@ -17,16 +19,18 @@ namespace VKAvaloniaPlayer.Models
         {
             Title = "Название";
             Artist = "Исполнитель";
-            Cover = new ImageModelBase { Image = GlobalVars.DefaultMusicImage };
-        }
-
-        public AudioModel(Audio VkModel)
-        {
             Cover = new ImageModelBase
             {
                 DecodeWidth = 50,
                 Image = GlobalVars.DefaultMusicImage
             };
+
+        }
+
+
+        public AudioModel(Audio VkModel) 
+        {
+           
             AccessKey = VkModel.AccessKey;
             ModelType = ModelTypes.Audio;
             Duration = VkModel.Duration;

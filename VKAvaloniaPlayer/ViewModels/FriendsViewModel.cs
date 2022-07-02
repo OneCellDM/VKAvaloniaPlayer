@@ -1,6 +1,6 @@
 ﻿namespace VKAvaloniaPlayer.ViewModels
 {
-    internal class FriendsViewModel : ViewModels.Base.VkDataViewModelBase
+    internal class FriendsViewModel : ViewModels.Base.DataViewModelBase <object>
     {
         public override void LoadData()
         {
@@ -8,6 +8,7 @@
             {
 
             });
+           
 
 
         }

@@ -13,7 +13,7 @@ using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels.Audios
 {
-    public sealed class AllMusicViewModel : VkDataViewModelBase
+    public sealed class AllMusicViewModel : AudioViewModelBase
     {
 
         public AllMusicViewModel()

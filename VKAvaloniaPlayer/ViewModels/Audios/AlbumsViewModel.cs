@@ -9,11 +9,9 @@ using VKAvaloniaPlayer.ViewModels.Base;
 
 namespace VKAvaloniaPlayer.ViewModels.Audios
 {
-    public class AlbumsViewModel : VkDataViewModelBase
+    public class AlbumsViewModel : DataViewModelBase <AlbumsViewModel>
     {
-        private bool _MusicFromAlbumIsVisible;
-        private MusicFromAlbumViewModel? _MusicFromAlbumViewModel;
-
+     
         public AlbumsViewModel()
         {
             BackToAlbumListCommand = ReactiveCommand.Create(() =>

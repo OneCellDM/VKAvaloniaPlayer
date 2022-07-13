@@ -1,15 +1,15 @@
-﻿using VKAvaloniaPlayer.Models.Base;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace VKAvaloniaPlayer.Models.Interfaces
 {
     public interface IVkModelBase
     {
-        public ModelTypes ModelType { get; set; }
         public long ID { get; set; }
-        public long OwnerID { get; set; }
-        public string Artist { get; set; }
         public string Title { get; set; }
-        public IImageBase Cover { get; set; }
-        public string Subtitle { get; set; }
+        public IImageBase Image { get; set; }
     }
 }

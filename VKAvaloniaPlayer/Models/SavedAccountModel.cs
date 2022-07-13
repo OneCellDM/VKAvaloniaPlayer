@@ -4,21 +4,27 @@ using System;
 using System.IO;
 
 using VKAvaloniaPlayer.ETC;
-using VKAvaloniaPlayer.Models.Base;
 
 using VkNet.Enums.Filters;
 
 namespace VKAvaloniaPlayer.Models
 {
-    public class SavedAccountModel : ImageModelBase
+    public class SavedAccountModel
     {
         public string? Name { get; set; }
         public long? UserID { get; set; }
         public string? Token { get; set; }
 
+        public ImageModel Image { get; set; }
+
         public bool Default { get; set; } = false;
 
-        public override void LoadBitmapAsync()
+        public SavedAccountModel()
+        {
+            Image = new ImageModel();
+        }
+        
+        public  void LoadAvatar()
         {
             try
             {
@@ -30,8 +36,11 @@ namespace VKAvaloniaPlayer.Models
                 {
                     var res = profileInfoAwaiter.GetResult();
                     if (res != null)
-                        Image = new Bitmap(
-                            new MemoryStream(await Utils.HttpClient.GetByteArrayAsync(res[0].Photo50.AbsoluteUri)));
+                    {
+                        Image.ImageUrl = res[0].Photo50.AbsoluteUri;
+                        Image.LoadBitmapAsync();
+                    }
+
                 });
             }
             catch (Exception ex)

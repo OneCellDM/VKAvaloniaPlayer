@@ -1,6 +1,6 @@
 ﻿namespace VKAvaloniaPlayer.ViewModels
 {
-    internal class FriendsViewModel : ViewModels.Base.DataViewModelBase <object>
+    internal class FriendsViewModel : ViewModels.Base.DataViewModelBase <FriendsViewModel>
     {
         public override void LoadData()
         {

@@ -13,7 +13,7 @@ namespace VKAvaloniaPlayer.ETC
 {
     public static class ExtensionsMethods
     {
-        public static void AddRange(this ObservableCollection<IVkModelBase>? DataCollection,
+        public static void AddRange(this ObservableCollection<AudioModel>? DataCollection,
             IEnumerable<Audio>? audios)
         {
             try
@@ -27,38 +27,36 @@ namespace VKAvaloniaPlayer.ETC
             }
         }
 
-        public static void AddRange(this ObservableCollection<IVkModelBase>? DataCollection,
+        public static void AddRange(this ObservableCollection<AudioAlbumModel>? DataCollection,
             VkCollection<AudioPlaylist> audios)
         {
-            try
-            {
+          
                 var itemCount = audios.Count();
                 for (var i = 0; i < itemCount; i++)
-                    DataCollection.Add(new AudioAlbumModel(audios[i]));
-            }
-            catch (Exception EX)
-            {
-            }
+                    DataCollection?.Add(new AudioAlbumModel(audios[i]));
+           
         }
 
         public static void StartLoadImages<T>(this ObservableCollection<T>? DataCollection) where T : IVkModelBase
         {
             try
             {
-                var itemCount = DataCollection.Count;
+                var itemCount = DataCollection?.Count;
                 for (var i = 0; i < itemCount; i++)
-                    if (!DataCollection[i].Cover.ImageIsloaded)
-                        DataCollection[i].Cover.LoadBitmapAsync();
+                {
+                    if (DataCollection[i] != null & !DataCollection[i].Image.ImageIsloaded)
+                        DataCollection[i].Image.LoadBitmapAsync();
+                }
             }
             catch (Exception EX)
             {
             }
         }
-
+        
         public static ObservableCollection<T> Shuffle<T>(this IEnumerable<T> collection)
         {
-            ObservableCollection<T> obscollection = new(collection);
-            Random rand = new();
+            ObservableCollection<T> obscollection = new (collection);
+            Random rand = new ();
             var itercount = collection.Count();
 
             for (var i = 0; i < itercount; i++)

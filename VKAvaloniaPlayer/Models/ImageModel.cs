@@ -15,24 +15,22 @@ using System.Threading.Tasks;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models.Interfaces;
 
-namespace VKAvaloniaPlayer.Models.Base
+namespace VKAvaloniaPlayer.Models
 {
-    public class ImageModelBase : ReactiveObject, IImageBase
+    public class ImageModel : ReactiveObject, IImageBase
     {
         public static Semaphore _Semaphore = new(5, 5);
-
-        [JsonIgnore] private Bitmap? _Image;
 
         public int DecodeWidth { get; set; }
 
         public string ImageUrl { get; set; }
         public bool ImageIsloaded { get; set; }
 
-        
+
         [JsonIgnore]
         [Reactive]
         public Bitmap? Image { get; set; }
-   
+
 
         public async Task<Stream?>? LoadImageStreamAsync()
         {
@@ -78,6 +76,6 @@ namespace VKAvaloniaPlayer.Models.Base
                 }
         }
 
-     
+
     }
 }

@@ -9,7 +9,7 @@ using VKAvaloniaPlayer.ViewModels.Base;
 
 namespace VKAvaloniaPlayer.ViewModels.Audios
 {
-    public class AlbumsViewModel : DataViewModelBase <AlbumsViewModel>
+    public class AlbumsViewModel : DataViewModelBase <AudioAlbumModel>
     {
      
         public AlbumsViewModel()

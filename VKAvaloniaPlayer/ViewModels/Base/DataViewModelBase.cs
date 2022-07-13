@@ -1,5 +1,4 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Controls.Presenters;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Threading;
@@ -15,7 +14,6 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 using VKAvaloniaPlayer.ETC;
-using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.Models.Interfaces;
 using VKAvaloniaPlayer.ViewModels.Exceptions;
 
@@ -34,12 +32,12 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
 
     }
-    public abstract class DataViewModelBase <T> : DataViewModelBase
+
+    public abstract class DataViewModelBase <T> : DataViewModelBase 
     {
-        protected ObservableCollection<IVkModelBase>? _AllDataCollection;
+        protected ObservableCollection<T>? _AllDataCollection;
 
         private IDisposable? _SearchDisposable;
-
 
         protected string _SearchText = string.Empty;
 
@@ -52,17 +50,10 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         [Reactive]
         public bool SearchIsVisible { get; set; }
 
-      
-
-        public static Action? LoadMusicsAction { get; set; }
-
         public int ResponseCount { get; set; }
 
         [Reactive]
-        public ObservableCollection<IVkModelBase>? DataCollection { get; set; }
-
-
-      
+        public ObservableCollection<T>? DataCollection { get; set; }
 
         public int Offset { get; set; }
 
@@ -71,10 +62,15 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         [Reactive]
         public int SelectedIndex { get; set; }
+
         public virtual void StartLoad() =>
           InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
 
-
+        public DataViewModelBase()
+        {
+            _AllDataCollection = new ObservableCollection<T>();
+            DataCollection = new ObservableCollection<T>();
+        }
         public void StartScrollChangedObservable(Action? action, Orientation orientation)
         {
 
@@ -122,40 +118,13 @@ namespace VKAvaloniaPlayer.ViewModels.Base
             ScrolledDisposible = null;
         }
 
-        public virtual async void LoadData()
+        public virtual void LoadData()
         {
         }
 
         public virtual void Search(string? text)
         {
-            try
-            {
-
-                if (string.IsNullOrEmpty(text))
-                {
-                    SelectedIndex = -1;
-                    DataCollection = _AllDataCollection;
-                    StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical);
-
-                }
-                else if (_AllDataCollection != null && _AllDataCollection.Count() > 0)
-                {
-                    StopScrollChandegObserVable();
-
-                    var searchRes = _AllDataCollection.Where(x =>
-                            x.Title.ToLower().Contains(text.ToLower()) ||
-                            x.Artist.ToLower().Contains(text.ToLower()))
-                        .Distinct();
-                    DataCollection = new ObservableCollection<IVkModelBase>(searchRes);
-                }
-
-                Task.Run(() => { DataCollection.StartLoadImages(); });
-            }
-            catch (Exception ex)
-            {
-                DataCollection = _AllDataCollection;
-                SearchText = "";
-            }
+           
         }
 
         public virtual void SelectedItem()
@@ -191,61 +160,10 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         {
             
         }
-        public virtual void Scrolled(object sender, ScrollChangedEventArgs args) =>
+        private  void Scrolled(object sender, ScrollChangedEventArgs args) =>
             ScrolledEventArgs = args;
 
 
     }
-
-
-public abstract class AudioViewModelBase : DataViewModelBase<IVkModelBase>
-{
-
-    public AudioListButtonsViewModel AudioListButtons { get; set; }
-
- 
-
-    public AudioViewModelBase()
-    {
-        SearchIsVisible = true;
-        AudioListButtons = new AudioListButtonsViewModel();
-        LoadMusicsAction = () =>
-        {
-            if (string.IsNullOrEmpty(_SearchText))
-                if (ResponseCount > 0 && IsLoading is false)
-                    InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
-        };
-
-
-        _AllDataCollection = new ObservableCollection<IVkModelBase>();
-        DataCollection = _AllDataCollection;
-    }
-        public override void SelectedItem()
-        {
-            Console.WriteLine("Item selected");
-            if (SelectedIndex > -1)
-                PlayerControlViewModel.SetPlaylist(
-                    new ObservableCollection<AudioModel>(DataCollection.Cast<AudioModel>().ToList()),
-                    SelectedIndex);
-        }
-        public override void SelectedItem(object sender, PointerPressedEventArgs args)
-        {
-          
-            var contentpress = args?.Source as ContentPresenter;
-
-            var model = contentpress?.Content as IVkModelBase;
-
-            if (model != null)
-            {
-                SelectedIndex = DataCollection.IndexOf(model);
-                SelectedItem();
-            }
-          
-        }
-    }
-
-        
-
-
-      
+    
 }

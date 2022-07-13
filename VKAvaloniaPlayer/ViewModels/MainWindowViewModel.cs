@@ -273,7 +273,7 @@ namespace VKAvaloniaPlayer.ViewModels
                 MenuSelectionIndex = 1;
 
                 if (CurrentAccountModel.Image is null)
-                    CurrentAccountModel.LoadBitmapAsync();
+                    CurrentAccountModel.LoadAvatar();
             });
 
             Events.VkApiChanged -= StaticObjects_VkApiChanged;

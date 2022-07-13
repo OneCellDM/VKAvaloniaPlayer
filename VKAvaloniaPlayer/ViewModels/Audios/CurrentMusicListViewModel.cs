@@ -31,7 +31,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
         private void PlayerControlViewModelOnSetPlaylistEvent(IEnumerable<AudioModel> audiocollection,
             int selectedindex)
         {
-            DataCollection = new ObservableCollection<IVkModelBase>();
+            DataCollection = new ObservableCollection<AudioModel>();
             DataCollection.AddRange(audiocollection);
             _AllDataCollection = DataCollection;
         }

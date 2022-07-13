@@ -61,7 +61,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                         IsLoading = true;
                         StopScrollChandegObserVable();
                         _AllDataCollection = DataCollection;
-                        DataCollection = new ObservableCollection<Models.Interfaces.IVkModelBase>();
+                        DataCollection = new ObservableCollection<AudioModel>();
                         while (true)
                         {
                             try

@@ -6,16 +6,16 @@ using VkNet.Model.Attachments;
 
 namespace VKAvaloniaPlayer.Models
 {
-    public class AudioAlbumModel : VkModelBase
+    public class AudioAlbumModel : VkAudioOrAlbumModelBase 
     {
         public AudioAlbumModel(AudioPlaylist audioPlaylist)
         {
-            Cover = new ImageModelBase
+            Image = new ImageModel
             {
                 Image = GlobalVars.DefaultAlbumImage,
                 DecodeWidth = 0
             };
-            ModelType = ModelTypes.Album;
+            
 
             Title = audioPlaylist.Title;
 
@@ -26,7 +26,7 @@ namespace VKAvaloniaPlayer.Models
             IsFollowing = audioPlaylist.IsFollowing;
 
             if (audioPlaylist.Photo != null)
-                Cover.ImageUrl = GetThumbUrl(audioPlaylist.Photo);
+                Image.ImageUrl = GetThumbUrl(audioPlaylist.Photo);
         }
 
         public bool IsFollowing { get; set; }

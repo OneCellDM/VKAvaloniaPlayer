@@ -10,7 +10,7 @@ using VkNet.Model.Attachments;
 
 namespace VKAvaloniaPlayer.Models
 {
-    public class AudioModel : VkModelBase
+    public class AudioModel : VkAudioOrAlbumModelBase
     {
         private int _DownloadPercent;
         private bool _IsDownload;
@@ -19,7 +19,7 @@ namespace VKAvaloniaPlayer.Models
         {
             Title = "Название";
             Artist = "Исполнитель";
-            Cover = new ImageModelBase
+            Image = new ImageModel
             {
                 DecodeWidth = 50,
                 Image = GlobalVars.DefaultMusicImage
@@ -27,12 +27,11 @@ namespace VKAvaloniaPlayer.Models
 
         }
 
-
-        public AudioModel(Audio VkModel) 
+        public AudioModel(Audio VkModel):this()
         {
            
             AccessKey = VkModel.AccessKey;
-            ModelType = ModelTypes.Audio;
+          
             Duration = VkModel.Duration;
             ID = (long)VkModel.Id;
             OwnerID = (long)VkModel.OwnerId;
@@ -41,7 +40,7 @@ namespace VKAvaloniaPlayer.Models
             Subtitle = VkModel.Subtitle;
 
             if (VkModel.Album != null && VkModel.Album.Thumb != null)
-                Cover.ImageUrl = GetThumbUrl(VkModel.Album.Thumb);
+                Image.ImageUrl = GetThumbUrl(VkModel.Album.Thumb);
         }
 
         public int DownloadPercent
@@ -64,7 +63,7 @@ namespace VKAvaloniaPlayer.Models
 
 
         public int Duration { get; set; }
-        public string AccessKey { get; set; }
+      
 
         public override string GetThumbUrl(AudioCover audioCover)
         {

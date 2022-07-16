@@ -43,10 +43,8 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         }
         public override void SelectedItem(object sender, PointerPressedEventArgs args)
         {
-          
-            var contentpress = args?.Source as ContentPresenter;
 
-            var model = contentpress?.Content as AudioModel;
+            var model = args?.GetContent<AudioModel>();
 
             if (model != null)
             {

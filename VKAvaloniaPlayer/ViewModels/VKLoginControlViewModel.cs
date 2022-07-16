@@ -54,7 +54,6 @@ namespace VKAvaloniaPlayer.ViewModels
             ToggleAccountsSidebarVisible();
             SavedAccounts.CollectionChanged += (sender, args) =>
             {
-                Console.WriteLine("collectionChanged");
                 SaveAccounts();
                 ToggleAccountsSidebarVisible();
             };
@@ -333,7 +332,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
         public virtual void SelectedItem(object sender, PointerPressedEventArgs args)
         {
-            var selectedAccount = (args?.Source as ContentPresenter).Content as SavedAccountModel;
+            var selectedAccount = args.GetContent<SavedAccountModel>();
             if (selectedAccount != null) AuthFromActiveAccount(selectedAccount);
         }
         public virtual void Scrolled(object sender, ScrollChangedEventArgs args)

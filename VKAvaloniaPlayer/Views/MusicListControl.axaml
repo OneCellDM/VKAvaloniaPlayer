@@ -64,7 +64,7 @@
                             <Border IsHitTestVisible="False" CornerRadius="10" Width="50" Height="50" 
                                 Margin="0,0,5,0" DockPanel.Dock="Left">
                                 <Border.Background>
-                                    <ImageBrush Source="{Binding Cover.Image}" Stretch="Uniform" />
+                                    <ImageBrush Source="{Binding Image.Bitmap}" Stretch="Uniform" />
                                 </Border.Background>
                             </Border>
                             <DockPanel Margin="5" MaxWidth="{Binding $parent.ActualWidth}">

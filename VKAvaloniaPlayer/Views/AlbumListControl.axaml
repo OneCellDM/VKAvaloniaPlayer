@@ -57,7 +57,7 @@
                     <StackPanel>
                         <Border IsHitTestVisible="False" CornerRadius="10" Width="120" Height="120">
                             <Border.Background>
-                                <ImageBrush Source="{Binding Cover.Image}" />
+                                <ImageBrush Source="{Binding Image.Bitmap}" />
                             </Border.Background>
                         </Border>
                         <TextBlock IsHitTestVisible="False" Width="120" Margin="10,3" TextAlignment="Center"

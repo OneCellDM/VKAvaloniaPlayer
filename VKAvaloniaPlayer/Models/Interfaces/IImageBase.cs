@@ -12,7 +12,7 @@ namespace VKAvaloniaPlayer.Models.Interfaces
         public string ImageUrl { get; set; }
         public bool ImageIsloaded { get; set; }
 
-        [JsonIgnore] public Bitmap? Image { get; set; }
+        [JsonIgnore] public Bitmap? Bitmap { get; set; }
 
         public Task<Stream?>? LoadImageStreamAsync();
 

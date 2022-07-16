@@ -87,12 +87,12 @@
                             <Ellipse IsHitTestVisible="False" Grid.Column="0" Fill="White" Width="50" Height="50">
                                 <i:Interaction.Behaviors>
 
-                                    <ia:DataTriggerBehavior Binding="{Binding  Image.Size.Height}"
+                                    <ia:DataTriggerBehavior Binding="{Binding  Image.Bitmap.Size.Height}"
                                                             ComparisonCondition="GreaterThan" Value="0">
 
                                         <ia:ChangePropertyAction PropertyName="Fill">
                                             <ia:ChangePropertyAction.Value>
-                                                <ImageBrush Source="{Binding Image}" />
+                                                <ImageBrush Source="{Binding Image.Bitmap}" />
                                             </ia:ChangePropertyAction.Value>
                                         </ia:ChangePropertyAction>
 

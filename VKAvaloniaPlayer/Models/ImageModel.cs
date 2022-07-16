@@ -29,7 +29,7 @@ namespace VKAvaloniaPlayer.Models
 
         [JsonIgnore]
         [Reactive]
-        public Bitmap? Image { get; set; }
+        public Bitmap? Bitmap { get; set; }
 
 
         public async Task<Stream?>? LoadImageStreamAsync()
@@ -54,7 +54,7 @@ namespace VKAvaloniaPlayer.Models
 
         public virtual async void LoadBitmapAsync()
         {
-            if (!string.IsNullOrEmpty(ImageUrl) && !ImageIsloaded)
+            if (string.IsNullOrEmpty(ImageUrl) is false && ImageIsloaded is false)
                 try
                 {
                     _Semaphore.WaitOne();
@@ -63,7 +63,7 @@ namespace VKAvaloniaPlayer.Models
                         if (imageStream is null)
                             return;
 
-                        Image = await Task.Run(() =>
+                        Bitmap = await Task.Run(() =>
                             DecodeWidth <= 0 ? new Bitmap(imageStream) : Bitmap.DecodeToWidth(imageStream, DecodeWidth)
                         );
 

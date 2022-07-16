@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Avalonia.Controls.Presenters;
+using Avalonia.Input;
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,6 +16,10 @@ namespace VKAvaloniaPlayer.ETC
 {
     public static class ExtensionsMethods
     {
+        public static T? GetContent<T>(this PointerPressedEventArgs eventArgs) where T : class
+        {
+            return (eventArgs?.Source as ContentPresenter)?.Content as T;
+        }
         public static void AddRange(this ObservableCollection<AudioModel>? DataCollection,
             IEnumerable<Audio>? audios)
         {
@@ -44,7 +51,7 @@ namespace VKAvaloniaPlayer.ETC
                 var itemCount = DataCollection?.Count;
                 for (var i = 0; i < itemCount; i++)
                 {
-                    if (DataCollection[i] != null & !DataCollection[i].Image.ImageIsloaded)
+                    if (DataCollection[i] != null)
                         DataCollection[i].Image.LoadBitmapAsync();
                 }
             }

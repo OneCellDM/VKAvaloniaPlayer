@@ -28,7 +28,7 @@
 
             <Ellipse Margin="5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="48" Height="48">
                 <Ellipse.Fill>
-                    <ImageBrush Source="{Binding CurrentAccountModel.Image}" />
+                    <ImageBrush Source="{Binding CurrentAccountModel.Image.Bitmap}" />
                 </Ellipse.Fill>
 
                 <i:Interaction.Behaviors>

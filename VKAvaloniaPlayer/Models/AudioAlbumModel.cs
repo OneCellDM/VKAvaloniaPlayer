@@ -12,7 +12,7 @@ namespace VKAvaloniaPlayer.Models
         {
             Image = new ImageModel
             {
-                Image = GlobalVars.DefaultAlbumImage,
+                Bitmap = GlobalVars.DefaultAlbumImage,
                 DecodeWidth = 0
             };
             

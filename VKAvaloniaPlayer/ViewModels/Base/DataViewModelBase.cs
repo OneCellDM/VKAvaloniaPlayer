@@ -160,7 +160,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         {
             
         }
-        private  void Scrolled(object sender, ScrollChangedEventArgs args) =>
+        public void Scrolled(object sender, ScrollChangedEventArgs args) =>
             ScrolledEventArgs = args;
 
 

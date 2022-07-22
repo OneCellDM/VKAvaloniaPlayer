@@ -33,14 +33,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         };
 
     }
-        public override void SelectedItem()
-        {
-            Console.WriteLine("Item selected");
-            if (SelectedIndex > -1)
-                PlayerControlViewModel.SetPlaylist(
-                    new ObservableCollection<AudioModel>(DataCollection.Cast<AudioModel>().ToList()),
-                    SelectedIndex);
-        }
+      
         public override void SelectedItem(object sender, PointerPressedEventArgs args)
         {
 
@@ -49,7 +42,11 @@ namespace VKAvaloniaPlayer.ViewModels.Base
             if (model != null)
             {
                 SelectedIndex = DataCollection.IndexOf(model);
-                SelectedItem();
+
+                if (SelectedIndex > -1)
+                    PlayerControlViewModel.SetPlaylist(
+                        new ObservableCollection<AudioModel>(DataCollection.Cast<AudioModel>().ToList()),
+                        SelectedIndex);
             }
           
         }
@@ -76,7 +73,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
                     DataCollection = new ObservableCollection<AudioModel>(searchRes);
                 }
 
-                Task.Run(() => { DataCollection.StartLoadImages(); });
+                DataCollection.StartLoadImagesAsync();
             }
             catch (Exception ex)
             {

@@ -1,4 +1,6 @@
-﻿using ReactiveUI;
+﻿using Avalonia.Input;
+
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using System.Threading.Tasks;
@@ -31,17 +33,21 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
         public bool MusicFromAlbumIsVisible { get; set; }
 
 
-        public override void SelectedItem()
+        public override void SelectedItem(object sender, PointerPressedEventArgs args)
         {
-            if (SelectedIndex > -1 && DataCollection.Count > 0)
+
+            var item = args?.GetContent<AudioAlbumModel>();
+            if (item != null)
             {
-                MusicFromAlbumViewModel = new MusicFromAlbumViewModel((AudioAlbumModel)DataCollection[SelectedIndex]);
+                MusicFromAlbumViewModel = new MusicFromAlbumViewModel(item);
                 MusicFromAlbumViewModel.StartLoad();
                 MusicFromAlbumIsVisible = true;
             }
+            
         }
 
-        public override void LoadData()
+
+        protected override void LoadData()
         {
             if (GlobalVars.CurrentAccount?.UserID != null)
             {
@@ -51,7 +57,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                 {
                     DataCollection.AddRange(res);
 
-                    Task.Run(() => { DataCollection.StartLoadImages(); });
+                    DataCollection.StartLoadImagesAsync();
                 }
             }
         }

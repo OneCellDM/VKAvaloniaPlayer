@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.Models.Interfaces;
@@ -20,28 +21,26 @@ namespace VKAvaloniaPlayer.ETC
         {
             return (eventArgs?.Source as ContentPresenter)?.Content as T;
         }
+      
         public static void AddRange(this ObservableCollection<AudioModel>? DataCollection,
             IEnumerable<Audio>? audios)
         {
-            try
-            {
-                var itemCount = audios.Count();
-                for (var i = 0; i < itemCount; i++)
-                    DataCollection.Add(new AudioModel(audios.ElementAt(i)));
-            }
-            catch (Exception EX)
-            {
-            }
+               if (audios != null)
+               {
+                    foreach (var item in audios)
+                        DataCollection?.Add(new AudioModel(item));
+               }
+           
         }
 
         public static void AddRange(this ObservableCollection<AudioAlbumModel>? DataCollection,
-            VkCollection<AudioPlaylist> audios)
+            IEnumerable<AudioPlaylist> audioPlayList)
         {
-          
-                var itemCount = audios.Count();
-                for (var i = 0; i < itemCount; i++)
-                    DataCollection?.Add(new AudioAlbumModel(audios[i]));
-           
+            if (audioPlayList != null)
+            {
+                foreach (var item in audioPlayList)
+                    DataCollection?.Add(new AudioAlbumModel(item));
+            }
         }
 
         public static void StartLoadImages<T>(this ObservableCollection<T>? DataCollection) where T : IVkModelBase
@@ -59,7 +58,12 @@ namespace VKAvaloniaPlayer.ETC
             {
             }
         }
-        
+        public static void StartLoadImagesAsync<T>(this ObservableCollection<T>? DataCollection) where T : IVkModelBase
+        {
+            Task.Run(()=>StartLoadImages(DataCollection));
+        }
+
+
         public static ObservableCollection<T> Shuffle<T>(this IEnumerable<T> collection)
         {
             ObservableCollection<T> obscollection = new (collection);

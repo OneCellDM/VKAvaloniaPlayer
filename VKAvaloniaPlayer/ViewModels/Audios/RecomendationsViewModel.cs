@@ -16,33 +16,21 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
         {
             StartSearchObservable(new TimeSpan(0, 0, 0, 0, 500));
             StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical);
+
             AudioListButtons.AudioRemoveIsVisible = false;
         }
 
-
-        public override void LoadData()
+        protected override void LoadData()
         {
-            Task.Run(() =>
+            var res = GlobalVars.VkApi?.Audio.GetRecommendations(count: 500, offset: (uint)Offset);
+            if (res != null)
             {
-                IsLoading = true;
-                try
-                {
-                    var res = GlobalVars.VkApi?.Audio.GetRecommendations(count: 500, offset: (uint)Offset);
-                    if (res != null)
-                    {
-                        DataCollection.AddRange(res);
+                DataCollection.AddRange(res);
 
-                        Task.Run(() => { DataCollection.StartLoadImages(); });
-                        Offset += res.Count;
-                        ResponseCount = res.Count;
-                    }
-                }
-                catch (VkAuthorizationException exception)
-                {
-                }
-
-                IsLoading = false;
-            });
+                DataCollection.StartLoadImagesAsync();
+                Offset += res.Count;
+                ResponseCount = res.Count;
+            }
         }
     }
 }

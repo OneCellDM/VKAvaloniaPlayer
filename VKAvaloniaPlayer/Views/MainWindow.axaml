@@ -12,7 +12,6 @@
         MinWidth="650" MinHeight="400"
         Width="900" Height="600">
 
-
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -185,8 +184,8 @@
         <views:PlayerControl DataContext="{Binding PlayerContext}" Margin="5,5,5,0" Grid.Column="1" />
 
         <views:MusicListControl
-            IsVisible="{Binding DataContext.CurrentDataViewIsVisible, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-            DataContext="{Binding DataContext.CurrentDataViewModel, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+            IsVisible="{Binding DataContext.CurrentAudioViewIsVisible, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+            DataContext="{Binding DataContext.CurrentAudioViewModel, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
             Background="White" Grid.Row="1" Grid.Column="1" />
 
         <views:AlbumListControl
@@ -198,7 +197,11 @@
             IsVisible="{Binding DataContext.VkLoginIsVisible, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
             Grid.RowSpan="2" Grid.ColumnSpan="2" Background="White"
             DataContext="{Binding  VkLoginViewModel}" />
-
+		
+        <views:RepostView   Background="White" Grid.Row="1" Grid.Column="1"
+							 DataContext="{Binding DataContext.RepostViewModel, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                              IsVisible="{Binding DataContext.RepostViewIsVisible,
+							 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
         <views:ExceptionView
             DataContext="{Binding DataContext.ExceptionViewModel, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
             IsVisible="{Binding DataContext.ExceptionIsVisible,

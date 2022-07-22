@@ -45,6 +45,10 @@ namespace VKAvaloniaPlayer.ViewModels
         public static PlayerControlViewModel Instance =>
             _Instance is null ? _Instance = new PlayerControlViewModel() : _Instance;
 
+        public static event SetCollection? SetPlaylistEvent;
+
+        public static event OpenRepostWindowDelegate? OpenRepostWindowEvent;
+
         public bool Repeat
         {
             get => _Repeat;
@@ -162,9 +166,9 @@ namespace VKAvaloniaPlayer.ViewModels
         public IReactiveCommand RepostCommand { get; set; }
 
 
-        public static event SetCollection? SetPlaylistEvent;
+        
 
-        public PlayerControlViewModel()
+        private PlayerControlViewModel()
         {
             PlayCommand = ReactiveCommand.Create(() =>
             {
@@ -209,10 +213,7 @@ namespace VKAvaloniaPlayer.ViewModels
                 }
             });
 
-            RepostCommand = ReactiveCommand.Create(() =>
-            {
-
-            });
+            RepostCommand = ReactiveCommand.Create(() => Events.AudioRepostEventCall(CurrentAudio));
             _Timer.Interval = 1000;
             _Timer.Elapsed += _Timer_Elapsed;
             SetPlaylistEvent += PlayerControlViewModel_SetPlaylistEvent;

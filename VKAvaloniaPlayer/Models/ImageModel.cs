@@ -19,7 +19,7 @@ namespace VKAvaloniaPlayer.Models
 {
     public class ImageModel : ReactiveObject, IImageBase
     {
-        public static Semaphore _Semaphore = new(5, 5);
+        public static Semaphore _Semaphore = new(50, 50);
 
         public int DecodeWidth { get; set; }
 

@@ -22,7 +22,7 @@ namespace VKAvaloniaPlayer.ETC
     {
         public delegate void TaskErrorResponsed(InvokeHandlerObject handlerObject, Exception ex);
 
-        public static event TaskErrorResponsed TaskErrorResponsedEvent;
+        public static event TaskErrorResponsed? TaskErrorResponsedEvent;
 
         public static async void Start(InvokeHandlerObject handlerObject)
         {

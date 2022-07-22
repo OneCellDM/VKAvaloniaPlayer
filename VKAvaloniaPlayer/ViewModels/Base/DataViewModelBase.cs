@@ -118,7 +118,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
             ScrolledDisposible = null;
         }
 
-        public virtual void LoadData()
+        protected virtual void LoadData()
         {
         }
 

@@ -30,7 +30,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
             {
                 if (text is not null && text.Length > 0)
                 {
-                    IsLoading = true;
+                    
                     DataCollection?.Clear();
                     ResponseCount = 0;
                     Offset = 0;
@@ -39,7 +39,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
             });
         }
 
-        public override void LoadData()
+        protected override void LoadData()
         {
             var res = GlobalVars.VkApi?.Audio.Search(new AudioSearchParams
             {
@@ -52,7 +52,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                 DataCollection.AddRange(res);
                 ResponseCount = res.Count;
 
-                Task.Run(() => { DataCollection.StartLoadImages(); });
+                DataCollection.StartLoadImagesAsync();
                 Offset += res.Count;
             }
         }

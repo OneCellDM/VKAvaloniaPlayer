@@ -3,6 +3,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using VKAvaloniaPlayer.ETC;
@@ -15,7 +16,8 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
 {
     public sealed class AllMusicViewModel : AudioViewModelBase
     {
-
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        bool Searching = false;
         public AllMusicViewModel()
 
         {
@@ -41,66 +43,76 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
 
         public override void Search(string? text)
         {
-            Task.Run(() =>
+            if (Searching == true)
             {
-                try
+                cancellationTokenSource?.TryReset();
+                Searching = false;
+                Search(text);
+            }
+            else
+            {
+                Searching = true;
+                Task.Run(() =>
                 {
-
-                    DataCollection = _AllDataCollection;
-                    if (string.IsNullOrEmpty(text))
+                    try
                     {
-                        SelectedIndex = -1;
+
                         DataCollection = _AllDataCollection;
-                        Offset = DataCollection.Count();
-                        Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
-                        StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical));
-                    }
-                    else
-                    {
-                        Offset = 0;
-                        IsLoading = true;
-                        StopScrollChandegObserVable();
-                        _AllDataCollection = DataCollection;
-                        DataCollection = new ObservableCollection<AudioModel>();
-                        while (true)
+                        if (string.IsNullOrEmpty(text))
                         {
-                            try
-                            {
-                                var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams
-                                {
-                                    Offset = Offset,
-                                    Count = 500,
-                                });
-                                if (res != null && res.Count > 0)
-                                {
-                                    var searchRes = res.Where(x =>
-                                    x.Title.ToLower().Contains(text.ToLower()) ||
-                                    x.Artist.ToLower().Contains(text.ToLower())).Distinct();
-
-                                    DataCollection.AddRange(searchRes);
-                                    ResponseCount = res.Count;
-                                    Offset += res.Count;
-                                }
-                                else break;
-                            }
-                            catch (Exception ex)
-                            {
-                                break;
-                            }
+                            SelectedIndex = -1;
+                            DataCollection = _AllDataCollection;
+                            Offset = DataCollection.Count();
+                            Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
+                            StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical));
                         }
-                        Task.Run(() => { DataCollection.StartLoadImages(); });
+                        else
+                        {
+                            Offset = 0;
+                            IsLoading = true;
+                            StopScrollChandegObserVable();
+                            _AllDataCollection = DataCollection;
+                            DataCollection = new ObservableCollection<AudioModel>();
+                            while (true)
+                            {
+                                try
+                                {
+                                    var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams
+                                    {
+                                        Offset = Offset,
+                                        Count = 500,
+                                    });
+                                    if (res != null && res.Count > 0)
+                                    {
+                                        var searchRes = res.Where(x =>
+                                        x.Title.ToLower().Contains(text.ToLower()) ||
+                                        x.Artist.ToLower().Contains(text.ToLower())).Distinct();
+
+                                        DataCollection.AddRange(searchRes);
+                                        ResponseCount = res.Count;
+                                        Offset += res.Count;
+                                    }
+                                    else break;
+                                }
+                                catch (Exception ex)
+                                {
+                                    break;
+                                }
+                            }
+                            DataCollection.StartLoadImagesAsync();
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    DataCollection = _AllDataCollection;
-                    SearchText = "";
-                }
-                finally
-                {
-                    IsLoading = false;
-                }
-            });
+                    catch (Exception ex)
+                    {
+                        DataCollection = _AllDataCollection;
+                        SearchText = "";
+                    }
+                    finally
+                    {
+                        IsLoading = false;
+                    }
+                }, cancellationTokenSource.Token);
+            }
         }
 
 
@@ -109,7 +121,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
 
 
 
-        public override void LoadData()
+        protected override void LoadData()
         {
             var res = GlobalVars.VkApi?.Audio.Get(new AudioGetParams
             {

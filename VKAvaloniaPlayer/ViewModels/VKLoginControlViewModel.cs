@@ -33,7 +33,7 @@ namespace VKAvaloniaPlayer.ViewModels
     {
         const int Port = 2654;
         private const string AuthUrl =
-           @"https://oauth.vk.com/oauth/authorize?client_id=5776857" +
+           @"https://oauth.vk.com/oauth/authorize?client_id=6463690" +
            "&scope=1073737727" +
            "&redirect_uri=https://oauth.vk.com/blank.html" +
            "&display=mobile" +

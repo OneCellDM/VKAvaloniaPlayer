@@ -11,6 +11,7 @@ namespace VKAvaloniaPlayer.ETC
     public static class Utils
     {
         public static readonly HttpClient HttpClient = new();
+        public static readonly Random Random = new Random();
 
         public static Bitmap LoadImageFromAssets(string path)
         {

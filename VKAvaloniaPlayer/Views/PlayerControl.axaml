@@ -55,7 +55,7 @@
             <Border Grid.RowSpan="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                     CornerRadius="10" Width="50" Height="50">
                 <Border.Background>
-                    <ImageBrush Source="{Binding CurrentAudio.Cover.Image}" Stretch="Fill" />
+                    <ImageBrush Source="{Binding CurrentAudio.Image.Bitmap}" Stretch="Fill" />
                 </Border.Background>
             </Border>
             <StackPanel Grid.Column="1" Margin="10,12,0,0">
@@ -148,6 +148,15 @@
                     Mode=TwoWay,
                     RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" />
             </Button>
+			<Button Background="Transparent">
+				<Path Data="M.75 0c-.41 0-.75.34-.75.75v5.5c0 .41.34.75.75.75h4.5c.41 0 .75-.34.75-.75v-1.25h-1v1h-4v-5h2v-1h-2.25zm5.25 0v1c-2.05 0-3.7 1.54-3.94 3.53.21-.88.99-1.53 1.94-1.53h2v1l2-2-2-2z" />
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="Click">
+						<ia:InvokeCommandAction
+							Command="{Binding RepostCommand}" />
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+			</Button>
 
             <Slider Grid.Column="6" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="0,0,0,-8"
                     Minimum="0"

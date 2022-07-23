@@ -35,21 +35,56 @@ namespace VKAvaloniaPlayer.Views
                o => o.NotifyTitleForeground,
                (o, v) => o.NotifyTitleForeground = v);
 
+        public static readonly DirectProperty<NotifyControl, int?> NotifyMessageSizeProperty =
+            AvaloniaProperty.RegisterDirect<NotifyControl, int?>(
+                nameof(NotifyMessageSize),
+                o => o.NotifyMessageSize,
+                (o, v) => o.NotifyMessageSize = v);
+
+        public static readonly DirectProperty<NotifyControl, int?> NotifyTitleSizeProperty =
+           AvaloniaProperty.RegisterDirect<NotifyControl, int?>(
+               nameof(NotifyTitleSize),
+               o => o.NotifyTitleSize,
+               (o, v) => o.NotifyTitleSize = v);
+
+        public static readonly DirectProperty<NotifyControl, FontWeight?> NotifyMessageFontWeightProperty =
+            AvaloniaProperty.RegisterDirect<NotifyControl, FontWeight?>(
+                nameof(NotifyMessageFontWeight),
+                o => o.NotifyMessageFontWeight,
+                (o, v) => o.NotifyMessageFontWeight = v);
+
+        public static readonly DirectProperty<NotifyControl, FontWeight?> NotifyTitleFontWeightProperty =
+           AvaloniaProperty.RegisterDirect<NotifyControl, FontWeight?>(
+               nameof(NotifyTitleFontWeight),
+               o => o.NotifyTitleFontWeight,
+               (o, v) => o.NotifyTitleFontWeight = v);
+
+
+
         [Reactive]
         public string? NotifyTitle { get; set; }
         [Reactive]
         public string? NotifyMessage { get; set; }
 
         [Reactive]
-        public IBrush? NotifyTitleForeground { get; set; }
+        public int? NotifyTitleSize { get; set; } = 16;
         [Reactive]
-        public IBrush? NotifyMessageForeground { get; set; }
+        public int? NotifyMessageSize { get; set; } = 16;
 
+        [Reactive]
+        public IBrush? NotifyTitleForeground { get; set; } = Brushes.Black;
+        [Reactive]
+        public IBrush? NotifyMessageForeground { get; set; } = Brushes.Black;
 
+        [Reactive]
+        public FontWeight? NotifyTitleFontWeight { get; set; } = FontWeight.Bold;
+        [Reactive]
+        public FontWeight? NotifyMessageFontWeight { get; set; } 
 
         public NotifyControl()
         {
             InitializeComponent();
+            this.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Center;
         }
 
         private void InitializeComponent()

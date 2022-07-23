@@ -4,24 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VKAvaloniaPlayer.Views.NotifyControl">
-	<UserControl.Styles>
-		<Style Selector="TextBlock">
-			<Setter Property="FontSize" Value="{TemplateBinding FontSize}"/>
-			<Setter Property="FontFamily" Value="{TemplateBinding FontFamily}"/>
-		</Style>
-	</UserControl.Styles>
+	
 	<UserControl.Template>
 		<ControlTemplate>
-			<Grid Background="{TemplateBinding Background}">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
-				<TextBlock Grid.Row="0" Foreground="{TemplateBinding NotifyTitleForeground}"
-						   Text="{TemplateBinding  NotifyTitle}"/>
-				<TextBlock Grid.Row="1" Foreground="{TemplateBinding NotifyMessageForeground}"
-						   Text="{TemplateBinding  NotifyMessage}"/>
-			</Grid>
-		</ControlTemplate>
+
+
+			<Border Background="{TemplateBinding Background}"
+				CornerRadius="{TemplateBinding CornerRadius}"
+					BorderBrush="{TemplateBinding BorderBrush}"
+					BorderThickness="{TemplateBinding BorderThickness}">
+				<Grid  Margin="10">
+					<Grid.RowDefinitions>
+						<RowDefinition />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="0"
+							   Margin="{TemplateBinding Padding}"
+							   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							   FontSize="{TemplateBinding NotifyTitleSize}"
+							   FontWeight="{TemplateBinding NotifyTitleFontWeight}"
+							   Foreground="{TemplateBinding NotifyTitleForeground}"
+							   Text="{TemplateBinding  NotifyTitle}"/>
+
+					<TextBlock Grid.Row="1"
+							   Margin="{TemplateBinding Padding}"
+							   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							   FontSize="{TemplateBinding NotifyMessageSize}"
+							   FontWeight="{TemplateBinding NotifyMessageFontWeight}"
+							   Foreground="{TemplateBinding NotifyMessageForeground}"
+							   Text="{TemplateBinding  NotifyMessage}"/>
+				</Grid>
+			</Border>
+
+				</ControlTemplate>
 	</UserControl.Template>
 </UserControl>

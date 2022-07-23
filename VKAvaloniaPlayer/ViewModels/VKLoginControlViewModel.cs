@@ -116,10 +116,10 @@ namespace VKAvaloniaPlayer.ViewModels
 
 
 
-            RemoveAccountCommand = ReactiveCommand.Create((RoutedEventArgs e) =>
+            RemoveAccountCommand = ReactiveCommand.Create<SavedAccountModel>(account =>
             {
-                var accountModel = (e.Source as Button)?.DataContext as SavedAccountModel;
-                SavedAccounts.Remove(accountModel);
+                if(account != null)
+                    SavedAccounts.Remove(account);
             });
 
 

@@ -29,11 +29,11 @@ namespace VKAvaloniaPlayer.ViewModels
         private static PlayerControlViewModel _Instance;
 
 
-        private AudioModel _CurrentAudio = new() { Duration = 60 };
+        private AudioModel _CurrentAudio;
         private bool _Mute;
         private bool _pauseButtonIsVisible;
         private bool _playButtonIsVisible = true;
-        private int _PlayPosition = 20;
+        private int _PlayPosition = 0;
         private bool _Repeat;
         private bool _Shuffling;
         private Thread? _thread;
@@ -96,8 +96,7 @@ namespace VKAvaloniaPlayer.ViewModels
             set
             {
                 this.RaiseAndSetIfChanged(ref _Volume, value);
-                if (Volume == 0)
-                    Mute = true;
+                if (Volume == 0)Mute = true;
                 else Mute = false;
                 Player.SetVolume(_Volume);
             }
@@ -110,13 +109,26 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 try
                 {
-                    this.RaiseAndSetIfChanged(ref _CurrentAudio, value);
-
+                    PlayPosition = 0;
+                    
+                    _Timer?.Stop();
+                    Player.Stop();
                     if (_thread != null)
                     {
                         _thread.Interrupt();
                         _thread.Join(1000);
                     }
+
+                    if (value is null)
+                    {
+                        this.RaiseAndSetIfChanged(ref _CurrentAudio, new AudioModel()
+                        {
+                            Duration = 0,
+                        });
+                        return;
+                    }
+
+                    this.RaiseAndSetIfChanged(ref _CurrentAudio, value);
 
                     PauseButtonVisible();
 
@@ -132,6 +144,8 @@ namespace VKAvaloniaPlayer.ViewModels
                     _thread.Priority = ThreadPriority.Lowest;
                     _thread.IsBackground = true;
                     _thread.Start();
+
+                   
                 }
                 catch (Exception ex)
                 {
@@ -170,6 +184,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
         private PlayerControlViewModel()
         {
+            CurrentAudio = null;
             PlayCommand = ReactiveCommand.Create(() =>
             {
                 if (Player.Play())
@@ -258,7 +273,7 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 PlayNext();
             }
-            else if ((PlayPosition == CurrentAudio.Duration) & Repeat)
+            else if ((PlayPosition == CurrentAudio.Duration) && Repeat)
             {
                 Player.Update();
                 Player.Play();
@@ -269,8 +284,9 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             if (PlayList != null)
             {
-                var index = PlayList.ToList().IndexOf(CurrentAudio);
-                if (index < PlayList.Count() - 1) CurrentAudio = PlayList.ToList()[index + 1];
+                var list = PlayList.ToList();
+                var index = list.IndexOf(CurrentAudio);
+                if (index < list.Count - 1) CurrentAudio = list[index + 1];
             }
         }
 
@@ -278,8 +294,9 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             if (PlayList != null)
             {
-                var index = PlayList.ToList().IndexOf(CurrentAudio);
-                if (index > 0) CurrentAudio = PlayList.ToList()[index - 1];
+                var list = PlayList.ToList();
+                var index = list.IndexOf(CurrentAudio);
+                if (index > 0) CurrentAudio =list[index - 1];
             }
         }
     }

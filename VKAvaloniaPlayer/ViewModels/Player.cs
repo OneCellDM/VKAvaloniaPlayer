@@ -64,7 +64,8 @@ namespace VKAvaloniaPlayer.ViewModels
 
             public static bool Play()
             {
-                return Bass.ChannelPlay(_stream);
+                Bass.Start();
+                return  Bass.ChannelPlay(_stream);
             }
 
 
@@ -72,8 +73,9 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 try
                 {
-                    Bass.ChannelStop(_stream);
-                    Bass.StreamFree(_stream);
+                    Bass.Stop();
+                    if (_stream != 0)
+                        Bass.StreamFree(_stream);
                     return true;
                 }
                 catch (Exception)

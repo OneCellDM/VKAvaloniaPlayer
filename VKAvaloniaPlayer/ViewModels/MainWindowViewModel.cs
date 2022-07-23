@@ -293,8 +293,9 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             try
             {
-                Player.Stop();
-                PlayerControlViewModel.Instance.CurrentAudio = null;
+                
+                PlayerContext.CurrentAudio = null;
+                
 
             }
             catch (Exception EX)
@@ -303,6 +304,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
             CurrentAudioViewIsVisible = false;
             AlbumsIsVisible = false;
+            RepostViewIsVisible = false;
             VkLoginIsVisible = true;
 
             AlbumsViewModel?.DataCollection?.Clear();
@@ -310,6 +312,7 @@ namespace VKAvaloniaPlayer.ViewModels
             _AllMusicListViewModel?.DataCollection?.Clear();
             _SearchViewModel?.DataCollection?.Clear();
 
+            RepostViewModel = null;
             CurrentAudioViewModel = null;
             AlbumsViewModel = null;
             _RecomendationsViewModel = null;

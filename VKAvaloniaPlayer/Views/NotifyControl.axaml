@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VKAvaloniaPlayer.Views.NotifyControl">
+	<UserControl.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="FontSize" Value="{TemplateBinding FontSize}"/>
+			<Setter Property="FontFamily" Value="{TemplateBinding FontFamily}"/>
+		</Style>
+	</UserControl.Styles>
+	<UserControl.Template>
+		<ControlTemplate>
+			<Grid Background="{TemplateBinding Background}">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<TextBlock Grid.Row="0" Foreground="{TemplateBinding NotifyTitleForeground}"
+						   Text="{TemplateBinding  NotifyTitle}"/>
+				<TextBlock Grid.Row="1" Foreground="{TemplateBinding NotifyMessageForeground}"
+						   Text="{TemplateBinding  NotifyMessage}"/>
+			</Grid>
+		</ControlTemplate>
+	</UserControl.Template>
+</UserControl>

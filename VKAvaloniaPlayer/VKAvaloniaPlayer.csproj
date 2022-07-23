@@ -47,6 +47,9 @@
         <Compile Update="Views\ExceptionView.axaml.cs">
             <DependentUpon>ExceptionView.axaml</DependentUpon>
         </Compile>
+        <Compile Update="Views\NotifyControl.axaml.cs">
+          <DependentUpon>NotifyControl.axaml</DependentUpon>
+        </Compile>
         <Compile Update="Views\RepostView.axaml.cs">
           <DependentUpon>RepostView.axaml</DependentUpon>
         </Compile>

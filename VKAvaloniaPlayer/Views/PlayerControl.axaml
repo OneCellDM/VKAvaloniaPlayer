@@ -46,6 +46,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="0.2*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -72,7 +73,7 @@
                 </DockPanel>
                 <TextBlock Text="{Binding CurrentAudio.Artist}" TextTrimming="CharacterEllipsis" />
             </StackPanel>
-            <Slider Grid.Row="1" Grid.ColumnSpan="6" Grid.Column="1" Value="{Binding Path=PlayPosition}"
+            <Slider Grid.Row="1" Grid.ColumnSpan="8" Grid.Column="1" Value="{Binding Path=PlayPosition}"
                     Maximum="{Binding Path=CurrentAudio.Duration}" Margin="11,-10,0,0">
                 <i:Interaction.Behaviors>
                     <ia:EventTriggerBehavior EventName="PointerCaptureLost">
@@ -130,8 +131,19 @@
                     Mode=TwoWay,
                     RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" />
             </Button>
-
-            <Button Command="{Binding MuteToggleCommand}" Grid.Column="5" VerticalAlignment="Bottom" Foreground="Gray"
+			<Button Background="Transparent" Grid.Column="5"  VerticalAlignment="Bottom">
+				<Path Data="M.75 0c-.41 0-.75.34-.75.75v5.5c0 .41.34.75.75.75h4.5c.41 0 .75-.34.75-.75v-1.25h-1v1h-4v-5h2v-1h-2.25zm5.25 0v1c-2.05 0-3.7 1.54-3.94 3.53.21-.88.99-1.53 1.94-1.53h2v1l2-2-2-2z"
+					  Stretch="Fill" Width="{StaticResource PlayerButtonSize}" Height="{StaticResource PlayerButtonSize}"
+					  Fill="Gray"
+					 />
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="Click">
+						<ia:InvokeCommandAction
+							Command="{Binding RepostCommand}" />
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+			</Button>
+            <Button Command="{Binding MuteToggleCommand}" Grid.Column="6" VerticalAlignment="Bottom" Foreground="Gray"
                     Background="Transparent">
                 <i:Interaction.Behaviors>
                     <ia:DataTriggerBehavior Binding="{Binding Mute}" ComparisonCondition="Equal" Value="False">
@@ -148,17 +160,9 @@
                     Mode=TwoWay,
                     RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" />
             </Button>
-			<Button Background="Transparent">
-				<Path Data="M.75 0c-.41 0-.75.34-.75.75v5.5c0 .41.34.75.75.75h4.5c.41 0 .75-.34.75-.75v-1.25h-1v1h-4v-5h2v-1h-2.25zm5.25 0v1c-2.05 0-3.7 1.54-3.94 3.53.21-.88.99-1.53 1.94-1.53h2v1l2-2-2-2z" />
-				<i:Interaction.Behaviors>
-					<ia:EventTriggerBehavior EventName="Click">
-						<ia:InvokeCommandAction
-							Command="{Binding RepostCommand}" />
-					</ia:EventTriggerBehavior>
-				</i:Interaction.Behaviors>
-			</Button>
+			
 
-            <Slider Grid.Column="6" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="0,0,0,-8"
+            <Slider Grid.Column="7" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="0,0,0,-8"
                     Minimum="0"
                     Maximum="1"
                     SmallChange="0.1"

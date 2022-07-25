@@ -162,10 +162,15 @@ namespace VKAvaloniaPlayer.ViewModels
                             RandomId = Utils.Random.Next(),
                             Attachments = GlobalVars.VkApi.Audio.GetById(new String[] { AudioModel.GetAudioIDFormatWithAccessKey() }),
                         });
+                        Notify.NotifyManager.Instance.PopMessage(
+                            new Notify.NotifyData("Успешно отправлено","Аудиозапись отправлена: "+item.Title
+                            ,TimeSpan.FromSeconds(2)));
                     }
                     catch (Exception)
                     {
-                        
+                        Notify.NotifyManager.Instance.PopMessage(
+                            new Notify.NotifyData("Ошибка отправки","Возникла проблема при отправке сообщения",
+                            TimeSpan.FromSeconds(2)));
                     }
                     finally { CloseViewEvent?.Invoke(); }
                 });

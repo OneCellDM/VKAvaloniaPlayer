@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="using:VKAvaloniaPlayer.Views"
+          xmlns:Notify="using:VKAvaloniaPlayer.Notify"
         xmlns:i="using:Avalonia.Xaml.Interactivity"
         xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
         mc:Ignorable="d " d:DesignWidth="650" d:DesignHeight="300"
@@ -202,24 +203,22 @@
 							 DataContext="{Binding DataContext.RepostViewModel, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                               IsVisible="{Binding DataContext.RepostViewIsVisible,
 							 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
-		<views:NotifyControl
+		<Notify:NotifyControl
 			Grid.Row="1"
             Grid.Column="2"
             Grid.RowSpan="6"
-			IsVisible="False"
+		
 			CornerRadius="5,0,0,0"
-
-			NotifyTitle="Оповещение"
-			NotifyMessage="Загрузка завершена"
 			VerticalAlignment="Bottom"
 			HorizontalAlignment="Right"
 			Padding="5"
 			Width="300"  BorderThickness="2,2,0,0" BorderBrush="{DynamicResource ControlsColor}" >
-			<views:NotifyControl.Background>
+			<Notify:NotifyControl.Background>
 				<SolidColorBrush Color="White" Opacity="0.9" />
-			</views:NotifyControl.Background>
+			</Notify:NotifyControl.Background>
+          
 			
-		</views:NotifyControl>
+		</Notify:NotifyControl>
 		<views:ExceptionView
 			
             DataContext="{Binding DataContext.ExceptionViewModel, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"

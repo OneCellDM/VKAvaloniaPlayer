@@ -3,13 +3,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="VKAvaloniaPlayer.Views.NotifyControl">
+             x:Class="VKAvaloniaPlayer.Notify.NotifyControl"
+			 
+			 >
 	
 	<UserControl.Template>
 		<ControlTemplate>
 
-
-			<Border Background="{TemplateBinding Background}"
+			<Border 
+				
+				Background="{TemplateBinding Background}"
 				CornerRadius="{TemplateBinding CornerRadius}"
 					BorderBrush="{TemplateBinding BorderBrush}"
 					BorderThickness="{TemplateBinding BorderThickness}">
@@ -25,7 +28,7 @@
 							   FontSize="{TemplateBinding NotifyTitleSize}"
 							   FontWeight="{TemplateBinding NotifyTitleFontWeight}"
 							   Foreground="{TemplateBinding NotifyTitleForeground}"
-							   Text="{TemplateBinding  NotifyTitle}"/>
+							   Text="{TemplateBinding  NotifyTitle,Mode=TwoWay}"/>
 
 					<TextBlock Grid.Row="1"
 							   Margin="{TemplateBinding Padding}"
@@ -34,7 +37,7 @@
 							   FontSize="{TemplateBinding NotifyMessageSize}"
 							   FontWeight="{TemplateBinding NotifyMessageFontWeight}"
 							   Foreground="{TemplateBinding NotifyMessageForeground}"
-							   Text="{TemplateBinding  NotifyMessage}"/>
+							   Text="{TemplateBinding  NotifyMessage,Mode=TwoWay}"/>
 				</Grid>
 			</Border>
 

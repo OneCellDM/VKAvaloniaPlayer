@@ -1,3 +1,4 @@
+using Microsoft.Win32.SafeHandles;
 using Avalonia.Controls;
 using Avalonia.Threading;
 
@@ -89,7 +90,6 @@ namespace VKAvaloniaPlayer.ViewModels
             Events.VkApiChanged += StaticObjects_VkApiChanged;
 
             VkLoginViewModel = new VkLoginControlViewModel();
-            
 
             OpenHideMiniPlayerCommand = ReactiveCommand.Create(() =>
             {
@@ -277,6 +277,8 @@ namespace VKAvaloniaPlayer.ViewModels
             
             Dispatcher.UIThread.InvokeAsync(() =>
             {
+               
+
                 _CurrentMusicListViewModel = new CurrentMusicListViewModel();
                 VkLoginIsVisible = false;
                 CurrentAccountModel = GlobalVars.CurrentAccount;
@@ -284,6 +286,9 @@ namespace VKAvaloniaPlayer.ViewModels
 
                 if (CurrentAccountModel.Image is null)
                     CurrentAccountModel.LoadAvatar();
+                
+               
+               
             });
 
             Events.VkApiChanged -= StaticObjects_VkApiChanged;

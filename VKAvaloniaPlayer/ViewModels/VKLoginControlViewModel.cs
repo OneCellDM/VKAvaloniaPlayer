@@ -195,13 +195,9 @@ namespace VKAvaloniaPlayer.ViewModels
             try
             {
                 if (GlobalVars.CurrentPlatform == OSPlatform.Windows)
-                    LoadSavedAccountsOnWindows();
+                    LoadSavedAccountsFromRegistry();
 
-                else if (GlobalVars.CurrentPlatform == OSPlatform.Linux)
-                    LoadSavedAccountsOnLinuxOrMac();
-
-                else if (GlobalVars.CurrentPlatform == OSPlatform.OSX)
-                    LoadSavedAccountsOnLinuxOrMac();
+                else LoadSavedAccountsFromConfig();
 
                 SavedAccounts?.ToList().AsParallel().ForAll(x => x.LoadAvatar());
             }
@@ -210,7 +206,7 @@ namespace VKAvaloniaPlayer.ViewModels
             }
         }
 
-        private void LoadSavedAccountsOnWindows()
+        private void LoadSavedAccountsFromRegistry()
         {
             RegistryKey? key = null;
             try
@@ -231,7 +227,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
         }
 
-        private void LoadSavedAccountsOnLinuxOrMac()
+        private void LoadSavedAccountsFromConfig()
         {
             var home = GlobalVars.HomeDirectory;
             if (string.IsNullOrEmpty(home)) return;
@@ -274,13 +270,12 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             string saveText = JsonConvert.SerializeObject(SavedAccounts);
             if (GlobalVars.CurrentPlatform == OSPlatform.Windows)
-                SaveAccountsOnWindows(saveText);
-            else if (GlobalVars.CurrentPlatform == OSPlatform.Linux)
-                SaveAccountsOnLinuxOrMac(saveText);
-            else if (GlobalVars.CurrentPlatform == OSPlatform.OSX) SaveAccountsOnLinuxOrMac(saveText);
+                SaveAccountsOnRegistry(saveText);
+            else  SaveAccountsOnConfig(saveText);
+           
         }
 
-        private void SaveAccountsOnWindows(string? data)
+        private void SaveAccountsOnRegistry(string? data)
         {
             RegistryKey? key = null;
             try
@@ -294,7 +289,7 @@ namespace VKAvaloniaPlayer.ViewModels
             }
         }
 
-        private void SaveAccountsOnLinuxOrMac(string? data)
+        private void SaveAccountsOnConfig(string? data)
         {
             var home = GlobalVars.HomeDirectory;
             if (string.IsNullOrEmpty(home)) return;

@@ -1,21 +1,17 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 
-using ReactiveUI.Fody.Helpers;
-
-
-
 namespace VKAvaloniaPlayer.Notify
 {
-    
-    public partial class NotifyControl : UserControl,INotifyControl
+
+    public partial class NotifyControl : UserControl, INotifyControl
     {
 
         private string? _NotifyTitle;
         private string? _NotifyMessage;
+        private bool _NotifyShow;
 
 
         public static readonly DirectProperty<NotifyControl, string?> NotifyTitleProperty =
@@ -32,7 +28,7 @@ namespace VKAvaloniaPlayer.Notify
 
 
         public static readonly StyledProperty<int> NotifyTitleSizeProperty =
-          AvaloniaProperty.Register<NotifyControl, int>(nameof(NotifyTitleSize),16);
+          AvaloniaProperty.Register<NotifyControl, int>(nameof(NotifyTitleSize), 16);
 
         public static readonly StyledProperty<int> NotifyMessageSizeProperty =
          AvaloniaProperty.Register<NotifyControl, int>(nameof(NotifyMessageSize), 16);
@@ -49,63 +45,74 @@ namespace VKAvaloniaPlayer.Notify
         public static readonly StyledProperty<FontWeight> NotifyMessageFontWeightProperty =
       AvaloniaProperty.Register<NotifyControl, FontWeight>(nameof(NotifyMessageFontWeight), FontWeight.Normal);
 
+        public static readonly DirectProperty<NotifyControl, bool> NotifyShowProperty =
+            AvaloniaProperty.RegisterDirect<NotifyControl, bool>(
+                nameof(NotifyShow),
+                o => o.NotifyShow,
+                (o, v) => o.NotifyShow = v, false);
 
-
-        public string? NotifyTitle 
+        public bool NotifyShow
+        {
+            get => _NotifyShow;
+            set => SetAndRaise(NotifyShowProperty, ref _NotifyShow, value);
+        }
+        public string? NotifyTitle
         {
             get => _NotifyTitle;
             set => SetAndRaise(NotifyTitleProperty, ref _NotifyTitle, value);
 
 
         }
-       
-        public string? NotifyMessage {
+
+        public string? NotifyMessage
+        {
             get => _NotifyMessage;
             set
             {
-                SetAndRaise(NotifyMessageProperty, ref _NotifyMessage,value);
+                SetAndRaise(NotifyMessageProperty, ref _NotifyMessage, value);
             }
         }
 
 
-        public int? NotifyTitleSize {
-            get=> GetValue(NotifyTitleSizeProperty);
-            set=> SetValue(NotifyTitleSizeProperty, value);
+        public int? NotifyTitleSize
+        {
+            get => GetValue(NotifyTitleSizeProperty);
+            set => SetValue(NotifyTitleSizeProperty, value);
         }
-       
-        public int? NotifyMessageSize 
+
+        public int? NotifyMessageSize
         {
             get => GetValue(NotifyMessageSizeProperty);
             set => SetValue(NotifyMessageSizeProperty, value);
-            
+
         }
 
-        
-        public IBrush? NotifyTitleForeground 
+
+        public IBrush? NotifyTitleForeground
         {
             get => GetValue(NotifyTitleForegroundProperty);
             set => SetValue(NotifyTitleForegroundProperty, value);
         }
-        public IBrush? NotifyMessageForeground 
+        public IBrush? NotifyMessageForeground
         {
             get => GetValue(NotifyMessageForegroundProperty);
             set => SetValue(NotifyMessageForegroundProperty, value);
-        } 
+        }
 
-       
-        public FontWeight? NotifyTitleFontWeight 
+
+        public FontWeight? NotifyTitleFontWeight
         {
             get => GetValue(NotifyTitleFontWeightProperty);
             set => SetValue(NotifyTitleFontWeightProperty, value);
-        } 
-       
-        public FontWeight? NotifyMessageFontWeight 
+        }
+
+        public FontWeight? NotifyMessageFontWeight
         {
             get => GetValue(NotifyMessageFontWeightProperty);
             set => SetValue(NotifyMessageFontWeightProperty, value);
-        } 
-       
-      
+        }
+
+
 
         public NotifyControl()
         {
@@ -120,17 +127,23 @@ namespace VKAvaloniaPlayer.Notify
             AvaloniaXamlLoader.Load(this);
         }
 
-        public void Hide() =>
+        public void Hide()
+        {
             Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => IsVisible = false);
-        
+        }
 
-        public void ShowNotify(string Title, string Message) =>
+
+        public void ShowNotify(string Title, string Message)
+        {
             Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
             {
+
+                IsVisible = true;
                 NotifyTitle = Title;
                 NotifyMessage = Message;
 
-                IsVisible = true;
+
             });
+        }
     }
 }

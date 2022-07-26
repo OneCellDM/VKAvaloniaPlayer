@@ -1,39 +1,36 @@
-﻿using Avalonia.Controls.Presenters;
-using Avalonia.Input;
+﻿using Avalonia.Input;
 using Avalonia.Layout;
 
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
-using VKAvaloniaPlayer.Models.Interfaces;
 
 namespace VKAvaloniaPlayer.ViewModels.Base
 {
     public abstract class AudioViewModelBase : DataViewModelBase<AudioModel>
-{
+    {
         public static Action? LoadMusicsAction { get; set; }
         public AudioListButtonsViewModel AudioListButtons { get; set; }
 
- 
 
-    public AudioViewModelBase()
-    {
-        SearchIsVisible = true;
-        AudioListButtons = new AudioListButtonsViewModel();
-        LoadMusicsAction = () =>
+
+        public AudioViewModelBase()
         {
-            if (string.IsNullOrEmpty(_SearchText))
-                if (ResponseCount > 0 && IsLoading is false)
-                    InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
-        };
+            SearchIsVisible = true;
+            AudioListButtons = new AudioListButtonsViewModel();
+            LoadMusicsAction = () =>
+            {
+                if (string.IsNullOrEmpty(_SearchText))
+                    if (ResponseCount > 0 && IsLoading is false)
+                        InvokeHandler.Start(new InvokeHandlerObject(LoadData, this));
+            };
 
-    }
-      
+        }
+
         public override void SelectedItem(object sender, PointerPressedEventArgs args)
         {
 
@@ -48,7 +45,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
                         new ObservableCollection<AudioModel>(DataCollection.Cast<AudioModel>().ToList()),
                         SelectedIndex);
             }
-          
+
         }
         public override void Search(string? text)
         {
@@ -83,8 +80,8 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         }
     }
 
-        
 
 
-      
+
+
 }

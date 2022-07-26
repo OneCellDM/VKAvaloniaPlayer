@@ -9,12 +9,9 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 
 using VKAvaloniaPlayer.ETC;
-using VKAvaloniaPlayer.Models.Interfaces;
 using VKAvaloniaPlayer.ViewModels.Exceptions;
 
 namespace VKAvaloniaPlayer.ViewModels.Base
@@ -33,7 +30,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
     }
 
-    public abstract class DataViewModelBase <T> : DataViewModelBase 
+    public abstract class DataViewModelBase<T> : DataViewModelBase
     {
         protected ObservableCollection<T>? _AllDataCollection;
 
@@ -46,7 +43,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         [Reactive]
         private ScrollChangedEventArgs ScrolledEventArgs { get; set; }
 
-      
+
         [Reactive]
         public bool SearchIsVisible { get; set; }
 
@@ -124,12 +121,12 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         public virtual void Search(string? text)
         {
-           
+
         }
 
         public virtual void SelectedItem()
         {
-           
+
         }
 
         public virtual void StartSearchObservable()
@@ -158,12 +155,12 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         public virtual void SelectedItem(object sender, PointerPressedEventArgs args)
         {
-            
+
         }
         public void Scrolled(object sender, ScrollChangedEventArgs args) =>
             ScrolledEventArgs = args;
 
 
     }
-    
+
 }

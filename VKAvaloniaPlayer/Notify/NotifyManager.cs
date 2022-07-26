@@ -1,21 +1,16 @@
-using System.Threading.Tasks;
-using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using System.Threading;
 using System.Collections.Generic;
-using System.Linq;
-using System.Collections;
+using System.Threading;
 
 namespace VKAvaloniaPlayer.Notify
 {
-    public  class NotifyManager
+    public class NotifyManager
     {
         private Thread Thread;
 
         private Queue<NotifyData> notifyDataQueUe = new Queue<NotifyData>();
 
         private static NotifyManager _NotifyManager;
-        private INotifyControl NotifyControl{ get; set; }
+        private INotifyControl NotifyControl { get; set; }
 
         public static NotifyManager Instance
         {
@@ -27,7 +22,7 @@ namespace VKAvaloniaPlayer.Notify
         {
             while (notifyDataQueUe.Count > 0)
             {
-               
+
                 var q = notifyDataQueUe.Dequeue();
 
                 Thread.Sleep((int)q.ShowDelayTime.TotalMilliseconds);
@@ -39,14 +34,14 @@ namespace VKAvaloniaPlayer.Notify
 
 
             };
-           
+
         }
-        
+
 
         public void PopMessage(NotifyData data)
         {
             notifyDataQueUe.Enqueue(data);
-            
+
             if (Thread == null
                 || Thread.ThreadState == ThreadState.Stopped
                 || Thread.ThreadState == ThreadState.Suspended)
@@ -55,11 +50,11 @@ namespace VKAvaloniaPlayer.Notify
                 Thread.IsBackground = true;
                 Thread.Start();
             }
-            
-           
+
+
         }
-        
-       
+
+
 
     }
 }

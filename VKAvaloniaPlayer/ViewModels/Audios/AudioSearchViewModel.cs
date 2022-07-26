@@ -4,7 +4,6 @@ using ReactiveUI;
 
 using System;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.ViewModels.Base;
@@ -30,7 +29,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
             {
                 if (text is not null && text.Length > 0)
                 {
-                    
+
                     DataCollection?.Clear();
                     ResponseCount = 0;
                     Offset = 0;

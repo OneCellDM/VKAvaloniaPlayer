@@ -5,7 +5,7 @@ using VKAvaloniaPlayer.ViewModels.Base;
 
 namespace VKAvaloniaPlayer.ETC
 {
-   
+
     public class InvokeHandlerObject
     {
         public InvokeHandlerObject(Action action, DataViewModelBase view)

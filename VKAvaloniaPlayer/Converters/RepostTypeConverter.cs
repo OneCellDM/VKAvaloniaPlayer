@@ -1,11 +1,7 @@
 ﻿using Avalonia.Data.Converters;
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using VKAvaloniaPlayer.Models;
 
@@ -26,7 +22,7 @@ namespace VKAvaloniaPlayer.Converters
                 };
             }
             else return "Неизвестно";
-        
+
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

@@ -11,7 +11,6 @@ using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.Models.Interfaces;
 
 using VkNet.Model.Attachments;
-using VkNet.Utils;
 
 namespace VKAvaloniaPlayer.ETC
 {
@@ -21,16 +20,17 @@ namespace VKAvaloniaPlayer.ETC
         {
             return (eventArgs?.Source as ContentPresenter)?.Content as T;
         }
-      
+
+
         public static void AddRange(this ObservableCollection<AudioModel>? DataCollection,
             IEnumerable<Audio>? audios)
         {
-               if (audios != null)
-               {
-                    foreach (var item in audios)
-                        DataCollection?.Add(new AudioModel(item));
-               }
-           
+            if (audios != null)
+            {
+                foreach (var item in audios)
+                    DataCollection?.Add(new AudioModel(item));
+            }
+
         }
 
         public static void AddRange(this ObservableCollection<AudioAlbumModel>? DataCollection,
@@ -60,14 +60,14 @@ namespace VKAvaloniaPlayer.ETC
         }
         public static void StartLoadImagesAsync<T>(this ObservableCollection<T>? DataCollection) where T : IVkModelBase
         {
-            Task.Run(()=>StartLoadImages(DataCollection));
+            Task.Run(() => StartLoadImages(DataCollection));
         }
 
 
         public static ObservableCollection<T> Shuffle<T>(this IEnumerable<T> collection)
         {
-            ObservableCollection<T> obscollection = new (collection);
-            Random rand = new ();
+            ObservableCollection<T> obscollection = new(collection);
+            Random rand = new();
             var itercount = collection.Count();
 
             for (var i = 0; i < itercount; i++)

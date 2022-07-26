@@ -3,17 +3,15 @@
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-using System.Threading.Tasks;
-
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Base;
 
 namespace VKAvaloniaPlayer.ViewModels.Audios
 {
-    public class AlbumsViewModel : DataViewModelBase <AudioAlbumModel>
+    public class AlbumsViewModel : DataViewModelBase<AudioAlbumModel>
     {
-     
+
         public AlbumsViewModel()
         {
             BackToAlbumListCommand = ReactiveCommand.Create(() =>
@@ -43,7 +41,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                 MusicFromAlbumViewModel.StartLoad();
                 MusicFromAlbumIsVisible = true;
             }
-            
+
         }
 
 

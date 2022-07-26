@@ -1,7 +1,5 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Controls.Presenters;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 
 using Microsoft.Win32;
 
@@ -24,8 +22,6 @@ using VKAvaloniaPlayer.Models;
 
 using VkNet;
 using VkNet.Model;
-
-using Button = Avalonia.Controls.Button;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
@@ -118,7 +114,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
             RemoveAccountCommand = ReactiveCommand.Create<SavedAccountModel>(account =>
             {
-                if(account != null)
+                if (account != null)
                     SavedAccounts.Remove(account);
             });
 
@@ -271,8 +267,8 @@ namespace VKAvaloniaPlayer.ViewModels
             string saveText = JsonConvert.SerializeObject(SavedAccounts);
             if (GlobalVars.CurrentPlatform == OSPlatform.Windows)
                 SaveAccountsOnRegistry(saveText);
-            else  SaveAccountsOnConfig(saveText);
-           
+            else SaveAccountsOnConfig(saveText);
+
         }
 
         private void SaveAccountsOnRegistry(string? data)

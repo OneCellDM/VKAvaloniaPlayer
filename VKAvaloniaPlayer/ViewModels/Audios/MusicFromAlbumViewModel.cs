@@ -1,8 +1,6 @@
 ﻿using Avalonia.Layout;
 
 using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
@@ -14,7 +12,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
 {
     public sealed class MusicFromAlbumViewModel : AudioViewModelBase
     {
-        
+
 
         public MusicFromAlbumViewModel(AudioAlbumModel audioAlbumModel)
         {
@@ -36,7 +34,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
 
         private void MusicFromAlbumViewModel_AudioRemoveEvent(AudioModel audioModel) =>
             _AllDataCollection?.Remove(audioModel);
-        
+
 
         protected override void LoadData()
         {
@@ -57,6 +55,6 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
             }
 
         }
-        
+
     }
 }

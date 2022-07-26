@@ -10,7 +10,6 @@ using System.Net;
 
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
-using VKAvaloniaPlayer.ViewModels.Audios;
 
 using VkNet.Model.RequestParams;
 
@@ -18,7 +17,7 @@ namespace VKAvaloniaPlayer.ViewModels
 {
     public class AudioListButtonsViewModel : ReactiveObject
     {
-      
+
         public AudioListButtonsViewModel()
         {
             AudioAddIsVisible = true;
@@ -30,7 +29,7 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 if (audioModel != null)
                     Events.AudioRepostEventCall(audioModel);
-                
+
             });
 
             AudioAddCommand = ReactiveCommand.Create(async (AudioModel vkModel) =>
@@ -48,13 +47,13 @@ namespace VKAvaloniaPlayer.ViewModels
                             vkModel.OwnerID = (long)(GlobalVars.VkApi?.UserId ?? 0);
 
                             Events.AudioAddCall(vkModel);
-                            Notify.NotifyManager.Instance.PopMessage(new Notify.NotifyData("Успешно добавлено",vkModel.Title));
+                            Notify.NotifyManager.Instance.PopMessage(new Notify.NotifyData("Успешно добавлено", vkModel.Title));
                         }
                     }
                     catch (Exception ex)
                     {
                         Notify.NotifyManager.Instance.PopMessage(
-                            new Notify.NotifyData("Ошибка добавления",vkModel.Title));
+                            new Notify.NotifyData("Ошибка добавления", vkModel.Title));
                     }
                 }
             });
@@ -79,19 +78,20 @@ namespace VKAvaloniaPlayer.ViewModels
                             webClient.DownloadFileAsync(res.ElementAt(0).Url,
                                 string.Format("{0}-{1}.mp3", vkModel.Artist, vkModel.Title));
 
-                            webClient.DownloadFileCompleted += delegate { 
-                                vkModel.IsDownload = false; 
-                                 Notify.NotifyManager.Instance.PopMessage(
-                            new Notify.NotifyData("Скачивание завершено",vkModel.Title));
-                                };
+                            webClient.DownloadFileCompleted += delegate
+                            {
+                                vkModel.IsDownload = false;
+                                Notify.NotifyManager.Instance.PopMessage(
+                           new Notify.NotifyData("Скачивание завершено", vkModel.Title));
+                            };
                             webClient.DownloadProgressChanged += (object o, DownloadProgressChangedEventArgs e) =>
                                 vkModel.DownloadPercent = e.ProgressPercentage;
                         }
                     }
                     catch
                     {
-                          Notify.NotifyManager.Instance.PopMessage(
-                            new Notify.NotifyData("Ошибка скачивания",vkModel.Title));
+                        Notify.NotifyManager.Instance.PopMessage(
+                          new Notify.NotifyData("Ошибка скачивания", vkModel.Title));
                         vkModel.IsDownload = false;
                     }
                 }
@@ -109,9 +109,9 @@ namespace VKAvaloniaPlayer.ViewModels
                         if (Awaiter == true)
                         {
                             Events.AudioRemoveCall(vkModel);
-                             Notify.NotifyManager.Instance.PopMessage(
-                            new Notify.NotifyData("Аудиозапись удалена",vkModel.Title));
-                        }    
+                            Notify.NotifyManager.Instance.PopMessage(
+                           new Notify.NotifyData("Аудиозапись удалена", vkModel.Title));
+                        }
                     }
                     else
                     {
@@ -138,13 +138,13 @@ namespace VKAvaloniaPlayer.ViewModels
                             if (res)
                                 Events.AudioRmoveFromAlbumEventCall(vkModel);
 
-                                Notify.NotifyManager.Instance.PopMessage(
-                            new Notify.NotifyData("Успешно удалено","Аудиозапись:"+vkModel.Title+"\n"+"удалена из "+Album.Title));
+                            Notify.NotifyManager.Instance.PopMessage(
+                        new Notify.NotifyData("Успешно удалено", "Аудиозапись:" + vkModel.Title + "\n" + "удалена из " + Album.Title));
                         }
                         catch (Exception)
                         {
-                                Notify.NotifyManager.Instance.PopMessage(
-                            new Notify.NotifyData("Ошибка удаления","Аудиозапись:"+vkModel.Title+"не была удалена"));
+                            Notify.NotifyManager.Instance.PopMessage(
+                        new Notify.NotifyData("Ошибка удаления", "Аудиозапись:" + vkModel.Title + "не была удалена"));
                         }
                         finally
                         {
@@ -158,13 +158,13 @@ namespace VKAvaloniaPlayer.ViewModels
         public AudioAlbumModel Album { get; set; } = null;
         [Reactive]
         public bool AudioDownloadIsVisible { get; set; }
-       
+
         [Reactive]
         public bool AudioAddIsVisible { get; set; }
-       
+
         [Reactive]
         public bool AudioRemoveIsVisible { get; set; }
-      
+
         [Reactive]
         public bool AudioAddToAlbumIsVisible { get; set; }
 

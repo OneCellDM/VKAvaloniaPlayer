@@ -6,7 +6,7 @@ using VkNet.Model.Attachments;
 
 namespace VKAvaloniaPlayer.Models
 {
-    public class AudioAlbumModel : VkAudioOrAlbumModelBase 
+    public class AudioAlbumModel : VkAudioOrAlbumModelBase
     {
         public AudioAlbumModel(AudioPlaylist audioPlaylist)
         {
@@ -15,7 +15,7 @@ namespace VKAvaloniaPlayer.Models
                 Bitmap = GlobalVars.DefaultAlbumImage,
                 DecodeWidth = 0
             };
-            
+
 
             Title = audioPlaylist.Title;
 

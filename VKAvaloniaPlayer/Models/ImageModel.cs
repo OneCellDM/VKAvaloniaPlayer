@@ -6,9 +6,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using System;
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -31,25 +29,34 @@ namespace VKAvaloniaPlayer.Models
         [Reactive]
         public Bitmap? Bitmap { get; set; }
 
-
-        public async Task<Stream?>? LoadImageStreamAsync()
+        ~ImageModel()
         {
-            try
+
+            if (Bitmap != null && ImageIsloaded)
+                Bitmap.Dispose();
+
+        }
+        public async Task<Stream?> LoadImageStreamAsync()
+        {
+            return await Task.Run(async () =>
             {
-                if (string.IsNullOrEmpty(ImageUrl))
+                try
+                {
+                    if (string.IsNullOrEmpty(ImageUrl))
+                        return null;
+
+                    byte[]? bytes = null;
+
+
+                    bytes = await Utils.HttpClient.GetByteArrayAsync(ImageUrl);
+
+                    return new MemoryStream(bytes);
+                }
+                catch (Exception)
+                {
                     return null;
-
-                byte[]? bytes = null;
-
-
-                bytes = await Utils.HttpClient.GetByteArrayAsync(ImageUrl);
-
-                return new MemoryStream(bytes);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+                }
+            });
         }
 
         public virtual async void LoadBitmapAsync()
@@ -58,7 +65,7 @@ namespace VKAvaloniaPlayer.Models
                 try
                 {
                     _Semaphore.WaitOne();
-                    using (var imageStream = await LoadImageStreamAsync())
+                    using (Stream? imageStream = await LoadImageStreamAsync())
                     {
                         if (imageStream is null)
                             return;

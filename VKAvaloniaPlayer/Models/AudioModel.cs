@@ -1,7 +1,5 @@
 ﻿using ReactiveUI;
 
-using System.Reactive.Linq;
-
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models.Base;
 
@@ -27,11 +25,11 @@ namespace VKAvaloniaPlayer.Models
 
         }
 
-        public AudioModel(Audio VkModel):this()
+        public AudioModel(Audio VkModel) : this()
         {
-           
+
             AccessKey = VkModel.AccessKey;
-          
+
             Duration = VkModel.Duration;
             ID = (long)VkModel.Id;
             OwnerID = (long)VkModel.OwnerId;
@@ -63,7 +61,7 @@ namespace VKAvaloniaPlayer.Models
 
 
         public int Duration { get; set; }
-      
+
 
         public override string GetThumbUrl(AudioCover audioCover)
         {

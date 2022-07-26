@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using VKAvaloniaPlayer.Models.Interfaces;
 
 using VkNet.Model;
@@ -20,7 +15,7 @@ namespace VKAvaloniaPlayer.Models
         {
             Image = new ImageModel();
         }
-        
+
         public RepostModel(User user) : this()
         {
             ID = user.Id;
@@ -28,7 +23,7 @@ namespace VKAvaloniaPlayer.Models
 
             if (user.Photo50 != null)
                 Image.ImageUrl = user.Photo50.ToString();
-            
+
         }
         public RepostModel(Conversation conversation) : this()
         {
@@ -41,7 +36,7 @@ namespace VKAvaloniaPlayer.Models
             Image.ImageUrl = conversation.ChatSettings.Photo?.
                             Photo50?.ToString();
 
-            
+
         }
         public RepostModel(Conversation conversation, User user) : this(conversation)
         {

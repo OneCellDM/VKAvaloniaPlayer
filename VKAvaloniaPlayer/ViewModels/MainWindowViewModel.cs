@@ -1,4 +1,3 @@
-using Microsoft.Win32.SafeHandles;
 using Avalonia.Controls;
 using Avalonia.Threading;
 
@@ -31,7 +30,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private AllMusicViewModel? _AllMusicListViewModel;
         private AudioSearchViewModel? _SearchViewModel;
         private RecomendationsViewModel? _RecomendationsViewModel;
-        
+
         public PlayerControlViewModel PlayerContext { get; set; }
 
         public VkLoginControlViewModel? VkLoginViewModel { get; set; }
@@ -122,7 +121,7 @@ namespace VKAvaloniaPlayer.ViewModels
                         View = handlerObject.View,
                         ErrorMessage = "Ошибка: требуется авторизация",
                         ButtonMessage = "Открыть авторизацию",
-                       
+
                     };
                 }
                 else
@@ -134,7 +133,7 @@ namespace VKAvaloniaPlayer.ViewModels
                         View = handlerObject.View,
                         ErrorMessage = "Ошибка:" + exception.Message,
                         ButtonMessage = "Повторить",
-                        
+
                     };
                 }
 
@@ -192,10 +191,10 @@ namespace VKAvaloniaPlayer.ViewModels
 
         private void Events_AudioRepostEvent(AudioModel audioModel)
         {
-            RepostViewModel = new RepostViewModel(RepostToType.Friend,audioModel);
+            RepostViewModel = new RepostViewModel(RepostToType.Friend, audioModel);
             RepostViewModel.CloseViewEvent += RepostViewModel_CloseViewEvent;
             RepostViewIsVisible = true;
-            
+
         }
 
         private void RepostViewModel_CloseViewEvent()
@@ -268,16 +267,16 @@ namespace VKAvaloniaPlayer.ViewModels
                         }
                 }
 
-               
+
             });
         }
 
         private void StaticObjects_VkApiChanged()
         {
-            
+
             Dispatcher.UIThread.InvokeAsync(() =>
             {
-               
+
 
                 _CurrentMusicListViewModel = new CurrentMusicListViewModel();
                 VkLoginIsVisible = false;
@@ -286,9 +285,8 @@ namespace VKAvaloniaPlayer.ViewModels
 
                 if (CurrentAccountModel.Image is null)
                     CurrentAccountModel.LoadAvatar();
-                
-               
-               
+
+
             });
 
             Events.VkApiChanged -= StaticObjects_VkApiChanged;
@@ -298,9 +296,9 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             try
             {
-                
+
                 PlayerContext.CurrentAudio = null;
-                
+
 
             }
             catch (Exception EX)

@@ -8,7 +8,7 @@ namespace VKAvaloniaPlayer.ETC
     public class Events
     {
         public delegate void AudioEvent(AudioModel audioModel);
-       
+
 
         public static event AudioEvent? AudioAddEvent;
         public static event AudioEvent? AudioAddToAlbumEvent;
@@ -21,7 +21,7 @@ namespace VKAvaloniaPlayer.ETC
         public static void VkaPiChangedCall() => VkApiChanged?.Invoke();
         public static void AudioRepostEventCall(AudioModel model) =>
            AudioRepostEvent?.Invoke(model);
-        
+
         public static void AudioAddCall(AudioModel model) =>
                 AudioAddEvent?.Invoke(model);
         public static void AudioRemoveCall(AudioModel model) =>

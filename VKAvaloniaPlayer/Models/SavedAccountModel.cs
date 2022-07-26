@@ -1,7 +1,5 @@
-﻿using Avalonia.Media.Imaging;
-
+﻿
 using System;
-using System.IO;
 
 using VKAvaloniaPlayer.ETC;
 
@@ -23,8 +21,8 @@ namespace VKAvaloniaPlayer.Models
         {
             Image = new ImageModel();
         }
-        
-        public  void LoadAvatar()
+
+        public void LoadAvatar()
         {
             try
             {

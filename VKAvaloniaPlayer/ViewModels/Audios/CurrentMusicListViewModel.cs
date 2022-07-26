@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using VKAvaloniaPlayer.Models;
-using VKAvaloniaPlayer.Models.Interfaces;
 using VKAvaloniaPlayer.ViewModels.Base;
 
 namespace VKAvaloniaPlayer.ViewModels.Audios

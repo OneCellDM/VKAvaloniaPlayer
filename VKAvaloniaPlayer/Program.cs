@@ -1,8 +1,6 @@
 using Avalonia;
 using Avalonia.ReactiveUI;
 
-using System.Collections.Generic;
-
 namespace VKAvaloniaPlayer
 {
 

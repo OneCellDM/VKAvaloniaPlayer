@@ -1,12 +1,9 @@
 ﻿using Avalonia.Layout;
 
 using System;
-using System.Threading.Tasks;
 
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.ViewModels.Base;
-
-using VkNet.Exception;
 
 namespace VKAvaloniaPlayer.ViewModels.Audios
 {

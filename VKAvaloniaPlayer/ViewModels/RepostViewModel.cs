@@ -1,44 +1,40 @@
-﻿using System.Threading.Tasks;
+﻿using Avalonia.Input;
 
-using VKAvaloniaPlayer.Models;
-using VKAvaloniaPlayer.ETC;
-using System.Collections.ObjectModel;
-using ReactiveUI.Fody.Helpers;
-using VkNet.Model;
-using System.Linq;
-using System.Linq.Expressions;
 using ReactiveUI;
-using System.Reactive;
-using System.Reactive.Linq;
-using ReactiveUI.Fody;
+using ReactiveUI.Fody.Helpers;
+
 using System;
-using Avalonia.Input;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+
+using VKAvaloniaPlayer.ETC;
+using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Interfaces;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
-    public class RepostViewModel : ViewModels.Base.DataViewModelBase <RepostModel>,ICloseView
+    public class RepostViewModel : ViewModels.Base.DataViewModelBase<RepostModel>, ICloseView
     {
-        
+
         private AudioModel? AudioModel { get; set; }
-        private RepostToType[] RepostTypeItems { get; set; } = new[] 
+        private RepostToType[] RepostTypeItems { get; set; } = new[]
         {
             RepostToType.Friend,
             RepostToType.Dialog,
         };
 
-       
+
         [Reactive]
         public RepostToType RepostToType { get; set; }
         [Reactive]
         public string Info { get; set; }
         public IReactiveCommand CloseCommand { get; set; }
-           
+
 
         public RepostViewModel(RepostToType repostToType)
         {
             CloseCommand = ReactiveCommand.Create(() => CloseViewEvent?.Invoke());
-                
+
             this.RepostToType = repostToType;
 
             this.WhenAnyValue(vm => vm.RepostToType)
@@ -54,14 +50,14 @@ namespace VKAvaloniaPlayer.ViewModels
 
         }
 
-        public RepostViewModel(RepostToType repostToType, 
-                                AudioModel audioModel): this(repostToType)
+        public RepostViewModel(RepostToType repostToType,
+                                AudioModel audioModel) : this(repostToType)
         {
             if (audioModel != null)
             {
                 AudioModel = audioModel;
             }
-            
+
         }
 
         public event ICloseView.CloseViewDelegate CloseViewEvent;
@@ -79,9 +75,9 @@ namespace VKAvaloniaPlayer.ViewModels
                 LoadConversation();
             }
             DataCollection.StartLoadImagesAsync();
-            
+
         }
-        
+
         private void LoadConversation()
         {
             var data = ETC.GlobalVars.VkApi.Messages.GetConversations(new VkNet.Model.RequestParams.GetConversationsParams()
@@ -89,9 +85,9 @@ namespace VKAvaloniaPlayer.ViewModels
                 Extended = true,
                 Count = 200,
                 Offset = (ulong)(DataCollection?.Count ?? 0),
-                
+
             });
-            
+
 
             foreach (var item in data.Items)
             {
@@ -100,23 +96,23 @@ namespace VKAvaloniaPlayer.ViewModels
 
                 if (conversation.Peer.Type == VkNet.Enums.SafetyEnums.ConversationPeerType.Chat)
                     repostModel = new RepostModel(conversation);
-                
+
                 else if (conversation.Peer.Type == VkNet.Enums.SafetyEnums.ConversationPeerType.User)
                 {
 
-                    foreach(var profile in data.Profiles)
+                    foreach (var profile in data.Profiles)
                     {
-                        if(profile.Id == conversation.Peer.Id)
+                        if (profile.Id == conversation.Peer.Id)
                         {
-                            repostModel = new RepostModel(conversation,profile);
+                            repostModel = new RepostModel(conversation, profile);
                             break;
                         }
                     }
-                    
+
                 }
                 else if (conversation.Peer.Type == VkNet.Enums.SafetyEnums.ConversationPeerType.Group)
                 {
-                    foreach (var group in data.Groups) 
+                    foreach (var group in data.Groups)
                     {
                         if (group.Id == -conversation.Peer.Id)
                         {
@@ -129,7 +125,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
             }
         }
-        
+
         private void LoadAllFriends()
         {
             var friends = ETC.GlobalVars.VkApi.Friends.Get(new VkNet.Model.RequestParams.FriendsGetParams()
@@ -163,13 +159,13 @@ namespace VKAvaloniaPlayer.ViewModels
                             Attachments = GlobalVars.VkApi.Audio.GetById(new String[] { AudioModel.GetAudioIDFormatWithAccessKey() }),
                         });
                         Notify.NotifyManager.Instance.PopMessage(
-                            new Notify.NotifyData("Успешно отправлено","Аудиозапись отправлена: "+item.Title
-                            ,TimeSpan.FromSeconds(2)));
+                            new Notify.NotifyData("Успешно отправлено", "Аудиозапись отправлена: " + item.Title
+                            , TimeSpan.FromSeconds(2)));
                     }
                     catch (Exception)
                     {
                         Notify.NotifyManager.Instance.PopMessage(
-                            new Notify.NotifyData("Ошибка отправки","Возникла проблема при отправке сообщения",
+                            new Notify.NotifyData("Ошибка отправки", "Возникла проблема при отправке сообщения",
                             TimeSpan.FromSeconds(2)));
                     }
                     finally { CloseViewEvent?.Invoke(); }

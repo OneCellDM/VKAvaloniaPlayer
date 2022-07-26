@@ -65,7 +65,7 @@ namespace VKAvaloniaPlayer.ViewModels
             public static bool Play()
             {
                 Bass.Start();
-                return  Bass.ChannelPlay(_stream);
+                return Bass.ChannelPlay(_stream);
             }
 
 

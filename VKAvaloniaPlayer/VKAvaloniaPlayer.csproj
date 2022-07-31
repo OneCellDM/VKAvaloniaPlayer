@@ -35,15 +35,24 @@
       <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.15" />
       <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.10.15" />
       <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.15" />
+      <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
       <PackageReference Include="ManagedBass" Version="3.1.1" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
       <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="ReactiveUI.Fody" Version="18.2.5" />
-      <PackageReference Include="VkNet" Version="1.69.0" />
+      <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Assets\t.otf" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Update="DataSet1.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>DataSet1.xsd</DependentUpon>
+        </Compile>
         <Compile Update="Views\ExceptionView.axaml.cs">
             <DependentUpon>ExceptionView.axaml</DependentUpon>
         </Compile>
@@ -56,5 +65,11 @@
         <Compile Update="Views\MusicListControl.axaml.cs">
             <DependentUpon>MusicListControl.axaml</DependentUpon>
         </Compile>
+    </ItemGroup>
+    <ItemGroup>
+      <None Update="DataSet1.xsd">
+        <Generator>MSDataSetGenerator</Generator>
+        <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      </None>
     </ItemGroup>
 </Project>

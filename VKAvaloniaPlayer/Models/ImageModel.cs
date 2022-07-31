@@ -7,6 +7,8 @@ using ReactiveUI.Fody.Helpers;
 
 using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,7 +19,7 @@ namespace VKAvaloniaPlayer.Models
 {
     public class ImageModel : ReactiveObject, IImageBase
     {
-        public static Semaphore _Semaphore = new(50, 50);
+        public static Semaphore _Semaphore = new(Environment.ProcessorCount, Environment.ProcessorCount);
 
         public int DecodeWidth { get; set; }
 
@@ -36,7 +38,7 @@ namespace VKAvaloniaPlayer.Models
                 Bitmap.Dispose();
 
         }
-        public async Task<Stream?> LoadImageStreamAsync()
+        private async Task<Stream?> GetImageStreamAsync()
         {
             return await Task.Run(async () =>
             {
@@ -49,8 +51,9 @@ namespace VKAvaloniaPlayer.Models
 
 
                     bytes = await Utils.HttpClient.GetByteArrayAsync(ImageUrl);
-
+                    CacheManager.SaveDataInCache(ImageUrl,in bytes);
                     return new MemoryStream(bytes);
+                    
                 }
                 catch (Exception)
                 {
@@ -58,23 +61,24 @@ namespace VKAvaloniaPlayer.Models
                 }
             });
         }
-
+    
         public virtual async void LoadBitmapAsync()
         {
             if (string.IsNullOrEmpty(ImageUrl) is false && ImageIsloaded is false)
                 try
                 {
                     _Semaphore.WaitOne();
-                    using (Stream? imageStream = await LoadImageStreamAsync())
+
+                    using (Stream? dataStream = await CacheManager.GetImageStreamFromCache(ImageUrl)
+                                            ?? await GetImageStreamAsync()) 
                     {
-                        if (imageStream is null)
-                            return;
-
-                        Bitmap = await Task.Run(() =>
-                            DecodeWidth <= 0 ? new Bitmap(imageStream) : Bitmap.DecodeToWidth(imageStream, DecodeWidth)
-                        );
-
-                        ImageIsloaded = true;
+                        if (dataStream != null)
+                        {
+                            Bitmap = DecodeWidth <= 0 ? new Bitmap(dataStream) 
+                                                      : Bitmap.DecodeToWidth(dataStream, DecodeWidth);
+                            ImageIsloaded = true;
+                        }
+                        
                     }
                 }
                 finally
@@ -82,7 +86,6 @@ namespace VKAvaloniaPlayer.Models
                     _Semaphore.Release();
                 }
         }
-
-
     }
+    
 }

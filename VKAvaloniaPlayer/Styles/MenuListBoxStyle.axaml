@@ -57,53 +57,53 @@
 
     <!--  PointerOver State  -->
     <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="transparent" />
+        <Setter Property="Background" Value="Transparent" />
     </Style>
     <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="TextBlock.Foreground" Value="white" />
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource MenuTextColor}" />
     </Style>
 
     <!--  Pressed State  -->
     <Style Selector="ListBoxItem:pressed /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="White" />
+        <Setter Property="Background" Value="{DynamicResource MenuSelectedColor}" />
     </Style>
     <Style Selector="ListBoxItem:pressed /template/ ContentPresenter">
 
-        <Setter Property="ListBox.Foreground" Value="black" />
+        <Setter Property="ListBox.Foreground" Value="{DynamicResource MenuTextColor}" />
     </Style>
 
     <!--  Selected State  -->
     <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="white" />
+        <Setter Property="Background" Value="{DynamicResource MenuSelectedColor}" />
     </Style>
     <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
 
-        <Setter Property="ListBox.Foreground" Value="black" />
+        <Setter Property="ListBox.Foreground" Value="{DynamicResource MenuSelectedTextColor}" />
     </Style>
 
     <!--  Selected Unfocused State  -->
     <Style Selector="ListBoxItem:selected:not(:focus) /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="White" />
+        <Setter Property="Background" Value="{DynamicResource  MenuSelectedColor}" />
     </Style>
     <Style Selector="ListBoxItem:selected:not(:focus) /template/ ContentPresenter#PART_ContentPresenter">
 
-        <Setter Property="ListBox.Foreground" Value="black" />
+        <Setter Property="ListBox.Foreground" Value="{DynamicResource MenuTextColor}" />
     </Style>
 
     <!--  Selected PointerOver State  -->
     <Style Selector="ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="White" />
+        <Setter Property="Background" Value="{DynamicResource MenuSelectedColor}" />
     </Style>
     <Style Selector="ListBoxItem:selected:pointerover /template/ ContentPresenter">
 
-        <Setter Property="ListBox.Foreground" Value="black" />
+        <Setter Property="ListBox.Foreground" Value="{DynamicResource MenuSelectedTextColor}" />
     </Style>
 
     <!--  Selected Pressed State  -->
     <Style Selector="ListBoxItem:selected:pressed /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="white" />
+        <Setter Property="Background" Value="{DynamicResource MenuSelectedColor}" />
     </Style>
     <Style Selector="ListBoxItem:selected:pressed /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="ListBox.Foreground" Value="black" />
+        <Setter Property="ListBox.Foreground" Value="{DynamicResource MenuSelectedTextColor}" />
     </Style>
 </Styles>

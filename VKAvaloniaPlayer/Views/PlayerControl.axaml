@@ -8,7 +8,8 @@
              xmlns:converters="clr-namespace:VKAvaloniaPlayer.Converters"
 			 xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
-            >
+             Background="{DynamicResource BgColor}"
+			 >
 
     <UserControl.Resources>
         <converters:DurationConverter x:Key="DurationConverter" />
@@ -22,20 +23,20 @@
         <StackPanel Grid.RowSpan="2" Spacing="5" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="0">
             <Button Background="Transparent" Command="{Binding PreviousCommand}">
                 <Path Data="M0 0v6h2v-6h-2zm2 3l5 3v-6l-5 3z" Width="12" Height="12" Stretch="Fill"
-                      Fill="{DynamicResource ControlsColor}" />
+                      Fill="{DynamicResource AccentColor}" />
             </Button>
             <Button Background="Transparent" IsVisible="{Binding PauseButtonIsVisible}"
                     Command="{Binding PauseCommand}">
                 <Path Data="M0 0v6h2v-6h-2zm4 0v6h2v-6h-2z" Width="12" Height="12" Stretch="Fill"
-                      Fill="{DynamicResource ControlsColor}" />
+                      Fill="{DynamicResource AccentColor}" />
             </Button>
             <Button Background="Transparent" IsVisible="{Binding PlayButtonIsVisible}" Command="{Binding PlayCommand}">
                 <Path Data="M0 0v6l6-3-6-3z" Width="12" Height="12" Stretch="Fill"
-                      Fill="{DynamicResource ControlsColor}" />
+                      Fill="{DynamicResource AccentColor}" />
             </Button>
             <Button Background="Transparent" Command="{Binding NextCommand}">
                 <Path Data="M0 0v6l5-3-5-3zm5 3v3h2v-6h-2v3z" Width="12" Height="12" Stretch="Fill"
-                      Fill="{DynamicResource ControlsColor}" />
+                      Fill="{DynamicResource AccentColor}" />
             </Button>
         </StackPanel>
         <Grid Margin="5,0,0,0" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0">
@@ -61,17 +62,17 @@
             </Border>
             <StackPanel Grid.Column="1" Margin="10,12,0,0">
                 <DockPanel MaxWidth="{Binding $parent.ActualWidth}">
-                    <TextBlock Text="{Binding CurrentAudio.Title}" TextTrimming="CharacterEllipsis" DockPanel.Dock="Left"/>
+                    <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding CurrentAudio.Title}" TextTrimming="CharacterEllipsis" DockPanel.Dock="Left"/>
                     <TextBlock Text="{Binding CurrentAudio.Subtitle}" TextTrimming="CharacterEllipsis"
                             Margin="5,0,0,0" DockPanel.Dock="Right">
                         <TextBlock.Styles>
                             <Style Selector="TextBlock">
-                                <Setter Property="Foreground" Value="#aaaaaa" />
+                                <Setter Property="Foreground" Value="{DynamicResource #aaaaa}" />
                             </Style>
                         </TextBlock.Styles>
                     </TextBlock>
                 </DockPanel>
-                <TextBlock Text="{Binding CurrentAudio.Artist}" TextTrimming="CharacterEllipsis" />
+                <TextBlock Text="{Binding CurrentAudio.Artist}" Foreground="{DynamicResource TextColor}" TextTrimming="CharacterEllipsis" />
             </StackPanel>
             <Slider Grid.Row="1" Grid.ColumnSpan="8" Grid.Column="1" Value="{Binding Path=PlayPosition}"
                     Maximum="{Binding Path=CurrentAudio.Duration}" Margin="11,-10,0,0">
@@ -84,7 +85,8 @@
                     <StyleInclude Source="/Styles/SliderStyle.axaml" />
                 </Slider.Styles>
             </Slider>
-            <TextBlock IsVisible="True" Grid.Column="2" VerticalAlignment="Center" Margin="5,18,5,0">
+            <TextBlock IsVisible="True" 
+					   Foreground="{DynamicResource TextColor}" Grid.Column="2" VerticalAlignment="Center" Margin="5,18,5,0">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="{}{0}/{1}">
                         <Binding Path="PlayPosition" Converter="{StaticResource  DurationConverter}" />
@@ -93,10 +95,10 @@
                 </TextBlock.Text>
             </TextBlock>
             <Button Command="{Binding RepeatToggleCommand}" Grid.Column="3" VerticalAlignment="Bottom"
-                    Background="Transparent" Foreground="{DynamicResource ControlsColor}">
+                    Background="Transparent" Foreground="{DynamicResource AccentColor}">
                 <i:Interaction.Behaviors>
                     <ia:DataTriggerBehavior Binding="{Binding Repeat}" ComparisonCondition="Equal" Value="True">
-                        <ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource ControlsColor}" />
+                        <ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource AccentColor}" />
                     </ia:DataTriggerBehavior>
                     <ia:DataTriggerBehavior Binding="{Binding Repeat}" ComparisonCondition="Equal" Value="False">
                         <ia:ChangePropertyAction PropertyName="Foreground" Value="Gray" />
@@ -117,7 +119,7 @@
 
                 <i:Interaction.Behaviors>
                     <ia:DataTriggerBehavior Binding="{Binding Shuffling}" ComparisonCondition="Equal" Value="True">
-                        <ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource ControlsColor}" />
+                        <ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource AccentColor}" />
                     </ia:DataTriggerBehavior>
                     <ia:DataTriggerBehavior Binding="{Binding Shuffling}" ComparisonCondition="Equal" Value="False">
                         <ia:ChangePropertyAction PropertyName="Foreground" Value="Gray" />
@@ -147,7 +149,7 @@
                     Background="Transparent">
                 <i:Interaction.Behaviors>
                     <ia:DataTriggerBehavior Binding="{Binding Mute}" ComparisonCondition="Equal" Value="False">
-                        <ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource ControlsColor}" />
+                        <ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource AccentColor}" />
                     </ia:DataTriggerBehavior>
                     <ia:DataTriggerBehavior Binding="{Binding Mute}" ComparisonCondition="Equal" Value="True">
                         <ia:ChangePropertyAction PropertyName="Foreground" Value="Gray" />

@@ -6,9 +6,7 @@
 			xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="VKAvaloniaPlayer.Notify.NotifyControl"
-			 
-			 >
+             x:Class="VKAvaloniaPlayer.Notify.NotifyControl">
 	
 	<UserControl.Template>
 		<ControlTemplate>
@@ -43,18 +41,16 @@
 							   Foreground="{TemplateBinding NotifyMessageForeground}"
 							   Text="{TemplateBinding  NotifyMessage,Mode=TwoWay}"/>
 				</Grid>
-
-
-
-
-				
-				
 			</Border>
 			
-			
-
 				</ControlTemplate>
 		
 	</UserControl.Template>
+	
+	<UserControl.Transitions>
+		<Transitions>
+			<ThicknessTransition Duration="0:0:0:0.3" Property="Margin"/>
+		</Transitions>
+	</UserControl.Transitions>
 	
 </UserControl>

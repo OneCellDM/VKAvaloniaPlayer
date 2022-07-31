@@ -6,16 +6,28 @@
         <local:ViewLocator />
     </Application.DataTemplates>
     <Application.Resources>
-		<SolidColorBrush x:Key="TextBoxColor" Color="#DDDDDD" />
-		<SolidColorBrush x:Key="MenuBackGroundColor" Color="#2888F5" />
-		<SolidColorBrush x:Key="ControlsColor" Color="#2888F5" />
-		<SolidColorBrush x:Key="SliderTickColor" Color="#2888F5" />
-		<SolidColorBrush x:Key="SliderBackGroundColor" Color="#DDDDDD" />
-		<SolidColorBrush x:Key="MenuForeGroundColor" Color="White" />
+		
+		<SolidColorBrush x:Key="AccentColor" Color="#2888F5"/>
+		<SolidColorBrush x:Key="BgColor" Color="White"/>
+		<SolidColorBrush x:Key="TextColor" Color="Black"/>
+		
+		<SolidColorBrush x:Key="MenuTextColor" Color="White"/>
+		<SolidColorBrush x:Key="MenuSelectedTextColor" Color="Black"/>
+		<SolidColorBrush x:Key="MenuSelectedColor" Color="White"/>
+		
+		<SolidColorBrush x:Key="SliderTrackColor" Color="Gray"/>
+		<SolidColorBrush x:Key="SubTitleColor" Color="Gray"/>
+		
+		<SolidColorBrush x:Key="ControlsColor" Color="#CDCDCD"/>
+		<SolidColorBrush x:Key="MouseOverColor" Color="Gray"/>
+		
+		<SolidColorBrush x:Key="BlockedColor" Color="Gray"/>
+		
+		
     </Application.Resources>
+	<Application.Styles>
+		<FluentTheme Mode="Light" />
+	</Application.Styles>
 
-    <Application.Styles>
-
-        <FluentTheme Mode="Light" />
-    </Application.Styles>
+   
 </Application>

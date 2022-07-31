@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaTesting.Notify.NotifyControl"
+			 
+			 >
+	
+	<UserControl.Template>
+		<ControlTemplate>
+
+			<Border 
+				x:Name="border"
+				
+				Background="{TemplateBinding Background}"
+				CornerRadius="{TemplateBinding CornerRadius}"
+					BorderBrush="{TemplateBinding BorderBrush}"
+					BorderThickness="{TemplateBinding BorderThickness}">
+				<Grid  Margin="10">
+					<Grid.RowDefinitions>
+						<RowDefinition />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="0"
+							   Margin="{TemplateBinding Padding}"
+							   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							   FontSize="{TemplateBinding NotifyTitleSize}"
+							   FontWeight="{TemplateBinding NotifyTitleFontWeight}"
+							   Foreground="{TemplateBinding NotifyTitleForeground}"
+							   Text="{TemplateBinding  NotifyTitle,Mode=TwoWay}"/>
+
+					<TextBlock Grid.Row="1"
+							   Margin="{TemplateBinding Padding}"
+							   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							   FontSize="{TemplateBinding NotifyMessageSize}"
+							   FontWeight="{TemplateBinding NotifyMessageFontWeight}"
+							   Foreground="{TemplateBinding NotifyMessageForeground}"
+							   Text="{TemplateBinding  NotifyMessage,Mode=TwoWay}"/>
+				</Grid>
+
+
+
+
+				
+				
+			</Border>
+			
+			
+
+				</ControlTemplate>
+		
+	</UserControl.Template>
+	<UserControl.Transitions>
+		<Transitions>
+			<DoubleTransition Duration="0:0:0:1" Property="Width"/>
+		</Transitions>
+	</UserControl.Transitions>
+</UserControl>

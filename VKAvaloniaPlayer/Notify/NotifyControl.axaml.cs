@@ -45,32 +45,18 @@ namespace VKAvaloniaPlayer.Notify
         public static readonly StyledProperty<FontWeight> NotifyMessageFontWeightProperty =
       AvaloniaProperty.Register<NotifyControl, FontWeight>(nameof(NotifyMessageFontWeight), FontWeight.Normal);
 
-        public static readonly DirectProperty<NotifyControl, bool> NotifyShowProperty =
-            AvaloniaProperty.RegisterDirect<NotifyControl, bool>(
-                nameof(NotifyShow),
-                o => o.NotifyShow,
-                (o, v) => o.NotifyShow = v, false);
-
-        public bool NotifyShow
-        {
-            get => _NotifyShow;
-            set => SetAndRaise(NotifyShowProperty, ref _NotifyShow, value);
-        }
+       
         public string? NotifyTitle
         {
             get => _NotifyTitle;
             set => SetAndRaise(NotifyTitleProperty, ref _NotifyTitle, value);
-
-
         }
 
         public string? NotifyMessage
         {
             get => _NotifyMessage;
-            set
-            {
-                SetAndRaise(NotifyMessageProperty, ref _NotifyMessage, value);
-            }
+            set => SetAndRaise(NotifyMessageProperty, ref _NotifyMessage, value);
+            
         }
 
 
@@ -117,7 +103,7 @@ namespace VKAvaloniaPlayer.Notify
         public NotifyControl()
         {
             InitializeComponent();
-            this.IsVisible = false;
+            this.IsVisible = true;
             NotifyManager.Instance.SetNotifyControl(this);
             this.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Center;
         }
@@ -125,11 +111,14 @@ namespace VKAvaloniaPlayer.Notify
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+           
         }
 
         public void Hide()
         {
-            Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => IsVisible = false);
+            Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => 
+            
+            Margin = new Thickness(0,0,-Width,0));
         }
 
 
@@ -137,11 +126,9 @@ namespace VKAvaloniaPlayer.Notify
         {
             Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
             {
-
-                IsVisible = true;
+                Margin = new Thickness(0, 0, 0, 0);
                 NotifyTitle = Title;
                 NotifyMessage = Message;
-
 
             });
         }

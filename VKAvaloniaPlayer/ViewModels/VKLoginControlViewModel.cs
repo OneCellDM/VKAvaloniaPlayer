@@ -98,13 +98,16 @@ namespace VKAvaloniaPlayer.ViewModels
 
                             _BrowserProcess.Start();
                             _BrowserProcess.WaitForExit();
-                            OffServerAndUnsubscribe();
-
+                           
                         }
                     }
                     catch (Exception ex)
                     {
                         InfoText = "Ошибка:" + ex.Message;
+                    }
+                    finally
+                    {
+                        OffServerAndUnsubscribe();
                     }
 
                 });
@@ -152,6 +155,10 @@ namespace VKAvaloniaPlayer.ViewModels
                 _webElementServer.Stop();
                 _webElementServer.ErrorEvent -= WebServer_ErrorEvent;
                 _webElementServer.MessageRecived -= WebServer_MessageEvent;
+            }
+            if (_BrowserProcess != null)
+            {
+                _BrowserProcess.Dispose();
             }
         }
         private void WebServer_ErrorEvent(Exception ex)

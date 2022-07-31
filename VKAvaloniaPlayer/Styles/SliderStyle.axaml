@@ -31,14 +31,14 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate>
-					<Border Background="{DynamicResource ControlsColor}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource SliderThumbCornerRadius}" />
+					<Border Background="{DynamicResource AccentColor}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource SliderThumbCornerRadius}" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
 	
 	<Style Selector="Slider:horizontal">
-		<Setter Property="Background" Value="{DynamicResource SliderBackGroundColor}" />
+		<Setter Property="Background" Value="Gray" />
 		<Setter Property="BorderThickness" Value="{DynamicResource SliderBorderThemeThickness}" />
 		<Setter Property="Foreground" Value="{DynamicResource SliderTrackValueFill}" />
 		<Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
@@ -71,14 +71,14 @@
 													<ControlTemplate>
 														<Grid >
 															<Border Name="FocusTarget" Background="Transparent" Margin="0,-10" />
-															<Border  Name="TrackBackground" Background="{DynamicResource SliderTickColor}" CornerRadius="{DynamicResource ControlCornerRadius}" Height="{DynamicResource SliderTrackThemeHeight}" VerticalAlignment="Center" />
+															<Border  Name="TrackBackground" Background="{DynamicResource AccentColor}" CornerRadius="{DynamicResource ControlCornerRadius}" Height="{DynamicResource SliderTrackThemeHeight}" VerticalAlignment="Center" />
 														</Grid>
 													</ControlTemplate>
 												</RepeatButton.Template>
 											</RepeatButton>
 										</Track.DecreaseButton>
 										<Track.IncreaseButton>
-											<RepeatButton Margin="-3,0,0,0" Name="PART_IncreaseButton" Background="{TemplateBinding Background}" Focusable="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+											<RepeatButton Margin="-3,0,0,0" Name="PART_IncreaseButton" Background="{DynamicResource SliderTrackColor}" Focusable="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 												<RepeatButton.Template>
 													<ControlTemplate>
 														<Grid>

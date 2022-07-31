@@ -1,4 +1,5 @@
-﻿using Avalonia.Input;
+﻿using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Layout;
 
 using System;
@@ -13,11 +14,16 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 {
     public abstract class AudioViewModelBase : DataViewModelBase<AudioModel>
     {
+        protected ListBox _ListBox;
         public static Action? LoadMusicsAction { get; set; }
         public AudioListButtonsViewModel AudioListButtons { get; set; }
+        
+        protected void ListboxInitHandler(object sender, System.EventHandler e)
+        {
+            _ListBox = sender as ListBox;
+        }
 
-
-
+        public AudioModel SelectedItemValue { get; set; }
         public AudioViewModelBase()
         {
             SearchIsVisible = true;

@@ -11,9 +11,10 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="VKAvaloniaPlayer"
         MinWidth="650" MinHeight="400"
+		
         Width="900" Height="600">
 
-    <Grid>
+    <Grid Background="{DynamicResource BgColor}">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding MenuColumnWidth}" />
@@ -24,7 +25,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <StackPanel Background="{DynamicResource MenuBackGroundColor}" Orientation="Horizontal">
+        <StackPanel Background="{DynamicResource AccentColor}" Orientation="Horizontal">
 
             <Ellipse Margin="5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="48" Height="48">
                 <Ellipse.Fill>
@@ -37,13 +38,14 @@
                     </ia:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
             </Ellipse>
-            <TextBlock FontSize="16" Foreground="White" IsVisible="{Binding MenuTextIsVisible}"
+            <TextBlock FontSize="16" 
+					   Foreground="{DynamicResource MenuTextColor}" IsVisible="{Binding MenuTextIsVisible}"
                        VerticalAlignment="Center" TextTrimming="150" Margin="1,0,5,0"
                        Text="{Binding CurrentAccountModel.Name}" />
         </StackPanel>
 
-        <ListBox SelectedIndex="{Binding Path=MenuSelectionIndex}" Foreground="White"
-                 Background="{DynamicResource MenuBackGroundColor}" Grid.Column="0" Grid.Row="1">
+        <ListBox SelectedIndex="{Binding Path=MenuSelectionIndex}" Foreground="{DynamicResource MenuTextColor}"
+                 Background="{DynamicResource AccentColor}" Grid.Column="0" Grid.Row="1">
 
             <ListBox.Styles>
                 <StyleInclude Source="/Styles/MenuListBoxStyle.axaml" />
@@ -56,12 +58,12 @@
 
                         <i:Interaction.Behaviors>
                             <ia:DataTriggerBehavior
-                                Binding="{Binding Path=IsSelected, RelativeSource={ RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
+                                Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
                                 ComparisonCondition="Equal" Value="True">
-                                <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource ControlsColor}" />
+                                <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource AccentColor}" />
                             </ia:DataTriggerBehavior>
                             <ia:DataTriggerBehavior
-                                Binding="{Binding Path=IsSelected, RelativeSource={ RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
+                                Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
                                 ComparisonCondition="Equal" Value="False">
                                 <ia:ChangePropertyAction PropertyName="Fill" Value="White" />
                             </ia:DataTriggerBehavior>
@@ -82,7 +84,7 @@
                             <ia:DataTriggerBehavior
                                 Binding="{Binding Path=IsSelected, RelativeSource={ RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
                                 ComparisonCondition="Equal" Value="True">
-                                <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource ControlsColor}" />
+                                <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource AccentColor}" />
                             </ia:DataTriggerBehavior>
                             <ia:DataTriggerBehavior
                                 Binding="{Binding Path=IsSelected, RelativeSource={ RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
@@ -105,7 +107,7 @@
                             <ia:DataTriggerBehavior
                                 Binding="{Binding Path=IsSelected, RelativeSource={ RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
                                 ComparisonCondition="Equal" Value="True">
-                                <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource ControlsColor}" />
+                                <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource AccentColor}" />
                             </ia:DataTriggerBehavior>
                             <ia:DataTriggerBehavior
                                 Binding="{Binding Path=IsSelected, RelativeSource={ RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
@@ -129,9 +131,9 @@
 			 M202.667,362.669c-88.235,0-160-71.765-160-160s71.765-160,160-160s160,71.765,160,160S290.901,362.669,202.667,362.669z">
                         <i:Interaction.Behaviors>
                             <ia:DataTriggerBehavior
-                                Binding="{Binding Path=IsSelected, RelativeSource={ RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
+                                Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
                                 ComparisonCondition="Equal" Value="True">
-                                <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource ControlsColor}" />
+                                <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource AccentColor}" />
                             </ia:DataTriggerBehavior>
                             <ia:DataTriggerBehavior
                                 Binding="{Binding Path=IsSelected, RelativeSource={ RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
@@ -155,7 +157,7 @@
                             <ia:DataTriggerBehavior
                                 Binding="{Binding Path=IsSelected, RelativeSource={ RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
                                 ComparisonCondition="Equal" Value="True">
-                                <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource ControlsColor}" />
+                                <ia:ChangePropertyAction PropertyName="Fill" Value="{DynamicResource AccentColor}" />
                             </ia:DataTriggerBehavior>
                             <ia:DataTriggerBehavior
                                 Binding="{Binding Path=IsSelected, RelativeSource={ RelativeSource Tree=Logical,AncestorType={x:Type ListBoxItem}}}"
@@ -180,6 +182,7 @@
                                VerticalAlignment="Center" Text="Выйти" />
                 </StackPanel>
             </ListBoxItem>
+			
         </ListBox>
 
         <views:PlayerControl DataContext="{Binding PlayerContext}" Margin="5,5,5,0" Grid.Column="1" />
@@ -212,7 +215,7 @@
 			VerticalAlignment="Bottom"
 			HorizontalAlignment="Right"
 			Padding="5"
-			Width="300"  BorderThickness="2,2,0,0" BorderBrush="{DynamicResource ControlsColor}" >
+			Width="300"  BorderThickness="2,2,0,0" BorderBrush="{DynamicResource AccentColor}" >
 			<Notify:NotifyControl.Background>
 				<SolidColorBrush Color="White" Opacity="0.9" />
 			</Notify:NotifyControl.Background>

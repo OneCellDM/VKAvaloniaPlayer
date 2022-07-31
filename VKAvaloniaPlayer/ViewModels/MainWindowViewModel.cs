@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Media;
 using Avalonia.Threading;
 
 using ReactiveUI;
@@ -186,7 +187,8 @@ namespace VKAvaloniaPlayer.ViewModels
                 }
             });
 
-            this.WhenAnyValue(vm => vm.MenuSelectionIndex).Subscribe(value => OpenViewFromMenu(value));
+           
+            
         }
 
         private void Events_AudioRepostEvent(AudioModel audioModel)

@@ -58,7 +58,8 @@ namespace WebElement
 
 
                 ServerStarted = false;
-                Console.WriteLine("Stopped");
+                Console.WriteLine("Server stopped");
+
                 return true;
             }
             catch (Exception)

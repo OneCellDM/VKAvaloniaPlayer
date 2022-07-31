@@ -3,12 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             Background="White"
+             Background="{DynamicResource BgColor}"
              x:Class="VKAvaloniaPlayer.ETC.LoadingControl">
 
-    <StackPanel Margin="100,0" Spacing="10">
-        <Label HorizontalContentAlignment="Center" Content="Загрузка" />
-        <ProgressBar Foreground="{DynamicResource SliderTickColor}" IsIndeterminate="True" />
+    <StackPanel  Margin="100,0" Spacing="10">
+        <Label HorizontalContentAlignment="Center" 
+			   Foreground="{DynamicResource TextColor}"
+			   Content="Загрузка" />
+        <ProgressBar Foreground="{DynamicResource AccentColor}" 
+					 IsIndeterminate="True" />
     </StackPanel>
 
 </UserControl>

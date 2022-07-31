@@ -14,8 +14,6 @@ namespace VKAvaloniaPlayer.Models.Interfaces
 
         [JsonIgnore] public Bitmap? Bitmap { get; set; }
 
-        public Task<Stream?>? LoadImageStreamAsync();
-
         public void LoadBitmapAsync()
         {
         }

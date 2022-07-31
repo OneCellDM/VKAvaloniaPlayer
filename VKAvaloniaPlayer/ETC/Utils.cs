@@ -37,5 +37,6 @@ namespace VKAvaloniaPlayer.ETC
         {
             return Environment.GetEnvironmentVariable("HOME");
         }
+        
     }
 }

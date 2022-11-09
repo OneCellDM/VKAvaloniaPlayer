@@ -56,8 +56,6 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                 {
                     try
                     {
-
-                       
                         if (string.IsNullOrEmpty(text))
                         {
                             
@@ -72,7 +70,10 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                             Offset = 0;
                             IsLoading = true;
                             StopScrollChandegObserVable();
-                            _AllDataCollection = DataCollection;
+
+                            if(_AllDataCollection is null||_AllDataCollection.Count == 0)
+                                _AllDataCollection = DataCollection;
+
                             DataCollection = new ObservableCollection<AudioModel>();
                             while (true)
                             {

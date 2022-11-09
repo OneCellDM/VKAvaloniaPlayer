@@ -13,10 +13,14 @@ namespace VKAvaloniaPlayer.ViewModels
         public static class Player
         {
             private static int _stream;
+            private static bool isNew = false;
 
             static Player()
             {
+                Bass.Configure(Configuration.IncludeDefaultDevice,true);
+              
                 Bass.Init();
+                
             }
 
             public static int GetPositionSeconds()
@@ -43,16 +47,32 @@ namespace VKAvaloniaPlayer.ViewModels
 
             public static void SetStream(AudioModel audioModel)
             {
+                
                 var url = GlobalVars.VkApi?.Audio.GetById(new[] { audioModel.GetAudioIDFormatWithAccessKey() })
                     .ElementAt(0).Url.AbsoluteUri;
-                _stream = Bass.CreateStream(url, 0, BassFlags.Default, null, IntPtr.Zero);
+               
+                _stream = Bass.CreateStream(url, 0,BassFlags.Default, Dw, IntPtr.Zero);    
+
+                var err = Bass.LastError;
+
+                if (err is Errors.OK) isNew = false;
+                
+                if (isNew && err == Errors.FileOpen)
+                    SetStream(audioModel);
+            }
+            public static void Dw(IntPtr buffer,int lenght, IntPtr user)
+            {
+                
+                Console.WriteLine();
             }
 
             public static bool Play(AudioModel model)
             {
                 try
                 {
+
                     Stop();
+                    isNew = true;
                     SetStream(model);
                     return Play();
                 }
@@ -74,8 +94,8 @@ namespace VKAvaloniaPlayer.ViewModels
                 try
                 {
                     Bass.Stop();
-                    if (_stream != 0)
-                        Bass.StreamFree(_stream);
+                    Bass.StreamFree(_stream);
+                   
                     return true;
                 }
                 catch (Exception)

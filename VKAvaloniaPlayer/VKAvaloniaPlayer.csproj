@@ -57,4 +57,7 @@
             <DependentUpon>MusicListControl.axaml</DependentUpon>
         </Compile>
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="BASS Lib\Win\" />
+    </ItemGroup>
 </Project>

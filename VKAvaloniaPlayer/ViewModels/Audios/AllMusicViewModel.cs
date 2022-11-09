@@ -57,9 +57,10 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                     try
                     {
 
-                        DataCollection = _AllDataCollection;
+                       
                         if (string.IsNullOrEmpty(text))
                         {
+                            
                             SelectedIndex = -1;
                             DataCollection = _AllDataCollection;
                             Offset = DataCollection.Count();
@@ -110,6 +111,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                     finally
                     {
                         IsLoading = false;
+                        Searching = false;
                     }
                 }, cancellationTokenSource.Token);
             }

@@ -42,7 +42,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
             public static void Update()
             {
-                Bass.ChannelUpdate(_stream, 0);
+               Bass.ChannelUpdate(_stream,0);
             }
 
             public static void SetStream(AudioModel audioModel)
@@ -51,7 +51,7 @@ namespace VKAvaloniaPlayer.ViewModels
                 var url = GlobalVars.VkApi?.Audio.GetById(new[] { audioModel.GetAudioIDFormatWithAccessKey() })
                     .ElementAt(0).Url.AbsoluteUri;
                
-                _stream = Bass.CreateStream(url, 0,BassFlags.Default|BassFlags.AutoFree,null, IntPtr.Zero);    
+                _stream = Bass.CreateStream(url, 0,BassFlags.Default,null, IntPtr.Zero);    
 
                 var err = Bass.LastError;
 
@@ -89,7 +89,10 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 try
                 {
-                    Bass.ChannelStop(_stream);
+                    if (Bass.ChannelStop(_stream))
+                    {
+                        Bass.StreamFree(_stream);
+                    }
 
                     return true;
                 }

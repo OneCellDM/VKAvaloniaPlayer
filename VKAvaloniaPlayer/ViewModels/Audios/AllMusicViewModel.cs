@@ -58,8 +58,8 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                     {
                         if (string.IsNullOrEmpty(text))
                         {
-                            
-                            SelectedIndex = -1;
+                            if(PlayerControlViewModel.Instance?.CurrentAudio != null)
+                                SelectToModel(PlayerControlViewModel.Instance.CurrentAudio,true);
                             DataCollection = _AllDataCollection;
                             Offset = DataCollection.Count();
                             Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
@@ -71,9 +71,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                             IsLoading = true;
                             StopScrollChandegObserVable();
 
-                            if(_AllDataCollection is null || _AllDataCollection.Count == 0)
-                                _AllDataCollection = DataCollection;
-
+ 
                             DataCollection = new ObservableCollection<AudioModel>();
                             while (true)
                             {

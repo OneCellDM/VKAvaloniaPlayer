@@ -71,7 +71,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                             IsLoading = true;
                             StopScrollChandegObserVable();
 
-                            if(_AllDataCollection is null||_AllDataCollection.Count == 0)
+                            if(_AllDataCollection is null || _AllDataCollection.Count == 0)
                                 _AllDataCollection = DataCollection;
 
                             DataCollection = new ObservableCollection<AudioModel>();

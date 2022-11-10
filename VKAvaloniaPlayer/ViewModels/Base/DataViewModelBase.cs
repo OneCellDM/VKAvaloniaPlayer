@@ -42,7 +42,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         [Reactive]
         private ScrollChangedEventArgs ScrolledEventArgs { get; set; }
-
+      
 
         [Reactive]
         public bool SearchIsVisible { get; set; }

@@ -33,7 +33,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
 
         public override void SelectedItem(object sender, PointerPressedEventArgs args)
         {
-
+            
             var item = args?.GetContent<AudioAlbumModel>();
             if (item != null)
             {

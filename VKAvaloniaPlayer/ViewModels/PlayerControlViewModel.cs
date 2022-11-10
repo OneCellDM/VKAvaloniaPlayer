@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Timers;
 
@@ -21,13 +22,15 @@ namespace VKAvaloniaPlayer.ViewModels
     public partial class PlayerControlViewModel : ViewModelBase
     {
         public delegate void OpenRepostWindowDelegate(AudioModel audioModel);
+
         public delegate void SetCollection(ObservableCollection<AudioModel> audioCollection, int selectedIndex);
+       
+        public delegate void AudioChanged(AudioModel? model);
 
         private static ObservableCollection<AudioModel>? PlayList;
         private static ObservableCollection<AudioModel>? _allData;
 
         private static PlayerControlViewModel _Instance;
-
 
         private AudioModel _CurrentAudio;
         private bool _Mute;
@@ -48,6 +51,10 @@ namespace VKAvaloniaPlayer.ViewModels
         public static event SetCollection? SetPlaylistEvent;
 
         public static event OpenRepostWindowDelegate? OpenRepostWindowEvent;
+       
+
+        public event AudioChanged AudioChangedEvent;
+
 
         public bool Repeat
         {
@@ -109,6 +116,7 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 try
                 {
+                    
                     PlayPosition = 0;
 
                     _Timer?.Stop();
@@ -129,6 +137,7 @@ namespace VKAvaloniaPlayer.ViewModels
                     }
 
                     this.RaiseAndSetIfChanged(ref _CurrentAudio, value);
+                   
 
                     PauseButtonVisible();
 
@@ -286,7 +295,11 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 var list = PlayList.ToList();
                 var index = list.IndexOf(CurrentAudio);
-                if (index < list.Count - 1) CurrentAudio = list[index + 1];
+                if (index < list.Count - 1)
+                {
+                    CurrentAudio = list[index + 1];
+                    AudioChangedEvent?.Invoke(_CurrentAudio);
+                }
             }
         }
 
@@ -296,7 +309,11 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 var list = PlayList.ToList();
                 var index = list.IndexOf(CurrentAudio);
-                if (index > 0) CurrentAudio = list[index - 1];
+                if (index > 0)
+                {
+                    CurrentAudio = list[index - 1];
+                    AudioChangedEvent?.Invoke(_CurrentAudio);
+                }
             }
         }
     }

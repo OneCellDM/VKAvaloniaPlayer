@@ -1,4 +1,6 @@
-﻿using DynamicData;
+﻿using Avalonia.Input;
+
+using DynamicData;
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,6 +14,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
     {
         public CurrentMusicListViewModel()
         {
+            
             SearchIsVisible = false;
             IsLoading = false;
             PlayerControlViewModel.SetPlaylistEvent += PlayerControlViewModelOnSetPlaylistEvent;
@@ -20,19 +23,23 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
             AudioListButtons.AudioAddToAlbumIsVisible = false;
         }
 
-        public override void SelectedItem()
+        public override void SelectedItem(object sender, PointerPressedEventArgs args)
         {
             PlayerControlViewModel.SetPlaylistEvent -= PlayerControlViewModelOnSetPlaylistEvent;
-            base.SelectedItem();
+            base.SelectedItem(sender, args);
             PlayerControlViewModel.SetPlaylistEvent += PlayerControlViewModelOnSetPlaylistEvent;
         }
+        
 
         private void PlayerControlViewModelOnSetPlaylistEvent(IEnumerable<AudioModel> audiocollection,
             int selectedindex)
         {
+           
             DataCollection = new ObservableCollection<AudioModel>();
             DataCollection.AddRange(audiocollection);
             _AllDataCollection = DataCollection;
+            SelectedIndex = selectedindex;
+            
         }
     }
 }

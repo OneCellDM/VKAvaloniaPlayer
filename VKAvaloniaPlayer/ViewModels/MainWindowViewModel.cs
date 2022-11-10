@@ -83,6 +83,7 @@ namespace VKAvaloniaPlayer.ViewModels
         public MainWindowViewModel()
         {
             PlayerContext = PlayerControlViewModel.Instance;
+            PlayerContext.AudioChangedEvent += PlayerContext_AudioChangedEvent;
             Events.AudioRepostEvent += Events_AudioRepostEvent;
             ExceptionViewModel.ViewExitEvent += ExceptionViewModel_ViewExitEvent;
 
@@ -189,6 +190,11 @@ namespace VKAvaloniaPlayer.ViewModels
             this.WhenAnyValue(vm => vm.MenuSelectionIndex).Subscribe(value => OpenViewFromMenu(value));
         }
 
+        private void PlayerContext_AudioChangedEvent(AudioModel? model)
+        {
+            CurrentAudioViewModel.SelectToModel(model,true);
+        }
+
         private void Events_AudioRepostEvent(AudioModel audioModel)
         {
             RepostViewModel = new RepostViewModel(RepostToType.Friend, audioModel);
@@ -202,7 +208,7 @@ namespace VKAvaloniaPlayer.ViewModels
             RepostViewIsVisible = false;
             RepostViewModel.CloseViewEvent -= RepostViewModel_CloseViewEvent;
         }
-
+      
         public void OpenViewFromMenu(int menuIndex)
         {
             Dispatcher.UIThread.InvokeAsync(() =>
@@ -217,6 +223,8 @@ namespace VKAvaloniaPlayer.ViewModels
                     case 0:
                         {
                             CurrentAudioViewModel = _CurrentMusicListViewModel;
+                            CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio,true);
+                            
                             break;
                         }
                     case 1:
@@ -228,6 +236,8 @@ namespace VKAvaloniaPlayer.ViewModels
                             }
 
                             CurrentAudioViewModel = _AllMusicListViewModel;
+                            CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
+
                             break;
                         }
                     case 2:
@@ -247,6 +257,9 @@ namespace VKAvaloniaPlayer.ViewModels
                             if (_SearchViewModel == null)
                                 _SearchViewModel = new AudioSearchViewModel();
                             CurrentAudioViewModel = _SearchViewModel;
+                            CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
+
+
                             break;
                         }
                     case 4:
@@ -258,6 +271,9 @@ namespace VKAvaloniaPlayer.ViewModels
                             }
 
                             CurrentAudioViewModel = _RecomendationsViewModel;
+                            CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
+
+
                             break;
                         }
                     case 5:
@@ -276,8 +292,6 @@ namespace VKAvaloniaPlayer.ViewModels
 
             Dispatcher.UIThread.InvokeAsync(() =>
             {
-
-
                 _CurrentMusicListViewModel = new CurrentMusicListViewModel();
                 VkLoginIsVisible = false;
                 CurrentAccountModel = GlobalVars.CurrentAccount;
@@ -285,8 +299,6 @@ namespace VKAvaloniaPlayer.ViewModels
 
                 if (CurrentAccountModel.Image is null)
                     CurrentAccountModel.LoadAvatar();
-
-
             });
 
             Events.VkApiChanged -= StaticObjects_VkApiChanged;

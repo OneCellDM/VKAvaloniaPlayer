@@ -43,6 +43,22 @@ namespace VKAvaloniaPlayer.ETC
             }
         }
 
+        public static int FindIndex<T>(this IEnumerable<T> items, Predicate<T> predicate)
+        {
+            int index = 0;
+            bool isSearched = false;
+            foreach (var item in items)
+            {
+                if (predicate(item))
+                {
+                    isSearched = true;
+                    break;
+                }
+                index++;
+            }
+            return isSearched ? index : -1;
+        }
+
         public static void StartLoadImages<T>(this ObservableCollection<T>? DataCollection) where T : IVkModelBase
         {
             try

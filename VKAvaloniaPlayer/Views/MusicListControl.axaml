@@ -43,8 +43,9 @@
             </TextBox.Styles>
         </TextBox>
 
-        <ListBox AutoScrollToSelectedItem="True" Grid.Row="1" UseLayoutRounding="True" VirtualizationMode="Simple"
+        <ListBox AutoScrollToSelectedItem="{Binding ScrollToItem}" Grid.Row="1" UseLayoutRounding="True" VirtualizationMode="Simple"
                  Background="White"
+
                  SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
                  Items="{Binding  DataCollection}">
 

@@ -1,6 +1,8 @@
 ﻿using Avalonia.Input;
 using Avalonia.Layout;
 
+using ReactiveUI.Fody.Helpers;
+
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,6 +11,8 @@ using System.Reactive.Linq;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 
+using VkNet.Model;
+
 namespace VKAvaloniaPlayer.ViewModels.Base
 {
     public abstract class AudioViewModelBase : DataViewModelBase<AudioModel>
@@ -16,6 +20,8 @@ namespace VKAvaloniaPlayer.ViewModels.Base
         public static Action? LoadMusicsAction { get; set; }
         public AudioListButtonsViewModel AudioListButtons { get; set; }
 
+        [Reactive]
+        public bool ScrollToItem { get; set; } = false;
 
 
         public AudioViewModelBase()
@@ -33,17 +39,23 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         public override void SelectedItem(object sender, PointerPressedEventArgs args)
         {
+            
 
             var model = args?.GetContent<AudioModel>();
 
             if (model != null)
             {
-                SelectedIndex = DataCollection.IndexOf(model);
+                var index = DataCollection.IndexOf(model);
 
-                if (SelectedIndex > -1)
+                if (index > -1)
+                {
+                    
                     PlayerControlViewModel.SetPlaylist(
                         new ObservableCollection<AudioModel>(DataCollection.Cast<AudioModel>().ToList()),
-                        SelectedIndex);
+                        index);
+
+                    SelectToModel(model, false);
+                }
             }
 
         }
@@ -78,6 +90,29 @@ namespace VKAvaloniaPlayer.ViewModels.Base
                 SearchText = "";
             }
         }
+        public void SelectToModel(AudioModel? model,bool scrolled)
+        {
+            if (model == null)
+                return;
+
+            int index = GetIndexFromAudio(model);
+            if (index > -1)
+            {
+               
+                ScrollToItem = scrolled;
+                SelectedIndex = 0;
+                SelectedIndex = index;
+                ScrollToItem = false;
+
+            }
+
+        }
+
+      
+        public int GetIndexFromAudio(AudioModel model)
+        {
+            return DataCollection.FindIndex(x => x.ID == model.ID);
+        } 
     }
 
 

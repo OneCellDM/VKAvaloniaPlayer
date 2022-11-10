@@ -47,7 +47,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="0.2*" MinWidth="40" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -74,10 +74,7 @@
                 <TextBlock Text="{Binding CurrentAudio.Artist}" TextTrimming="CharacterEllipsis" />
             </StackPanel>
             <Slider Grid.Row="1" Grid.ColumnSpan="8" Grid.Column="1" Value="{Binding Path=PlayPosition}"
-                    Maximum="{Binding Path=CurrentAudio.Duration}" Margin="11,
-					
-
-0,0,0">
+                    Maximum="{Binding Path=CurrentAudio.Duration}" Margin="11,0,0,0">
                 <i:Interaction.Behaviors>
                     <ia:EventTriggerBehavior EventName="PointerCaptureLost">
                         <ia:CallMethodAction TargetObject="{Binding }" MethodName="VolumeChanged" />

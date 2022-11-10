@@ -53,6 +53,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                 DataCollection.StartLoadImagesAsync();
                 Offset += res.Count;
             }
+            _AllDataCollection = DataCollection;
 
         }
 

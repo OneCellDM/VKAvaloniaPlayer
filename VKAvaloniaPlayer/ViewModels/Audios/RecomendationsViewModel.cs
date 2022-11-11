@@ -11,7 +11,8 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
     {
         public RecomendationsViewModel()
         {
-            StartSearchObservable(new TimeSpan(0, 0, 0, 0, 500));
+            SearchIsVisible = false;
+           
             StartScrollChangedObservable(LoadMusicsAction, Orientation.Vertical);
 
             AudioListButtons.AudioRemoveIsVisible = false;

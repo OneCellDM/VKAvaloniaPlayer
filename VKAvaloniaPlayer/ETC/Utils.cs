@@ -33,6 +33,7 @@ namespace VKAvaloniaPlayer.ETC
             throw new InvalidOperationException();
         }
 
+        
         public static string? GetHomeDirectory()
         {
             return Environment.GetEnvironmentVariable("HOME");

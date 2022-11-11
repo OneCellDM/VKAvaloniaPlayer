@@ -88,7 +88,7 @@ namespace VKAvaloniaPlayer.ETC
 
             for (var i = 0; i < itercount; i++)
             {
-                var element = obscollection.ElementAt(rand.Next(itercount));
+                var element = obscollection[rand.Next(itercount)];
                 obscollection.Remove(element);
                 obscollection.Insert(rand.Next(itercount), element);
             }

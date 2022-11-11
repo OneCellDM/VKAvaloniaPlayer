@@ -110,7 +110,7 @@ namespace VKAvaloniaPlayer.ViewModels
                         {
                             Events.AudioRemoveCall(vkModel);
                             Notify.NotifyManager.Instance.PopMessage(
-                           new Notify.NotifyData("Аудиозапись удалена", vkModel.Title));
+                            new Notify.NotifyData("Аудиозапись удалена", vkModel.Title));
                         }
                     }
                     else

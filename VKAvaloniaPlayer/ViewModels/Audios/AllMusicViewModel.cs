@@ -138,6 +138,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
 
                 ResponseCount = res.Count;
             }
+            _AllDataCollection = DataCollection;
         }
     }
 }

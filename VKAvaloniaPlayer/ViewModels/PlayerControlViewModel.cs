@@ -284,7 +284,7 @@ namespace VKAvaloniaPlayer.ViewModels
             }
             else if ((PlayPosition == CurrentAudio.Duration) && Repeat)
             {
-                Player.Update();
+                 Player.Update();
                 Player.Play();
             }
         }

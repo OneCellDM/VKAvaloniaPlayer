@@ -27,6 +27,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                 DataCollection.StartLoadImagesAsync();
                 Offset += res.Count;
                 ResponseCount = res.Count;
+               
             }
         }
     }

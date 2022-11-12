@@ -26,6 +26,7 @@ namespace VKAvaloniaPlayer.ViewModels.Audios
                 DataCollection.AddRange(res);
 
                 DataCollection.StartLoadImagesAsync();
+
                 Offset += res.Count;
                 ResponseCount = res.Count;
                

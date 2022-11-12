@@ -3,6 +3,7 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="Notify/NotifyControl.axaml" value="VKAvaloniaPlayer.csproj" />
         <entry key="Styles/ListBoxStyle.axaml" value="VKAvaloniaPlayer.csproj" />
         <entry key="Styles/MenuListBoxStyle.axaml" value="VKAvaloniaPlayer.csproj" />
         <entry key="Styles/SliderStyle.axaml" value="VKAvaloniaPlayer.csproj" />

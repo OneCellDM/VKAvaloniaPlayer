@@ -11,7 +11,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Timers;
-
+using ManagedBass;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 
@@ -278,13 +278,16 @@ namespace VKAvaloniaPlayer.ViewModels
         private void _Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             Dispatcher.UIThread.InvokeAsync(() => PlayPosition = Player.GetPositionSeconds());
-            if ((PlayPosition == CurrentAudio.Duration) & !Repeat)
+
+            bool isEnd = (PlayPosition == CurrentAudio.Duration) 
+                         || (Player.GetStatus() == PlaybackState.Stopped);
+            if (isEnd && !Repeat)
             {
                 PlayNext();
             }
-            else if ((PlayPosition == CurrentAudio.Duration) && Repeat)
+            else if (isEnd && Repeat)
             {
-                 Player.Update();
+                Player.Update();
                 Player.Play();
             }
         }

@@ -1,6 +1,7 @@
 ﻿using ManagedBass;
 
 using System;
+using System.Diagnostics;
 using System.Linq;
 
 using VKAvaloniaPlayer.ETC;
@@ -118,6 +119,10 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 Bass.ChannelSetAttribute(_stream, ChannelAttribute.Volume, volume);
             }
+
+            public static PlaybackState GetStatus()=>
+                Bass.ChannelIsActive(_stream);
+                
         }
     }
 }

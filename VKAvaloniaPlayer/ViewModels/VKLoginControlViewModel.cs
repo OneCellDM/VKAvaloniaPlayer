@@ -72,15 +72,35 @@ namespace VKAvaloniaPlayer.ViewModels
 
                         if (_webElementServer.ServerStarted)
                         {
+                            string winName = "WindowsWebBrowser.exe";
+                            string LinuxName = "Linux";
+                            string tmpfileEexecute = string.Empty;
+                            string tmpfileEexecute2 = string.Empty;
                             string fileExecute = string.Empty;
                             string args = $"{AuthUrl} {Port}";
 
 
                             if (ETC.GlobalVars.CurrentPlatform == OSPlatform.Linux)
-                                fileExecute = Path.Combine("WebElement", "Linux");
+                            {
+                                tmpfileEexecute = Path.Combine("WebElement", LinuxName);
+                                tmpfileEexecute2 = LinuxName;
+                            }
 
                             else if (ETC.GlobalVars.CurrentPlatform == OSPlatform.Windows)
-                                fileExecute = Path.Combine("WebElement", "WindowsWebBrowser.exe");
+                            {
+                               tmpfileEexecute = Path.Combine("WebElement", winName);
+                               tmpfileEexecute2 = winName;
+                            }
+
+                            if (Path.Exists(tmpfileEexecute))
+                            {
+                                fileExecute = tmpfileEexecute;
+                            }
+                            else if (Path.Exists(tmpfileEexecute2))
+                            {
+                                fileExecute = tmpfileEexecute2;
+                            }
+
 
                             var start = new ProcessStartInfo
                             {
@@ -156,7 +176,7 @@ namespace VKAvaloniaPlayer.ViewModels
         }
         private void WebServer_ErrorEvent(Exception ex)
         {
-            InfoText = "$Произошла ошибка {ex.Message}";
+            InfoText = $"Произошла ошибка {ex.Message}";
             OffServerAndUnsubscribe();
         }
         private void WebServer_MessageEvent(String message)

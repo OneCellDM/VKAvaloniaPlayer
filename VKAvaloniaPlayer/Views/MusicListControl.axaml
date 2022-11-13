@@ -81,8 +81,18 @@
                                         </TextBlock.Styles>
                                     </TextBlock>
                                 </DockPanel>
-                                <TextBlock IsHitTestVisible="True" TextTrimming="WordEllipsis" FontSize="14"
+                                <TextBlock  x:Name="artist" IsHitTestVisible="True" TextTrimming="WordEllipsis" FontSize="14"
                                         Text="{Binding Artist}" DockPanel.Dock="Bottom">
+                                    
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:CallMethodAction TargetObject="{Binding DataContext , 
+                                                                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" 
+                                                                 MethodName="ArtistClicked"/>
+                                        </ia:EventTriggerBehavior>
+                                        
+                                    </i:Interaction.Behaviors>
+                                    
                                     <TextBlock.Styles>
                                         <Style Selector="TextBlock">
                                             <Setter Property="Foreground" Value="#737272" />

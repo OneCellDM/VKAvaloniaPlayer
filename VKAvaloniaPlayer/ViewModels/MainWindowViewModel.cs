@@ -6,7 +6,7 @@ using ReactiveUI.Fody.Helpers;
 
 using System;
 using System.Threading.Tasks;
-
+using Avalonia.Input;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Audios;
@@ -187,6 +187,8 @@ namespace VKAvaloniaPlayer.ViewModels
                 }
             });
 
+            _SearchViewModel = new AudioSearchViewModel();
+            
             this.WhenAnyValue(vm => vm.MenuSelectionIndex).Subscribe(value => OpenViewFromMenu(value));
         }
 
@@ -208,7 +210,16 @@ namespace VKAvaloniaPlayer.ViewModels
             RepostViewIsVisible = false;
             RepostViewModel.CloseViewEvent -= RepostViewModel_CloseViewEvent;
         }
-      
+
+        public void ArtistClicked(object sender, PointerPressedEventArgs e)
+        {
+           var tb = e.GetContent<AudioModel>();
+           if (tb?.Artist != null)
+           {
+               OpenViewFromMenu(3);
+               _SearchViewModel.SearchText = tb.Artist;
+           }
+        }
         public void OpenViewFromMenu(int menuIndex)
         {
             Dispatcher.UIThread.InvokeAsync(() =>
@@ -221,66 +232,65 @@ namespace VKAvaloniaPlayer.ViewModels
                 switch (menuIndex)
                 {
                     case 0:
-                        {
-                            CurrentAudioViewModel = _CurrentMusicListViewModel;
-                            CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio,true);
-                            
-                            break;
-                        }
+                    {
+                        CurrentAudioViewModel = _CurrentMusicListViewModel;
+                        CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
+
+                        break;
+                    }
                     case 1:
+                    {
+                        if (_AllMusicListViewModel == null)
                         {
-                            if (_AllMusicListViewModel == null)
-                            {
-                                _AllMusicListViewModel = new AllMusicViewModel();
-                                _AllMusicListViewModel.StartLoad();
-                            }
-
-                            CurrentAudioViewModel = _AllMusicListViewModel;
-                            CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
-
-                            break;
+                            _AllMusicListViewModel = new AllMusicViewModel();
+                            _AllMusicListViewModel.StartLoad();
                         }
+
+                        CurrentAudioViewModel = _AllMusicListViewModel;
+                        CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
+
+                        break;
+                    }
                     case 2:
+                    {
+                        if (AlbumsViewModel == null)
                         {
-                            if (AlbumsViewModel == null)
-                            {
-                                AlbumsViewModel = new AlbumsViewModel();
-                                AlbumsViewModel.StartLoad();
-                            }
-
-                            CurrentAudioViewIsVisible = false;
-                            AlbumsIsVisible = true;
-                            break;
+                            AlbumsViewModel = new AlbumsViewModel();
+                            AlbumsViewModel.StartLoad();
                         }
+
+                        CurrentAudioViewIsVisible = false;
+                        AlbumsIsVisible = true;
+                        break;
+                    }
                     case 3:
-                        {
-                            if (_SearchViewModel == null)
-                                _SearchViewModel = new AudioSearchViewModel();
-                            CurrentAudioViewModel = _SearchViewModel;
-                            CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
+                    {
+                       
+                        CurrentAudioViewModel = _SearchViewModel;
+                        CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
 
 
-                            break;
-                        }
+                        break;
+                    }
                     case 4:
+                    {
+                        if (_RecomendationsViewModel is null)
                         {
-                            if (_RecomendationsViewModel is null)
-                            {
-                                _RecomendationsViewModel = new RecomendationsViewModel();
-                                _RecomendationsViewModel.StartLoad();
-                            }
-
-                            CurrentAudioViewModel = _RecomendationsViewModel;
-                            CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
-
-
-                            break;
+                            _RecomendationsViewModel = new RecomendationsViewModel();
+                            _RecomendationsViewModel.StartLoad();
                         }
+
+                        CurrentAudioViewModel = _RecomendationsViewModel;
+                        CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
+
+
+                        break;
+                    }
                     case 5:
-                        {
-                            AccountExit();
-                            break;
-                        }
+                    {
+                        AccountExit();
+                        break;
+                    }
                 }
 
 

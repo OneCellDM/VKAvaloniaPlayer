@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Avalonia.Controls;
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.Models.Interfaces;
 
@@ -18,7 +18,13 @@ namespace VKAvaloniaPlayer.ETC
     {
         public static T? GetContent<T>(this PointerPressedEventArgs eventArgs) where T : class
         {
-            return (eventArgs?.Source as ContentPresenter)?.Content as T;
+            
+            var res = (eventArgs?.Source as ContentPresenter)?.Content as T;
+            if (res is null)
+                res = (eventArgs?.Source as TextBlock)?.DataContext as T;
+            
+          
+            return res;
         }
 
 

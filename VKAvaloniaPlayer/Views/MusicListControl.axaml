@@ -81,8 +81,9 @@
                                         </TextBlock.Styles>
                                     </TextBlock>
                                 </DockPanel>
-                                <TextBlock  x:Name="artist" IsHitTestVisible="True" TextTrimming="WordEllipsis" FontSize="14"
-                                        Text="{Binding Artist}" DockPanel.Dock="Bottom">
+                               
+                                    <TextBlock  x:Name="artist" IsHitTestVisible="True" TextTrimming="WordEllipsis" FontSize="14"
+                                                Text="{Binding Artist}" DockPanel.Dock="Bottom">
                                     
                                     <i:Interaction.Behaviors>
                                         <ia:EventTriggerBehavior EventName="PointerPressed">
@@ -104,6 +105,7 @@
                                         </Style>
                                     </TextBlock.Styles>
                                 </TextBlock>
+                                
                             </DockPanel>
                         </DockPanel>
                         <StackPanel Margin="10,0" Spacing="5" Grid.Column="1" Orientation="Horizontal">

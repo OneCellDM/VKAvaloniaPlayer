@@ -7,7 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
-
+using Avalonia.Controls;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 
@@ -39,7 +39,11 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
         public override void SelectedItem(object sender, PointerPressedEventArgs args)
         {
-            
+
+            if (args.Source is TextBlock)
+            {
+                return;
+            }
 
             var model = args?.GetContent<AudioModel>();
 

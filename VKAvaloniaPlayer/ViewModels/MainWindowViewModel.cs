@@ -7,6 +7,7 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Threading.Tasks;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Audios;
@@ -212,11 +213,18 @@ namespace VKAvaloniaPlayer.ViewModels
         }
 
         public void ArtistClicked(object sender, PointerPressedEventArgs e)
-        {
-           var tb = e.GetContent<AudioModel>();
+        {   
+            var tb = e.GetContent<AudioModel>();
            if (tb?.Artist != null)
            {
-               OpenViewFromMenu(3);
+               MenuSelectionIndex = 3;
+               if (PlayerContext?.CurrentAudio != null)
+               {
+                   CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, false);
+                   CurrentAudioViewModel.SelectedIndex = -1;
+               }
+
+               _SearchViewModel.IsLoading = true;
                _SearchViewModel.SearchText = tb.Artist;
            }
         }

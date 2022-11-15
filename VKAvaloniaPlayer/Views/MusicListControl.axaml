@@ -76,7 +76,7 @@
                                             Text="{Binding Subtitle}" Margin="5,0,0,0" DockPanel.Dock="Right">
                                         <TextBlock.Styles>
                                             <Style Selector="TextBlock">
-                                                <Setter Property="Foreground" Value="#aaaaaa" />
+                                                <Setter Property="Foreground" Value="#464646" />
                                             </Style>
                                         </TextBlock.Styles>
                                     </TextBlock>

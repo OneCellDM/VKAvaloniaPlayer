@@ -1,7 +1,11 @@
-﻿<Styles xmlns="https://github.com/avaloniaui"
+﻿
+<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-          xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-            xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions">
+        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions">
+    <Styles.Resources>
+        <SolidColorBrush x:Key="SelectColor" Color="#2888F5" Opacity="0.2"/>
+    </Styles.Resources>
     <Style Selector="ListBoxItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     </Style>
@@ -44,4 +48,51 @@
             </ControlTemplate>
         </Setter>
     </Style>
+    
+    
+    <Style Selector="ListBoxItem /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="TextBlock.FontWeight" Value="Normal" />
+        <Setter Property="TextBlock.FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+
+    </Style>
+
+    <!--  Disabled State  -->
+    <Style Selector="ListBoxItem:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}" />
+    </Style>
+
+    <!--  PointerOver State  -->
+    <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource SelectColor}" />
+    </Style>
+   
+
+    <!--  Pressed State  -->
+    <Style Selector="ListBoxItem:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource SelectColor}" />
+    </Style>
+    
+
+    <!--  Selected State  -->
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource SelectColor}" />
+    </Style>
+   
+
+    <!--  Selected Unfocused State  -->
+    <Style Selector="ListBoxItem:selected:not(:focus) /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource SelectColor}" />
+    </Style>
+ 
+
+    <!--  Selected PointerOver State  -->
+    <Style Selector="ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource SelectColor}" />
+    </Style>
+   
+    <!--  Selected Pressed State  -->
+    <Style Selector="ListBoxItem:selected:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource SelectColor}" />
+    </Style>
+   
 </Styles>

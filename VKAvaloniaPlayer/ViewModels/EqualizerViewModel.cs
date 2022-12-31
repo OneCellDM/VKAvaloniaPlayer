@@ -47,13 +47,12 @@ public class SavedEqualizerData
         EqualizerPressets.Add(presset);
     }
 
-<<<<<<< HEAD
+
     public void RemovePreset(int index)
     {
         EqualizerPressets.RemoveAt(index);
     }
-=======
->>>>>>> origin/master
+
     public void RemovePreset(EqualizerPresset presset)
     {
         EqualizerPressets.Remove(presset);

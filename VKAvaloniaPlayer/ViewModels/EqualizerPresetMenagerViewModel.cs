@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-<<<<<<< HEAD
+
 using System.Reactive.Linq;
-=======
->>>>>>> origin/master
+
 using System.Text.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -41,7 +40,7 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
     public event ICloseView.CloseViewDelegate? CloseViewEvent;
     public IReactiveCommand CloseCommand { get; set; }
 
-<<<<<<< HEAD
+
     
     private bool CanRemove()
     {
@@ -58,19 +57,12 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
             return true;
         }
     }
-=======
->>>>>>> origin/master
+
     public EqualizerPresetMenagerViewModel()
     {
         
         LoadingPressets();
-<<<<<<< HEAD
 
-        
-
-=======
-        
->>>>>>> origin/master
         TitleInputViewModel = new InputViewModel()
         {
             Message = "Название пресета",
@@ -84,7 +76,7 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
         });
         RemovePreset = ReactiveCommand.Create(() =>
         {
-<<<<<<< HEAD
+
             if (CanRemove())
             {
                 SavedEqualizerData?.RemovePreset(SelectedItemIndex);
@@ -97,9 +89,9 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
 
 
 
-=======
+
             SavedEqualizerData.RemoveSelectedPreset();
->>>>>>> origin/master
+
         });
         CloseCommand = ReactiveCommand.Create(() =>
         {
@@ -111,12 +103,7 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
         {
            ApplyPreset(SelectedItemIndex);
         });
-<<<<<<< HEAD
-        
 
-       
-=======
->>>>>>> origin/master
     }
 
     public void ApplyPreset(int index)
@@ -165,11 +152,8 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
                     Title = DefaultPresetName,
                     Equalizers = hz.Select(x => new Equalizer(x)).ToList(),
                 };
-<<<<<<< HEAD
-                SavedEqualizerData.EqualizerPressets.Insert(0,presset);
-=======
-                SavedEqualizerData.AddPreset(presset);
->>>>>>> origin/master
+                SavedEqualizerData.EqualizerPressets.Insert(0,presset); 
+
             }
 
         }

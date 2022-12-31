@@ -22,6 +22,7 @@ namespace VKAvaloniaPlayer.ETC
         {
             return Convert.ToInt32(Bass.ChannelBytes2Seconds(_stream, Bass.ChannelGetPosition(_stream)));
         }
+     
 
 
         public static void SetPositon(double val)

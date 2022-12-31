@@ -15,6 +15,7 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             private static int _stream;
             private static bool isNew = false;
+          
 
             static Player()
             {
@@ -23,6 +24,12 @@ namespace VKAvaloniaPlayer.ViewModels
                 Bass.Init();
                 
             }
+
+            public static int GetStreamHandler()
+            {
+                return _stream;
+            }
+            
 
             public static int GetPositionSeconds()
             {

@@ -1,4 +1,6 @@
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
 namespace VKAvaloniaPlayer.Views
@@ -14,5 +16,8 @@ namespace VKAvaloniaPlayer.Views
         {
             AvaloniaXamlLoader.Load(this);
         }
+
+
+       
     }
 }

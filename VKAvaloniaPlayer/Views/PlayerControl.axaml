@@ -8,9 +8,11 @@
              xmlns:converters="clr-namespace:VKAvaloniaPlayer.Converters"
 			 xmlns:i="using:Avalonia.Xaml.Interactivity"
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:view="clr-namespace:VKAvaloniaPlayer.Views"
             >
 
     <UserControl.Resources>
+        <converters:EqualizerOffsetConverter x:Key="EqualizerOffsetConverter"></converters:EqualizerOffsetConverter>
         <converters:DurationConverter x:Key="DurationConverter" />
         <sys:Double x:Key="PlayerButtonSize">14</sys:Double>
     </UserControl.Resources>
@@ -42,6 +44,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -134,8 +137,7 @@
 			<Button Background="Transparent" Grid.Column="5"  VerticalAlignment="Bottom">
 				<Path Data="M.75 0c-.41 0-.75.34-.75.75v5.5c0 .41.34.75.75.75h4.5c.41 0 .75-.34.75-.75v-1.25h-1v1h-4v-5h2v-1h-2.25zm5.25 0v1c-2.05 0-3.7 1.54-3.94 3.53.21-.88.99-1.53 1.94-1.53h2v1l2-2-2-2z"
 					  Stretch="Fill" Width="{StaticResource PlayerButtonSize}" Height="{StaticResource PlayerButtonSize}"
-					  Fill="Gray"
-					 />
+					  Fill="Gray"/>
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="Click">
 						<ia:InvokeCommandAction
@@ -143,7 +145,57 @@
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
 			</Button>
-            <Button Command="{Binding MuteToggleCommand}" Grid.Column="6" VerticalAlignment="Bottom" Foreground="Gray"
+            
+            <Button  Background="Transparent"  Command="{Binding OpenCloseEqualizer}"  VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="6">
+                <i:Interaction.Behaviors>
+                  
+                    
+                    <ia:DataTriggerBehavior Binding="{Binding EqualizerViewModel.IsUseEqualizer}" ComparisonCondition="Equal" Value="True">
+                        <ia:ChangePropertyAction PropertyName="Foreground" Value="{DynamicResource ControlsColor}" />
+                    </ia:DataTriggerBehavior>
+                    <ia:DataTriggerBehavior Binding="{Binding EqualizerViewModel.IsUseEqualizer}" ComparisonCondition="Equal" Value="False">
+                        <ia:ChangePropertyAction PropertyName="Foreground" Value="Gray" />
+                    </ia:DataTriggerBehavior>
+                    
+                    
+                </i:Interaction.Behaviors>
+                
+                <Grid>
+                <Path
+                  Stretch="Fill" 
+                  Width="{StaticResource PlayerButtonSize}" Height="{StaticResource PlayerButtonSize}"
+                  Fill="{Binding Foreground,
+                    Mode=TwoWay,
+                    RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                  Data="M6,8 C7.1045695,8 8,8.8954305 8,10 L8,18 C8,19.1045695 7.1045695,20 6,20 C4.8954305,20 4,19.1045695 4,18 L4,10 C4,8.8954305 4.8954305,8 6,8 Z M18,11 C19.1045695,11 20,11.8954305 20,13 L20,18 C20,19.1045695 19.1045695,20 18,20 C16.8954305,20 16,19.1045695 16,18 L16,13 C16,11.8954305 16.8954305,11 18,11 Z M12,2 C13.1045695,2 14,2.8954305 14,4 L14,18 C14,19.1045695 13.1045695,20 12,20 C10.8954305,20 10,19.1045695 10,18 L10,4 C10,2.8954305 10.8954305,2 12,2 Z"/>
+                <Popup
+                      
+                        MaxWidth="1000"
+                        VerticalOffset="20"
+                        IsOpen="{Binding EqualizerIsOpen}"
+                        Topmost="True"
+                        WindowManagerAddShadowHint="True"
+                        PlacementAnchor="Bottom"
+                        PlacementGravity="Bottom"
+                        PlacementMode="AnchorAndGravity">
+                   
+                   
+                    <Border Padding="10" Background="white" CornerRadius="10">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="PointerLeave">
+                                <ia:CallMethodAction TargetObject="{Binding }" MethodName="EqualizerElement_OnLosPointer" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        
+                            <view:EQWindow x:Name="QW"   Background="white" DataContext="{Binding EqualizerViewModel}"></view:EQWindow>
+                    </Border>
+                   
+                   
+                </Popup>
+                </Grid>
+            </Button>
+            
+            <Button Command="{Binding MuteToggleCommand}" Grid.Column="7" VerticalAlignment="Bottom" Foreground="Gray"
                     Background="Transparent">
                 <i:Interaction.Behaviors>
                     <ia:DataTriggerBehavior Binding="{Binding Mute}" ComparisonCondition="Equal" Value="False">
@@ -160,9 +212,8 @@
                     Mode=TwoWay,
                     RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" />
             </Button>
-			
-
-            <Slider Grid.Column="7" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="0,0,0,-8"
+            
+            <Slider Grid.Column="8" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="0,0,0,-8"
                     Minimum="0"
                     Maximum="1"
                     SmallChange="0.1"

@@ -1,0 +1,68 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+       
+        x:Class="VKAvaloniaPlayer.Views.EQWindow" FontSize="12">
+       <Grid Margin="20">
+               <Grid.RowDefinitions>
+                       <RowDefinition Height="*"/>
+                       <RowDefinition Height="Auto"/>
+                      
+               </Grid.RowDefinitions>
+               <ListBox Background="Transparent" 
+                        HorizontalAlignment="Center" Items="{Binding Equalizers}" >
+                <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                        <DataTemplate>
+                                <StackPanel>
+                                        <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                           
+                                                <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock VerticalAlignment="Top" Text="+15"></TextBlock>
+                                                <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  Text="0"></TextBlock>
+                                                <TextBlock VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="0"  Text="-15"></TextBlock>
+
+                                                <Slider Grid.RowSpan="3" Grid.Column="1" Height="150"  
+                                                        TickPlacement="None" 
+                                                        Ticks="3"
+                                                        Value="{Binding Value}"
+                                                        Orientation="Vertical"
+                                                        Minimum="-10" Maximum="+10">
+                                                        
+                                                </Slider>
+                                        </Grid>
+                       
+                                        <TextBlock HorizontalAlignment="Center" Margin="15,0,0,0" Text="{Binding Title}"/>
+                                </StackPanel>
+                        </DataTemplate>
+                </ListBox.ItemTemplate>
+                 </ListBox>
+               
+               <StackPanel Grid.Row="1" Spacing="5" Orientation="Horizontal">
+                       <TextBlock FontWeight="Bold" VerticalAlignment="Center" Text="Эквалайзер: "></TextBlock>
+                       <ToggleSwitch  
+                               FontWeight="Bold"
+                               IsChecked="{Binding IsUseEqualizer}"
+                               OnContent="Вкл" 
+                               OffContent="Выкл"/>
+                       <Button Content="Пресеты" Command="{Binding OpenPresetManager}"/>
+                       
+               </StackPanel>
+               
+              
+       </Grid>
+</UserControl>

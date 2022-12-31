@@ -49,7 +49,7 @@ namespace VKAvaloniaPlayer.ViewModels.Base
 
             if (model != null)
             {
-                var index = DataCollection.IndexOf(model);
+                var index = DataCollection?.IndexOf(model) ?? -1;
 
                 if (index > -1)
                 {

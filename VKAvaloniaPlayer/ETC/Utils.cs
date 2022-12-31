@@ -13,10 +13,13 @@ namespace VKAvaloniaPlayer.ETC
         public static readonly HttpClient HttpClient = new();
         public static readonly Random Random = new Random();
 
-        public static Bitmap LoadImageFromAssets(string path)
+        public static Bitmap? LoadImageFromAssets(string path)
         {
             Uri pathUri = new(@"Avares://VKAvaloniaPlayer/Assets/" + path);
-            return new Bitmap(AvaloniaLocator.Current.GetService<IAssetLoader>().Open(pathUri));
+
+            var res = AvaloniaLocator.Current?.GetService<IAssetLoader>()?.Open(pathUri);
+            return res != null ? new Bitmap(res) : null;
+           
         }
 
         public static OSPlatform CheckPlatForm()

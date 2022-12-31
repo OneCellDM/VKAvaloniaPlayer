@@ -13,14 +13,11 @@ namespace VKAvaloniaPlayer.Models
         public long? UserID { get; set; }
         public string? Token { get; set; }
 
-        public ImageModel Image { get; set; }
+        public ImageModel Image { get; set; } 
 
         public bool Default { get; set; } = false;
 
-        public SavedAccountModel()
-        {
-            Image = new ImageModel();
-        }
+       
 
         public void LoadAvatar()
         {
@@ -35,6 +32,8 @@ namespace VKAvaloniaPlayer.Models
                     var res = profileInfoAwaiter.GetResult();
                     if (res != null)
                     {
+                        if (Image is null)
+                            Image = new ImageModel();
                         Image.ImageUrl = res[0].Photo50.AbsoluteUri;
                         Image.LoadBitmapAsync();
                     }

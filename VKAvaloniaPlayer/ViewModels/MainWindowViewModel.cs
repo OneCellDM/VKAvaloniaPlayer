@@ -242,7 +242,7 @@ namespace VKAvaloniaPlayer.ViewModels
                     case 0:
                     {
                         CurrentAudioViewModel = _CurrentMusicListViewModel;
-                        CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, true);
+                        CurrentAudioViewModel?.SelectToModel(PlayerContext?.CurrentAudio, true);
 
                         break;
                     }

@@ -8,7 +8,7 @@
 
     <StackPanel Margin="100,0" Spacing="10">
         <Label HorizontalContentAlignment="Center" Content="Загрузка" />
-        <ProgressBar Foreground="{DynamicResource SliderTickColor}" IsIndeterminate="True" />
+        <ProgressBar  IsIndeterminate="True" />
     </StackPanel>
 
 </UserControl>

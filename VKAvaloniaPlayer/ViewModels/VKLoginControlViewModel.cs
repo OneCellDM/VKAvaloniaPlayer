@@ -36,12 +36,10 @@ namespace VKAvaloniaPlayer.ViewModels
            "&response_type=token" +
            "&revoke=1";
 
-        private Process _BrowserProcess;
+        private Process? _BrowserProcess;
 
 
-        private WebElement.WebElementServer _webElementServer;
-
-        private bool _SavedAccountsIsVisible;
+        private WebElement.WebElementServer? _webElementServer;
 
         public VkLoginControlViewModel()
         {
@@ -148,7 +146,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
 
         [Reactive]
-        public string InfoText { get; set; }
+        public string? InfoText { get; set; }
 
 
         [Reactive]
@@ -163,7 +161,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
         private void ToggleAccountsSidebarVisible()
         {
-            SavedAccountsIsVisible = SavedAccounts.Count > 0;
+            SavedAccountsIsVisible = SavedAccounts?.Count > 0;
         }
         private void OffServerAndUnsubscribe()
         {
@@ -186,7 +184,7 @@ namespace VKAvaloniaPlayer.ViewModels
                 string token = message.Split("=")[1].Split("&")[0];
                 string id = message.Split("=")[3].Split("&")[0];
 
-                _BrowserProcess.Kill();
+                _BrowserProcess?.Kill();
 
                 OffServerAndUnsubscribe();
                 InfoText = "Авторизация успешна";
@@ -257,13 +255,14 @@ namespace VKAvaloniaPlayer.ViewModels
         {
 
             var accountEnumerable = SavedAccounts?.ToList().Where(x => x.UserID == vkApi?.UserId);
-
-            foreach (var savedAccountModel in accountEnumerable) SavedAccounts?.Remove(savedAccountModel);
+            
+            if( accountEnumerable !=null )
+                foreach (var savedAccountModel in accountEnumerable) SavedAccounts?.Remove(savedAccountModel);
 
             VkNet.Model.RequestParams.AccountSaveProfileInfoParams accountData = null;
             try
             {
-                accountData = vkApi?.Account.GetProfileInfo();
+                accountData = vkApi?.Account?.GetProfileInfo();
 
             }
             catch (Exception ex)

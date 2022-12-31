@@ -13,6 +13,7 @@ namespace VKAvaloniaPlayer
         {
             BuildAvaloniaApp()
               .StartWithClassicDesktopLifetime(args);
+           
 
         }
 

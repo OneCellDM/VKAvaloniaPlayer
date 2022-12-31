@@ -1,0 +1,18 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="VKAvaloniaPlayer.Views.InputViewDialog">
+   <Grid>
+       <StackPanel>
+           <TextBlock Text="{Binding Message}"/>
+           <TextBox Text="{Binding InputText}"/>
+           <StackPanel Orientation="Horizontal">
+               <Button Content="OK" Command="{Binding OkCommand}" 
+                       CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+               <Button Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+           </StackPanel>
+       </StackPanel>
+   </Grid>
+</UserControl>

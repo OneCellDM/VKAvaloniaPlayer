@@ -11,7 +11,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Timers;
+using Avalonia.Interactivity;
 using ManagedBass;
+using ReactiveUI.Fody.Helpers;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 
@@ -30,7 +32,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private static ObservableCollection<AudioModel>? PlayList;
         private static ObservableCollection<AudioModel>? _allData;
 
-        private static PlayerControlViewModel _Instance;
+        private static PlayerControlViewModel? _Instance;
 
         private AudioModel _CurrentAudio;
         private bool _Mute;
@@ -39,6 +41,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private int _PlayPosition = 0;
         private bool _Repeat;
         private bool _Shuffling;
+        private bool _UseEqualizer;
         private Thread? _thread;
 
         private readonly Timer _Timer = new();
@@ -61,6 +64,8 @@ namespace VKAvaloniaPlayer.ViewModels
             get => _Repeat;
             set => this.RaiseAndSetIfChanged(ref _Repeat, value);
         }
+
+       
 
         public bool Shuffling
         {
@@ -143,12 +148,15 @@ namespace VKAvaloniaPlayer.ViewModels
 
                     PlayPosition = 0;
 
-                    _Timer.Start();
+                    _Timer?.Start();
 
                     _thread = new Thread(() =>
                     {
                         if (Player.Play(_CurrentAudio))
+                        {
                             Player.SetVolume(Volume);
+                            EqualizerViewModel.UpdateEqualizer();
+                        }
                     });
                     _thread.Priority = ThreadPriority.Lowest;
                     _thread.IsBackground = true;
@@ -174,6 +182,8 @@ namespace VKAvaloniaPlayer.ViewModels
             get => _pauseButtonIsVisible;
             set => this.RaiseAndSetIfChanged(ref _pauseButtonIsVisible, value);
         }
+        [Reactive]
+        public  bool EqualizerIsOpen { get; set; }
 
         public IReactiveCommand PlayCommand { get; set; }
         public IReactiveCommand PauseCommand { get; set; }
@@ -187,17 +197,29 @@ namespace VKAvaloniaPlayer.ViewModels
 
         public IReactiveCommand ShuffleToogleCommand { get; set; }
         public IReactiveCommand RepostCommand { get; set; }
+        public  IReactiveCommand OpenCloseEqualizer { get; set; }
 
 
-
-
+        public  EqualizerViewModel EqualizerViewModel { get; set; }
         private PlayerControlViewModel()
         {
             CurrentAudio = null;
+            EqualizerViewModel = new EqualizerViewModel();
+            OpenCloseEqualizer = ReactiveCommand.Create(() =>
+            {
+                if (EqualizerIsOpen)
+                    EqualizerIsOpen = false;
+                else EqualizerIsOpen = true;
+            });
+            
             PlayCommand = ReactiveCommand.Create(() =>
             {
                 if (Player.Play())
+                {
+                    
+                    EqualizerViewModel.UpdateFx();
                     PauseButtonVisible();
+                }
             });
             PauseCommand = ReactiveCommand.Create(() =>
             {
@@ -242,13 +264,22 @@ namespace VKAvaloniaPlayer.ViewModels
             _Timer.Elapsed += _Timer_Elapsed;
             SetPlaylistEvent += PlayerControlViewModel_SetPlaylistEvent;
         }
-
+        
+        public void EqualizerElement_OnLostFocus(object? sender, RoutedEventArgs e)
+        {
+            EqualizerIsOpen = false;
+        }
+        public void EqualizerElement_OnLosPointer(object? sender, PointerEventArgs e)
+        {
+            EqualizerIsOpen = false;
+        }
         public void VolumeChanged(object sender, PointerCaptureLostEventArgs e)
         {
             Slider s = e.Source as Slider;
             if (s != null)
                 Player.SetPositon(s.Value);
         }
+      
         public static void SetPlaylist(ObservableCollection<AudioModel> audioCollection, int selectedIndex)
         {
             SetPlaylistEvent?.Invoke(audioCollection, selectedIndex);

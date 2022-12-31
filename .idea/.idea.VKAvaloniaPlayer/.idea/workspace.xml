@@ -27,7 +27,9 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e2a429f38cfae242ebe16e4e658a31e3a188d3b79c6e243298c5f81814aacc9/IReactiveObjectExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/VKAvaloniaPlayer/Converters/DurationConverter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/Projects/C#/Avalonia/VkAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/Base/AudioViewModelBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/C#/Avalonia/VkAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/EqualizerPresetMenagerViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/EqualizerViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/C#/Avalonia/VkAvaloniaPlayer/VKAvaloniaPlayer/ViewModels/EqualizerViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -112,7 +114,7 @@
       <workItem from="1672343035011" duration="2597000" />
       <workItem from="1672351532753" duration="1426000" />
       <workItem from="1672430620558" duration="1224000" />
-      <workItem from="1672462998310" duration="4375000" />
+      <workItem from="1672462998310" duration="5036000" />
     </task>
     <task id="LOCAL-00001" summary="Aqualizer start implements">
       <created>1672464853807</created>
@@ -121,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672464853807</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Aqualizer start implements">
+      <created>1672469757625</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1672469757625</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

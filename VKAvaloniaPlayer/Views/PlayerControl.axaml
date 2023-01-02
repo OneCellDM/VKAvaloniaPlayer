@@ -171,7 +171,7 @@
                 <Popup
                       
                         MaxWidth="1000"
-                        VerticalOffset="20"
+                        VerticalOffset="22"
                         IsOpen="{Binding EqualizerIsOpen}"
                         Topmost="True"
                         WindowManagerAddShadowHint="True"

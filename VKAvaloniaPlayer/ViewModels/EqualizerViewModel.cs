@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using DynamicData;
+using System.ComponentModel.DataAnnotations;
 
 namespace VKAvaloniaPlayer.ViewModels;
 
@@ -17,6 +18,7 @@ public class Equalizer:ReactiveObject
         get => hz + " гц";
     }
     public  int hz { get; set; }
+
     [Reactive]
     public  int Value { get; set; }
 
@@ -30,10 +32,11 @@ public class Equalizer:ReactiveObject
 public class EqualizerPresset
 {
     public  string Title { get; set; }
+    public bool IsDefault { get; set; }
     public  List<Equalizer> Equalizers { get; set; }
 }
 
-public class SavedEqualizerData
+public class SavedEqualizerData:ReactiveObject
 {
     [Reactive] public ObservableCollection<EqualizerPresset> EqualizerPressets { get; set; }
     [Reactive] public int SelectedPresset { get; set; }
@@ -86,34 +89,39 @@ public class EqualizerViewModel:ReactiveObject
     
     private List<IDisposable?> Disposibles;
     
-  
+    [Reactive]
+    public  bool EqualizerManagerIsVisible { get; set; }
+
+    [Reactive]
+    public string EqualizerTitle { get; set; }
     
     [Reactive]
     public bool IsUseEqualizer { get; set; }
-    
+
+    [Reactive]
+    public bool IsEnabled { get; set; }
+
     [Reactive]
     public  IReactiveCommand ResetCommand { get; set; }
 
-    
-    
-    
     public  IReactiveCommand OpenPresetManager { get; set; }
     
     [Reactive]
     public List<Equalizer> Equalizers { get; set; }
     
-   
-    
-    
+    [Reactive]
     public EqualizerPresetMenagerViewModel PresetMenagerViewModel { get; set; }
     
     public EqualizerViewModel()
     {
+       
         PresetMenagerViewModel = new EqualizerPresetMenagerViewModel();
+        PresetMenagerViewModel.ApplyPreset(-1); 
+        PresetMenagerViewModel.CloseViewEvent+=PresetMenagerViewModelOnCloseViewEvent;
         
         OpenPresetManager = ReactiveCommand.Create(() =>
         {
-            
+            EqualizerManagerIsVisible = true;
         });
         
         Disposibles = new List<IDisposable?>();
@@ -127,7 +135,6 @@ public class EqualizerViewModel:ReactiveObject
             }
             else
             {
-                UpdateEqualizer();
                 UpdateFx();
             }
             
@@ -141,41 +148,58 @@ public class EqualizerViewModel:ReactiveObject
         PresetMenagerViewModel
             .SavedEqualizerData
             .WhenAnyValue(x => x.SelectedPresset).Subscribe((x) =>
-        {
-            if (x > -1)
             {
-                
-                for (int i = 0; i < Disposibles?.Count; )
+                if (x > -1)
                 {
-                    Disposibles[i].Dispose();
-                    Disposibles.RemoveAt(i);
+                    var preset = PresetMenagerViewModel.SavedEqualizerData.EqualizerPressets[x];
+
+                    IsEnabled = !preset.IsDefault;
+
+
+                    EqualizerTitle = preset.Title;
+
+                    for (int i = 0; i < Disposibles?.Count; )
+                    {
+                        Disposibles[i].Dispose();
+                        Disposibles.RemoveAt(i);
+                    }
+                
+                    Equalizers = preset.Equalizers;
+                
+                    for (int i = 0; i < Equalizers.Count; i++)
+                    {
+                      var disposible = Equalizers[i].WhenAnyValue(x => x.Value)
+                            .Subscribe((val)=>
+                            {
+                                if(IsUseEqualizer) UpdateFx();
+                            });
+                      Disposibles.Add(disposible);
+                    }
+                
+               
+                
                 }
-                
-                Equalizers = PresetMenagerViewModel.SavedEqualizerData.EqualizerPressets[x].Equalizers;
-                
-                for (int i = 0; i < Equalizers.Count; i++)
-                {
-                  var disposible = Equalizers[i].WhenAnyValue(x => x.Value)
-                        .Subscribe((val)=>
-                        {
-                            if(IsUseEqualizer) UpdateFx();
-                        });
-                  Disposibles.Add(disposible);
-                }
-                
-                UpdateEqualizer();
-                
-            }
-        });
+            });
 
     }
 
-   
+    private void PresetMenagerViewModelOnCloseViewEvent()
+    {
+        EqualizerManagerIsVisible = false;
+    }
+
+
     public void DisableEqualizer()
     {
-        for (int i = 0; i < channels?.Length; i++)
+        for(int i=0; i < Equalizers?.Count; i++)
         {
-            Bass.ChannelRemoveFX(PlayerControlViewModel.Player.GetStreamHandler(),channels[i]);
+            ManagedBass.DirectX8.DXParamEQParameters dXParamEQParameters = new ManagedBass.DirectX8.DXParamEQParameters()
+            {
+                fBandwidth = 12,
+                fCenter = Equalizers[i].hz,
+                fGain = 0,
+            };
+            Bass.FXSetParameters(channels[i], dXParamEQParameters);
         }
     }
     public void ResetEqualizer()

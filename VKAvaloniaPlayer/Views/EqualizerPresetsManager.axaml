@@ -2,6 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:views="clr-namespace:VKAvaloniaPlayer.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VKAvaloniaPlayer.Views.EqualizerPresetsManager">
     <Grid>
@@ -9,7 +12,68 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Пресеты"/>
-        
+		<Grid>
+			<Grid.ColumnDefinitions>
+				    <ColumnDefinition Width="Auto"/>
+				    <ColumnDefinition Width="*"/>
+				    <ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<Button Grid.Column="0" Content="Закрыть" Command="{Binding CloseCommand}"/>
+			<TextBlock Grid.Column="1" FontSize="18" FontWeight="Bold" Text="Пресеты" HorizontalAlignment="Center"/>
+			<Button Grid.Column="2" Content="Добавить" Command="{Binding AddPreset}"/>
+		</Grid>
+		
+        <ListBox 
+				 BorderThickness="2"
+				 BorderBrush="{DynamicResource ControlsColor}" 
+				 Grid.Row="1" 
+				 SelectedIndex="{Binding SavedEqualizerData.SelectedPresset}"
+				 Items="{Binding SavedEqualizerData.EqualizerPressets}">
+			<ListBox.Styles>
+				<Style Selector="ListBoxItem">
+					<Setter Property="Margin" Value="0,3"/>
+					
+				</Style>
+			</ListBox.Styles>
+			
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+					
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Text="{Binding Title}"/>
+                        
+                        <StackPanel Grid.Column="1" Spacing="5" HorizontalAlignment="Right">
+
+							<Button  x:Name="RemoveButton" Content="Удалить" 
+									 Command="{Binding DataContext.RemovePreset, RelativeSource={RelativeSource Mode=FindAncestor, 
+									AncestorType={x:Type UserControl}}}" CommandParameter="{Binding }">
+								<i:Interaction.Behaviors>
+									<ia:DataTriggerBehavior  Binding="{Binding IsDefault}" ComparisonCondition="Equal" Value="True">
+										<ia:ChangePropertyAction
+																 TargetObject="RemoveButton" 
+																 PropertyName="IsVisible" 
+																 Value="False"/>
+									</ia:DataTriggerBehavior>
+								</i:Interaction.Behaviors>
+								
+							</Button>
+                           
+                        </StackPanel>
+                    </Grid>
+                   
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+			
+        </ListBox>
+        <views:InputViewDialog 
+			Grid.RowSpan="3"
+			Background="White"
+            IsVisible="{Binding  DataContext.TitleInputIsVisible,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+            DataContext="{Binding TitleInputViewModel}"></views:InputViewDialog>
     </Grid>
 </UserControl>

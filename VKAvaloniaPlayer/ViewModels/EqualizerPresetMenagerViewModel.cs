@@ -24,8 +24,6 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
     
     
     [Reactive]
-    public  int SelectedItemIndex { get; set; }
-    [Reactive]
     public InputViewModel  TitleInputViewModel { get; set; }
     
     [Reactive]
@@ -34,7 +32,7 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
     public  IReactiveCommand AddPreset { get; set; }
     public  IReactiveCommand RemovePreset { get; set; }
     
-    public  IReactiveCommand ApplyPresetCommand { get; set; }
+   
     
    
     public event ICloseView.CloseViewDelegate? CloseViewEvent;
@@ -42,21 +40,6 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
 
 
     
-    private bool CanRemove()
-    {
-        try
-        {
-            var elem = SavedEqualizerData.EqualizerPressets.ElementAtOrDefault(SelectedItemIndex);
-            if (elem is null) return false;
-
-            return elem.Title == DefaultPresetName;
-
-        }
-        catch
-        {
-            return true;
-        }
-    }
 
     public EqualizerPresetMenagerViewModel()
     {
@@ -74,23 +57,11 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
             TitleInputIsVisible = true;
 
         });
-        RemovePreset = ReactiveCommand.Create(() =>
+        RemovePreset = ReactiveCommand.Create((EqualizerPresset P) =>
         {
 
-            if (CanRemove())
-            {
-                SavedEqualizerData?.RemovePreset(SelectedItemIndex);
-                if (SavedEqualizerData?.SelectedPresset == SelectedItemIndex)
-                {
-                    SavedEqualizerData.SelectedPresset = 0;
-                }
-            }
-
-
-
-
-
-            SavedEqualizerData.RemoveSelectedPreset();
+                SavedEqualizerData?.RemovePreset(P);
+                ApplyPreset(0);
 
         });
         CloseCommand = ReactiveCommand.Create(() =>
@@ -98,18 +69,15 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
             SavePressets();
             CloseViewEvent?.Invoke();
         });
-
-        ApplyPresetCommand = ReactiveCommand.Create(() =>
-        {
-           ApplyPreset(SelectedItemIndex);
-        });
+        
 
     }
 
     public void ApplyPreset(int index)
     {
-        SavedEqualizerData.SelectedPresset = index;
+        SavedEqualizerData.SelectedPresset = 0;
     }
+
 
   
     private void TextInputViewModelOnCloseViewEvent()
@@ -149,6 +117,7 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
             {
                 EqualizerPresset presset = new EqualizerPresset()
                 {
+                    IsDefault = true,
                     Title = DefaultPresetName,
                     Equalizers = hz.Select(x => new Equalizer(x)).ToList(),
                 };

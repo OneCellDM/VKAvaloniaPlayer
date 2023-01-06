@@ -50,14 +50,15 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="0.2*" MinWidth="40" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Border Grid.RowSpan="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                    CornerRadius="10" Width="50" Height="50">
+            <Border  Grid.RowSpan="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                     CornerRadius="10" Width="50" Height="50">
                 <Border.Background>
                     <ImageBrush Source="{Binding CurrentAudio.Image.Bitmap}" Stretch="Fill" />
                 </Border.Background>
@@ -76,7 +77,7 @@
                 </DockPanel>
                 <TextBlock Text="{Binding CurrentAudio.Artist}" TextTrimming="CharacterEllipsis" />
             </StackPanel>
-            <Slider Grid.Row="1" Grid.ColumnSpan="8" Grid.Column="1" Value="{Binding Path=PlayPosition}"
+            <Slider Grid.Row="1" Grid.ColumnSpan="9" Grid.Column="1" Value="{Binding Path=PlayPosition}"
                     Maximum="{Binding Path=CurrentAudio.Duration}" Margin="11,0,0,0">
                 <i:Interaction.Behaviors>
                     <ia:EventTriggerBehavior EventName="PointerCaptureLost">
@@ -146,7 +147,8 @@
 				</i:Interaction.Behaviors>
 			</Button>
             
-            <Button  Background="Transparent"  Command="{Binding OpenCloseEqualizer}"  VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="6">
+            <Button  Background="Transparent"  Command="{Binding OpenCloseEqualizer}"  
+                     VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="6">
                 <i:Interaction.Behaviors>
                   
                     
@@ -194,8 +196,47 @@
                 </Popup>
                 </Grid>
             </Button>
-            
-            <Button Command="{Binding MuteToggleCommand}" Grid.Column="7" VerticalAlignment="Bottom" Foreground="Gray"
+            <Button  x:Name="btn" Background="Transparent" Grid.Column="7"  VerticalAlignment="Bottom">
+                <Path
+                    Stretch="Fill" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    
+                    Width="17" Height="17"
+                    Fill="{Binding Foreground,
+                    Mode=TwoWay,
+                    RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                    Data="M17 15h2V7c0-1.1-.9-2-2-2H9v2h8v8zM7 17V1H5v4H1v2h4v10c0 1.1.9 2 2 2h10v4h2v-4h4v-2H7z"/>
+               
+                <i:Interaction.Behaviors>
+                    <ia:DataTriggerBehavior 
+                        Binding="{Binding DataContext.IsMaximized,
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                        Value="True"
+                        ComparisonCondition="NotEqual">
+                        
+                        <ia:ChangePropertyAction PropertyName="Foreground"  
+                                                 TargetObject="btn" 
+                                                 Value="{DynamicResource ControlsColor}"/>
+                    </ia:DataTriggerBehavior>
+                    
+                    <ia:DataTriggerBehavior 
+                        Binding="{Binding DataContext.IsMaximized,
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                        Value="True"
+                        ComparisonCondition="Equal">
+                        
+                        <ia:ChangePropertyAction PropertyName="Foreground"  
+                                                 TargetObject="btn" 
+                                                 Value="{DynamicResource ButtonForeground}"/>
+                    </ia:DataTriggerBehavior>
+                    <ia:EventTriggerBehavior EventName="Click">
+                        <ia:InvokeCommandAction
+                            Command="{Binding DataContext.OpenHideMiniPlayerCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" />
+                    </ia:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+            </Button>
+            <Button Command="{Binding MuteToggleCommand}" Grid.Column="8" VerticalAlignment="Bottom" Foreground="Gray"
                     Background="Transparent">
                 <i:Interaction.Behaviors>
                     <ia:DataTriggerBehavior Binding="{Binding Mute}" ComparisonCondition="Equal" Value="False">
@@ -213,7 +254,7 @@
                     RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" />
             </Button>
             
-            <Slider Grid.Column="8" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="0,0,0,-8"
+            <Slider Grid.Column="9" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="0,0,0,-8"
                     Minimum="0"
                     Maximum="1"
                     SmallChange="0.1"

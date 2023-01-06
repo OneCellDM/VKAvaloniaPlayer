@@ -24,9 +24,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
+        
         <StackPanel Background="{DynamicResource MenuBackGroundColor}" Orientation="Horizontal">
 
-            <Ellipse Margin="5,0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="48" Height="48">
+            <Ellipse Margin="5,0" VerticalAlignment="Center" HorizontalAlignment="Left"  
+                     Width="48" 
+                     Height="48" 
+                     IsVisible="{Binding  IsMaximized}">
                 <Ellipse.Fill>
                     <ImageBrush Source="{Binding CurrentAccountModel.Image.Bitmap}" />
                 </Ellipse.Fill>
@@ -38,7 +42,7 @@
                 </i:Interaction.Behaviors>
             </Ellipse>
             <TextBlock FontSize="16" Foreground="White" IsVisible="{Binding MenuTextIsVisible}"
-                       VerticalAlignment="Center" TextTrimming="150" Margin="1,0,5,0"
+                       VerticalAlignment="Center"   TextTrimming="150" Margin="1,0,5,0"
                        Text="{Binding CurrentAccountModel.Name}" />
         </StackPanel>
 

@@ -26,6 +26,20 @@ namespace VKAvaloniaPlayer.ViewModels
             AudioRemoveIsVisible = true;
             AudioRepostIsVisible = true;
             
+
+            AudioOpenLyricsCommand = ReactiveCommand.Create(async (AudioModel audioModel) =>
+            {
+                if (audioModel.LyricsViewModel != null)
+                {
+                    if (audioModel.LyricsViewModel.Text is null|| audioModel.LyricsViewModel.Text.Length>0)
+                    {
+                        audioModel.LyricsViewModel.StartLoad();
+                    }
+
+                    audioModel.LyricsViewModel.IsVisible = !audioModel.LyricsViewModel.IsVisible;
+
+                }
+            });
             AudioRepostCommand = ReactiveCommand.Create(async (AudioModel audioModel) =>
             {
                 if (audioModel != null)
@@ -174,11 +188,14 @@ namespace VKAvaloniaPlayer.ViewModels
 
         [Reactive]
         public bool AudioRepostIsVisible { get; set; }
-
+        
+        
         public IReactiveCommand AudioAddCommand { get; set; }
         public IReactiveCommand AudioDownloadCommand { get; set; }
         public IReactiveCommand AudioRemoveCommand { get; set; }
         public IReactiveCommand AudioAddToAlbumCommand { get; set; }
         public IReactiveCommand AudioRepostCommand { get; set; }
+        
+        public  IReactiveCommand AudioOpenLyricsCommand { get; set; }
     }
 }

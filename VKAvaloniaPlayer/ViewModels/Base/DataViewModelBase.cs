@@ -77,11 +77,14 @@ namespace VKAvaloniaPlayer.ViewModels.Base
                 {
                     try
                     {
+                        
                         double max = 0;
                         double current = 0;
 
                         if (e?.Source is ScrollViewer scrollViewer)
                         {
+                            if(scrollViewer.Name=="LyricsScroll")
+                                return;
                             Dispatcher.UIThread.InvokeAsync(() =>
                             {
                                 if (orientation == Orientation.Vertical)

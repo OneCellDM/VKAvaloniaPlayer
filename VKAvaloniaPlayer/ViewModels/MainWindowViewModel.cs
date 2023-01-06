@@ -24,7 +24,8 @@ namespace VKAvaloniaPlayer.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
 
-        private bool _IsMini;
+        
+        private double _oldheight = 0;
         private bool _SiderBarAnimationIsPlaying;
         private bool _MenuIsOpen;
 
@@ -81,6 +82,9 @@ namespace VKAvaloniaPlayer.ViewModels
 
         [Reactive]
         public bool ExceptionIsVisible { get; set; }
+        
+        [Reactive]
+        public bool IsMaximized { get; set; }
 
         [Reactive]
         public IReactiveCommand AvatarPressedCommand { get; set; }
@@ -88,8 +92,12 @@ namespace VKAvaloniaPlayer.ViewModels
         [Reactive]
         public IReactiveCommand OpenHideMiniPlayerCommand { get; set; }
 
+        
+
         public MainWindowViewModel()
         {
+            MenuColumnWidth = new GridLength(60);
+            IsMaximized = true;
             PlayerContext = PlayerControlViewModel.Instance;
             PlayerContext.AudioChangedEvent += PlayerContext_AudioChangedEvent;
             
@@ -103,21 +111,32 @@ namespace VKAvaloniaPlayer.ViewModels
 
             OpenHideMiniPlayerCommand = ReactiveCommand.Create(() =>
             {
-                if (!_IsMini)
+                if (IsMaximized)
                 {
-                    _IsMini = true;
+                    
+                    IsMaximized = false;
+                    _oldheight = MainWindow.Instance.Height;
+                    MenuColumnWidth = new GridLength(0);
                     MainWindow.Instance.Topmost = true;
-                    MainWindow.Instance.MinHeight = 200;
-                    MainWindow.Instance.Height = 200;
-                    MainWindow.Instance.MaxHeight = 200;
+                    MainWindow.Instance.MinHeight = 100;
+                    MainWindow.Instance.Height = 100;
+                    MainWindow.Instance.MaxHeight = 100; 
+                   
                 }
                 else
                 {
-                    _IsMini = false;
+                   
+                    
+                    IsMaximized = true;
+                    if (_MenuIsOpen)
+                    {
+                        MenuColumnWidth = new GridLength(200);
+                    }
+                    else MenuColumnWidth = new GridLength(60);
                     MainWindow.Instance.Topmost = false;
-                    MainWindow.Instance.MinHeight = 0;
-                    MainWindow.Instance.Height = 500;
-                    MainWindow.Instance.MaxHeight = 0;
+                    MainWindow.Instance.MaxHeight = Double.PositiveInfinity;
+                    MainWindow.Instance.MinHeight = 400;
+                    MainWindow.Instance.Height = _oldheight;
                 }
             });
 

@@ -1,10 +1,11 @@
 ﻿using ReactiveUI;
 
 using System.Diagnostics;
-
+using Avalonia.Media;
+using ReactiveUI.Fody.Helpers;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models.Base;
-
+using VKAvaloniaPlayer.ViewModels;
 using VkNet.Model;
 using VkNet.Model.Attachments;
 
@@ -26,6 +27,15 @@ namespace VKAvaloniaPlayer.Models
             };
 
         }
+        [Reactive]
+        public LyricsViewModel? LyricsViewModel { get; set; }
+        
+        
+   
+        public bool LyricsButtonIsVisible
+        {
+            get => LyricsViewModel != null;
+        } 
 
         public AudioModel(Audio VkModel) : this()
         {
@@ -33,6 +43,11 @@ namespace VKAvaloniaPlayer.Models
             IsNotAvailable = VkModel?.ContentRestricted != null;
             
             AccessKey = VkModel.AccessKey;
+            if (VkModel.LyricsId != null)
+            {
+                LyricsViewModel = new LyricsViewModel(VkModel.LyricsId);
+               
+            }
 
             Duration = VkModel.Duration;
             ID = (long)VkModel.Id;

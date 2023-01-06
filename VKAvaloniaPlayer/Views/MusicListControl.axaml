@@ -59,7 +59,17 @@
             <ListBox.DataTemplates>
                
                 <DataTemplate>
-                    <Grid x:Name="GridData" >
+                   
+                    <Grid x:Name="GridData" Opacity="1">
+                        <i:Interaction.Behaviors>
+                            <ia:DataTriggerBehavior Binding="{Binding  IsNotAvailable}" ComparisonCondition="Equal" Value="True">
+                                <ia:ChangePropertyAction TargetObject="GridData" PropertyName="Opacity" Value="0.6"/>
+                            </ia:DataTriggerBehavior>
+                            <ia:DataTriggerBehavior Binding="{Binding  IsNotAvailable}" ComparisonCondition="Equal" Value="False">
+                                <ia:ChangePropertyAction TargetObject="GridData" PropertyName="Opacity" Value="1"/>
+                            </ia:DataTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="Auto" />
@@ -67,12 +77,13 @@
                         </Grid.ColumnDefinitions>
                         <DockPanel>
                             
-                            <Border IsHitTestVisible="False" CornerRadius="10" Width="50" Height="50" 
-                                    Margin="0,0,5,0" DockPanel.Dock="Left">
+                            <Border IsHitTestVisible="False" VerticalAlignment="Top" CornerRadius="10" Width="50" Height="50" 
+                                    Margin="0,0,5,0" DockPanel.Dock="Left" >
                                 <Border.Background>
                                     <ImageBrush Source="{Binding Image.Bitmap}" Stretch="Uniform" />
                                 </Border.Background>
                             </Border>
+                            
                             <DockPanel Margin="5" MaxWidth="{Binding $parent.ActualWidth}">
                                 <DockPanel DockPanel.Dock="Top" MaxWidth="{Binding $parent.ActualWidth}">
                                     <TextBlock IsHitTestVisible="False" TextTrimming="WordEllipsis" FontSize="14"
@@ -86,9 +97,9 @@
                                         </TextBlock.Styles>
                                     </TextBlock>
                                 </DockPanel>
-                               
+                                <StackPanel Margin="0,5" DockPanel.Dock="Bottom">
                                     <TextBlock  x:Name="artist" IsHitTestVisible="True" TextTrimming="WordEllipsis" FontSize="14"
-                                                Text="{Binding Artist}" DockPanel.Dock="Bottom">
+                                            Text="{Binding Artist}">
                                     
                                     <i:Interaction.Behaviors>
                                         <ia:EventTriggerBehavior EventName="PointerPressed">
@@ -110,7 +121,13 @@
                                         </Style>
                                     </TextBlock.Styles>
                                 </TextBlock>
-                                
+                                    
+                                    <ScrollViewer x:Name="LyricsScroll" IsVisible="{Binding IsVisible,FallbackValue=False}" 
+                                                  DataContext="{Binding LyricsViewModel}" Height="300">
+                                        <TextBlock Text="{Binding Text}"></TextBlock>
+                                    </ScrollViewer>
+                                    
+                                </StackPanel>
                             </DockPanel>
                         </DockPanel>
                         
@@ -202,6 +219,20 @@
                                 </i:Interaction.Behaviors>
                             </Button>
                             
+                              <Button  x:Name="OpenTextBTN" Background="Transparent" IsVisible="{Binding LyricsButtonIsVisible}">
+                                
+                                <Path VerticalAlignment="Center" 
+                                      Data="M13 17a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2h9Zm7-6a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2h16Zm0-6a1 1 0 1 1 0 2H4a1 1 0 0 1 0-2h16Z" />
+                                <i:Interaction.Behaviors>
+                                   
+                                    <ia:EventTriggerBehavior EventName="Click">
+                                        <ia:InvokeCommandAction
+                                            CommandParameter="{Binding }"
+                                            Command="{Binding DataContext.AudioListButtons.AudioOpenLyricsCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                            
                             <Button Background="Transparent"
                                     IsVisible="{Binding DataContext.AudioListButtons.AudioRemoveIsVisible,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}">
                                 <Path
@@ -215,6 +246,7 @@
                                 </i:Interaction.Behaviors>
                             </Button>
                         </StackPanel>
+                        
                         <TextBlock Width="60" VerticalAlignment="Center" Grid.Column="2"
                                    Text="{Binding Duration, Converter={StaticResource durationConverter}}" />
                         

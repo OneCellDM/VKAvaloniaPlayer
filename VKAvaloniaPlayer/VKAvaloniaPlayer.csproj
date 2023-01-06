@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <ApplicationIcon />
         <StartupObject />
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateAssemblyInfo>False</GenerateAssemblyInfo>
 		<LangVersion>11</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

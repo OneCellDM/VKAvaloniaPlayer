@@ -90,11 +90,11 @@ namespace VKAvaloniaPlayer.ViewModels
                                tmpfileEexecute2 = winName;
                             }
 
-                            if (Path.Exists(tmpfileEexecute))
+                            if (File.Exists(tmpfileEexecute))
                             {
                                 fileExecute = tmpfileEexecute;
                             }
-                            else if (Path.Exists(tmpfileEexecute2))
+                            else if (File.Exists(tmpfileEexecute2))
                             {
                                 fileExecute = tmpfileEexecute2;
                             }

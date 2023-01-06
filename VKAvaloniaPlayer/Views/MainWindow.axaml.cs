@@ -1,6 +1,10 @@
+using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using VKAvaloniaPlayer.ETC;
+using System.Windows;
+using Avalonia.Controls.Primitives;
 
 namespace VKAvaloniaPlayer.Views
 {
@@ -22,5 +26,6 @@ namespace VKAvaloniaPlayer.Views
         {
             AvaloniaXamlLoader.Load(this);
         }
+        
     }
 }

@@ -12,6 +12,7 @@
 		<SolidColorBrush x:Key="SliderTickColor" Color="#2888F5" />
 		<SolidColorBrush x:Key="SliderBackGroundColor" Color="#DDDDDD" />
 		<SolidColorBrush x:Key="MenuForeGroundColor" Color="White" />
+		<SolidColorBrush x:Key="AudioNotAvalible" Color="Silver"/>
     </Application.Resources>
 
     <Application.Styles>

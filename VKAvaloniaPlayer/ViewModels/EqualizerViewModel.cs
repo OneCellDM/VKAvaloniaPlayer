@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using ManagedBass;
+﻿using ManagedBass;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -8,79 +7,9 @@ using System.IO;
 using System.Text.Json;
 using DynamicData;
 using System.ComponentModel.DataAnnotations;
+using VKAvaloniaPlayer.Models;
 
 namespace VKAvaloniaPlayer.ViewModels;
-
-public class Equalizer:ReactiveObject
-{
-    public  string Title
-    {
-        get => hz + " гц";
-    }
-    public  int hz { get; set; }
-
-    [Reactive]
-    public  int Value { get; set; }
-
-    public Equalizer(int hz = 0)
-    {
-        this.hz = hz;
-    }
-    
-}
-
-public class EqualizerPresset
-{
-    public  string Title { get; set; }
-    public bool IsDefault { get; set; }
-    public  List<Equalizer> Equalizers { get; set; }
-}
-
-public class SavedEqualizerData:ReactiveObject
-{
-    [Reactive] public ObservableCollection<EqualizerPresset> EqualizerPressets { get; set; }
-    [Reactive] public int SelectedPresset { get; set; }
-
-    public SavedEqualizerData()
-    {
-        EqualizerPressets = new ObservableCollection<EqualizerPresset>();
-    }
-    public void AddPreset(EqualizerPresset presset)
-    {
-        EqualizerPressets.Add(presset);
-    }
-
-
-    public void RemovePreset(int index)
-    {
-        EqualizerPressets.RemoveAt(index);
-    }
-
-    public void RemovePreset(EqualizerPresset presset)
-    {
-        EqualizerPressets.Remove(presset);
-    }
-
-    public void RemoveSelectedPreset()
-    {
-        try
-        {
-            EqualizerPressets.RemoveAt(SelectedPresset);
-        }
-        catch (Exception ex)
-        {
-
-        }
-
-    }
-
-    public int GetCount()
-    {
-        if (EqualizerPressets is not null)
-            return EqualizerPressets.Count;
-        return 0;
-    }
-}
 
 public class EqualizerViewModel:ReactiveObject
 {
@@ -116,7 +45,7 @@ public class EqualizerViewModel:ReactiveObject
     {
        
         PresetMenagerViewModel = new EqualizerPresetMenagerViewModel();
-        PresetMenagerViewModel.ApplyPreset(-1); 
+        
         PresetMenagerViewModel.CloseViewEvent+=PresetMenagerViewModelOnCloseViewEvent;
         
         OpenPresetManager = ReactiveCommand.Create(() =>
@@ -141,7 +70,7 @@ public class EqualizerViewModel:ReactiveObject
         });
     
         
-        PresetMenagerViewModel.ApplyPreset(0);
+        
         channels = new int[8];
         
         
@@ -154,8 +83,7 @@ public class EqualizerViewModel:ReactiveObject
                     var preset = PresetMenagerViewModel.SavedEqualizerData.EqualizerPressets[x];
 
                     IsEnabled = !preset.IsDefault;
-
-
+                    
                     EqualizerTitle = preset.Title;
 
                     for (int i = 0; i < Disposibles?.Count; )
@@ -175,12 +103,9 @@ public class EqualizerViewModel:ReactiveObject
                             });
                       Disposibles.Add(disposible);
                     }
-                
-               
-                
+
                 }
             });
-
     }
 
     private void PresetMenagerViewModelOnCloseViewEvent()
@@ -231,4 +156,6 @@ public class EqualizerViewModel:ReactiveObject
         }
        PresetMenagerViewModel.SavePressets();
     }
+
+   
 }

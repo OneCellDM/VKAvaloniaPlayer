@@ -24,6 +24,10 @@ namespace VKAvaloniaPlayer.ETC
 
         public static void AudioAddCall(AudioModel model) =>
                 AudioAddEvent?.Invoke(model);
+        
+        public static void AudioAddToAlbumCall(AudioModel model) =>
+            AudioAddToAlbumEvent?.Invoke(model);
+        
         public static void AudioRemoveCall(AudioModel model) =>
                AudioRemoveEvent?.Invoke(model);
         public static void AudioRmoveFromAlbumEventCall(AudioModel model) =>

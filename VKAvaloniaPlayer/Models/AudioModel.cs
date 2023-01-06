@@ -1,5 +1,7 @@
 ﻿using ReactiveUI;
 
+using System.Diagnostics;
+
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models.Base;
 
@@ -27,7 +29,9 @@ namespace VKAvaloniaPlayer.Models
 
         public AudioModel(Audio VkModel) : this()
         {
-
+           
+            IsNotAvailable = VkModel?.ContentRestricted != null;
+            
             AccessKey = VkModel.AccessKey;
 
             Duration = VkModel.Duration;
@@ -70,6 +74,7 @@ namespace VKAvaloniaPlayer.Models
 
             if (audioCover.Photo135 != null)
                 return audioCover.Photo135;
+
             return string.Empty;
         }
     }

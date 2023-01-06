@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -8,6 +9,7 @@ using System.Reactive.Linq;
 using System.Text.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.ViewModels.Interfaces;
 
 namespace VKAvaloniaPlayer.ViewModels;
@@ -18,6 +20,7 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
     
     public const string FileName = "EqualizerPressets.json";
     public const string DefaultPresetName = "Обычный";
+   
     
     [Reactive]
     public  bool TitleInputIsVisible { get; set; }
@@ -75,7 +78,7 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
 
     public void ApplyPreset(int index)
     {
-        SavedEqualizerData.SelectedPresset = 0;
+           SavedEqualizerData.SelectedPresset = index;
     }
 
 
@@ -89,11 +92,13 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
             var preset = new EqualizerPresset();
 
            preset.Title = TitleInputViewModel.InputText;
-               
+           
            preset.Equalizers = hz.Select(x => new Equalizer(x)).ToList();
            
            SavedEqualizerData.AddPreset(preset);
-            
+
+           TitleInputViewModel.InputText = string.Empty;
+           this.SavePressets();
         }
         
         TitleInputIsVisible = false;
@@ -104,10 +109,11 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
         try
         {
             SavedEqualizerData =
-                JsonSerializer.Deserialize<SavedEqualizerData>(FileName);
+                JsonSerializer.Deserialize<SavedEqualizerData>(File.ReadAllText(FileName));
         }
         catch (Exception ex)
         {
+            
             SavedEqualizerData = new SavedEqualizerData();
         }
         finally
@@ -130,7 +136,7 @@ public class EqualizerPresetMenagerViewModel:ReactiveObject,ICloseView
 
     public void SavePressets()
     {
-        File.WriteAllText(FileName, JsonSerializer.Serialize(SavedEqualizerData));
+        File.WriteAllText(FileName, JsonSerializer.Serialize(SavedEqualizerData).Trim());
     }
 
 }

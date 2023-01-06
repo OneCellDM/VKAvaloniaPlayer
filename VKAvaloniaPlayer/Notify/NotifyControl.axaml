@@ -25,6 +25,7 @@
 					
 					<TextBlock Grid.Row="0"
 							   Margin="{TemplateBinding Padding}"
+							   TextWrapping="WrapWithOverflow"
 							   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 							   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 							   FontSize="{TemplateBinding NotifyTitleSize}"
@@ -33,6 +34,8 @@
 							   Text="{TemplateBinding  NotifyTitle,Mode=TwoWay}"/>
 
 					<TextBlock Grid.Row="1"
+					           TextWrapping="WrapWithOverflow"
+					           TextAlignment="Center"
 							   Margin="{TemplateBinding Padding}"
 							   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 							   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"

@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-		<Grid>
+		<Grid Margin="10">
 			<Grid.ColumnDefinitions>
 				    <ColumnDefinition Width="Auto"/>
 				    <ColumnDefinition Width="*"/>
@@ -24,11 +24,13 @@
 		</Grid>
 		
         <ListBox 
+					
 				 BorderThickness="2"
 				 BorderBrush="{DynamicResource ControlsColor}" 
 				 Grid.Row="1" 
+				 Items="{Binding SavedEqualizerData.EqualizerPressets}"
 				 SelectedIndex="{Binding SavedEqualizerData.SelectedPresset}"
-				 Items="{Binding SavedEqualizerData.EqualizerPressets}">
+				>
 			<ListBox.Styles>
 				<Style Selector="ListBoxItem">
 					<Setter Property="Margin" Value="0,3"/>

@@ -16,6 +16,7 @@ using VKAvaloniaPlayer.ViewModels.Exceptions;
 using VKAvaloniaPlayer.Views;
 
 using VkNet.Exception;
+using AddToAlbumViewModel = VKAvaloniaPlayer.ViewModels.Audios.AddToAlbumViewModel;
 
 
 namespace VKAvaloniaPlayer.ViewModels
@@ -31,6 +32,7 @@ namespace VKAvaloniaPlayer.ViewModels
         private AllMusicViewModel? _AllMusicListViewModel;
         private AudioSearchViewModel? _SearchViewModel;
         private RecomendationsViewModel? _RecomendationsViewModel;
+        
 
         public PlayerControlViewModel PlayerContext { get; set; }
 
@@ -47,6 +49,8 @@ namespace VKAvaloniaPlayer.ViewModels
 
         [Reactive]
         public RepostViewModel? RepostViewModel { get; set; }
+        [Reactive]
+        public AddToAlbumViewModel? AddToAlbumViewModel { get; set; }
 
         [Reactive]
         public SavedAccountModel CurrentAccountModel { get; set; }
@@ -59,15 +63,17 @@ namespace VKAvaloniaPlayer.ViewModels
 
         [Reactive]
         public bool RepostViewIsVisible { get; set; }
+        
+        [Reactive]
+        public bool AddToAlbumIsVisible { get; set; } 
 
         [Reactive]
         public bool CurrentAudioViewIsVisible { get; set; }
 
         [Reactive]
-
         public bool VkLoginIsVisible { get; set; } = true;
+        
         [Reactive]
-
         public int MenuSelectionIndex { get; set; }
 
         [Reactive]
@@ -78,6 +84,7 @@ namespace VKAvaloniaPlayer.ViewModels
 
         [Reactive]
         public IReactiveCommand AvatarPressedCommand { get; set; }
+        
         [Reactive]
         public IReactiveCommand OpenHideMiniPlayerCommand { get; set; }
 
@@ -85,7 +92,9 @@ namespace VKAvaloniaPlayer.ViewModels
         {
             PlayerContext = PlayerControlViewModel.Instance;
             PlayerContext.AudioChangedEvent += PlayerContext_AudioChangedEvent;
+            
             Events.AudioRepostEvent += Events_AudioRepostEvent;
+            Events.AudioAddToAlbumEvent+=Events_AudioAddToAlbumEvent;
             ExceptionViewModel.ViewExitEvent += ExceptionViewModel_ViewExitEvent;
 
             Events.VkApiChanged += StaticObjects_VkApiChanged;
@@ -193,6 +202,23 @@ namespace VKAvaloniaPlayer.ViewModels
             this.WhenAnyValue(vm => vm.MenuSelectionIndex).Subscribe(value => OpenViewFromMenu(value));
         }
 
+        private void Events_AudioAddToAlbumEvent(AudioModel audiomodel)
+        {
+            AddToAlbumViewModel = new AddToAlbumViewModel(audiomodel);
+            AddToAlbumViewModel.StartLoad();
+            AddToAlbumViewModel.CloseViewEvent+=AddToAlbumViewModel_CloseViewEvent;
+            AddToAlbumIsVisible = true;
+        }
+
+        private void AddToAlbumViewModel_CloseViewEvent()
+        {
+            AddToAlbumViewModel.CloseViewEvent -= AddToAlbumViewModel_CloseViewEvent;
+            AddToAlbumViewModel?.DataCollection?.Clear();
+            AddToAlbumViewModel = null;
+            AddToAlbumIsVisible = false;
+
+        }
+
         private void PlayerContext_AudioChangedEvent(AudioModel? model)
         {
             CurrentAudioViewModel.SelectToModel(model,true);
@@ -208,8 +234,11 @@ namespace VKAvaloniaPlayer.ViewModels
 
         private void RepostViewModel_CloseViewEvent()
         {
-            RepostViewIsVisible = false;
+            
             RepostViewModel.CloseViewEvent -= RepostViewModel_CloseViewEvent;
+            RepostViewModel?.DataCollection?.Clear();
+            RepostViewIsVisible = false;
+            RepostViewModel = null;
         }
 
         public void ArtistClicked(object sender, PointerPressedEventArgs e)
@@ -263,7 +292,7 @@ namespace VKAvaloniaPlayer.ViewModels
                     {
                         if (AlbumsViewModel == null)
                         {
-                            AlbumsViewModel = new AlbumsViewModel();
+                            AlbumsViewModel = new OpenAlbumViewModel();
                             AlbumsViewModel.StartLoad();
                         }
 
@@ -328,8 +357,6 @@ namespace VKAvaloniaPlayer.ViewModels
             {
 
                 PlayerContext.CurrentAudio = null;
-
-
             }
             catch (Exception EX)
             {
@@ -338,14 +365,18 @@ namespace VKAvaloniaPlayer.ViewModels
             CurrentAudioViewIsVisible = false;
             AlbumsIsVisible = false;
             RepostViewIsVisible = false;
+            ExceptionIsVisible = false;
             VkLoginIsVisible = true;
 
             AlbumsViewModel?.DataCollection?.Clear();
             _RecomendationsViewModel?.DataCollection?.Clear();
             _AllMusicListViewModel?.DataCollection?.Clear();
             _SearchViewModel?.DataCollection?.Clear();
+            RepostViewModel?.DataCollection?.Clear();
+            AddToAlbumViewModel?.DataCollection?.Clear();
 
             RepostViewModel = null;
+            AddToAlbumViewModel = null;
             CurrentAudioViewModel = null;
             AlbumsViewModel = null;
             _RecomendationsViewModel = null;

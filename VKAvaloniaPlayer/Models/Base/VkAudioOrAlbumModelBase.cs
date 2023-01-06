@@ -1,5 +1,5 @@
 ﻿using ReactiveUI;
-
+using ReactiveUI.Fody.Helpers;
 using VKAvaloniaPlayer.Models.Interfaces;
 
 using VkNet.Model;
@@ -17,6 +17,8 @@ namespace VKAvaloniaPlayer.Models.Base
         public IImageBase Image { get; set; }
         public string Subtitle { get; set; }
         public string AccessKey { get; set; }
+        
+        [Reactive]
         public bool IsNotAvailable { get; set; }
 
         public virtual string GetThumbUrl(AudioCover audioCover)

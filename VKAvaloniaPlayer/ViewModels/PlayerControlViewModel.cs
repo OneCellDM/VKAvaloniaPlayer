@@ -16,7 +16,7 @@ using ManagedBass;
 using ReactiveUI.Fody.Helpers;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
-
+using VKAvaloniaPlayer.Notify;
 using Timer = System.Timers.Timer;
 
 namespace VKAvaloniaPlayer.ViewModels
@@ -140,13 +140,18 @@ namespace VKAvaloniaPlayer.ViewModels
                         });
                         return;
                     }
-
+                    
                     this.RaiseAndSetIfChanged(ref _CurrentAudio, value);
-                   
 
+                    if (_CurrentAudio.IsNotAvailable)
+                    {
+                        Notify.NotifyManager.Instance.PopMessage(new NotifyData("Ошибка", "Аудиозапись не доступна"));
+                        PlayNext();
+                        
+                    }
                     PauseButtonVisible();
 
-                    PlayPosition = 0;
+                  
 
                     _Timer?.Start();
 

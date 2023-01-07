@@ -121,12 +121,7 @@
                                         </Style>
                                     </TextBlock.Styles>
                                 </TextBlock>
-                                    
-                                    <ScrollViewer x:Name="LyricsScroll" IsVisible="{Binding IsVisible,FallbackValue=False}" 
-                                                  DataContext="{Binding LyricsViewModel}" Height="300">
-                                        <TextBlock Text="{Binding Text}"></TextBlock>
-                                    </ScrollViewer>
-                                    
+ 
                                 </StackPanel>
                             </DockPanel>
                         </DockPanel>
@@ -220,17 +215,39 @@
                             </Button>
                             
                               <Button  x:Name="OpenTextBTN" Background="Transparent" IsVisible="{Binding LyricsButtonIsVisible}">
-                                
+                                  <i:Interaction.Behaviors>
+                                   
+                                      <ia:EventTriggerBehavior EventName="Click">
+                                          <ia:InvokeCommandAction
+                                              CommandParameter="{Binding }"
+                                              Command="{Binding DataContext.AudioListButtons.AudioOpenLyricsCommand,
+                                              RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}" />
+                                      </ia:EventTriggerBehavior>
+                                  </i:Interaction.Behaviors>
+                                  <Grid>
                                 <Path VerticalAlignment="Center" 
                                       Data="M13 17a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2h9Zm7-6a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2h16Zm0-6a1 1 0 1 1 0 2H4a1 1 0 0 1 0-2h16Z" />
-                                <i:Interaction.Behaviors>
-                                   
-                                    <ia:EventTriggerBehavior EventName="Click">
-                                        <ia:InvokeCommandAction
-                                            CommandParameter="{Binding }"
-                                            Command="{Binding DataContext.AudioListButtons.AudioOpenLyricsCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}" />
-                                    </ia:EventTriggerBehavior>
-                                </i:Interaction.Behaviors>
+                               
+                                    <Popup  IsOpen="{Binding IsVisible,FallbackValue=False}" 
+                                           
+                                           OverlayDismissEventPassThrough="False"
+                                           DataContext="{Binding LyricsViewModel}" MaxHeight="400"
+                                           Topmost="False"
+                                           IsLightDismissEnabled="True"
+                                           WindowManagerAddShadowHint="False"
+                                           PlacementAnchor="Bottom"
+                                           PlacementGravity="Bottom"
+                                           PlacementMode="AnchorAndGravity">
+                                        <Border x:Name="LyricsScrollBorder"  PointerLeave="LyricsScrollBorder_OnPointerLeave"  CornerRadius="10" Background="White" BorderThickness="1">
+                                                                              
+                                            <ScrollViewer  Margin="10" x:Name="LyricsScroll"  >
+                                                <TextBox IsReadOnly="True" BorderBrush="{DynamicResource ControlsColor}" Margin="5"  Text="{Binding Text}"/>
+                                                
+                                                
+                                            </ScrollViewer>
+                                        </Border>
+                                    </Popup>
+                                </Grid>
                             </Button>
                             
                             <Button Background="Transparent"

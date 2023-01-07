@@ -7,10 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-
+using Avalonia.Controls;
 using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
-
+using VKAvaloniaPlayer.Views;
 using VkNet.Model.RequestParams;
 
 namespace VKAvaloniaPlayer.ViewModels
@@ -81,9 +81,17 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 if (vkModel != null)
                 {
-                    if (vkModel.IsDownload)
-                        return;
+                    if (vkModel.IsDownload) return;
 
+                    var fileName = string.Format("{0}-{1}.mp3", vkModel.Artist, vkModel.Title);
+                    SaveFileDialog dialog = new SaveFileDialog();
+                    
+                    dialog.InitialFileName = fileName;
+                    dialog.DefaultExtension = "*.mp3";
+                    var path = await dialog.ShowAsync(MainWindow.Instance);
+                    
+                    if(path is null) return;
+                    
                     vkModel.IsDownload = true;
 
                     try
@@ -93,14 +101,13 @@ namespace VKAvaloniaPlayer.ViewModels
 
                         using (WebClient webClient = new WebClient())
                         {
-                            webClient.DownloadFileAsync(res.ElementAt(0).Url,
-                                string.Format("{0}-{1}.mp3", vkModel.Artist, vkModel.Title));
+                            webClient.DownloadFileAsync(res.ElementAt(0).Url,path);
 
                             webClient.DownloadFileCompleted += delegate
                             {
                                 vkModel.IsDownload = false;
                                 Notify.NotifyManager.Instance.PopMessage(
-                           new Notify.NotifyData("Скачивание завершено", vkModel.Title));
+                           new Notify.NotifyData("Скачивание завершено", fileName));
                             };
                             webClient.DownloadProgressChanged += (object o, DownloadProgressChangedEventArgs e) =>
                                 vkModel.DownloadPercent = e.ProgressPercentage;
@@ -188,6 +195,8 @@ namespace VKAvaloniaPlayer.ViewModels
 
         [Reactive]
         public bool AudioRepostIsVisible { get; set; }
+        
+     
         
         
         public IReactiveCommand AudioAddCommand { get; set; }

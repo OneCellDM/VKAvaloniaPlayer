@@ -29,8 +29,7 @@
 				 BorderBrush="{DynamicResource ControlsColor}" 
 				 Grid.Row="1" 
 				 Items="{Binding SavedEqualizerData.EqualizerPressets}"
-				 SelectedIndex="{Binding SavedEqualizerData.SelectedPresset}"
-				>
+				 SelectedIndex="{Binding SavedEqualizerData.SelectedPresset}">
 			<ListBox.Styles>
 				<Style Selector="ListBoxItem">
 					<Setter Property="Margin" Value="0,3"/>

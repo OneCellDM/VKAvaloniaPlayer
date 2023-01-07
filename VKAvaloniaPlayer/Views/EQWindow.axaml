@@ -73,7 +73,7 @@
                </StackPanel>
                
                <views:EqualizerPresetsManager Grid.RowSpan="4" 
-											  Background="White"
+                                              Background="White"
                                               IsVisible="{Binding DataContext.EqualizerManagerIsVisible,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" 
                                               DataContext="{Binding PresetMenagerViewModel}"/>
                

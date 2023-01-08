@@ -4,6 +4,10 @@ An open cross-platform music player for vk com using Avalonia UI.
 
 Supported pltaforms: Windows and Linux.
 
+**Dependencies:** 
+> Start in windows:
+  Install .NET Desktop Runtime 6.0.12
+
 **Implemented:**
 > - Access to all music
 > - Albums

@@ -20,8 +20,8 @@ Supported pltaforms: Windows and Linux.
 > - Customization of the interface
 
 Thanks:
-[VK.NET: A opensource vk.com api wrapper](https://github.com/vknet/vk)
-[AvaloniaUI: A cross-platform UI framework for .NET ](https://github.com/AvaloniaUI/Avalonia)
+- [VK.NET: A opensource vk.com api wrapper](https://github.com/vknet/vk)
+- [AvaloniaUI: A cross-platform UI framework for .NET ](https://github.com/AvaloniaUI/Avalonia)
 
 **Build:** 
 > Will be available soon.

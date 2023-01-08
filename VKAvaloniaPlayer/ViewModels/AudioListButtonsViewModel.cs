@@ -196,9 +196,6 @@ namespace VKAvaloniaPlayer.ViewModels
         [Reactive]
         public bool AudioRepostIsVisible { get; set; }
         
-     
-        
-        
         public IReactiveCommand AudioAddCommand { get; set; }
         public IReactiveCommand AudioDownloadCommand { get; set; }
         public IReactiveCommand AudioRemoveCommand { get; set; }

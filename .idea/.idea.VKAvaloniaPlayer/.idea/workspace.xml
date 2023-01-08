@@ -7,11 +7,8 @@
     <list default="true" id="825e25c9-3839-4b20-be4f-fc64a5e8a300" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VKAvaloniaPlayer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VKAvaloniaPlayer/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/AudioListButtonsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/AudioListButtonsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/LyricsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/LyricsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/EQWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/EQWindow.axaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/EqualizerPresetsManager.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/EqualizerPresetsManager.axaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MusicListControl.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MusicListControl.axaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MusicListControl.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/Views/MusicListControl.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/Audios/MusicFromAlbumViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/Audios/MusicFromAlbumViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/VKAvaloniaPlayer/ViewModels/MainWindowViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +72,8 @@
       <workItem from="1673026763846" duration="13322000" />
       <workItem from="1673080081017" duration="607000" />
       <workItem from="1673080706803" duration="30000" />
-      <workItem from="1673080897439" duration="5449000" />
+      <workItem from="1673080897439" duration="9160000" />
+      <workItem from="1673179340089" duration="1009000" />
     </task>
     <task id="LOCAL-00001" summary="Mini player and fixes">
       <created>1673045979973</created>
@@ -84,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673045979973</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Lyrics text redesign">
+      <created>1673086631262</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1673086631262</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,7 +111,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Mini player and fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mini player and fixes" />
+    <MESSAGE value="Lyrics text redesign" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lyrics text redesign" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

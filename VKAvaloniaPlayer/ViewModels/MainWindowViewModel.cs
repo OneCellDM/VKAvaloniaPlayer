@@ -269,7 +269,7 @@ namespace VKAvaloniaPlayer.ViewModels
                if (PlayerContext?.CurrentAudio != null)
                {
                    CurrentAudioViewModel.SelectToModel(PlayerContext?.CurrentAudio, false);
-                   CurrentAudioViewModel.SelectedIndex = -1;
+                   CurrentAudioViewModel.SelectedIndex = - 1;
                }
 
                _SearchViewModel.IsLoading = true;

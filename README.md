@@ -2,7 +2,7 @@
 An open cross-platform music player for vk com using Avalonia UI.
 ![Screenshot1](https://github.com/OneCellDM/VKAvaloniaPlayer/blob/master/Images/s1.png)
 
-Supported pltaforms: Windows and Linux.
+Supported platforms: Windows and Linux.
 
 **Dependencies:** 
 > Start in windows:

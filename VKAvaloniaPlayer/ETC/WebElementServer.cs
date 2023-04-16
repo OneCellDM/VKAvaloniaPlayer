@@ -42,9 +42,10 @@ namespace WebElement
 
                 ReadConnections();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 ServerStarted = false;
+                ErrorEvent?.Invoke(ex);
             }
 
         }

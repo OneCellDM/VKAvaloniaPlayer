@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="VKAvaloniaPlayer/App.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Notify/NotifyControl.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/AddToAlbumView.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/AddToAlbumViewModel.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/AlbumListControl.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/EQWindow.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/EqualizerPresetsManager.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/ExceptionView.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/InputViewDialog.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/LeftSideBar.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/LyricsView.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/MainWindow.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/MusicListControl.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/PlayerControl.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/RepostView.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+        <entry key="VKAvaloniaPlayer/Views/VKLoginControl.axaml" value="VKAvaloniaPlayer/VKAvaloniaPlayer.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

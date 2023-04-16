@@ -19,30 +19,29 @@ namespace VKAvaloniaPlayer.Models
 
        
 
-        public void LoadAvatar()
+        public async void LoadAvatar()
         {
             try
             {
-                var profileInfoAwaiter = GlobalVars.VkApi.Users
-                    .GetAsync(new[] { (long)UserID }, ProfileFields.Photo50)
-                    .GetAwaiter();
-
-                profileInfoAwaiter.OnCompleted(async () =>
+                var profileInfoAwaiter = await GlobalVars.VkApi.Users
+                    .GetAsync(new[] { (long)UserID }, ProfileFields.Photo50);
+                
+                var res = profileInfoAwaiter[0];
+                if (res != null)
                 {
-                    var res = profileInfoAwaiter.GetResult();
-                    if (res != null)
-                    {
-                        if (Image is null)
-                            Image = new ImageModel();
-                        Image.ImageUrl = res[0].Photo50.AbsoluteUri;
-                        Image.LoadBitmapAsync();
-                    }
-
-                });
+                    if (Image is null)
+                        Image = new ImageModel();
+                    Image.ImageUrl = res.Photo50.AbsoluteUri;
+                    Image.LoadBitmapAsync();
+                }
             }
             catch (Exception ex)
             {
+                Console.WriteLine("ex");
             }
+
+
+
         }
     }
 }

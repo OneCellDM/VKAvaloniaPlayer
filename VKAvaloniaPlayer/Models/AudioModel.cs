@@ -34,7 +34,7 @@ namespace VKAvaloniaPlayer.Models
    
         public bool LyricsButtonIsVisible
         {
-            get => LyricsViewModel != null;
+            get => false;
         } 
 
         public AudioModel(Audio VkModel) : this()

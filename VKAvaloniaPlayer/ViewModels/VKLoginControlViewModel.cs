@@ -28,6 +28,7 @@ namespace VKAvaloniaPlayer.ViewModels
     public class VkLoginControlViewModel : ViewModelBase
     {
         const int Port = 2654;
+        bool WaitStartServer = false;
         private const string AuthUrl =
            @"https://oauth.vk.com/oauth/authorize?client_id=6463690" +
            "&scope=1073737727" +
@@ -38,11 +39,13 @@ namespace VKAvaloniaPlayer.ViewModels
 
         private Process? _BrowserProcess;
 
+        CancellationToken AuthCancelletionSource = new CancellationToken();
 
         private WebElement.WebElementServer? _webElementServer;
 
         public VkLoginControlViewModel()
         {
+            
             LoadSavedAccounts();
             SkipMenuIfOnlyOneAccount();
             ToggleAccountsSidebarVisible();
@@ -56,18 +59,24 @@ namespace VKAvaloniaPlayer.ViewModels
             {
 
                 InfoText = "Открытие авторизации";
-                Task.Run(() =>
+                AuthCancelletionSource.ThrowIfCancellationRequested();
+                
+                Task.Run(async () =>
                 {
                     try
                     {
+                      
+                       
                         _webElementServer = new WebElement.WebElementServer(Port);
                         _webElementServer.ErrorEvent += WebServer_ErrorEvent;
                         _webElementServer.MessageRecived += WebServer_MessageEvent;
                         _webElementServer.StartServerOnThread();
 
 
-                        Thread.Sleep(1000);
-
+                        while (_webElementServer.ServerStarted == false)
+                        {
+                            await Task.Delay(1000);
+                        }
                         if (_webElementServer.ServerStarted)
                         {
                             string winName = "WindowsWebBrowser.exe";
@@ -125,7 +134,7 @@ namespace VKAvaloniaPlayer.ViewModels
                         InfoText = "Ошибка:" + ex.Message;
                     }
 
-                });
+                },AuthCancelletionSource);
             });
 
 
@@ -174,7 +183,10 @@ namespace VKAvaloniaPlayer.ViewModels
         }
         private void WebServer_ErrorEvent(Exception ex)
         {
+           
             InfoText = $"Произошла ошибка {ex.Message}";
+            
+           
             OffServerAndUnsubscribe();
         }
         private void WebServer_MessageEvent(String message)

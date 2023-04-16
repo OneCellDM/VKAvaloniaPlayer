@@ -17,6 +17,7 @@ using VKAvaloniaPlayer.Views;
 
 using VkNet.Exception;
 using AddToAlbumViewModel = VKAvaloniaPlayer.ViewModels.Audios.AddToAlbumViewModel;
+using Exception = System.Exception;
 
 
 namespace VKAvaloniaPlayer.ViewModels
@@ -156,15 +157,19 @@ namespace VKAvaloniaPlayer.ViewModels
                 }
                 else
                 {
-                    handlerObject.View.IsError = true;
-                    handlerObject.View.ExceptionModel = new ExceptionViewModel
-                    {
-                        Action = handlerObject.Action,
-                        View = handlerObject.View,
-                        ErrorMessage = "Ошибка:" + exception.Message,
-                        ButtonMessage = "Повторить",
+                   
+                        handlerObject.View.IsError = true;
+                        handlerObject.View.ExceptionModel = new ExceptionViewModel
+                        {
+                            Action = handlerObject.Action,
+                            View = handlerObject.View,
+                            ErrorMessage = "Ошибка:" + exception.Message,
+                            ButtonMessage = "Повторить",
 
-                    };
+                        };
+                     
+                    
+
                 }
 
                 if (CurrentAudioViewModel == null)
@@ -358,13 +363,20 @@ namespace VKAvaloniaPlayer.ViewModels
 
             Dispatcher.UIThread.InvokeAsync(() =>
             {
-                _CurrentMusicListViewModel = new CurrentMusicListViewModel();
-                VkLoginIsVisible = false;
-                CurrentAccountModel = GlobalVars.CurrentAccount;
-                MenuSelectionIndex = 1;
+                try
+                {
+                    _CurrentMusicListViewModel = new CurrentMusicListViewModel();
+                    VkLoginIsVisible = false;
+                    CurrentAccountModel = GlobalVars.CurrentAccount;
+                    MenuSelectionIndex = 1;
 
-                if (CurrentAccountModel.Image is null)
-                    CurrentAccountModel.LoadAvatar();
+                    if (CurrentAccountModel.Image is null)
+                        CurrentAccountModel.LoadAvatar();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("EErr");   
+                }
             });
 
             Events.VkApiChanged -= StaticObjects_VkApiChanged;

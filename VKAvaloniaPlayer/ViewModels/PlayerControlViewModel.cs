@@ -18,6 +18,8 @@ using VKAvaloniaPlayer.ETC;
 using VKAvaloniaPlayer.Models;
 using VKAvaloniaPlayer.Notify;
 using Timer = System.Timers.Timer;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace VKAvaloniaPlayer.ViewModels
 {
@@ -42,12 +44,15 @@ namespace VKAvaloniaPlayer.ViewModels
         private bool _Repeat;
         private bool _Shuffling;
         private bool _UseEqualizer;
-        private Thread? _thread;
+        private Task? _playTask;
 
         private readonly Timer _Timer = new();
         private double _Volume = 1;
 
+        public CancellationToken CancellationToken { get; private set; } = new CancellationToken();
+        public bool IsBusy { get; set; }
 
+        private bool _AutoNext { get; set; }
         public static PlayerControlViewModel Instance =>
             _Instance is null ? _Instance = new PlayerControlViewModel() : _Instance;
 
@@ -121,15 +126,14 @@ namespace VKAvaloniaPlayer.ViewModels
             {
                 try
                 {
-                    
+                   
                     PlayPosition = 0;
 
                     _Timer?.Stop();
                     Player.Stop();
-                    if (_thread != null)
+                    if (_playTask != null)
                     {
-                        _thread.Interrupt();
-                        _thread.Join(1000);
+                        CancellationToken.ThrowIfCancellationRequested();
                     }
 
                     if (value is null)
@@ -140,13 +144,22 @@ namespace VKAvaloniaPlayer.ViewModels
                         });
                         return;
                     }
-                    
-                    this.RaiseAndSetIfChanged(ref _CurrentAudio, value);
+                    else
+                    {
+                        this.RaiseAndSetIfChanged(ref _CurrentAudio, value);
+                    }
+                   
 
                     if (_CurrentAudio.IsNotAvailable)
                     {
-                        Notify.NotifyManager.Instance.PopMessage(new NotifyData("Ошибка", "Аудиозапись не доступна"));
-                        PlayNext();
+                        Notify.NotifyManager.Instance.PopMessage(new NotifyData("Ошибка", $"Аудиозапись {_CurrentAudio.Artist} - {_CurrentAudio.Title} не доступна"));
+                        if (_AutoNext)
+                        {
+                            _AutoNext = false;
+                            PlayNext();
+                            
+                        }
+                        return;
                         
                     }
                     PauseButtonVisible();
@@ -155,17 +168,23 @@ namespace VKAvaloniaPlayer.ViewModels
 
                     _Timer?.Start();
 
-                    _thread = new Thread(() =>
+                    _playTask = new Task(() =>
                     {
+                        if (IsBusy) return;
+                        
+                        IsBusy = true;
                         if (Player.Play(_CurrentAudio))
                         {
                             Player.SetVolume(Volume);
                             EqualizerViewModel.UpdateEqualizer();
                         }
-                    });
-                    _thread.Priority = ThreadPriority.Lowest;
-                    _thread.IsBackground = true;
-                    _thread.Start();
+                        IsBusy = false;
+
+
+                    },cancellationToken:CancellationToken);
+                   
+                    _playTask.Start();
+                   
 
 
                 }
@@ -320,6 +339,7 @@ namespace VKAvaloniaPlayer.ViewModels
             if (isEnd && !Repeat)
             {
                 PlayNext();
+                _AutoNext = true;
             }
             else if (isEnd && Repeat)
             {
